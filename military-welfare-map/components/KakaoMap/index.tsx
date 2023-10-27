@@ -1,6 +1,5 @@
 "use client"
 
-import PreviousMap from 'postcss/lib/previous-map'
 import { useEffect, useState } from 'react'
 import { Map, MapTypeControl, ZoomControl, MapMarker } from 'react-kakao-maps-sdk'
 
@@ -30,6 +29,7 @@ export const KakaoMap = () => {
                         isLoading: false,
                     }))
                     setLocationState((prev) => ({
+                        ...prev,
                         center: {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
