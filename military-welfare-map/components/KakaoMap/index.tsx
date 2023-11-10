@@ -3,11 +3,15 @@
 import { useEffect, useState } from 'react'
 import { Map, MapTypeControl, ZoomControl, MapMarker } from 'react-kakao-maps-sdk'
 
-export const KakaoMap = () => {
+interface KakaoMapProps {
+    isBarShowing: boolean
+}
+
+export const KakaoMap = (isBarShowing: KakaoMapProps) => {
 
     // get current position and mark
 
-    const [currentPositionState, setCurrentPositionState] = useState({
+    const [initialLocationState, setInitialLocationState] = useState({
         center: {
             lat: 33.450701,
             lng: 126.570667,
@@ -20,7 +24,7 @@ export const KakaoMap = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    setCurrentPositionState((prev) => ({
+                    setInitialLocationState((prev) => ({
                         ...prev,
                         center: {
                             lat: position.coords.latitude,
@@ -33,11 +37,12 @@ export const KakaoMap = () => {
                         center: {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
-                        }
+                        },
+                        isPanTo: true,
                     }))
                 },
                 (err) => {
-                    setCurrentPositionState((prev) => ({
+                    setInitialLocationState((prev) => ({
                         ...prev,
                         errMsg: err.message,
                         isLoading: false,
@@ -51,24 +56,14 @@ export const KakaoMap = () => {
         
         const [locationState, setLocationState] = useState({
             center: {
-                lat: currentPositionState.center.lat,
-                lng: currentPositionState.center.lng,
+                lat: initialLocationState.center.lat,
+                lng: initialLocationState.center.lng,
             },
-            isPanTo: false,
+            isPanTo: true,
         })
         
-        // const panTo = (lat:number, lng:number) => {
-        //     setLocationState({
-        //         center: {
-        //             lat: lat,
-        //             lng: lng,
-        //         },
-        //         isPanTo: true
-        //     })
-        // }
-        
         return (
-        <div className='relative w-full h-full'>        
+        <div className='w-full h-full'>        
             <Map center={locationState.center}
                 isPanto={locationState.isPanTo}
                 style={{
@@ -76,8 +71,8 @@ export const KakaoMap = () => {
                     height: "100%",
                 }}
                 level={10}>
-                {!currentPositionState.isLoading &&
-                    <MapMarker position={currentPositionState.center}
+                {!initialLocationState.isLoading &&
+                    <MapMarker position={initialLocationState.center}
                         image={{
                             src: "/current-position.png",
                             size: {width: 20, height: 20},
@@ -87,7 +82,6 @@ export const KakaoMap = () => {
                 <MapTypeControl position={"TOPRIGHT"} />
                 <ZoomControl position={"RIGHT"} />
             </Map>
-            {/* <span className="material-icons w-10 h-10 absolute bottom-0 right-0 z-10" onClick={panTo(currentPositionState.center.lat, currentPositionState.center.lng)}/> */}
         </div>
     )
 }
