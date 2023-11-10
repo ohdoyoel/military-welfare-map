@@ -1,1 +1,2 @@
-color: #536349
+greencolor: #536349
+bluecolor: #3396ff
