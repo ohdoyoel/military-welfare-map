@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        "nsr": ["nanum-square-regular"],
+        "nsb": ["nanum-square-bold"]
+      }
     },
   },
   plugins: [],

@@ -5,15 +5,18 @@ import { Transition } from '@headlessui/react'
 import { KakaoMap } from '@/components/KakaoMap'
 import { Header } from '@/components/Header'
 import { useState } from 'react'
+import { SearchInput } from '@/components/SearchInput'
+import { ToggleTags } from '@/components/ToggleTags'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
   
   return (
     <main className="flex flex-row w-screen h-screen">
-      <div className={`${isBarOpened ? `block` : `hidden`} basis-1/2 h-full bg-white z-10 h-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+      <div className={`${isBarOpened ? `block` : `hidden`} basis-1/2 h-full z-10 h-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
-        {/* info */}
+        <SearchInput onKeyUp={() => console.log("keyup")}/>
+        <ToggleTags/>
       </div>
 
       <div className={`absolute inset-y-0 w-auto z-20

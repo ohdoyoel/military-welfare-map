@@ -3,8 +3,18 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "godo-medium";
-  src: url('/fonts/GodoM.ttf')
+  font-family: "nanum-square-light";
+  src: url('/fonts/NanumSquareL.ttf')
+}
+
+@font-face {
+  font-family: "nanum-square-regular";
+  src: url('/fonts/NanumSquareR.ttf')
+}
+
+@font-face {
+  font-family: "nanum-square-bold";
+  src: url('/fonts/NanumSquareB.ttf')
 }
 
 :root {
@@ -17,5 +27,5 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  font-family: "godo-medium";
+  font-family: "nanum-square-light";
 }
