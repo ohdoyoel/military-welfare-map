@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react'
 import { Map, MapTypeControl, ZoomControl, MapMarker } from 'react-kakao-maps-sdk'
 
 interface KakaoMapProps {
-    isBarShowing: boolean
 }
 
-export const KakaoMap = (isBarShowing: KakaoMapProps) => {
+export const KakaoMap = () => {
 
     // get current position and mark
 
@@ -74,13 +73,12 @@ export const KakaoMap = (isBarShowing: KakaoMapProps) => {
                 {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
                         image={{
-                            src: "/current-position.png",
+                            src: "/images/current-position.png",
                             size: {width: 20, height: 20},
                             options: {offset: {x: 0, y: 0}},
                         }}
                     />}
                 <MapTypeControl position={"TOPRIGHT"} />
-                <ZoomControl position={"RIGHT"} />
             </Map>
         </div>
     )
