@@ -16,7 +16,7 @@ export default function Home() {
       <div className={`${isBarOpened ? `block` : `hidden`} basis-1/2 h-full z-10 h-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
         <SearchInput onKeyUp={() => console.log("keyup")}/>
-        <ToggleTags/>
+        {/* <ToggleTags/> */}
       </div>
 
       <div className={`absolute inset-y-0 w-auto z-20
