@@ -29,3 +29,24 @@ body {
     rgb(var(--background-start-rgb));
   font-family: "nanum-square-light";
 }
+
+/* width */
+::-webkit-scrollbar {
+    height: 3px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #3396ff;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 3px;
+}
+ 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #d3d3d3;
+}
