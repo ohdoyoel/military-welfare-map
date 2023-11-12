@@ -14,59 +14,67 @@ import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
 interface ToggleTagsProps {
 }
 
+interface TagToggleButton {
+    icon: string,
+    label: string
+}
+
 export const ToggleTags = () => {
         return (
-        <div className="w-full h-16 bg-[#3396ff] flex justify-center px-4">
-            <div className='w-full flex flex-row items-center justify-between'>
-                <button className='flex flex-col w-10 items-center text-xs text-white'>
-                    <RestaurantOutlinedIcon className='text-lg'/>
-                    음식점
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <CoffeeOutlinedIcon className='text-lg'/>
-                    카페
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <ContentCutOutlinedIcon className='text-lg'/>
-                    미용실
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <HotTubOutlinedIcon className='text-lg'/>
-                    목욕탕
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <AttractionsOutlinedIcon className='text-lg'/>
-                    문화·여가
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <HotelOutlinedIcon className='text-lg'/>
-                    숙박
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <SportsSoccerOutlinedIcon className='text-lg'/>
-                    스포츠·레저
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <TrainOutlinedIcon className='text-lg'/>
-                    교통·항공
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <VisibilityOutlinedIcon className='text-lg'/>
-                    안경점
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <LocalHospitalOutlinedIcon className='text-lg'/>
-                    병원
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <MilitaryTechOutlinedIcon className='text-lg'/>
-                    예비군
-                </button>
-                <button className='flex flex-col w-8 items-center text-xs text-white'>
-                    <GolfCourseOutlinedIcon className='text-lg'/>
-                    골프장
-                </button>
+        <div className="w-full h-16 bg-[#3396ff] px-4 flex items-center">
+            <div className='w-full h-full flex flex-row justify-between flex-nowrap overflow-auto'>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <RestaurantOutlinedIcon className='text-lg'/>
+                음식점
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <CoffeeOutlinedIcon className='text-lg'/>
+                카페
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <ContentCutOutlinedIcon className='text-lg'/>
+                미용실
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <HotTubOutlinedIcon className='text-lg'/>
+                목욕탕
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <AttractionsOutlinedIcon className='text-lg'/>
+                문화·여가
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <HotelOutlinedIcon className='text-lg'/>
+                숙박
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <SportsSoccerOutlinedIcon className='text-lg'/>
+                스포츠
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <TrainOutlinedIcon className='text-lg'/>
+                교통·항공
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <VisibilityOutlinedIcon className='text-lg'/>
+                안경점
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <LocalHospitalOutlinedIcon className='text-lg'/>
+                병원
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <MilitaryTechOutlinedIcon className='text-lg'/>
+                예비군
+            </button>
+            <button className='flex flex-col w-24 items-center text-xs text-white'>
+                <GolfCourseOutlinedIcon className='text-lg'/>
+                골프장
+            </button>
+
             </div>
+            
+
         </div>
     )
 }
