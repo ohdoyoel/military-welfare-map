@@ -62,7 +62,7 @@ export const KakaoMap = () => {
         })
         
         return (
-        <div className='w-full h-full'>        
+        <div className='h-full'>        
             <Map center={locationState.center}
                 isPanto={locationState.isPanTo}
                 style={{
