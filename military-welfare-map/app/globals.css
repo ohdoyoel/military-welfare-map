@@ -27,17 +27,17 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  font-family: "nanum-square-light";
+  font-family: "nanum-square-regular";
 }
 
 /* width */
 ::-webkit-scrollbar {
-    height: 3px;
+    height: 3.5px;
 }
  
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #3396ff;
+    background: #10b981;
 }
  
 /* Handle */

@@ -24,7 +24,7 @@ export default function Home() {
                       ${isBarOpened ? `left-[460px]` : `left-0`} flex items-center 
                       `}>
         <button className='w-6 h-12 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(!isBarOpened)}}>
-          {isBarOpened ? <NavigateBeforeIcon className='text-[#3396ff]'/> : <NavigateNextIcon className='text-[#3396ff]'/>}
+          {isBarOpened ? <NavigateBeforeIcon className='text-emerald-500'/> : <NavigateNextIcon className='text-emerald-500'/>}
         </button>
       </div>
 

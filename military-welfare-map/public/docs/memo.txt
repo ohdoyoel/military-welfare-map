@@ -1,2 +1,4 @@
 greencolor: #536349
 bluecolor: #3396ff
+emerald color 500: bg-emerald-500, #10b981
+emerald color 600: bg-emerald-600, #059668

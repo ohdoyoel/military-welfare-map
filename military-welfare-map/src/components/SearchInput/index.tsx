@@ -7,7 +7,7 @@ interface SearchInputProps {
 export const SearchInput = ({onKeyUp}: SearchInputProps) => {
 
     return (
-        <div className="w-full h-12 bg-[#3396ff] flex justify-center px-4">
+        <div className="w-full h-12 bg-emerald-500 flex justify-center px-4">
             <div className='relative w-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'>
                 <SearchIcon className='absolute top-3 left-3 text-gray-500' fontSize='medium'/>
                 <input id="searchInput" type="text" onKeyUp={onKeyUp}
