@@ -1,12 +1,14 @@
 "use client"
 
+import { Marker } from '@/src/types/data'
 import { useEffect, useState } from 'react'
-import { Map, MapTypeControl, ZoomControl, MapMarker } from 'react-kakao-maps-sdk'
+import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
 
 interface KakaoMapProps {
+    markers: Marker[]
 }
 
-export const KakaoMap = () => {
+export const KakaoMap = ({markers}: KakaoMapProps) => {
 
     // get current position and mark
 
@@ -60,26 +62,38 @@ export const KakaoMap = () => {
             },
             isPanTo: true,
         })
+
+        const makeMapMarkers = (mks: Marker[]) => {
+            const result = []
+            for (let i = 0; i < mks.length; i++) {
+                result.push(
+                    <MapMarker position={mks[i].position} title={mks[i].title} key={i}/>
+                )
+            }
+
+            return result
+        }
         
         return (
-        <div className='w-full h-full'>        
-            <Map center={locationState.center}
-                isPanto={locationState.isPanTo}
-                style={{
-                    width: "100%",
-                    height: "100%",
-                }}
-                level={10}>
-                {!initialLocationState.isLoading &&
-                    <MapMarker position={initialLocationState.center}
-                        image={{
-                            src: "/images/current-position.png",
-                            size: {width: 20, height: 20},
-                            options: {offset: {x: 0, y: 0}},
-                        }}
-                    />}
-                <MapTypeControl position={"TOPRIGHT"} />
-            </Map>
-        </div>
+            <div className='w-full h-full'>        
+                <Map center={locationState.center}
+                    isPanto={locationState.isPanTo}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                    }}
+                    level={10}>
+                    {!initialLocationState.isLoading &&
+                        <MapMarker position={initialLocationState.center}
+                            image={{
+                                src: "/images/current-position.png",
+                                size: {width: 20, height: 20},
+                                options: {offset: {x: 0, y: 0}},
+                            }}
+                        />}
+                    <MapTypeControl position={"TOPRIGHT"} />
+                    {makeMapMarkers(markers)}
+                </Map>
+            </div>
     )
 }

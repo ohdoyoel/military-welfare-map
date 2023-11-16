@@ -3,14 +3,32 @@
 import Image from 'next/image'
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import axios from 'axios'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
+
+  const glassesStore = async () => {
+      try {
+          const response = await axios.get(
+            "https://cors-anywhere.herokuapp.com/" + "https://openapi.mnd.go.kr/3632313638363232303033333732313531/json/DS_TB_MND_GLAS_LIST/1/5/",
+          )
+          console.log(response.data)
+      } catch (e) {
+          console.log(e)
+      } finally {
+          // console.log(response)
+      }
+  }
+
+  useEffect(() => {
+    glassesStore()
+  }, [])
   
   return (
     <main className="flex flex-row w-screen h-screen">
@@ -28,7 +46,20 @@ export default function Home() {
         </button>
       </div>
 
-      <KakaoMap/>
+      <KakaoMap markers={
+        [
+          {
+            position: { lat: 33.450701, lng: 126.570667 },
+            title:"kakao",
+            tag: 1
+          },
+          {
+            position: { lat: 35.450701, lng: 128.570667 },
+            title:"kakao",
+            tag: 2
+          }
+        ]
+        }/>
 
     </main>
   )
