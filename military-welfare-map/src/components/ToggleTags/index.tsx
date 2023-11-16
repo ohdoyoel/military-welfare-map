@@ -21,97 +21,10 @@ interface ToggleTagButtonProps {
     label: string
 }
 
+const NUM_OF_TAGS = 12
+
 export const ToggleTags = () => {
-    const [isToggled01, setToggleButton01] = useState(false)
-    const [isToggled02, setToggleButton02] = useState(false)
-    const [isToggled03, setToggleButton03] = useState(false)
-    const [isToggled04, setToggleButton04] = useState(false)
-    const [isToggled05, setToggleButton05] = useState(false)
-    const [isToggled06, setToggleButton06] = useState(false)
-    const [isToggled07, setToggleButton07] = useState(false)
-    const [isToggled08, setToggleButton08] = useState(false)
-    const [isToggled09, setToggleButton09] = useState(false)
-    const [isToggled10, setToggleButton10] = useState(false)
-    const [isToggled11, setToggleButton11] = useState(false)
-    const [isToggled12, setToggleButton12] = useState(false)
-
-    const onToggleButtonClicked = (btnIdx: Number) => {
-        switch(btnIdx) { 
-            case 1: { 
-                setToggleButton01(!isToggled01)
-                break; 
-            } case 2: { 
-                setToggleButton02(!isToggled02)
-                break; 
-            } case 3: {
-                setToggleButton03(!isToggled03)
-                break;
-            } case 4: { 
-                setToggleButton04(!isToggled04)
-                break; 
-            } case 5: { 
-                setToggleButton05(!isToggled05)
-                break; 
-            } case 6: { 
-                setToggleButton06(!isToggled06)
-                break; 
-            } case 7: { 
-                setToggleButton07(!isToggled07)
-                break; 
-            } case 8: { 
-                setToggleButton08(!isToggled08)
-                break; 
-            } case 9: { 
-                setToggleButton09(!isToggled09)
-                break; 
-            } case 10: { 
-                setToggleButton10(!isToggled10)
-                break; 
-            } case 11: { 
-                setToggleButton11(!isToggled11)
-                break; 
-            } case 12: { 
-                setToggleButton12(!isToggled12)
-                break; 
-            } default: { 
-                console.log("btnIdx error")
-                break; 
-            } 
-        } 
-    }
-
-    const isToggled = (btnIdx: Number) => {
-        switch(btnIdx) { 
-            case 1: { 
-                return isToggled01
-            } case 2: { 
-                return isToggled02
-            } case 3: {
-                return isToggled03
-            } case 4: { 
-                return isToggled04
-            } case 5: { 
-                return isToggled05
-            } case 6: { 
-                return isToggled06
-            } case 7: { 
-                return isToggled07
-            } case 8: { 
-                return isToggled08
-            } case 9: { 
-                return isToggled09
-            } case 10: { 
-                return isToggled10
-            } case 11: { 
-                return isToggled11
-            } case 12: { 
-                return isToggled12
-            } default: { 
-                console.log("btnIdx error")
-                return false
-            } 
-        } 
-    }
+    const [isToggled, setIsToggled] = useState(Array.from({length: NUM_OF_TAGS}, () => false))
 
     const toggleTagButtonList = () => {
         const iconAndLabelData: ToggleTagButtonProps[] = [
@@ -168,7 +81,7 @@ export const ToggleTags = () => {
         const result = []
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
-                <ToggleTagButton onClicked={() => onToggleButtonClicked(i+1)} isToggled={isToggled(i+1)} label={iconAndLabelData[i].label} key={i}>
+                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} isToggled={isToggled[i]} label={iconAndLabelData[i].label} key={i}>
                     {iconAndLabelData[i].icon}
                 </ToggleTagButton>
             )
