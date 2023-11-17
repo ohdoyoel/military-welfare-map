@@ -8,50 +8,57 @@ import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import axios from 'axios'
+import { Marker } from '@/src/types/data'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
-  const markersRef = useRef([
-    {
-      position: { lat: 33.450701, lng: 126.570667 },
-      title:"kakao",
-      tag: 1
-    },
-    {
-      position: { lat: 35.450701, lng: 128.570667 },
-      title:"kakao",
-      tag: 2
-    }
-  ])
+  const [markers, setMarkers] = useState<Marker[]>([])
+  const markersRef = useRef<Marker[]>([])
+  
+  const geocoder = new window.kakao.maps.services.Geocoder()
 
-  // using openAPI is so hard
-  // const glassesStore = async () => {
-  //     try {
-  //         const preRes = await axios.get(
-  //           "https://cors-anywhere.herokuapp.com/" + `https://openapi.mnd.go.kr/3632313638363232303033333732313531/json/DS_TB_MND_GLAS_LIST/1/1`,
-  //         )
-  //         let cnt = preRes.data.DS_TB_MND_GLAS_LIST.list_total_count
-  //         const response = await axios.get(
-  //           "https://cors-anywhere.herokuapp.com/" + `https://openapi.mnd.go.kr/3632313638363232303033333732313531/json/DS_TB_MND_GLAS_LIST/1/${cnt}`,
-  //         )
-  //         let data = response.data.DS_TB_MND_GLAS_LIST.row
-  //         console.log(data)
-  //         for (let i = 0; i < cnt; i++) {
-  //           markersRef.current.push(
-  //             {
-  //               position: { lat: 33.450701, lng: 126.570667 },
-  //               title: data[i].shop,
-  //               tag: 8
-  //             }
-  //           )
-  //         }
-  //     } catch (e) {
-  //         console.log(e)
-  //     }
-  // }
+  const GLAS = async () => {
+      try {
+        const preRes = await axios.get(
+          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/1`,
+        )
+        const cnt = preRes.data.DS_TB_MND_GLAS_LIST.list_total_count
+        const response = await axios.get(
+          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/${cnt}`,
+        )
+        const data = response.data.DS_TB_MND_GLAS_LIST.row
+        console.log(data)
+        for (let i = 0; i < cnt; i++) {
+          geocoder.addressSearch(data[i].address+data[i].addressdetail, (result, status) => {
+
+          if (status === kakao.maps.services.Status.OK) {
+          markersRef.current.push(
+            {
+              position:
+                {
+                  lat: +result[0].y,
+                  lng: +result[0].x
+                },
+              title: data[i].shop,
+              tag: 8
+            }
+          )
+          }})
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setMarkers(markersRef.current)
+      }
+  }
 
   useEffect(() => {
+    GLAS()
   }, [])
+
+  useEffect(() => {
+    console.log(markers)
+  }, [markers])
   
   return (
     <main className="flex flex-row w-screen h-screen">
@@ -69,7 +76,7 @@ export default function Home() {
         </button>
       </div>
 
-      <KakaoMap markers={markersRef.current}/>
+      <KakaoMap markers={markers}/>
 
     </main>
   )

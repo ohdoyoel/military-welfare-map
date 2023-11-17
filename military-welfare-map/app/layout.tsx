@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Head } from 'next/document'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
@@ -17,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Script
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8708ed5b7fa1b785f401de678b66f96e&libraries=services,clusterer&autoload=false"
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_KEY}&libraries=services,clusterer&autoload=false`}
           strategy="beforeInteractive"
         />
         {children}
