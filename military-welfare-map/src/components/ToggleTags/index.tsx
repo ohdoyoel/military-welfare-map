@@ -92,8 +92,8 @@ export const ToggleTags = () => {
 
 
     return (
-        <div className="w-full h-16 bg-emerald-500 px-4 flex items-center">
-            <div className='w-full h-14 grid grid-cols-12 gap-14 content-center overflow-x-auto'>
+        <div className="w-full h-16 bg-emerald-500 px-4 flex items-center py-1">
+            <div className='w-full h-full grid grid-cols-12 gap-14 content-center overflow-x-auto'>
                 {toggleTagButtonList()}
             </div>
         </div>

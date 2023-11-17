@@ -1,10 +1,13 @@
 export type Marker = {
+    tag: number
     position: {
         lat: number,
         lng: number
     },
+    address: string
     title: string
-    tag: number
+    description?: string
+    teleno?: string
 }
 
 export type APIProps = {
