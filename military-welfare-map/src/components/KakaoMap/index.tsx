@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react'
 import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
 
 interface KakaoMapProps {
+    pos: {lat: number, lng: number}
     markers: Marker[]
 }
 
-export const KakaoMap = ({markers}: KakaoMapProps) => {
+export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
 
     // get current position and mark
 
@@ -33,14 +34,14 @@ export const KakaoMap = ({markers}: KakaoMapProps) => {
                         },
                         isLoading: false,
                     }))
-                    setLocationState((prev) => ({
-                        ...prev,
-                        center: {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        },
-                        isPanTo: true,
-                    }))
+                    // setLocationState((prev) => ({
+                    //     ...prev,
+                    //     center: {
+                    //         lat: position.coords.latitude,
+                    //         lng: position.coords.longitude,
+                    //     },
+                    //     isPanTo: true,
+                    // }))
                 },
                 (err) => {
                     setInitialLocationState((prev) => ({
@@ -55,13 +56,13 @@ export const KakaoMap = ({markers}: KakaoMapProps) => {
         
         // move map function
         
-        const [locationState, setLocationState] = useState({
-            center: {
-                lat: initialLocationState.center.lat,
-                lng: initialLocationState.center.lng,
-            },
-            isPanTo: true,
-        })
+        // const [locationState, setLocationState] = useState({
+        //     center: {
+        //         lat: initialLocationState.center.lat,
+        //         lng: initialLocationState.center.lng,
+        //     },
+        //     isPanTo: true,
+        // })
 
         const makeMapMarkers = (mks: Marker[]) => {
             const result = []
@@ -76,8 +77,8 @@ export const KakaoMap = ({markers}: KakaoMapProps) => {
         
         return (
             <div className='w-full h-full'>        
-                <Map center={locationState.center}
-                    isPanto={locationState.isPanTo}
+                <Map center={pos}
+                    isPanto={true}
                     style={{
                         width: "100%",
                         height: "100%",

@@ -7,28 +7,46 @@ import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Marker } from '@/src/types/data'
+import { APIProps, Marker } from '@/src/types/data'
 import { GLAS } from '@/src/api/MND_GLAS'
-import { AxiosResponse } from 'axios'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
   const [markers, setMarkers] = useState<Marker[]>([])
-  const markersRef = useRef<Marker[]>([])
+  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 0, lng: 0})
+
+  const apiPropsRef = useRef<APIProps>(
+    {
+      position:
+      {
+        lat: 0,
+        lng: 0,
+      },
+      size: 5
+    }
+  )
 
   useEffect(() => {
-    try {
-      markersRef.current
-      
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setMarkers(markersRef.current)
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                apiPropsRef.current.position.lat = position.coords.latitude
+                apiPropsRef.current.position.lng = position.coords.longitude
+                setMapPos({lat: position.coords.latitude, lng: position.coords.longitude})
+            },
+            (err) => {
+                console.log(err)
+            }
+        )
     }
+
+    const response = GLAS(apiPropsRef.current)
+
   }, [])
 
   useEffect(() => {
-    console.log(markers)
+    // console.log(markers)
   }, [markers])
   
   return (
@@ -47,7 +65,7 @@ export default function Home() {
         </button>
       </div>
 
-      <KakaoMap markers={markers}/>
+      <KakaoMap pos={mapPos} markers={markers}/>
 
     </main>
   )
