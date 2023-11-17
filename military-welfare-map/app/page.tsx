@@ -9,7 +9,7 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Marker } from '@/src/types/data'
 import { GLAS } from '@/src/api/MND_GLAS'
-import { InformationPanel, LocationList } from '@/src/components/InformationPanel'
+import { InformationPanel } from '@/src/components/InformationPanel'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
