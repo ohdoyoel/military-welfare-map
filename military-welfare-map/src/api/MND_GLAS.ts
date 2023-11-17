@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { APIProps, Marker } from '../types/data'
+import { Marker } from '../types/data'
 
-export const GLAS = async ({position, size}: APIProps): Promise<Marker[]> => {
+export const GLAS = async (): Promise<Marker[]> => {
     var resultList: Marker[] = []
 
     try {
@@ -14,32 +14,40 @@ export const GLAS = async ({position, size}: APIProps): Promise<Marker[]> => {
       const response = await axios.get(
           process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/${cnt}`,
       )
-      const data = response.data.DS_TB_MND_GLAS_LIST.row
+      const data = await response.data.DS_TB_MND_GLAS_LIST.row
 
-      // data sieve
-      const geocoder = new window.kakao.maps.services.Geocoder()
-      geocoder.coord2RegionCode(position.lng, position.lat, (result, status) => {
-        if (status == kakao.maps.services.Status.OK) {
-          // sieve requires
-          console.log(result[0].region_1depth_name)
-        }
-      })
+      // // data filter by region -> no filtering is ok with sleep function
+      // const geocoder = new window.kakao.maps.services.Geocoder()
+      // var filteredData:any[] = []
+      // geocoder.coord2RegionCode(position.lng, position.lat, (result, status) => {
+      //   if (status == kakao.maps.services.Status.OK) {
+      //     const region = result[0].region_1depth_name
+      //     if (region == "경기도") {
+      //       filteredData = data.filter((elem:any) => elem.city === "경기")
+      //     }
+      //   }
+      // })
+      // console.log(data)
+      // console.log(filteredData)
 
       // data add
+      const geocoder = new window.kakao.maps.services.Geocoder()
       var address = ""
-      for (let i = 0; i < size; i++) {
+      for (let i = 0; i < cnt; i++) {
         address = `${data[i].address} ${data[i].addressdetail}`
         geocoder.addressSearch(address, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
         resultList.push(
           {
+            tag: 8,
             position:
-              {
-                lat: +result[0].y,
-                lng: +result[0].x
-              },
+            {
+              lat: +result[0].y,
+              lng: +result[0].x
+            },
+            address: address,
             title: data[i].shop,
-            tag: 8
+            teleno: data[i].telno
           }
         )
         }}, {
@@ -47,6 +55,7 @@ export const GLAS = async ({position, size}: APIProps): Promise<Marker[]> => {
           size: 1,
           analyze_type: kakao.maps.services.AnalyzeType.SIMILAR
         })
+        await new Promise(f => setTimeout(f, 1))
       }
 
     } catch (e) {

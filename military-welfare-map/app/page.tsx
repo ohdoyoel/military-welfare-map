@@ -2,37 +2,25 @@
 
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { APIProps, Marker } from '@/src/types/data'
+import { Marker } from '@/src/types/data'
 import { GLAS } from '@/src/api/MND_GLAS'
+import { InformationPanel, LocationList } from '@/src/components/InformationPanel'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<Marker[]>([])
-  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 0, lng: 0})
-
-  const apiPropsRef = useRef<APIProps>(
-    {
-      position:
-      {
-        lat: 0,
-        lng: 0,
-      },
-      size: 5
-    }
-  )
+  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
 
   useEffect(() => {
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                apiPropsRef.current.position.lat = position.coords.latitude
-                apiPropsRef.current.position.lng = position.coords.longitude
                 setMapPos({lat: position.coords.latitude, lng: position.coords.longitude})
             },
             (err) => {
@@ -41,20 +29,24 @@ export default function Home() {
         )
     }
 
-    const response = GLAS(apiPropsRef.current)
+    GLAS().then((res) => {
+      setIsLoading(false)
+      setMarkers(res)
+    })
 
   }, [])
 
   useEffect(() => {
-    // console.log(markers)
+    console.log(markers)
   }, [markers])
   
   return (
-    <main className="flex flex-row w-screen h-screen">
-      <div className={`${isBarOpened ? `block` : `hidden`} grow-0 w-[460px] h-full z-10 h-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+    <main className={`flex flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
+      <div className={`${isBarOpened ? `block` : `hidden`} w-[460px] h-full z-10 h-full flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
         <SearchInput onKeyUp={() => console.log("keyup")}/>
         <ToggleTags/>
+        <InformationPanel markers={markers}/>
       </div>
 
       <div className={`absolute inset-y-0 w-auto z-20
