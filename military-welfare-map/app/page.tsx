@@ -14,8 +14,6 @@ export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
   const [markers, setMarkers] = useState<Marker[]>([])
   const markersRef = useRef<Marker[]>([])
-  
-  const geocoder = new window.kakao.maps.services.Geocoder()
 
   const GLAS = async () => {
       try {
@@ -28,9 +26,12 @@ export default function Home() {
         )
         const data = response.data.DS_TB_MND_GLAS_LIST.row
         console.log(data)
-        for (let i = 0; i < cnt; i++) {
-          geocoder.addressSearch(data[i].address+data[i].addressdetail, (result, status) => {
 
+        const geocoder = new window.kakao.maps.services.Geocoder()
+        var address = ""
+        for (let i = 0; i < 300; i++) {
+          address = `${data[i].address} ${data[i].addressdetail}`
+          geocoder.addressSearch(address, (result, status) => {
           if (status === kakao.maps.services.Status.OK) {
           markersRef.current.push(
             {
@@ -43,7 +44,11 @@ export default function Home() {
               tag: 8
             }
           )
-          }})
+          }}, {
+            page: 1,
+            size: 1,
+            analyze_type: kakao.maps.services.AnalyzeType.SIMILAR
+          })
         }
       } catch (e) {
         console.log(e)
