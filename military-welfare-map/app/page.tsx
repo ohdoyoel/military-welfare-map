@@ -7,58 +7,24 @@ import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import axios from 'axios'
 import { Marker } from '@/src/types/data'
+import { GLAS } from '@/src/api/MND_GLAS'
+import { AxiosResponse } from 'axios'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
   const [markers, setMarkers] = useState<Marker[]>([])
   const markersRef = useRef<Marker[]>([])
 
-  const GLAS = async () => {
-      try {
-        const preRes = await axios.get(
-          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/1`,
-        )
-        const cnt = preRes.data.DS_TB_MND_GLAS_LIST.list_total_count
-        const response = await axios.get(
-          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/${cnt}`,
-        )
-        const data = response.data.DS_TB_MND_GLAS_LIST.row
-        console.log(data)
-
-        const geocoder = new window.kakao.maps.services.Geocoder()
-        var address = ""
-        for (let i = 0; i < 300; i++) {
-          address = `${data[i].address} ${data[i].addressdetail}`
-          geocoder.addressSearch(address, (result, status) => {
-          if (status === kakao.maps.services.Status.OK) {
-          markersRef.current.push(
-            {
-              position:
-                {
-                  lat: +result[0].y,
-                  lng: +result[0].x
-                },
-              title: data[i].shop,
-              tag: 8
-            }
-          )
-          }}, {
-            page: 1,
-            size: 1,
-            analyze_type: kakao.maps.services.AnalyzeType.SIMILAR
-          })
-        }
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setMarkers(markersRef.current)
-      }
-  }
-
   useEffect(() => {
-    GLAS()
+    try {
+      markersRef.current
+      
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setMarkers(markersRef.current)
+    }
   }, [])
 
   useEffect(() => {
