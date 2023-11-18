@@ -5,7 +5,6 @@ export const GLAS = async (): Promise<Marker[]> => {
     var resultList: Marker[] = []
 
     try {
-
       // data fetch
       const preRes = await axios.get(
           process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/1`,
@@ -27,7 +26,7 @@ export const GLAS = async (): Promise<Marker[]> => {
       //     }
       //   }
       // })
-      // console.log(data)
+      console.log(data)
       // console.log(filteredData)
 
       // data add

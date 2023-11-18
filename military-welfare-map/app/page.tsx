@@ -2,7 +2,7 @@
 
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -10,12 +10,14 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Marker } from '@/src/types/data'
 import { GLAS } from '@/src/api/MND_GLAS'
 import { InformationPanel } from '@/src/components/InformationPanel'
+import { ToggleRegions } from '@/src/components/ToggleRegions'
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [markers, setMarkers] = useState<Marker[]>([])
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+  const isGLASLoadedRef = useRef(false)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -28,16 +30,18 @@ export default function Home() {
             }
         )
     }
-
-    GLAS().then((res) => {
-      setIsLoading(false)
-      setMarkers(res)
-    })
-
   }, [])
 
   useEffect(() => {
     console.log(markers)
+    if (!isGLASLoadedRef.current) {
+      setIsLoading(true)
+      GLAS().then((res) => {
+        setMarkers([...markers, ...res])
+        isGLASLoadedRef.current = true
+        setIsLoading(false)
+      })
+    }
   }, [markers])
   
   return (
@@ -46,6 +50,7 @@ export default function Home() {
         <Header/>
         <SearchInput onKeyUp={() => console.log("keyup")}/>
         <ToggleTags/>
+        <ToggleRegions/>
         <InformationPanel markers={markers}/>
       </div>
 
