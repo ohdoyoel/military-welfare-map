@@ -10,19 +10,19 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
-import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
-import { ToggleTagButton } from '../ToggleTagButton';
+import { ReactElement } from 'react';
 
-interface ToggleTagsProps {
-    setToggled: Dispatch<SetStateAction<boolean[]>>
+interface LocationItemProps {
+    tag: number,
+    region: number,
+    address: string,
+    title: string
 }
 
 interface ToggleTagButtonProps {
     icon: ReactElement<any, any>,
     label: string
 }
-
-const NUM_OF_TAGS = 12
 
 const iconAndLabelData: ToggleTagButtonProps[] = [
     {
@@ -75,38 +75,15 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
     },
 ]
 
-export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
-    const [isToggled, setIsToggled] = useState(Array.from({length: NUM_OF_TAGS}, () => false))
-
-    const toggleTagButtonList = () => {
-
-        const result = []
-        for (let i = 0; i < iconAndLabelData.length; i++) {
-            result.push(
-                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} isToggled={isToggled[i]} label={iconAndLabelData[i].label} key={i}>
-                    {iconAndLabelData[i].icon}
-                </ToggleTagButton>
-            )
-        }
-
-        return result
-    }
-
-    useEffect(() => {
-        if (!isToggled.includes(true)) {
-            setToggled(Array.from({length: NUM_OF_TAGS}, () => true))
-        }
-        else {
-            setToggled(isToggled)
-        }
-    }, [isToggled])
-
+export const LocationItem = ({tag, region, address, title}: LocationItemProps) => {
 
     return (
-        <div className="w-full h-16 bg-emerald-500 px-4 flex items-center py-1">
-            <div className='w-full h-full grid grid-cols-12 gap-14 content-center overflow-x-auto'>
-                {toggleTagButtonList()}
+        <button className="w-full h-20 bg-white pr-4 mt-2 rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+                        flex flex-row">
+            <div className="w-20 h-full bg-black flex items-center">
+                {iconAndLabelData[tag].icon}
+                {iconAndLabelData[tag].label}
             </div>
-        </div>
+        </button>
     )
 }
