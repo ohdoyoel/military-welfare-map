@@ -1,4 +1,4 @@
-export type Marker = {
+export type MarkerType = {
     tag: number
     region: number
     position: {

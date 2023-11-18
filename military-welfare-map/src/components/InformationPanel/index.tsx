@@ -1,17 +1,19 @@
-import { Marker } from "@/src/types/data"
+import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
+import { Dispatch, SetStateAction } from "react"
 
 interface InformationPanelProps {
-    markers: Marker[]
+    markers: MarkerType[]
+    setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
 }
 
-export const InformationPanel = ({markers}: InformationPanelProps) => {
+export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
     const LocationList = () => {
         const result = []
         for (let i = 0; i < markers.length; i++) {
             result.push(
-                <LocationItem tag={markers[i].tag} region={markers[i].region}
-                            address={markers[i].address} title={markers[i].title} key={i}/>
+                <LocationItem position={markers[i].position}tag={markers[i].tag}
+                            address={markers[i].address} title={markers[i].title} key={i} setPos={setPos}/>
             )
         }
 

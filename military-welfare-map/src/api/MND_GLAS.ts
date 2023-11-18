@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { Marker } from '../types/data'
+import { MarkerType } from '../types/data'
 import { addressToRegion } from '../functions/addressToRegion'
 
-export const GLAS = async (): Promise<Marker[]> => {
-    var resultList: Marker[] = []
+export const GLAS = async (): Promise<MarkerType[]> => {
+    var resultList: MarkerType[] = []
 
     try {
       console.log('MND_GLAS Loading...')
