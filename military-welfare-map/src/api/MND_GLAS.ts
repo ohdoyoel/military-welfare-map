@@ -1,10 +1,13 @@
 import axios from 'axios'
 import { Marker } from '../types/data'
+import { addressToRegion } from '../functions/addressToRegion'
 
 export const GLAS = async (): Promise<Marker[]> => {
     var resultList: Marker[] = []
 
     try {
+      console.log('MND_GLAS Loading...')
+
       // data fetch
       const preRes = await axios.get(
           process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/1`,
@@ -14,20 +17,7 @@ export const GLAS = async (): Promise<Marker[]> => {
           process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/${cnt}`,
       )
       const data = await response.data.DS_TB_MND_GLAS_LIST.row
-
-      // // data filter by region -> no filtering is ok with sleep function
-      // const geocoder = new window.kakao.maps.services.Geocoder()
-      // var filteredData:any[] = []
-      // geocoder.coord2RegionCode(position.lng, position.lat, (result, status) => {
-      //   if (status == kakao.maps.services.Status.OK) {
-      //     const region = result[0].region_1depth_name
-      //     if (region == "경기도") {
-      //       filteredData = data.filter((elem:any) => elem.city === "경기")
-      //     }
-      //   }
-      // })
       console.log(data)
-      // console.log(filteredData)
 
       // data add
       const geocoder = new window.kakao.maps.services.Geocoder()
@@ -35,10 +25,11 @@ export const GLAS = async (): Promise<Marker[]> => {
       for (let i = 0; i < cnt; i++) {
         address = `${data[i].address} ${data[i].addressdetail}`
         geocoder.addressSearch(address, (result, status) => {
-        if (status === kakao.maps.services.Status.OK) {
+        if (status === kakao.maps.services.Status.OK && addressToRegion(address) != -1) {
         resultList.push(
           {
             tag: 8,
+            region: addressToRegion(address),
             position:
             {
               lat: +result[0].y,
@@ -56,9 +47,9 @@ export const GLAS = async (): Promise<Marker[]> => {
         })
         await new Promise(f => setTimeout(f, 1))
       }
-
+      console.log('MND_GLAS Loaded')
     } catch (e) {
-    console.log(e)
+      console.log(e)
     } finally {
       return resultList
     }

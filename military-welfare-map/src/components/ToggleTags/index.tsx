@@ -10,10 +10,11 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
-import React, { ReactElement, useState } from 'react';
+import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
 import { ToggleTagButton } from '../ToggleTagButton';
 
 interface ToggleTagsProps {
+    setToggled: Dispatch<SetStateAction<boolean[]>>
 }
 
 interface ToggleTagButtonProps {
@@ -23,7 +24,7 @@ interface ToggleTagButtonProps {
 
 const NUM_OF_TAGS = 12
 
-export const ToggleTags = () => {
+export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
     const [isToggled, setIsToggled] = useState(Array.from({length: NUM_OF_TAGS}, () => false))
 
     const toggleTagButtonList = () => {
@@ -89,6 +90,15 @@ export const ToggleTags = () => {
 
         return result
     }
+
+    useEffect(() => {
+        if (!isToggled.includes(true)) {
+            setToggled(Array.from({length: NUM_OF_TAGS}, () => true))
+        }
+        else {
+            setToggled(isToggled)
+        }
+    }, [isToggled])
 
 
     return (

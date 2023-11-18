@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ToggleRegionButton } from "../ToggleRegionButton"
 
-interface ToggleTagsProps {
+interface ToggleRegionsProps {
+    setToggled: Dispatch<SetStateAction<boolean[]>>
 }
 
-const NUM_OF_TAGS = 16
+const NUM_OF_REGIONS = 16
 
-export const ToggleRegions = () => {
-    const [isToggled, setIsToggled] = useState(Array.from({length: NUM_OF_TAGS}, () => false))
+export const ToggleRegions = ({setToggled}: ToggleRegionsProps) => {
+    const [isToggled, setIsToggled] = useState(Array.from({length: NUM_OF_REGIONS}, () => false))
 
     const toggleRegionButtonList = () => {
         const regionData: string[] = [
@@ -27,10 +28,18 @@ export const ToggleRegions = () => {
         return result
     }
 
+    useEffect(() => {
+        if (!isToggled.includes(true)) {
+            setToggled(Array.from({length: NUM_OF_REGIONS}, () => true))
+        }
+        else {
+            setToggled(isToggled)
+        }
+    }, [isToggled])
 
     return (
-        <div className="w-full h-16 bg-emerald-500 px-4 flex items-center py-1">
-            <div className='w-full h-full grid grid-cols-13 gap-0'>
+        <div className="w-full h-10 bg-emerald-500 px-4 flex items-center pb-1">
+            <div className='w-full h-full grid grid-cols-16 gap-11 content-center overflow-x-scroll'>
                 {toggleRegionButtonList()}
             </div>
         </div>

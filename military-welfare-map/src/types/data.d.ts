@@ -1,5 +1,6 @@
 export type Marker = {
     tag: number
+    region: number
     position: {
         lat: number,
         lng: number
