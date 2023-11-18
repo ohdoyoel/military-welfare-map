@@ -34,14 +34,6 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
                         },
                         isLoading: false,
                     }))
-                    // setLocationState((prev) => ({
-                    //     ...prev,
-                    //     center: {
-                    //         lat: position.coords.latitude,
-                    //         lng: position.coords.longitude,
-                    //     },
-                    //     isPanTo: true,
-                    // }))
                 },
                 (err) => {
                     setInitialLocationState((prev) => ({
@@ -55,14 +47,6 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
         }, [])
         
         // move map function
-        
-        // const [locationState, setLocationState] = useState({
-        //     center: {
-        //         lat: initialLocationState.center.lat,
-        //         lng: initialLocationState.center.lng,
-        //     },
-        //     isPanTo: true,
-        // })
 
         const makeMapMarkers = (mks: Marker[]) => {
             const result = []

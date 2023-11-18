@@ -12,10 +12,32 @@ import { GLAS } from '@/src/api/MND_GLAS'
 import { InformationPanel } from '@/src/components/InformationPanel'
 import { ToggleRegions } from '@/src/components/ToggleRegions'
 
+const NUM_OF_TAGS = 12
+const NUM_OF_REGIONS = 16
+
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [markers, setMarkers] = useState<Marker[]>([])
+  const [markers, setMarkers] = useState<Marker[]>(
+    [
+      {
+        tag: 1,
+        region: 1,
+        position: {
+          lat: 33.450701,
+          lng: 126.570667
+        },
+        address: "서울특별시 어딘가",
+        title: 'kakao',
+      }
+    ]
+    )
+  
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => false))
+  const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => false))
+  
+  const [filteredMarkers, setFilteredMarkers] = useState<Marker[]>([])
+
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const isGLASLoadedRef = useRef(false)
 
@@ -34,24 +56,37 @@ export default function Home() {
 
   useEffect(() => {
     console.log(markers)
-    if (!isGLASLoadedRef.current) {
-      setIsLoading(true)
-      GLAS().then((res) => {
-        setMarkers([...markers, ...res])
-        isGLASLoadedRef.current = true
-        setIsLoading(false)
-      })
-    }
+    // if (!isGLASLoadedRef.current) {
+    //   setIsLoading(true)
+    //   GLAS().then((res) => {
+    //     setMarkers([...markers, ...res])
+    //     isGLASLoadedRef.current = true
+    //     setIsLoading(false)
+    //   })
+    // }
   }, [markers])
+
+  useEffect(() => {
+    console.log(isTagsToggled)
+    setFilteredMarkers(markers.filter((x) => {
+      for (let i = 0; i < isTagsToggled.length; i++) {
+        for (let j = 0; j < isRegionsToggled.length; j++) {
+          if (isTagsToggled[i] && x.tag == i
+              && isRegionsToggled[j] && x.region == j) return true
+        }
+      }
+      return false
+    }))
+  }, [isTagsToggled, isRegionsToggled])
   
   return (
     <main className={`flex flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
       <div className={`${isBarOpened ? `block` : `hidden`} w-[460px] h-full z-10 h-full flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
         <SearchInput onKeyUp={() => console.log("keyup")}/>
-        <ToggleTags/>
-        <ToggleRegions/>
-        <InformationPanel markers={markers}/>
+        <ToggleTags setToggled={setIsTagsToggled}/>
+        <ToggleRegions setToggled={setIsRegionsToggled}/>
+        <InformationPanel markers={filteredMarkers}/>
       </div>
 
       <div className={`absolute inset-y-0 w-auto z-20
@@ -62,7 +97,7 @@ export default function Home() {
         </button>
       </div>
 
-      <KakaoMap pos={mapPos} markers={markers}/>
+      <KakaoMap pos={mapPos} markers={filteredMarkers}/>
 
     </main>
   )
