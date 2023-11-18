@@ -1,3 +1,4 @@
+import { ReactElement } from "react"
 import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
 import ContentCutOutlinedIcon from '@mui/icons-material/ContentCut';
@@ -10,17 +11,13 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
-import { Dispatch, ReactElement, SetStateAction } from 'react';
 
-interface LocationItemProps {
-    setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
-    position: {
-        lat: number,
-        lng: number
-    }
-    tag: number,
-    address: string,
+interface InfoWindowProps {
+    tag: number
     title: string
+    address: string
+    description?: string
+    teleno?: string
 }
 
 interface ToggleTagButtonProps {
@@ -170,21 +167,21 @@ const tagColorData:tagColorType = {
     },
 }
 
-export const LocationItem = ({setPos, position, tag, address, title}: LocationItemProps) => {
-
+export const InfoWindow = ({tag, address, title, description,teleno}: InfoWindowProps) => {    
     return (
-        <button onClick={() => {setPos({lat: position.lat, lng: position.lng})}}
-                    className="w-full h-20 bg-white pr-2 mt-2 rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+        <div className="w-96 h-48 flex flex-row bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                         flex flex-row">
             <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
             <div className={`w-16 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}
                 <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
             </div>
-            <div className={`w-full h-full bg-white flex flex-col items-start p-2`}>
+            <div className="w-full h-full flex flex-col items-start p-2">
                 <p className='text-lg font-nsb'>{title}</p>
-                <p className='text-xs text-start'>{address}</p>
+                <p className='text-sm text-start'>{address}</p>
+                {teleno}
+                {description}
             </div>
-        </button>
+        </div>
     )
 }
