@@ -22,13 +22,23 @@ export default function Home() {
     [
       {
         tag: 1,
-        region: 1,
+        region: 0,
         position: {
-          lat: 33.450701,
-          lng: 126.570667
+          lat: 37.5518911,
+          lng: 126.9917937
         },
         address: "서울특별시 어딘가",
-        title: 'kakao',
+        title: '서울군인카페',
+      },
+      {
+        tag: 0,
+        region: 0,
+        position: {
+          lat: 37.5018911,
+          lng: 126.9917937
+        },
+        address: "서울특별시 어딘가",
+        title: '서울군인식당',
       }
     ]
     )

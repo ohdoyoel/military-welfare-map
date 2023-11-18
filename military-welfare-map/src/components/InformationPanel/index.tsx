@@ -1,4 +1,5 @@
 import { Marker } from "@/src/types/data"
+import { LocationItem } from "../LocationItem"
 
 interface InformationPanelProps {
     markers: Marker[]
@@ -9,7 +10,8 @@ export const InformationPanel = ({markers}: InformationPanelProps) => {
         const result = []
         for (let i = 0; i < markers.length; i++) {
             result.push(
-                <p key={i}>{markers[i].title}</p>
+                <LocationItem tag={markers[i].tag} region={markers[i].region}
+                            address={markers[i].address} title={markers[i].title} key={i}/>
             )
         }
 
@@ -18,7 +20,7 @@ export const InformationPanel = ({markers}: InformationPanelProps) => {
 
 
     return (
-        <div className="w-full h-full bg-white px-4 flex flex-col items-start overflow-y-scroll">
+        <div className="w-full h-full bg-white px-4 py-2 flex flex-col items-start overflow-y-scroll">
             {LocationList()}
         </div>
     )
