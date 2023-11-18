@@ -26,7 +26,7 @@ interface ToggleTagButtonProps {
 
 const iconAndLabelData: ToggleTagButtonProps[] = [
     {
-        icon: <RestaurantOutlinedIcon className='text-lg text-white'/>,
+        icon: <RestaurantOutlinedIcon className='text-5xl text-white'/>,
         label: '음식점'
     },
     {
@@ -78,11 +78,11 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
 export const LocationItem = ({tag, region, address, title}: LocationItemProps) => {
 
     return (
-        <button className="w-full h-20 bg-white pr-4 mt-2 rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+        <button className="w-full h-20 bg-white pr-4 mt-2 rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                         flex flex-row">
-            <div className="w-20 h-full bg-black flex items-center">
+            <div className="w-20 h-full bg-black flex flex-col items-center rounded-l-[3px]">
                 {iconAndLabelData[tag].icon}
-                {iconAndLabelData[tag].label}
+                <p className='text-white'>{iconAndLabelData[tag].label}</p>
             </div>
         </button>
     )

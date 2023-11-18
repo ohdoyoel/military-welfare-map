@@ -64,30 +64,36 @@ export default function Home() {
     }
   }, [])
 
+  // useEffect(() => {
+  //   if (!isGLASLoadedRef.current) {
+  //     setIsLoading(true)
+  //     GLAS().then((res) => {
+  //       setMarkers([...markers, ...res])
+  //       isGLASLoadedRef.current = true
+  //       setIsLoading(false)
+  //     })
+  //   }
+  // }, [])
+
   useEffect(() => {
     console.log(markers)
-    // if (!isGLASLoadedRef.current) {
-    //   setIsLoading(true)
-    //   GLAS().then((res) => {
-    //     setMarkers([...markers, ...res])
-    //     isGLASLoadedRef.current = true
-    //     setIsLoading(false)
-    //   })
-    // }
   }, [markers])
 
   useEffect(() => {
-    console.log(isTagsToggled)
     setFilteredMarkers(markers.filter((x) => {
       for (let i = 0; i < isTagsToggled.length; i++) {
         for (let j = 0; j < isRegionsToggled.length; j++) {
           if (isTagsToggled[i] && x.tag == i
-              && isRegionsToggled[j] && x.region == j) return true
+            && isRegionsToggled[j] && x.region == j) return true
+          }
         }
-      }
-      return false
-    }))
-  }, [isTagsToggled, isRegionsToggled])
+        return false
+      }))
+    }, [isTagsToggled, isRegionsToggled, markers])
+
+  useEffect(() => {
+    console.log(filteredMarkers)
+  }, [filteredMarkers])
   
   return (
     <main className={`flex flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>

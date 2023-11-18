@@ -19,7 +19,7 @@ interface ToggleTagsProps {
 
 interface ToggleTagButtonProps {
     icon: ReactElement<any, any>,
-    label: string
+    label: ReactElement<any, any>
 }
 
 const NUM_OF_TAGS = 12
@@ -27,51 +27,51 @@ const NUM_OF_TAGS = 12
 const iconAndLabelData: ToggleTagButtonProps[] = [
     {
         icon: <RestaurantOutlinedIcon className='text-lg text-white'/>,
-        label: '음식점'
+        label: <p className='text-white text-xs'>음식점</p>
     },
     {
         icon: <CoffeeOutlinedIcon className='text-lg text-white'/>,
-        label: '카페'
+        label: <p className='text-white text-xs'>카페</p>
     },
     {
         icon: <ContentCutOutlinedIcon className='text-lg text-white'/>,
-        label: '미용실'
+        label: <p className='text-white text-xs'>미용실</p>
     },
     {
         icon: <HotTubOutlinedIcon className='text-lg text-white'/>,
-        label: '목욕탕'
+        label: <p className='text-white text-xs'>목욕탕</p>
     },
     {
         icon: <AttractionsOutlinedIcon className='text-lg text-white'/>,
-        label: '문화·여가'
+        label: <p className='text-white text-xs'>문화·여가</p>
     },
     {
         icon: <HotelOutlinedIcon className='text-lg text-white'/>,
-        label: '숙박'
+        label: <p className='text-white text-xs'>숙박</p>
     },
     {
         icon: <SportsSoccerOutlinedIcon className='text-lg text-white'/>,
-        label: '스포츠'
+        label: <p className='text-white text-xs'>스포츠</p>
     },
     {
         icon: <TrainOutlinedIcon className='text-lg text-white'/>,
-        label: '교통·항공'
+        label: <p className='text-white text-xs'>교통·항공</p>
     },
     {
         icon: <VisibilityOutlinedIcon className='text-lg text-white'/>,
-        label: '안경점'
+        label: <p className='text-white text-xs'>안경점</p>
     },
     {
         icon: <LocalHospitalOutlinedIcon className='text-lg text-white'/>,
-        label: '병원'
+        label: <p className='text-white text-xs'>병원</p>
     },
     {
         icon: <MilitaryTechOutlinedIcon className='text-lg text-white'/>,
-        label: '예비군'
+        label: <p className='text-white text-xs'>예비군</p>
     },
     {
         icon: <GolfCourseOutlinedIcon className='text-lg text-white'/>,
-        label: '골프장'
+        label: <p className='text-white text-xs'>골프장</p>
     },
 ]
 
@@ -83,8 +83,9 @@ export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
         const result = []
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
-                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} isToggled={isToggled[i]} label={iconAndLabelData[i].label} key={i}>
+                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
                     {iconAndLabelData[i].icon}
+                    {iconAndLabelData[i].label}
                 </ToggleTagButton>
             )
         }
