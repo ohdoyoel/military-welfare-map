@@ -11,6 +11,7 @@ import { MarkerType } from '@/src/types/data'
 import { GLAS } from '@/src/api/MND_GLAS'
 import { InformationPanel } from '@/src/components/InformationPanel'
 import { ToggleRegions } from '@/src/components/ToggleRegions'
+import { GEOCOORD } from '@/src/api/VW-GEOCOORD'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -62,6 +63,7 @@ export default function Home() {
             }
         )
     }
+    console.log(GEOCOORD('서울특별시 서대문구 충정로3가 190-36'))
   }, [])
 
   // useEffect(() => {

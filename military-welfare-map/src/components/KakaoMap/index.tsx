@@ -1,7 +1,7 @@
 "use client"
 
 import { MarkerType } from '@/src/types/data'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
 import PlaceIcon from '@mui/icons-material/Place';
 import { Marker } from '../Marker';
@@ -12,6 +12,8 @@ interface KakaoMapProps {
 }
 
 export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
+    const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
+    const [cnt, setCnt] = useState(0)
 
     // get current position and mark
 
@@ -23,6 +25,10 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
         errMsg: "",
         isLoading: true,
     })
+
+    useEffect(() => {
+        setMapPos(pos)
+    }, [pos])
     
     useEffect(() => {
         if (navigator.geolocation) {
@@ -54,21 +60,22 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
             const result = []
             for (let i = 0; i < mks.length; i++) {
                 result.push(
-                    <Marker tag={mks[i].tag} position={mks[i].position}
-                            address={mks[i].address} title={mks[i].title}/>
+                    <Marker tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
+                            address={mks[i].address} title={mks[i].title} setPos={setMapPos}/>
                 )
             }
             return result
         }
         
         return (
-            <Map center={pos}
+            <Map center={mapPos}
                 isPanto={true}
                 style={{
                     width: "100%",
                     height: "100%",
                 }}
-                level={10}>
+                level={10}
+                onClick={() => {setCnt(cnt+1)}}>
                 {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
                         image={{
@@ -77,7 +84,7 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
                             options: {offset: {x: 0, y: 0}},
                         }}
                     />}
-                <MapTypeControl position={"TOPRIGHT"} />
+                <MapTypeControl position={"TOPRIGHT"}/>
                 {makeMapMarkers(markers)}
             </Map>
     )
