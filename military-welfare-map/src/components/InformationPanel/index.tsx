@@ -1,6 +1,7 @@
 import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
+// import InfiniteScroll from "react-infinite-scroller"
 
 interface InformationPanelProps {
     markers: MarkerType[]
@@ -8,12 +9,26 @@ interface InformationPanelProps {
 }
 
 export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
-    const LocationList = () => {
+    
+    // const itemsPerPage = 10;
+    // const [hasMore, setHasMore] = useState(true);
+    // const [records, setRecords] = useState(itemsPerPage);
+    // const loadMore = () => {
+    //     if (records >= markers.length) {
+    //         setHasMore(false);
+    //     } else {
+    //     setTimeout(() => {
+    //         setRecords(records + itemsPerPage);
+    //     }, 1000);
+    //     }
+    // };
+    
+    const LocationList = (posts: MarkerType[]) => {
         const result = []
-        for (let i = 0; i < markers.length; i++) {
+        for (let i = 0; i < posts.length; i++) {
             result.push(
-                <LocationItem position={markers[i].position}tag={markers[i].tag}
-                            address={markers[i].address} title={markers[i].title} key={i} setPos={setPos}/>
+                <LocationItem position={posts[i].position} tag={posts[i].tag}
+                            address={posts[i].address} title={posts[i].title} key={i} setPos={setPos}/>
             )
         }
 
@@ -23,7 +38,9 @@ export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
 
     return (
         <div className="w-full h-full bg-white px-4 py-2 flex flex-col items-start overflow-y-scroll">
-            {LocationList()}
+            <div className="w-full h-full">
+            {LocationList(markers)}
+            </div>
         </div>
     )
 }
