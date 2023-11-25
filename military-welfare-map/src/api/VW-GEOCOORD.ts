@@ -29,7 +29,7 @@ export const GEOCOORD = async (addr: string): Promise<{lat:number, lng:number}> 
     } catch (e) {
       console.log(e)
     } finally {
-        console.log(resultPos)
+      // console.log(resultPos)
       return resultPos
     }
   }

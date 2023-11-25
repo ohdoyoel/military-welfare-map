@@ -13,6 +13,8 @@ import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
 
 interface InfoWindowProps {
+    isVisible?: boolean
+    _id: number
     tag: number
     title: string
     address: string
@@ -167,10 +169,10 @@ const tagColorData:tagColorType = {
     },
 }
 
-export const InfoWindow = ({tag, address, title, description,teleno}: InfoWindowProps) => {    
+export const InfoWindow = ({_id, tag, address, title, description,teleno}: InfoWindowProps) => {    
     return (
-        <div className="w-96 h-48 flex flex-row bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
-                        flex flex-row">
+        <div id={`InfoWindow${_id}`} className={`w-96 h-48 flex flex-row bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+                        flex flex-row`}>
             <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
             <div className={`w-16 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}

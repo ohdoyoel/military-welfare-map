@@ -3,6 +3,7 @@ import { MapMarker } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
 
 interface MarkerProps {
+    _id: number
     tag: number
     position: {lat: number, lng: number}
     address: string
@@ -13,7 +14,7 @@ interface MarkerProps {
     mapClicked: number
 }
 
-export const Marker = ({tag, position, address, title, description,teleno, setPos, mapClicked}: MarkerProps) => {
+export const Marker = ({_id, tag, position, address, title, description,teleno, setPos, mapClicked}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
@@ -25,16 +26,14 @@ export const Marker = ({tag, position, address, title, description,teleno, setPo
         position={position}
         image={{
         src: `/images/marker${tag}.png`,
-        size: {width: 16, height: 16},
-        options: {offset: {x: 8, y: 8}},}}
+        size: {width: 12, height: 12},
+        options: {offset: {x: 6, y: 6}},}}
         onClick={() => {
             setPos({lat: position.lat, lng: position.lng})
             setIsVisible(true)
         }}
-        // onMouseOver={() => setIsVisible(true)}
-        // onMouseOut={() => setIsVisible(false)}
         >
-            {isVisible && <InfoWindow tag={tag} title={title} address={address} description={description} teleno={teleno}/>}
+            {isVisible && <InfoWindow _id={_id} tag={tag} title={title} address={address} description={description} teleno={teleno}/>}
         </MapMarker>
     )
 }

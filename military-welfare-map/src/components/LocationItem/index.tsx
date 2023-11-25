@@ -13,6 +13,7 @@ import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
 import { Dispatch, ReactElement, SetStateAction } from 'react';
 
 interface LocationItemProps {
+    _id: number
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     position: {
         lat: number,
@@ -170,10 +171,16 @@ const tagColorData:tagColorType = {
     },
 }
 
-export const LocationItem = ({setPos, position, tag, address, title}: LocationItemProps) => {
+export const LocationItem = ({_id, setPos, position, tag, address, title}: LocationItemProps) => {
+    const handleOnClick = () => {
+        setPos({lat: position.lat, lng: position.lng})
+        let marker = document.getElementById(`InfoWindow${_id}`) as HTMLUnknownElement;
+        console.log(marker)
+        // marker.
+    }
 
     return (
-        <button onClick={() => {setPos({lat: position.lat, lng: position.lng})}}
+        <button onClick={handleOnClick}
                     className="w-full h-20 bg-white pr-2 mt-2 rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                         flex flex-row">
             <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>

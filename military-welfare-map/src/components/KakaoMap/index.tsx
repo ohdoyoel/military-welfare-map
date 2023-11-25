@@ -3,7 +3,6 @@
 import { MarkerType } from '@/src/types/data'
 import { useEffect, useRef, useState } from 'react'
 import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
-import PlaceIcon from '@mui/icons-material/Place';
 import { Marker } from '../Marker';
 
 interface KakaoMapProps {
@@ -60,7 +59,7 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
             const result = []
             for (let i = 0; i < mks.length; i++) {
                 result.push(
-                    <Marker tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
+                    <Marker key={i} _id={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
                             address={mks[i].address} title={mks[i].title} setPos={setMapPos}/>
                 )
             }
@@ -81,7 +80,7 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
                         image={{
                             src: "/images/current-position.png",
                             size: {width: 20, height: 20},
-                            options: {offset: {x: 0, y: 0}},
+                            options: {offset: {x: 10, y: 10}},
                         }}
                     />}
                 <MapTypeControl position={"TOPRIGHT"}/>
