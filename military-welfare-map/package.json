@@ -21,7 +21,7 @@
     "react-kakao-maps-sdk": "^1.1.21"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.10.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-infinite-scroller": "^1.2.5",

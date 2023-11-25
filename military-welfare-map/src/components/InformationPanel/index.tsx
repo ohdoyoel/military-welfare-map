@@ -27,7 +27,7 @@ export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
         const result = []
         for (let i = 0; i < posts.length; i++) {
             result.push(
-                <LocationItem position={posts[i].position} tag={posts[i].tag}
+                <LocationItem _id={i} position={posts[i].position} tag={posts[i].tag}
                             address={posts[i].address} title={posts[i].title} key={i} setPos={setPos}/>
             )
         }

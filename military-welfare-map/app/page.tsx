@@ -9,9 +9,10 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { MarkerType } from '@/src/types/data'
 import { GLAS } from '@/src/api/MND_GLAS'
+import { DCNT } from '@/src/api/MND_DCNT'
 import { InformationPanel } from '@/src/components/InformationPanel'
 import { ToggleRegions } from '@/src/components/ToggleRegions'
-import { GEOCOORD } from '@/src/api/VW-GEOCOORD'
+// import { GEOCOORD } from '@/src/api/VW-GEOCOORD'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -51,6 +52,7 @@ export default function Home() {
 
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const isGLASLoadedRef = useRef(false)
+  const isDCNTLoadedRef = useRef(false)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -63,19 +65,27 @@ export default function Home() {
             }
         )
     }
-    console.log(GEOCOORD('서울특별시 서대문구 충정로3가 190-36'))
+    // console.log(GEOCOORD('서울특별시 서대문구 충정로3가 190-36'))
   }, [])
 
-  // useEffect(() => {
-  //   if (!isGLASLoadedRef.current) {
-  //     setIsLoading(true)
-  //     GLAS().then((res) => {
-  //       setMarkers([...markers, ...res])
-  //       isGLASLoadedRef.current = true
-  //       setIsLoading(false)
-  //     })
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!isDCNTLoadedRef.current) {
+      setIsLoading(true)
+      DCNT().then((res) => {
+        setMarkers([...markers, ...res])
+        isGLASLoadedRef.current = true
+        setIsLoading(false)
+      })
+    }
+    // if (!isGLASLoadedRef.current) {
+    //   setIsLoading(true)
+    //   GLAS().then((res) => {
+    //     setMarkers([...markers, ...res])
+    //     isGLASLoadedRef.current = true
+    //     setIsLoading(false)
+    //   })
+    // }
+  }, [])
 
   useEffect(() => {
     console.log(markers)
