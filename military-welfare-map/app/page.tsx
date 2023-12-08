@@ -19,7 +19,7 @@ const NUM_OF_REGIONS = 16
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<MarkerType[]>(
     [
       {
@@ -77,14 +77,14 @@ export default function Home() {
         setIsLoading(false)
       })
     }
-    // if (!isGLASLoadedRef.current) {
-    //   setIsLoading(true)
-    //   GLAS().then((res) => {
-    //     setMarkers([...markers, ...res])
-    //     isGLASLoadedRef.current = true
-    //     setIsLoading(false)
-    //   })
-    // }
+    if (!isGLASLoadedRef.current) {
+      setIsLoading(true)
+      GLAS().then((res) => {
+        setMarkers([...markers, ...res])
+        isGLASLoadedRef.current = true
+        setIsLoading(false)
+      })
+    }
   }, [])
 
   useEffect(() => {
