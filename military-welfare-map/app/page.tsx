@@ -18,73 +18,49 @@ const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
 
 export default function Home() {
-  const [isBarOpened, setIsBarOpened] = useState(true)
-  const [isLoading, setIsLoading] = useState(true)
-  const [markers, setMarkers] = useState<MarkerType[]>(
-    [
-      {
-        tag: 1,
-        region: 0,
-        position: {
-          lat: 37.5518911,
-          lng: 126.9917937
-        },
-        address: "서울특별시 어딘가",
-        title: '서울군인카페',
-      },
-      {
-        tag: 0,
-        region: 0,
-        position: {
-          lat: 37.5018911,
-          lng: 126.9917937
-        },
-        address: "서울특별시 어딘가",
-        title: '서울군인식당',
-      }
-    ]
-    )
+  const [isBarOpened, setIsBarOpened] = useState(false)
+  const [markers, setMarkers] = useState<Marker[]>([])
+  const markersRef = useRef<Marker[]>([])
   
-  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => false))
-  const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => false))
-  
-  const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
+  const geocoder = new window.kakao.maps.services.Geocoder()
 
-  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
-  const isGLASLoadedRef = useRef(false)
-  const isDCNTLoadedRef = useRef(false)
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setMapPos({lat: position.coords.latitude, lng: position.coords.longitude})
-            },
-            (err) => {
-                console.log(err)
-            }
+  const GLAS = async () => {
+      try {
+        const preRes = await axios.get(
+          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/1`,
         )
-    }
-    // console.log(GEOCOORD('서울특별시 서대문구 충정로3가 190-36'))
-  }, [])
+        const cnt = preRes.data.DS_TB_MND_GLAS_LIST.list_total_count
+        const response = await axios.get(
+          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/${cnt}`,
+        )
+        const data = response.data.DS_TB_MND_GLAS_LIST.row
+        console.log(data)
+        for (let i = 0; i < cnt; i++) {
+          geocoder.addressSearch(data[i].address+data[i].addressdetail, (result, status) => {
+
+          if (status === kakao.maps.services.Status.OK) {
+          markersRef.current.push(
+            {
+              position:
+                {
+                  lat: +result[0].y,
+                  lng: +result[0].x
+                },
+              title: data[i].shop,
+              tag: 8
+            }
+          )
+          }})
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setMarkers(markersRef.current)
+      }
+  }
 
   useEffect(() => {
-    if (!isDCNTLoadedRef.current) {
-      setIsLoading(true)
-      DCNT().then((res) => {
-        setMarkers([...markers, ...res])
-        isGLASLoadedRef.current = true
-        setIsLoading(false)
-      })
-    }
-    if (!isGLASLoadedRef.current) {
-      setIsLoading(true)
-      GLAS().then((res) => {
-        setMarkers([...markers, ...res])
-        isGLASLoadedRef.current = true
-        setIsLoading(false)
-      })
-    }
+    GLAS()
   }, [])
 
   useEffect(() => {
