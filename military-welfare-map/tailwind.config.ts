@@ -11,6 +11,9 @@ const config: Config = {
       fontFamily: {
         "nsr": ["nanum-square-regular"],
         "nsb": ["nanum-square-bold"]
+      },
+      gridTemplateColumns: {
+        '16': 'repeat(16, minmax(0, 1fr))',
       }
     },
   },

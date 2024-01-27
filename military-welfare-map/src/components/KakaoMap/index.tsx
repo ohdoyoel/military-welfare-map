@@ -1,14 +1,22 @@
 "use client"
 
-import { Marker } from '@/src/types/data'
-import { useEffect, useState } from 'react'
+import { MarkerType } from '@/src/types/data'
+import { useEffect, useRef, useState } from 'react'
 import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
+import { Marker } from '../Marker';
 
 interface KakaoMapProps {
-    markers: Marker[]
+    pos: {lat: number, lng: number}
+    markers: MarkerType[]
 }
 
-export const KakaoMap = ({markers}: KakaoMapProps) => {
+export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
+    const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
+    const [cnt, setCnt] = useState(0)
+    
+    useEffect(() => {
+        setMapPos(pos)
+    }, [pos])
 
     // get current position and mark
 
@@ -20,7 +28,7 @@ export const KakaoMap = ({markers}: KakaoMapProps) => {
         errMsg: "",
         isLoading: true,
     })
-    
+
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -32,14 +40,6 @@ export const KakaoMap = ({markers}: KakaoMapProps) => {
                             lng: position.coords.longitude,
                         },
                         isLoading: false,
-                    }))
-                    setLocationState((prev) => ({
-                        ...prev,
-                        center: {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        },
-                        isPanTo: true,
                     }))
                 },
                 (err) => {
@@ -55,45 +55,43 @@ export const KakaoMap = ({markers}: KakaoMapProps) => {
         
         // move map function
         
-        const [locationState, setLocationState] = useState({
-            center: {
+        useEffect(() => {
+            setMapPos({
                 lat: initialLocationState.center.lat,
-                lng: initialLocationState.center.lng,
-            },
-            isPanTo: true,
-        })
+                lng: initialLocationState.center.lng
+            })
+        }, [initialLocationState])
 
-        const makeMapMarkers = (mks: Marker[]) => {
+        const makeMapMarkers = (mks: MarkerType[]) => {
             const result = []
             for (let i = 0; i < mks.length; i++) {
                 result.push(
-                    <MapMarker position={mks[i].position} title={mks[i].title} key={i}/>
+                    <Marker key={i} _id={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
+                            address={mks[i].address} title={mks[i].title} setPos={setMapPos}/>
                 )
             }
-
             return result
         }
         
         return (
-            <div className='w-full h-full'>        
-                <Map center={locationState.center}
-                    isPanto={locationState.isPanTo}
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                    }}
-                    level={10}>
-                    {!initialLocationState.isLoading &&
-                        <MapMarker position={initialLocationState.center}
-                            image={{
-                                src: "/images/current-position.png",
-                                size: {width: 20, height: 20},
-                                options: {offset: {x: 0, y: 0}},
-                            }}
-                        />}
-                    <MapTypeControl position={"TOPRIGHT"} />
-                    {makeMapMarkers(markers)}
-                </Map>
-            </div>
+            <Map center={mapPos}
+                isPanto={true}
+                style={{
+                    width: "100%",
+                    height: "100%",
+                }}
+                level={10}
+                onClick={() => {setCnt(cnt+1)}}>
+                {!initialLocationState.isLoading &&
+                    <MapMarker position={initialLocationState.center}
+                        image={{
+                            src: "/images/current-position.png",
+                            size: {width: 20, height: 20},
+                            options: {offset: {x: 10, y: 10}},
+                        }}
+                    />}
+                <MapTypeControl position={"TOPRIGHT"}/>
+                {makeMapMarkers(markers)}
+            </Map>
     )
 }

@@ -2,71 +2,67 @@
 
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import axios from 'axios'
-import { Marker } from '@/src/types/data'
+import { MarkerType } from '@/src/types/data'
+import { InformationPanel } from '@/src/components/InformationPanel'
+import { ToggleRegions } from '@/src/components/ToggleRegions'
+import db from '@/public/data/db.json'
+// import { GEOCOORD } from '@/src/api/VW-GEOCOORD'
+
+const NUM_OF_TAGS = 12
+const NUM_OF_REGIONS = 16
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
-  const [markers, setMarkers] = useState<Marker[]>([])
-  const markersRef = useRef<Marker[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [markers, setMarkers] = useState<MarkerType[]>([])
+
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => false))
+  const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => false))
   
-  const geocoder = new window.kakao.maps.services.Geocoder()
+  const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
-  const GLAS = async () => {
-      try {
-        const preRes = await axios.get(
-          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/1`,
-        )
-        const cnt = preRes.data.DS_TB_MND_GLAS_LIST.list_total_count
-        const response = await axios.get(
-          process.env.NEXT_PUBLIC_PROXY_SERVER + `https://openapi.mnd.go.kr/${process.env.NEXT_PUBLIC_OPENAPI_KEY}/json/DS_TB_MND_GLAS_LIST/1/${cnt}`,
-        )
-        const data = response.data.DS_TB_MND_GLAS_LIST.row
-        console.log(data)
-        for (let i = 0; i < cnt; i++) {
-          geocoder.addressSearch(data[i].address+data[i].addressdetail, (result, status) => {
-
-          if (status === kakao.maps.services.Status.OK) {
-          markersRef.current.push(
-            {
-              position:
-                {
-                  lat: +result[0].y,
-                  lng: +result[0].x
-                },
-              title: data[i].shop,
-              tag: 8
-            }
-          )
-          }})
-        }
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setMarkers(markersRef.current)
-      }
-  }
+  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
 
   useEffect(() => {
-    GLAS()
+    setMarkers(db)
   }, [])
 
   useEffect(() => {
     console.log(markers)
+    setIsLoading(false)
   }, [markers])
+
+  useEffect(() => {
+    setFilteredMarkers(markers.filter((x) => {
+      for (let i = 0; i < isTagsToggled.length; i++) {
+        for (let j = 0; j < isRegionsToggled.length; j++) {
+          if (isTagsToggled[i] && x.tag == i
+            && isRegionsToggled[j] && x.region == j) return true
+          }
+        }
+        return false
+      }))
+    }, [markers, isTagsToggled, isRegionsToggled])
+
+  useEffect(() => {
+    console.log(filteredMarkers)
+  }, [filteredMarkers])
   
   return (
-    <main className="flex flex-row w-screen h-screen">
-      <div className={`${isBarOpened ? `block` : `hidden`} grow-0 w-[460px] h-full z-10 h-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+    <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
+      <div className={`${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
         <SearchInput onKeyUp={() => console.log("keyup")}/>
-        <ToggleTags/>
+        <ToggleTags setToggled={setIsTagsToggled}/>
+        <ToggleRegions setToggled={setIsRegionsToggled}/>
+        <InformationPanel markers={filteredMarkers} setPos={setMapPos}/>
       </div>
+      
 
       <div className={`absolute inset-y-0 w-auto z-20
                       ${isBarOpened ? `left-[460px]` : `left-0`} flex items-center 
@@ -76,7 +72,9 @@ export default function Home() {
         </button>
       </div>
 
-      <KakaoMap markers={markers}/>
+      <div className={`w-full h-full`}>
+        <KakaoMap pos={mapPos} markers={filteredMarkers}/>
+      </div>
 
     </main>
   )
