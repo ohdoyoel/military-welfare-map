@@ -29,12 +29,7 @@ export const ToggleRegions = ({setToggled}: ToggleRegionsProps) => {
     }
 
     useEffect(() => {
-        if (!isToggled.includes(true)) {
-            setToggled(Array.from({length: NUM_OF_REGIONS}, () => true))
-        }
-        else {
-            setToggled(isToggled)
-        }
+        setToggled(isToggled)
     }, [isToggled])
 
     return (

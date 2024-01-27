@@ -94,12 +94,7 @@ export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
     }
 
     useEffect(() => {
-        if (!isToggled.includes(true)) {
-            setToggled(Array.from({length: NUM_OF_TAGS}, () => true))
-        }
-        else {
-            setToggled(isToggled)
-        }
+        setToggled(isToggled)
     }, [isToggled])
 
 

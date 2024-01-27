@@ -13,6 +13,10 @@ interface KakaoMapProps {
 export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
     const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
+    
+    useEffect(() => {
+        setMapPos(pos)
+    }, [pos])
 
     // get current position and mark
 
@@ -25,10 +29,6 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
         isLoading: true,
     })
 
-    useEffect(() => {
-        setMapPos(pos)
-    }, [pos])
-    
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -54,6 +54,13 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
         }, [])
         
         // move map function
+        
+        useEffect(() => {
+            setMapPos({
+                lat: initialLocationState.center.lat,
+                lng: initialLocationState.center.lng
+            })
+        }, [initialLocationState])
 
         const makeMapMarkers = (mks: MarkerType[]) => {
             const result = []
