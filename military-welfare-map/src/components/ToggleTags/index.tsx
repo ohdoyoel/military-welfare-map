@@ -76,11 +76,22 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
 ]
 
 export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
-    const [isToggled, setIsToggled] = useState(Array.from({length: NUM_OF_TAGS}, () => false))
+    const [isEntireToggled, setIsEntireToggled] = useState(true)
+    const [isToggled, setIsToggled] = useState([true, true, true, true, 
+                                                false, false, false, false,
+                                                false, false, false, false,])
+    
+    useEffect(() => {
+        setIsToggled(Array.from({length: NUM_OF_TAGS}, () => isEntireToggled))
+    }, [isEntireToggled])
 
     const toggleTagButtonList = () => {
-
         const result = []
+        result.push(
+            <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
+                <p className='text-white text-xs'>전체</p>
+            </ToggleTagButton>
+        )
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
                 <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
@@ -100,7 +111,7 @@ export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
 
     return (
         <div className="w-full h-16 bg-emerald-500 px-4 flex items-center py-1">
-            <div className='w-full h-full grid grid-cols-12 gap-14 content-center overflow-x-auto'>
+            <div className='w-full h-full grid grid-cols-13 gap-14 content-center overflow-x-auto'>
                 {toggleTagButtonList()}
             </div>
         </div>

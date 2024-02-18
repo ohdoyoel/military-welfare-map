@@ -10,7 +10,7 @@ type tagColorType = {
 };
 
 const tagColorData: tagColorType = {
-    0: 'border-red-500',
+     0: 'border-red-500',
     1: 'border-orange-500',
     2: 'border-amber-500',
     3: 'border-yellow-500',
@@ -26,12 +26,13 @@ const tagColorData: tagColorType = {
     13: 'border-fuchsia-500',
     14: 'border-pink-500',
     15: 'border-rose-500',
+    16: 'border-gray-500',
 }
 
 export const ToggleTagButton = ({children, tag, isToggled, onClicked}: ToggleTagButtonProps) => {
 
     return (
-        <button className={`flex flex-col w-[55px] items-center rounded-[3px] border-l-4 
+        <button className={`flex flex-col w-[55px] h-full items-center place-content-center rounded-[3px] border-l-4 
                             hover:bg-emerald-600 ${isToggled ? `bg-emerald-600 ${tagColorData[tag]}` : `border-transparent`}`}
                 onClick={onClicked}>
             {children}

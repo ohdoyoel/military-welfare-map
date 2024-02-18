@@ -11,12 +11,22 @@ interface KakaoMapProps {
 }
 
 export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
+    const mapRef = useRef<kakao.maps.Map>(null)
     const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
     
     useEffect(() => {
+        onMapDragged()
+    }, [mapRef.current, pos, cnt])
+
+    useEffect(() => {
         setMapPos(pos)
     }, [pos])
+    
+    const onMapDragged = () => {
+        console.log(mapRef.current?.getBounds().getSouthWest())
+        console.log(mapRef.current?.getBounds().getNorthEast())
+    }
 
     // get current position and mark
 
@@ -74,14 +84,18 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
         }
         
         return (
-            <Map center={mapPos}
+            <Map ref={mapRef}
+                center={mapPos}
                 isPanto={true}
                 style={{
                     width: "100%",
                     height: "100%",
                 }}
                 level={10}
-                onClick={() => {setCnt(cnt+1)}}>
+                onClick={() => {setCnt(cnt+1)}}
+                onLoad={onMapDragged}
+                onLoadStart={onMapDragged}
+                onDragEnd={onMapDragged}>
                 {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
                         image={{

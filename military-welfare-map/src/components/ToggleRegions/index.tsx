@@ -8,7 +8,15 @@ interface ToggleRegionsProps {
 const NUM_OF_REGIONS = 16
 
 export const ToggleRegions = ({setToggled}: ToggleRegionsProps) => {
-    const [isToggled, setIsToggled] = useState(Array.from({length: NUM_OF_REGIONS}, () => false))
+    const [isEntireToggled, setIsEntireToggled] = useState(true)
+    const [isToggled, setIsToggled] = useState([true, true, true, true, 
+                                                false, false, false, false,
+                                                false, false, false, false,
+                                                false, false, false, false])
+    
+    useEffect(() => {
+        setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => isEntireToggled))
+    }, [isEntireToggled])
 
     const toggleRegionButtonList = () => {
         const regionData: string[] = [
@@ -19,6 +27,9 @@ export const ToggleRegions = ({setToggled}: ToggleRegionsProps) => {
         ]
 
         const result = []
+            result.push(
+            <ToggleRegionButton onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={17}/>
+        )
         for (let i = 0; i < regionData.length; i++) {
             result.push(
                 <ToggleRegionButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} isToggled={isToggled[i]} label={regionData[i]} key={i}/>
@@ -34,7 +45,7 @@ export const ToggleRegions = ({setToggled}: ToggleRegionsProps) => {
 
     return (
         <div className="w-full h-10 bg-emerald-500 px-4 flex items-center pb-1">
-            <div className='w-full h-full grid grid-cols-16 gap-11 content-center overflow-x-scroll'>
+            <div className='w-full h-full grid grid-cols-17 gap-11 content-center overflow-x-scroll'>
                 {toggleRegionButtonList()}
             </div>
         </div>
