@@ -2,7 +2,7 @@
 
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -27,7 +27,10 @@ export default function Home() {
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
-  // const [mapSWbound, setmapSWbound] = useState({la: , lo})
+  const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+
+  // const [mapSWBound, setMapSWBound] = useState({La: 124.57080341037309, Ma: 32.876565636738974})
+  // const [mapNEBound, setMapNEBound] = useState({La: 131.26848784984313, Ma: 38.66983226943576})
 
   useEffect(() => {
     setMarkers(db)
@@ -39,11 +42,21 @@ export default function Home() {
   }, [markers])
 
   useEffect(() => {
+    markers.forEach((x) => {
+      x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
+    })
+    markers.sort((x) => x.distance)
+  }, [curPos])
+
+  useEffect(() => {
     setFilteredMarkers(markers.filter((x) => {
+      // if (x.position.lng < mapSWBound.La  || mapNEBound.La < x.position.lng  || x.position.lat < mapSWBound.Ma || mapNEBound.Ma < x.position.lat) {
+      //   console.log(x)
+      //   return false
+      // }
       for (let i = 0; i < isTagsToggled.length; i++) {
         for (let j = 0; j < isRegionsToggled.length; j++) {
-          if (isTagsToggled[i] && x.tag == i
-            && isRegionsToggled[j] && x.region == j) return true
+            if (isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j) return true
           }
         }
         return false
@@ -74,7 +87,7 @@ export default function Home() {
       </div>
 
       <div className={`w-full h-full`}>
-        <KakaoMap pos={mapPos} markers={filteredMarkers}/>
+        <KakaoMap pos={mapPos} markers={filteredMarkers} setCurPos={setCurPos}/>
       </div>
 
     </main>
