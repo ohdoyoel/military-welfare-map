@@ -1,32 +1,44 @@
 "use client"
 
 import { MarkerType } from '@/src/types/data'
-import { useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
+import { SettingsBackupRestoreSharp } from '@mui/icons-material';
 
 interface KakaoMapProps {
     pos: {lat: number, lng: number}
     markers: MarkerType[]
+    setCurPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
+    // setSWBound: Dispatch<SetStateAction<{La: number | undefined, Ma: number | undefined}>>
+    // setNEBound: Dispatch<SetStateAction<{La: number | undefined, Ma: number | undefined}>>
 }
 
-export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
+export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
     const mapRef = useRef<kakao.maps.Map>(null)
     const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
     
-    useEffect(() => {
-        onMapDragged()
-    }, [mapRef.current, pos, cnt])
+    // useEffect(() => {
+    //     onMapDragged()
+    // }, [mapRef.current, pos, cnt])
 
     useEffect(() => {
         setMapPos(pos)
     }, [pos])
     
-    const onMapDragged = () => {
-        console.log(mapRef.current?.getBounds().getSouthWest())
-        console.log(mapRef.current?.getBounds().getNorthEast())
-    }
+    // const onMapDragged = () => {
+    //     setSWBound({
+    //         La: mapRef.current?.getBounds().getSouthWest().getLng(),
+    //         Ma: mapRef.current?.getBounds().getSouthWest().getLat()
+    //     })
+    //     setNEBound({
+    //         La: mapRef.current?.getBounds().getNorthEast().getLng(),
+    //         Ma: mapRef.current?.getBounds().getNorthEast().getLat()
+    //     })
+    //     console.log(mapRef.current?.getBounds().getSouthWest())
+    //     console.log(mapRef.current?.getBounds().getNorthEast())
+    // }
 
     // get current position and mark
 
@@ -51,6 +63,10 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
                         },
                         isLoading: false,
                     }))
+                    setCurPos({
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        })
                 },
                 (err) => {
                     setInitialLocationState((prev) => ({
@@ -92,10 +108,7 @@ export const KakaoMap = ({pos, markers}: KakaoMapProps) => {
                     height: "100%",
                 }}
                 level={10}
-                onClick={() => {setCnt(cnt+1)}}
-                onLoad={onMapDragged}
-                onLoadStart={onMapDragged}
-                onDragEnd={onMapDragged}>
+                onClick={() => {setCnt(cnt+1)}}>
                 {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
                         image={{

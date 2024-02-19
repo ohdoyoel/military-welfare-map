@@ -9,6 +9,7 @@ export type MarkerType = {
     title: string
     description?: string
     teleno?: string
+    distance?: number
 }
 
 export type APIProps = {
