@@ -45,15 +45,11 @@ export default function Home() {
     markers.forEach((x) => {
       x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
     })
-    markers.sort((x) => x.distance)
+    markers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
   }, [curPos])
 
   useEffect(() => {
     setFilteredMarkers(markers.filter((x) => {
-      // if (x.position.lng < mapSWBound.La  || mapNEBound.La < x.position.lng  || x.position.lat < mapSWBound.Ma || mapNEBound.Ma < x.position.lat) {
-      //   console.log(x)
-      //   return false
-      // }
       for (let i = 0; i < isTagsToggled.length; i++) {
         for (let j = 0; j < isRegionsToggled.length; j++) {
             if (isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j) return true
