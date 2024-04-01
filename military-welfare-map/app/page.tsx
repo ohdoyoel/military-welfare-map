@@ -82,6 +82,13 @@ export default function Home() {
         </button>
       </div>
 
+      <div className='z-10 absolute top-12 right-1
+                        w-8 h-8 bg-white rounded-lg shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'>
+        <button className='w-full h-full' onClick={() => setMapPos({lat:curPos.lat, lng:curPos.lng})}>
+          <img src='/images/current-position.png'></img>
+        </button>
+      </div>
+
       <div className={`w-full h-full`}>
         <KakaoMap pos={mapPos} markers={filteredMarkers} setCurPos={setCurPos}/>
       </div>
