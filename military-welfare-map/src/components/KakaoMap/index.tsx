@@ -4,7 +4,7 @@ import { MarkerType } from '@/src/types/data'
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
-import { SettingsBackupRestoreSharp } from '@mui/icons-material';
+// import { SettingsBackupRestoreSharp } from '@mui/icons-material';
 
 interface KakaoMapProps {
     pos: {lat: number, lng: number}
@@ -18,15 +18,15 @@ export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
     const mapRef = useRef<kakao.maps.Map>(null)
     const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
-    
-    // useEffect(() => {
-    //     onMapDragged()
-    // }, [mapRef.current, pos, cnt])
 
     useEffect(() => {
         setMapPos(pos)
     }, [pos])
-    
+
+    useEffect(() => {
+        console.log(mapPos)
+    }, [mapPos])
+
     // const onMapDragged = () => {
     //     setSWBound({
     //         La: mapRef.current?.getBounds().getSouthWest().getLng(),
@@ -100,7 +100,8 @@ export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
         }
         
         return (
-            <Map ref={mapRef}
+            <Map 
+                // ref={mapRef}
                 center={mapPos}
                 isPanto={true}
                 style={{
@@ -108,7 +109,16 @@ export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
                     height: "100%",
                 }}
                 level={10}
-                onClick={() => {setCnt(cnt+1)}}>
+                onClick={() => {setCnt(cnt+1)}}
+                onDragEnd={(map) => {
+                    const latlng = map.getCenter()
+                    setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
+                }}
+                onZoomChanged={(map) => {
+                    const latlng = map.getCenter()
+                    setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
+                }}
+                >
                 {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
                         image={{

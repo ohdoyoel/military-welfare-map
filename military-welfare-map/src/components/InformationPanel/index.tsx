@@ -1,7 +1,7 @@
 import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
-import { Dispatch, SetStateAction, useState } from "react"
-import InfiniteScroll from "react-infinite-scroll-component"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
+// import InfiniteScroll from "react-infinite-scroll-component"
 // import InfiniteScroll from "react-infinite-scroller"
 
 interface InformationPanelProps {
@@ -14,16 +14,23 @@ export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
     // const itemsPerPage = 10;
     // const [hasMore, setHasMore] = useState(true);
     // const [records, setRecords] = useState(itemsPerPage);
+    // const [showingMarkers, setShowingMarkers] = useState<MarkerType[]>(markers.slice(0,itemsPerPage))
 
     // const loadMore = () => {
+    //     console.log("loadMore")
     //     if (records >= markers.length) {
     //         setHasMore(false);
     //     } else {
-    //     setTimeout(() => {
-    //         setRecords(records + itemsPerPage);
-    //     }, 1000);
+    //         setTimeout(() => {
+    //             setRecords(records + itemsPerPage)
+    //         }, 1000);
     //     }
     // };
+
+    // useEffect(() => {
+    //     console.log(records)
+    //     setShowingMarkers(markers.slice(0, records))
+    // }, [records])
     
     const LocationList = (posts: MarkerType[]) => {
         const result = []
@@ -33,27 +40,25 @@ export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
                             address={posts[i].address} title={posts[i].title} key={i} setPos={setPos}/>
             )
         }
-
         return result
     }
-
 
     return (
         <div className="w-full h-full bg-white px-4 py-2 flex flex-col items-start overflow-y-scroll">
             <div className="w-full h-full">
-                {/* {LocationList(markers)} */}
-                <InfiniteScroll
-                    dataLength={this.state.items.length}
-                    next={this.fetchMoreData}
-                    hasMore={true}
+                {LocationList(markers)}
+                {/* <InfiniteScroll
+                    dataLength={showingMarkers.length}
+                    next={loadMore}
+                    hasMore={hasMore}
                     loader={<h4>Loading...</h4>}
                     >
-                    {this.state.items.map((i, index) => (
-                        <div style={style} key={index}>
-                        div - #{index}
-                        </div>
+                    {showingMarkers.map((i, index) => (
+                        <LocationItem _id={index} position={i.position} tag={i.tag}
+                        address={i.address} title={i.title} key={index} setPos={setPos}/>
                     ))}
-                </InfiniteScroll>
+                    {LocationList(showingMarkers)}
+                </InfiniteScroll> */}
             </div>
         </div>
     )
