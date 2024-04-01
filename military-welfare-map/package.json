@@ -18,7 +18,9 @@
     "next": "^14.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-kakao-maps-sdk": "^1.1.21"
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-kakao-maps-sdk": "^1.1.21",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
