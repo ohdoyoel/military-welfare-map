@@ -65,7 +65,7 @@ export default function Home() {
   
   return (
     <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
-      <div className={`${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+      <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
         <SearchInput onKeyUp={() => console.log("keyup")}/>
         <ToggleTags setToggled={setIsTagsToggled}/>
