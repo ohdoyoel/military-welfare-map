@@ -1,6 +1,7 @@
 import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useState } from "react"
+import InfiniteScroll from "react-infinite-scroll-component"
 // import InfiniteScroll from "react-infinite-scroller"
 
 interface InformationPanelProps {
@@ -13,6 +14,7 @@ export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
     // const itemsPerPage = 10;
     // const [hasMore, setHasMore] = useState(true);
     // const [records, setRecords] = useState(itemsPerPage);
+
     // const loadMore = () => {
     //     if (records >= markers.length) {
     //         setHasMore(false);
@@ -39,7 +41,19 @@ export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
     return (
         <div className="w-full h-full bg-white px-4 py-2 flex flex-col items-start overflow-y-scroll">
             <div className="w-full h-full">
-            {LocationList(markers)}
+                {/* {LocationList(markers)} */}
+                <InfiniteScroll
+                    dataLength={this.state.items.length}
+                    next={this.fetchMoreData}
+                    hasMore={true}
+                    loader={<h4>Loading...</h4>}
+                    >
+                    {this.state.items.map((i, index) => (
+                        <div style={style} key={index}>
+                        div - #{index}
+                        </div>
+                    ))}
+                </InfiniteScroll>
             </div>
         </div>
     )
