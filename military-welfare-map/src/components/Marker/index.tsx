@@ -3,7 +3,6 @@ import { MapMarker } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
 
 interface MarkerProps {
-    _id: number
     tag: number
     position: {lat: number, lng: number}
     address: string
@@ -16,7 +15,7 @@ interface MarkerProps {
     setIdx: Dispatch<SetStateAction<number>>
 }
 
-export const Marker = ({_id, tag, position, address, title, description, telno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
+export const Marker = ({tag, position, address, title, description, telno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
     console.log(description)
     const [isVisible, setIsVisible] = useState(false)
 
@@ -41,7 +40,7 @@ export const Marker = ({_id, tag, position, address, title, description, telno, 
             setIsVisible(true)
         }}
         >
-            {isVisible && <InfoWindow _id={_id} tag={tag} title={title} address={address} description={description} telno={telno}/>}
+            {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno}/>}
         </MapMarker>
     )
 }
