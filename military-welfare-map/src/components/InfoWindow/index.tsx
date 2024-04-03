@@ -19,7 +19,7 @@ interface InfoWindowProps {
     title: string
     address: string
     description?: string
-    teleno?: string
+    telno?: string
 }
 
 interface ToggleTagButtonProps {
@@ -169,7 +169,8 @@ const tagColorData:tagColorType = {
     },
 }
 
-export const InfoWindow = ({_id, tag, address, title, description,teleno}: InfoWindowProps) => {    
+export const InfoWindow = ({_id, tag, address, title, description, telno}: InfoWindowProps) => {
+    console.log("telno: " + telno)
     return (
         <div id={`InfoWindow${_id}`} className={`w-96 h-48 flex flex-row bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                         flex flex-row`}>
@@ -181,8 +182,8 @@ export const InfoWindow = ({_id, tag, address, title, description,teleno}: InfoW
             <div className="w-full h-full flex flex-col items-start p-2">
                 <p className='text-lg font-nsb'>{title}</p>
                 <p className='text-sm text-start'>{address}</p>
-                {teleno}
-                {description}
+                <p className='text-sm text-start'>{telno}</p>
+                <p className='text-sm text-start'>{description}</p>
             </div>
         </div>
     )
