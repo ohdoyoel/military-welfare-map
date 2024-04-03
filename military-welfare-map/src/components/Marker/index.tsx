@@ -9,14 +9,15 @@ interface MarkerProps {
     address: string
     title: string
     description?: string
-    teleno?: string
+    telno?: string
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     mapClicked: number
     visible: boolean
     setIdx: Dispatch<SetStateAction<number>>
 }
 
-export const Marker = ({_id, tag, position, address, title, description,teleno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
+export const Marker = ({_id, tag, position, address, title, description, telno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
+    console.log(description)
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
@@ -40,7 +41,7 @@ export const Marker = ({_id, tag, position, address, title, description,teleno, 
             setIsVisible(true)
         }}
         >
-            {isVisible && <InfoWindow _id={_id} tag={tag} title={title} address={address} description={description} teleno={teleno}/>}
+            {isVisible && <InfoWindow _id={_id} tag={tag} title={title} address={address} description={description} telno={telno}/>}
         </MapMarker>
     )
 }

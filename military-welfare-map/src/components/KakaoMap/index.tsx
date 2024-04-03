@@ -25,10 +25,6 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
         setMapPos(pos)
     }, [pos])
 
-    useEffect(() => {
-        console.log(mapPos)
-    }, [mapPos])
-
     // get current position and mark
 
     const [initialLocationState, setInitialLocationState] = useState({
@@ -84,10 +80,9 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                     && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng)
                 result.push(
                     <Marker key={i} _id={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
-                            address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false} setIdx={setIdx}/>
+                            telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false} setIdx={setIdx}/>
                 )
             }
-            console.log(result)
             return result
         }
 

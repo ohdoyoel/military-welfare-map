@@ -8,7 +8,7 @@ export type MarkerType = {
     address: string
     title: string
     description?: string
-    teleno?: string
+    telno?: string
     distance?: number
 }
 
