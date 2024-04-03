@@ -1,10 +1,12 @@
 export const NavBar = () => {
         return (
-        <div className='w-full h-14 bg-emerald-500'>
-            <a href="" className="flex flex-row p-4">
-                <p className="text-xl text-white font-nsr">병영생활</p>
-                <p className="text-xl text-white font-nsb">지도</p>
-            </a>
+        <div className='w-full h-14 bg-emerald-500 flex flex-row justify-around items-center'>
+            <button className="w-24 h-10 bg-emerald-600">
+                <p className="text-base text-white">장소 검색</p>
+            </button>
+            <button className="w-24 h-10 bg-emerald-600">
+                <p className="text-base text-white">오상병 부르기</p>
+            </button>
         </div>
     )
 }
