@@ -27,10 +27,8 @@ export default function Home() {
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+  const [selectedIdx, setSelectedIdx] = useState(-1)
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
-
-  // const [mapSWBound, setMapSWBound] = useState({La: 124.57080341037309, Ma: 32.876565636738974})
-  // const [mapNEBound, setMapNEBound] = useState({La: 131.26848784984313, Ma: 38.66983226943576})
 
   useEffect(() => {
     setMarkers(db)
@@ -62,6 +60,10 @@ export default function Home() {
   useEffect(() => {
     console.log(filteredMarkers)
   }, [filteredMarkers])
+
+  useEffect(() => {
+    console.log(selectedIdx)
+  }, [selectedIdx])
   
   return (
     <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
@@ -70,7 +72,7 @@ export default function Home() {
         <SearchInput onKeyUp={() => console.log("keyup")}/>
         <ToggleTags setToggled={setIsTagsToggled}/>
         <ToggleRegions setToggled={setIsRegionsToggled}/>
-        <InformationPanel markers={filteredMarkers} setPos={setMapPos}/>
+        <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
       </div>
       
 
@@ -90,7 +92,7 @@ export default function Home() {
       </div>
 
       <div className={`w-full h-full`}>
-        <KakaoMap pos={mapPos} markers={filteredMarkers} setCurPos={setCurPos}/>
+        <KakaoMap pos={mapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setIdx={setSelectedIdx}/>
       </div>
 
     </main>

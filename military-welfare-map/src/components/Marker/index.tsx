@@ -12,13 +12,20 @@ interface MarkerProps {
     teleno?: string
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     mapClicked: number
+    visible: boolean
+    setIdx: Dispatch<SetStateAction<number>>
 }
 
-export const Marker = ({_id, tag, position, address, title, description,teleno, setPos, mapClicked}: MarkerProps) => {
+export const Marker = ({_id, tag, position, address, title, description,teleno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
+        setIsVisible(visible)
+    }, [visible])
+
+    useEffect(() => {
         setIsVisible(false)
+        // setIdx(-1)
     }, [mapClicked])
     
     return (

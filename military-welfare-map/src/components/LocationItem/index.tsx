@@ -15,6 +15,7 @@ import { Dispatch, ReactElement, SetStateAction } from 'react';
 interface LocationItemProps {
     _id: number
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
+    setIdx: Dispatch<SetStateAction<number>>
     position: {
         lat: number,
         lng: number
@@ -171,12 +172,10 @@ const tagColorData:tagColorType = {
     },
 }
 
-export const LocationItem = ({_id, setPos, position, tag, address, title}: LocationItemProps) => {
+export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title}: LocationItemProps) => {
     const handleOnClick = () => {
         setPos({lat: position.lat, lng: position.lng})
-        let marker = document.getElementById(`InfoWindow${_id}`) as HTMLUnknownElement;
-        console.log(marker)
-        // marker.
+        setIdx(_id)    
     }
 
     return (
