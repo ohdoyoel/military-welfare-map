@@ -174,7 +174,7 @@ export const InfoWindow = ({pos, tag, address, title, description, telno}: InfoW
         <div className={`w-96 h-48 flex flex-row bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                         flex flex-row`}>
             <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
-            <div className={`w-16 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
+            <div className={`w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}
                 <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
             </div>

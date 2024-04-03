@@ -33,9 +33,9 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
     //     setShowingMarkers(markers.slice(0, records))
     // }, [records])
     
-    const LocationList = (posts: MarkerType[]) => {
+    const LocationList = (posts: MarkerType[], size: number) => {
         const result = []
-        for (let i = 0; i < posts.length; i++) {
+        for (let i = 0; i < Math.min(size,posts.length); i++) {
             result.push(
                 <LocationItem _id={i} position={posts[i].position} tag={posts[i].tag}
                             address={posts[i].address} title={posts[i].title} key={i} setPos={setPos} setIdx={setIdx}/>
@@ -46,8 +46,7 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
 
     return (
         <div className="w-full h-full bg-white px-4 py-2 flex flex-col items-start overflow-y-scroll">
-            <div className="w-full h-full">
-                {LocationList(markers)}
+            {LocationList(markers, 999999999999999999)}
                 {/* <InfiniteScroll
                     dataLength={showingMarkers.length}
                     next={loadMore}
@@ -60,7 +59,6 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
                     ))}
                     {LocationList(showingMarkers)}
                 </InfiniteScroll> */}
-            </div>
         </div>
     )
 }
