@@ -80,7 +80,7 @@ export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
     const [isToggled, setIsToggled] = useState([true, true, true, true, true, true, true, true, false, false, false, false,])
     
     useEffect(() => {
-        isEntireToggled && setIsToggled(Array.from({length: NUM_OF_TAGS}, () => isEntireToggled))
+        isEntireToggled!=undefined && setIsToggled(Array.from({length: NUM_OF_TAGS}, () => isEntireToggled))
     }, [isEntireToggled])
 
     const toggleTagButtonList = () => {

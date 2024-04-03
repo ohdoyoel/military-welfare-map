@@ -183,12 +183,12 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
                     className="w-full h-20 bg-white pr-2 mt-2 rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                         flex flex-row">
             <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
-            <div className={`w-16 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
+            <div className={`w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}
                 <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
             </div>
             <div className={`w-full h-full bg-white flex flex-col items-start p-2`}>
-                <p className='text-lg font-nsb'>{title}</p>
+                <p className='text-lg text-start font-nsb'>{title}</p>
                 <p className='text-xs text-start'>{address}</p>
             </div>
         </button>

@@ -2,6 +2,7 @@
 
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
+import { NavBar } from '@/src/components/NavBar'
 import { useEffect, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
@@ -60,10 +61,6 @@ export default function Home() {
   useEffect(() => {
     console.log(filteredMarkers)
   }, [filteredMarkers])
-
-  useEffect(() => {
-    console.log(selectedIdx)
-  }, [selectedIdx])
   
   return (
     <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
@@ -73,6 +70,7 @@ export default function Home() {
         <ToggleTags setToggled={setIsTagsToggled}/>
         <ToggleRegions setToggled={setIsRegionsToggled}/>
         <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
+        <NavBar/>
       </div>
       
 
