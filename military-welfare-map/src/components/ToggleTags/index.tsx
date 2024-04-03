@@ -76,19 +76,17 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
 ]
 
 export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
-    const [isEntireToggled, setIsEntireToggled] = useState(true)
-    const [isToggled, setIsToggled] = useState([true, true, true, true, 
-                                                false, false, false, false,
-                                                false, false, false, false,])
+    const [isEntireToggled, setIsEntireToggled] = useState<boolean|undefined>()
+    const [isToggled, setIsToggled] = useState([true, true, true, true, true, true, true, true, false, false, false, false,])
     
     useEffect(() => {
-        setIsToggled(Array.from({length: NUM_OF_TAGS}, () => isEntireToggled))
+        isEntireToggled && setIsToggled(Array.from({length: NUM_OF_TAGS}, () => isEntireToggled))
     }, [isEntireToggled])
 
     const toggleTagButtonList = () => {
         const result = []
         result.push(
-            <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
+            <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled ? true : !isEntireToggled)} tag={16} isToggled={!isEntireToggled ? false : isEntireToggled} key={16}>
                 <p className='text-white text-xs'>전체</p>
             </ToggleTagButton>
         )
