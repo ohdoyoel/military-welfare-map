@@ -10,14 +10,16 @@ interface KakaoMapProps {
     pos: {lat: number, lng: number}
     markers: MarkerType[]
     setCurPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
-    // setSWBound: Dispatch<SetStateAction<{La: number | undefined, Ma: number | undefined}>>
-    // setNEBound: Dispatch<SetStateAction<{La: number | undefined, Ma: number | undefined}>>
+    setIdx: Dispatch<SetStateAction<number>>
+    selectedIdx: number
 }
 
-export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
-    const mapRef = useRef<kakao.maps.Map>(null)
+export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMapProps) => {
     const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
+
+    const [mapNE, setMapNE] = useState({lat: 0, lng:0});
+    const [mapSW, setMapSW] = useState({lat: 0, lng:0});
 
     useEffect(() => {
         setMapPos(pos)
@@ -26,19 +28,6 @@ export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
     useEffect(() => {
         console.log(mapPos)
     }, [mapPos])
-
-    // const onMapDragged = () => {
-    //     setSWBound({
-    //         La: mapRef.current?.getBounds().getSouthWest().getLng(),
-    //         Ma: mapRef.current?.getBounds().getSouthWest().getLat()
-    //     })
-    //     setNEBound({
-    //         La: mapRef.current?.getBounds().getNorthEast().getLng(),
-    //         Ma: mapRef.current?.getBounds().getNorthEast().getLat()
-    //     })
-    //     console.log(mapRef.current?.getBounds().getSouthWest())
-    //     console.log(mapRef.current?.getBounds().getNorthEast())
-    // }
 
     // get current position and mark
 
@@ -88,15 +77,27 @@ export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
             })
         }, [initialLocationState])
 
-        const makeMapMarkers = (mks: MarkerType[]) => {
+        const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
             for (let i = 0; i < mks.length; i++) {
+                if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat
+                    && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng)
                 result.push(
                     <Marker key={i} _id={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
-                            address={mks[i].address} title={mks[i].title} setPos={setMapPos}/>
+                            address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false} setIdx={setIdx}/>
                 )
             }
+            console.log(result)
             return result
+        }
+
+        const setCenterAndBound = (map: any) => {
+            const NE = map.getBounds().getNorthEast()
+            setMapNE({lat:NE.getLat(), lng:NE.getLng()})
+            const SW = map.getBounds().getSouthWest()
+            setMapSW({lat:SW.getLat(), lng:SW.getLng()})
+            const latlng = map.getCenter()
+            setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
         }
         
         return (
@@ -110,14 +111,11 @@ export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
                 }}
                 level={10}
                 onClick={() => {setCnt(cnt+1)}}
-                onDragEnd={(map) => {
-                    const latlng = map.getCenter()
-                    setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
-                }}
-                onZoomChanged={(map) => {
-                    const latlng = map.getCenter()
-                    setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
-                }}
+                onDragEnd={setCenterAndBound}
+                onIdle={setCenterAndBound}
+                onBoundsChanged={setCenterAndBound}
+                onCenterChanged={setCenterAndBound}
+                onTileLoaded={setCenterAndBound}
                 >
                 {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
@@ -128,7 +126,7 @@ export const KakaoMap = ({pos, markers, setCurPos}: KakaoMapProps) => {
                         }}
                     />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                {makeMapMarkers(markers)}
+                {makeMapMarkers(markers, mapNE, mapSW)}
             </Map>
     )
 }

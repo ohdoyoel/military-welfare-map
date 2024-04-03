@@ -7,9 +7,10 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 interface InformationPanelProps {
     markers: MarkerType[]
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
+    setIdx: Dispatch<SetStateAction<number>>
 }
 
-export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
+export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProps) => {
     
     // const itemsPerPage = 10;
     // const [hasMore, setHasMore] = useState(true);
@@ -37,7 +38,7 @@ export const InformationPanel = ({markers, setPos}: InformationPanelProps) => {
         for (let i = 0; i < posts.length; i++) {
             result.push(
                 <LocationItem _id={i} position={posts[i].position} tag={posts[i].tag}
-                            address={posts[i].address} title={posts[i].title} key={i} setPos={setPos}/>
+                            address={posts[i].address} title={posts[i].title} key={i} setPos={setPos} setIdx={setIdx}/>
             )
         }
         return result
