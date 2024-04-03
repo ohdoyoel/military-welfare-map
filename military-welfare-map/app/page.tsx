@@ -3,6 +3,7 @@
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
 import { NavBar } from '@/src/components/NavBar'
+import { ChatPanel } from '@/src/components/ChatPanel'
 import { useEffect, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
 import { ToggleTags } from '@/src/components/ToggleTags'
@@ -70,6 +71,7 @@ export default function Home() {
         <ToggleTags setToggled={setIsTagsToggled}/>
         <ToggleRegions setToggled={setIsRegionsToggled}/>
         <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
+        <ChatPanel/>
         <NavBar/>
       </div>
       
