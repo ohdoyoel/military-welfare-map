@@ -71,7 +71,7 @@ export default function Home() {
         <ToggleTags setToggled={setIsTagsToggled}/>
         <ToggleRegions setToggled={setIsRegionsToggled}/>
         <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
-        <ChatPanel/>
+        {/* <ChatPanel/> */}
         <NavBar/>
       </div>
       
@@ -90,7 +90,7 @@ export default function Home() {
           <img src='/images/current-position.png'></img>
         </button>
       </div>
-
+      
       <div className={`w-full h-full`}>
         <KakaoMap pos={mapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setIdx={setSelectedIdx}/>
       </div>
