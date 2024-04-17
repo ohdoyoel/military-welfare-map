@@ -11,7 +11,7 @@ export const ChatPanel = ({}: ChatPanelProps) => {
     
     return (
         <div className="w-full h-full bg-white px-4 py-2 flex flex-col items-start overflow-y-scroll">
-        
+        안녕
         </div>
     )
 }
