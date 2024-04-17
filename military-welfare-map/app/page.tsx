@@ -25,6 +25,7 @@ export default function Home() {
 
   const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => true))
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
+  const [isSearch, setIsSearch] = useState(true)
   
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
@@ -70,9 +71,8 @@ export default function Home() {
         <SearchInput onKeyUp={() => console.log("keyup")}/>
         <ToggleTags setToggled={setIsTagsToggled}/>
         <ToggleRegions setToggled={setIsRegionsToggled}/>
-        <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
-        {/* <ChatPanel/> */}
-        <NavBar/>
+        {isSearch ? <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/> : <ChatPanel/>}
+        <NavBar setIsSearch={setIsSearch}/>
       </div>
       
 
