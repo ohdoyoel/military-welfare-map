@@ -1,6 +1,7 @@
 import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { ChatMessage } from "../ChatMessage"
 
 interface ChatPanelProps {
     
@@ -10,8 +11,13 @@ export const ChatPanel = ({}: ChatPanelProps) => {
     
     
     return (
-        <div className="w-full h-full bg-white px-4 py-2 flex flex-col items-start overflow-y-scroll">
-        안녕
+        <div className="w-full h-full bg-emerald-200 px-4 py-4 flex flex-col items-start overflow-y-scroll gap-2">
+
+        <ChatMessage message={"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."} isBotSide={true}/>
+        <ChatMessage message={"안녕"} isBotSide={false}/>
+        <ChatMessage message={"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."} isBotSide={true}/>
+
+
         </div>
     )
 }
