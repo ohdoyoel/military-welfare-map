@@ -2,22 +2,74 @@ import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
+import { useMoveScroll } from "@/src/functions/useMoveScroll"
 
 interface ChatPanelProps {
     
 }
 
+interface MessageProps {
+    message: string,
+    isBotSide: boolean
+}
+
 export const ChatPanel = ({}: ChatPanelProps) => {
+    const [messages, setMessages] = useState<MessageProps[]>(
+        [
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕하세요", isBotSide: true},
+        ]
+    )
+    const {element, onMoveToElement} = useMoveScroll()
     
+    useEffect(() => {
+    }, [])
+
+    const messageList = (messages: MessageProps[]) => {
+        const result = []
+        for (let i=0; i<messages.length; i++){
+            if (i == messages.length-1) result.push(<ChatMessage ref={element} message={messages[i].message} isBotSide={messages[i].isBotSide}/>)
+            else result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide}/>)
+        }
+        onMoveToElement
+        return result
+    }
+
+    const pushUserMessage = (message: string) => {
+        setMessages([...messages, {message:message, isBotSide: false}])
+    }
     
     return (
-        <div className="w-full h-full bg-emerald-200 px-4 py-4 flex flex-col items-start overflow-y-scroll gap-2">
+        <div className="flex flex-col w-full h-full relative">
+            <div className="w-full h-0 grow bg-emerald-200 px-4 py-4 flex flex-col items-start overflow-y-auto gap-2" onClick={onMoveToElement}>
+                {messageList(messages)}
+            </div>
 
-        <ChatMessage message={"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."} isBotSide={true}/>
-        <ChatMessage message={"안녕"} isBotSide={false}/>
-        <ChatMessage message={"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."} isBotSide={true}/>
-
-
+            <div className="flex-none flex h-12 items-center justify-center w-full border-t-[1px] border-slate-200">
+                <input className="flex w-full h-full px-3 py-2 text-sm placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed" placeholder="메시지를 입력해주세요"/>       
+                <button className="h-full w-20 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-500">
+                    보내기
+                </button>
+            </div>
         </div>
     )
 }
