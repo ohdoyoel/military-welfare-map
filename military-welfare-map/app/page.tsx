@@ -31,6 +31,7 @@ export default function Home() {
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+  const [level, setLevel] = useState(10)
   const [selectedIdx, setSelectedIdx] = useState(-1)
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
 
@@ -54,14 +55,14 @@ export default function Home() {
     setFilteredMarkers(markers.filter((x) => {
       for (let i = 0; i < isTagsToggled.length; i++) {
         for (let j = 0; j < isRegionsToggled.length; j++) {
-            if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
-                && isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
-                && (x.title + x.address + x.telno + x.description + iconAndLabelData[x.tag].label).indexOf(searchText) > -1
-            ) return true
-          }
+          if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
+            && isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
+            && (x.title + x.address + x.telno + x.description + iconAndLabelData[x.tag].label).indexOf(searchText) > -1
+          ) return true
         }
-        return false
-      }))
+      }
+      return false
+    }))
     }, [markers, isTagsToggled, isRegionsToggled, searchText])
 
   useEffect(() => {
