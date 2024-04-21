@@ -14,6 +14,7 @@ import { InformationPanel } from '@/src/components/InformationPanel'
 import { ToggleRegions } from '@/src/components/ToggleRegions'
 import db from '@/public/data/db.json'
 import { iconAndLabelData } from '@/src/components/LocationItem'
+import { Header2 } from '@/src/components/Header2'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -88,7 +89,10 @@ export default function Home() {
         {isSearch ? <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/> : <ChatPanel/>}
         <NavBar setIsSearch={setIsSearch}/>
       </div>
-      
+
+      <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
+        <Header2/>
+      </div>      
 
       <div className={`absolute inset-y-0 w-auto z-20
                       ${isBarOpened ? `left-[460px]` : `left-0`} flex items-center 
