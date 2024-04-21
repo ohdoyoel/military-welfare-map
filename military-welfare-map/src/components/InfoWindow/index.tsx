@@ -182,7 +182,7 @@ export const InfoWindow = ({pos, tag, address, title, description, telno}: InfoW
                 <p className='text-left text-lg font-nsb'>{title}</p>
                 <p className='text-left text-base text-balance'>{address}</p>
                 <p className='pt-1 text-left text-sm text-pretty'>{telno}</p>
-                <p className='pt-2 text-left text-xs text-pretty'>{description}</p>
+                <p className='pt-2 text-left text-xs text-pretty whitespace-pre-wrap'>{description}</p>
                 <a className={`absolute bottom-2 flex flex-col justify-center right-2 w-20 h-8 ${tagColorData[tag].normal} rounded-[3px] place-content-center`}
                     href={`https://map.kakao.com/link/to/${title},${pos.lat},${pos.lng}`} target='_blank'
                 >
