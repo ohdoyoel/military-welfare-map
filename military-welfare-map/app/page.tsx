@@ -13,7 +13,7 @@ import { MarkerType } from '@/src/types/data'
 import { InformationPanel } from '@/src/components/InformationPanel'
 import { ToggleRegions } from '@/src/components/ToggleRegions'
 import db from '@/public/data/db.json'
-// import { GEOCOORD } from '@/src/api/VW-GEOCOORD'
+import { iconAndLabelData } from '@/src/components/LocationItem'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -25,6 +25,7 @@ export default function Home() {
 
   const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => true))
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
+  const [searchText, setSearchText] = useState<string>("")
   const [isSearch, setIsSearch] = useState(true)
   
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
@@ -53,22 +54,33 @@ export default function Home() {
     setFilteredMarkers(markers.filter((x) => {
       for (let i = 0; i < isTagsToggled.length; i++) {
         for (let j = 0; j < isRegionsToggled.length; j++) {
-            if (isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j) return true
+            if (isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
+                && (x.title + x.address + x.telno + x.description + iconAndLabelData[x.tag].label) .indexOf(searchText) > -1
+            ) return true
           }
         }
         return false
       }))
-    }, [markers, isTagsToggled, isRegionsToggled])
+    }, [markers, isTagsToggled, isRegionsToggled, searchText])
 
   useEffect(() => {
     console.log(filteredMarkers)
+    setMapPos(filteredMarkers.length == 0 ? curPos
+              :{lat:filteredMarkers.reduce((r, c) => 33 < c.position.lat && c.position.lat < 42  ? r + c.position.lat : r + curPos.lat, 0) / filteredMarkers.length,
+                lng:filteredMarkers.reduce((r, c) => 124 < c.position.lat && c.position.lat < 130  ? r + c.position.lng : r + curPos.lng, 0) / filteredMarkers.length})
   }, [filteredMarkers])
+
+  const onSearchInputKeyUp = () => { 
+    let input;
+    input = document.getElementById("searchInput") as HTMLInputElement;
+    setSearchText(input.value)
+  }
   
   return (
     <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
       <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
-        <SearchInput onKeyUp={() => console.log("keyup")}/>
+        <SearchInput onKeyUp={onSearchInputKeyUp}/>
         <ToggleTags setToggled={setIsTagsToggled}/>
         <ToggleRegions setToggled={setIsRegionsToggled}/>
         {isSearch ? <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/> : <ChatPanel/>}

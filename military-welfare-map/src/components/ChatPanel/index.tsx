@@ -17,7 +17,7 @@ export const ChatPanel = ({}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>(
         [
             {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
+            {message: "안녕 오상병", isBotSide: false},
             {message: "안녕하세요", isBotSide: true},
             {message: "안녕하세요", isBotSide: true},
             {message: "안녕하세요", isBotSide: true},
