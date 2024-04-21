@@ -163,7 +163,7 @@ const ReSetttingMapBounds = ({
         else {
             map.setCenter(new kakao.maps.LatLng(mapPos.lat, mapPos.lng));
             map.setLevel(3)
-        }            
+        }
     }, [markers])
   
     return (<p/>)
