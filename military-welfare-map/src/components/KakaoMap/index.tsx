@@ -1,10 +1,9 @@
 "use client"
 
 import { MarkerType } from '@/src/types/data'
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
-import { Map, MapTypeControl, MapMarker } from 'react-kakao-maps-sdk'
+import { Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from 'react'
+import { Map, MapTypeControl, MapMarker, useMap } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
-// import { SettingsBackupRestoreSharp } from '@mui/icons-material';
 
 interface KakaoMapProps {
     pos: {lat: number, lng: number}
@@ -15,6 +14,7 @@ interface KakaoMapProps {
 }
 
 export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMapProps) => {
+
     const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
 
@@ -24,6 +24,20 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
     useEffect(() => {
         setMapPos(pos)
     }, [pos])
+    
+    // const map = useMap()
+    // const bounds = useMemo(() => {
+    //   const bounds = new kakao.maps.LatLngBounds()
+    
+    //   markers.forEach((marker) => {
+    //     bounds.extend(new kakao.maps.LatLng(marker.position.lat, marker.position.lng))
+    //   })
+    //   return bounds
+    // }, [markers])
+
+    // useEffect(() => {
+    //     map.setBounds(bounds)
+    // })
 
     // get current position and mark
 
@@ -49,10 +63,10 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                         isLoading: false,
                     }))
                     setCurPos({
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
                         })
-                },
+                    },
                 (err) => {
                     setInitialLocationState((prev) => ({
                         ...prev,
@@ -122,6 +136,36 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                     />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 {makeMapMarkers(markers, mapNE, mapSW)}
+                <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
             </Map>
     )
 }
+
+const ReSetttingMapBounds = ({
+    markers,
+    mapPos
+  }: {
+    markers: MarkerType[],
+    mapPos: {lat: number, lng: number}
+  }) => {
+    const map = useMap()
+    const bounds = useMemo(() => {
+      const bounds = new kakao.maps.LatLngBounds()
+  
+      markers.forEach((marker) => {
+        bounds.extend(new kakao.maps.LatLng(marker.position.lat, marker.position.lng))
+      })
+      return bounds
+    }, [markers])
+
+    useEffect(() => {
+        if (markers.length != 0) map.setBounds(bounds)
+        else {
+            map.setCenter(new kakao.maps.LatLng(mapPos.lat, mapPos.lng));
+            map.setLevel(3)
+        }            
+    }, [markers])
+  
+    return (<p/>)
+  }
+  
