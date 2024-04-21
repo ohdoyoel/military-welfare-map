@@ -54,8 +54,9 @@ export default function Home() {
     setFilteredMarkers(markers.filter((x) => {
       for (let i = 0; i < isTagsToggled.length; i++) {
         for (let j = 0; j < isRegionsToggled.length; j++) {
-            if (isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
-                && (x.title + x.address + x.telno + x.description + iconAndLabelData[x.tag].label) .indexOf(searchText) > -1
+            if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
+                && isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
+                && (x.title + x.address + x.telno + x.description + iconAndLabelData[x.tag].label).indexOf(searchText) > -1
             ) return true
           }
         }
@@ -66,8 +67,8 @@ export default function Home() {
   useEffect(() => {
     console.log(filteredMarkers)
     setMapPos(filteredMarkers.length == 0 ? curPos
-              :{lat:filteredMarkers.reduce((r, c) => 33 < c.position.lat && c.position.lat < 42  ? r + c.position.lat : r + curPos.lat, 0) / filteredMarkers.length,
-                lng:filteredMarkers.reduce((r, c) => 124 < c.position.lat && c.position.lat < 130  ? r + c.position.lng : r + curPos.lng, 0) / filteredMarkers.length})
+              :{lat:filteredMarkers.reduce((r, c) => r + c.position.lat, 0) / filteredMarkers.length,
+                lng:filteredMarkers.reduce((r, c) => r + c.position.lng, 0) / filteredMarkers.length})
   }, [filteredMarkers])
 
   const onSearchInputKeyUp = () => { 
