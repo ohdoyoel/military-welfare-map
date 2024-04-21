@@ -30,7 +30,7 @@ interface ToggleTagButtonProps {
     label: string
 }
 
-const iconAndLabelData: ToggleTagButtonProps[] = [
+export const iconAndLabelData: ToggleTagButtonProps[] = [
     {
         icon: <RestaurantOutlinedIcon className='text-3xl text-white'/>,
         label: '음식점'

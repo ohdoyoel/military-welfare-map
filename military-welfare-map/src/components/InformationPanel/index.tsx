@@ -45,7 +45,7 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
     }
 
     return (
-        <div className="w-full h-full flex flex-col items-start overflow-y-scroll divide-y divide-slate-200">
+        <div id="locationList" className="w-full h-full bg-white flex flex-col items-start overflow-y-scroll divide-y divide-slate-200">
             {LocationList(markers)}
                 {/* <InfiniteScroll
                     dataLength={showingMarkers.length}
