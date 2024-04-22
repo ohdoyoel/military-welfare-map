@@ -52,13 +52,16 @@ export const ToggleRegions2 = ({toggled, setToggled}: ToggleRegions2Props) => {
 
         const result = []
             result.push(
-            <ToggleRegionButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={17}/>
+            <ToggleRegionButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={12}/>
         )
+        result.push(<div/>)
+        result.push(<div/>)
+        result.push(<div/>)
         for (let i=0; i < regionData.length; i++) {
             result.push(
                 <ToggleRegionButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx==i ? !item : item))} isToggled={isToggled[i]} label={regionData[i]} key={i}/>
             )
-            if ((i+1) % 4 == 0) result.push(<div/>)
+            // if ((i+1) % 4 == 0) result.push(<div/>)
         }
 
         return result
@@ -69,7 +72,7 @@ export const ToggleRegions2 = ({toggled, setToggled}: ToggleRegions2Props) => {
     }, [isToggled])
 
     return (
-        <div className="w-fit grid grid-cols-5 pl-2 gap-2">
+        <div className="w-fit grid grid-cols-4 pl-2 gap-2">
             {toggleRegionButtonList()}
         </div>
     )
