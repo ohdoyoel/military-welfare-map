@@ -17,6 +17,7 @@ import { iconAndLabelData } from '@/src/components/LocationItem'
 import { Header2 } from '@/src/components/Header2'
 import { ToggleTags2 } from '@/src/components/ToggleTags2'
 import { ToggleRegions2 } from '@/src/components/ToggleRegions2'
+import SearchIcon from '@mui/icons-material/Search';
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -83,7 +84,7 @@ export default function Home() {
   return (
     <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
       <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-        <Header/>
+          <Header/>
         <SearchInput onKeyUp={onSearchInputKeyUp}/>
         <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
         <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
@@ -92,7 +93,12 @@ export default function Home() {
       </div>
 
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
-        <Header2/>
+        <div className='flex'> 
+          <Header2/>
+          <button className='w-10 h-10 z-10 bg-white rounded-lg m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => setIsBarOpened(true)}>
+            <SearchIcon className='text-gray-500' fontSize='medium'/> 
+          </button>
+        </div>
         <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
         <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
       </div>
