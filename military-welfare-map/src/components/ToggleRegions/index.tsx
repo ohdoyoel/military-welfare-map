@@ -2,20 +2,43 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ToggleRegionButton } from "../ToggleRegionButton"
 
 interface ToggleRegionsProps {
+    toggled: boolean[]
     setToggled: Dispatch<SetStateAction<boolean[]>>
 }
 
 const NUM_OF_REGIONS = 16
 
-export const ToggleRegions = ({setToggled}: ToggleRegionsProps) => {
+export const ToggleRegions = ({toggled, setToggled}: ToggleRegionsProps) => {
     const [isEntireToggled, setIsEntireToggled] = useState(true)
-    const [isToggled, setIsToggled] = useState([true, true, true, true, 
-                                                false, false, false, false,
-                                                false, false, false, false,
-                                                false, false, false, false])
+    const [isToggled, setIsToggled] = useState(toggled)
+
+    useEffect(() => {
+        setIsToggled(toggled)
+    }, [toggled])
+
+    useEffect(() => {
+        let isAllToggled = true;
+        for (let i=0; i<isToggled.length; i++) {
+            if (isToggled[i] == false) {
+                isAllToggled = false;
+                break;
+            }
+        }
+        setIsEntireToggled(isAllToggled)
+    }, [isToggled])
     
     useEffect(() => {
-        setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => isEntireToggled))
+        if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => true))
+        else {
+            let isAllToggled = true;
+            for (let i=0; i<isToggled.length; i++) {
+                if (isToggled[i] == false) {
+                    isAllToggled = false;
+                    break;
+                }
+            }
+            if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => false))
+        }
     }, [isEntireToggled])
 
     const toggleRegionButtonList = () => {
@@ -32,7 +55,7 @@ export const ToggleRegions = ({setToggled}: ToggleRegionsProps) => {
         )
         for (let i = 0; i < regionData.length; i++) {
             result.push(
-                <ToggleRegionButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} isToggled={isToggled[i]} label={regionData[i]} key={i}/>
+                <ToggleRegionButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} isToggled={isToggled[i]} label={regionData[i]} key={i}/>
             )
         }
 
