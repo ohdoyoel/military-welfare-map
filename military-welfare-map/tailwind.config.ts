@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         "nsr": ["nanum-square-regular"],
-        "nsb": ["nanum-square-bold"]
+        "nsb": ["nanum-square-bold"],
+        "nse": ["nanum-square-extrabold"]
       },
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',

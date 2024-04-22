@@ -1,7 +1,7 @@
 "use client"
 
 import { MarkerType } from '@/src/types/data'
-import { Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { Map, MapTypeControl, MapMarker, useMap } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
 
@@ -111,7 +111,6 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
         
         return (
             <Map 
-                // ref={mapRef}
                 center={mapPos}
                 isPanto={true}
                 style={{
