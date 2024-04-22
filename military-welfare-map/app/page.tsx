@@ -15,6 +15,8 @@ import { ToggleRegions } from '@/src/components/ToggleRegions'
 import db from '@/public/data/db.json'
 import { iconAndLabelData } from '@/src/components/LocationItem'
 import { Header2 } from '@/src/components/Header2'
+import { ToggleTags2 } from '@/src/components/ToggleTags2'
+import { ToggleRegions2 } from '@/src/components/ToggleRegions2'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -24,7 +26,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<MarkerType[]>([])
 
-  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => true))
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>([true, true, true, true, true, true, true, true, false, false, false, false])
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
   const [isSearch, setIsSearch] = useState(true)
@@ -32,7 +34,6 @@ export default function Home() {
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
-  const [level, setLevel] = useState(10)
   const [selectedIdx, setSelectedIdx] = useState(-1)
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
 
@@ -92,11 +93,9 @@ export default function Home() {
 
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <Header2/>
-        <div>
-        <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-        <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
-        </div>
-      </div>      
+        <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+        <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
+      </div>
 
       <div className={`absolute inset-y-0 w-auto z-20
                       ${isBarOpened ? `left-[460px]` : `left-0`} flex items-center 

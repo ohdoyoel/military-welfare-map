@@ -12,8 +12,9 @@ import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
 import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
 import { ToggleTagButton } from '../ToggleTagButton';
+import { ToggleTagButton2 } from '../ToggleTagButton2';
 
-interface ToggleTagsProps {
+interface ToggleTags2Props {
     toggled: boolean[]
     setToggled: Dispatch<SetStateAction<boolean[]>>
 }
@@ -27,56 +28,56 @@ const NUM_OF_TAGS = 12
 
 const iconAndLabelData: ToggleTagButtonProps[] = [
     {
-        icon: <RestaurantOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>음식점</p>
+        icon: <RestaurantOutlinedIcon className='text-lg'/>,
+        label: <p className='text-xs'>음식점</p>
     },
     {
-        icon: <CoffeeOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>카페</p>
+        icon: <CoffeeOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>카페</p>
     },
     {
-        icon: <ContentCutOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>미용실</p>
+        icon: <ContentCutOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>미용실</p>
     },
     {
-        icon: <HotTubOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>목욕탕</p>
+        icon: <HotTubOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>목욕탕</p>
     },
     {
-        icon: <AttractionsOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>문화·여가</p>
+        icon: <AttractionsOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>문화·여가</p>
     },
     {
-        icon: <HotelOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>숙박</p>
+        icon: <HotelOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>숙박</p>
     },
     {
-        icon: <SportsSoccerOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>스포츠</p>
+        icon: <SportsSoccerOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>스포츠</p>
     },
     {
-        icon: <TrainOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>교통·항공</p>
+        icon: <TrainOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>교통·항공</p>
     },
     {
-        icon: <VisibilityOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>안경점</p>
+        icon: <VisibilityOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>안경점</p>
     },
     {
-        icon: <LocalHospitalOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>병원</p>
+        icon: <LocalHospitalOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>병원</p>
     },
     {
-        icon: <MilitaryTechOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>예비군</p>
+        icon: <MilitaryTechOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>예비군</p>
     },
     {
-        icon: <GolfCourseOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>골프장</p>
+        icon: <GolfCourseOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>골프장</p>
     },
 ]
 
-export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
+export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
     const [isEntireToggled, setIsEntireToggled] = useState(false)
     const [isToggled, setIsToggled] = useState(toggled)
 
@@ -112,17 +113,18 @@ export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
     const toggleTagButtonList = () => {
         const result = []
         result.push(
-            <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
-                <p className='text-white text-xs'>전체</p>
-            </ToggleTagButton>
+            <ToggleTagButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
+                <p className='text-xs'>전체</p>
+            </ToggleTagButton2>
         )
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
-                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
+                <ToggleTagButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
                     {iconAndLabelData[i].icon}
                     {iconAndLabelData[i].label}
-                </ToggleTagButton>
+                </ToggleTagButton2>
             )
+            if ((i+1) % 4 == 0) result.push(<div/>)
         }
 
         return result
@@ -133,10 +135,8 @@ export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
     }, [isToggled])
 
     return (
-        <div className="w-full h-16 bg-emerald-500 px-4 flex items-center py-1">
-            <div className='w-full h-full grid grid-cols-13 gap-14 content-center overflow-x-auto'>
-                {toggleTagButtonList()}
-            </div>
+        <div className="w-fit grid grid-cols-5 pt-4 pb-4 pl-2 gap-2">
+            {toggleTagButtonList()}
         </div>
     )
 }

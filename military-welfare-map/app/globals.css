@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "nanum-square-light";
-  src: url('/fonts/NanumSquareL.ttf')
-}
-
-@font-face {
   font-family: "nanum-square-regular";
   src: url('/fonts/NanumSquareR.ttf')
 }
@@ -15,6 +10,11 @@
 @font-face {
   font-family: "nanum-square-bold";
   src: url('/fonts/NanumSquareB.ttf')
+}
+
+@font-face {
+  font-family: "nanum-square-extrabold";
+  src: url('/fonts/NanumSquareEB.ttf')
 }
 
 :root {
