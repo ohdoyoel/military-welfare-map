@@ -84,14 +84,18 @@ export default function Home() {
       <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
         <SearchInput onKeyUp={onSearchInputKeyUp}/>
-        <ToggleTags setToggled={setIsTagsToggled}/>
-        <ToggleRegions setToggled={setIsRegionsToggled}/>
+        <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+        <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
         {isSearch ? <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/> : <ChatPanel/>}
         <NavBar setIsSearch={setIsSearch}/>
       </div>
 
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <Header2/>
+        <div>
+        <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+        <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
+        </div>
       </div>      
 
       <div className={`absolute inset-y-0 w-auto z-20

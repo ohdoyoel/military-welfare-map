@@ -14,6 +14,7 @@ import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } fr
 import { ToggleTagButton } from '../ToggleTagButton';
 
 interface ToggleTagsProps {
+    toggled: boolean[]
     setToggled: Dispatch<SetStateAction<boolean[]>>
 }
 
@@ -75,24 +76,49 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
     },
 ]
 
-export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
-    const [isEntireToggled, setIsEntireToggled] = useState<boolean|undefined>()
-    const [isToggled, setIsToggled] = useState([true, true, true, true, true, true, true, true, false, false, false, false,])
+export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
+    const [isEntireToggled, setIsEntireToggled] = useState(true)
+    const [isToggled, setIsToggled] = useState(toggled)
+
+    useEffect(() => {
+        setIsToggled(toggled)
+    }, [toggled])
+
+    useEffect(() => {
+        let isAllToggled = true;
+        for (let i=0; i<isToggled.length; i++) {
+            if (isToggled[i] == false) {
+                isAllToggled = false;
+                break;
+            }
+        }
+        setIsEntireToggled(isAllToggled)
+    }, [isToggled])
     
     useEffect(() => {
-        isEntireToggled!=undefined && setIsToggled(Array.from({length: NUM_OF_TAGS}, () => isEntireToggled))
+        if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => true))
+        else {
+            let isAllToggled = true;
+            for (let i=0; i<isToggled.length; i++) {
+                if (isToggled[i] == false) {
+                    isAllToggled = false;
+                    break;
+                }
+            }
+            if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
+        }
     }, [isEntireToggled])
 
     const toggleTagButtonList = () => {
         const result = []
         result.push(
-            <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled ? true : !isEntireToggled)} tag={16} isToggled={!isEntireToggled ? false : isEntireToggled} key={16}>
+            <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
                 <p className='text-white text-xs'>전체</p>
             </ToggleTagButton>
         )
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
-                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx === i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
+                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
                     {iconAndLabelData[i].icon}
                     {iconAndLabelData[i].label}
                 </ToggleTagButton>
@@ -105,7 +131,6 @@ export const ToggleTags = ({setToggled}: ToggleTagsProps) => {
     useEffect(() => {
         setToggled(isToggled)
     }, [isToggled])
-
 
     return (
         <div className="w-full h-16 bg-emerald-500 px-4 flex items-center py-1">
