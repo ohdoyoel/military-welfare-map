@@ -95,7 +95,7 @@ export default function Home() {
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <div className='flex'> 
           <Header2/>
-          <button className='w-10 h-10 z-10 bg-white rounded-lg m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => setIsBarOpened(true)}>
+          <button className='w-10 h-10 z-10 bg-white rounded-lg m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(true); console.log('hello')}}>
             <SearchIcon className='text-gray-500' fontSize='medium'/> 
           </button>
         </div>

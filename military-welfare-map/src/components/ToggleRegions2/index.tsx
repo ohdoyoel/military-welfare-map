@@ -39,8 +39,12 @@ export const ToggleRegions2 = ({toggled, setToggled}: ToggleRegions2Props) => {
                 }
             }
             if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => false))
-        }
+            }
     }, [isEntireToggled])
+    
+        useEffect(() => {
+            setToggled(isToggled)
+        }, [isToggled])
 
     const toggleRegionButtonList = () => {
         const regionData: string[] = [
@@ -49,27 +53,20 @@ export const ToggleRegions2 = ({toggled, setToggled}: ToggleRegions2Props) => {
             '충북','충남','전북','전남',
             '경북','경남','강원','제주'
         ]
-
         const result = []
-            result.push(
-            <ToggleRegionButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={12}/>
+        result.push(
+            <ToggleRegionButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={NUM_OF_REGIONS}/>
         )
-        result.push(<div/>)
-        result.push(<div/>)
-        result.push(<div/>)
-        for (let i=0; i < regionData.length; i++) {
+        result.push(<div key={NUM_OF_REGIONS+1}/>)
+        result.push(<div key={NUM_OF_REGIONS+2}/>)
+        result.push(<div key={NUM_OF_REGIONS+3}/>)
+        for (let i=0; i < NUM_OF_REGIONS; i++) {
             result.push(
                 <ToggleRegionButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx==i ? !item : item))} isToggled={isToggled[i]} label={regionData[i]} key={i}/>
             )
-            // if ((i+1) % 4 == 0) result.push(<div/>)
         }
-
         return result
     }
-
-    useEffect(() => {
-        setToggled(isToggled)
-    }, [isToggled])
 
     return (
         <div className="w-fit grid grid-cols-4 pl-2 gap-2">
