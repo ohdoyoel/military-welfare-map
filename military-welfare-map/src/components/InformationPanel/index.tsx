@@ -45,20 +45,22 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
     }
 
     return (
-        <div id="locationList" className="w-full h-full bg-white flex flex-col items-start overflow-y-scroll divide-y divide-slate-200">
-            {LocationList(markers)}
-                {/* <InfiniteScroll
-                    dataLength={showingMarkers.length}
-                    next={loadMore}
-                    hasMore={hasMore}
-                    loader={<h4>Loading...</h4>}
-                    >
-                    {showingMarkers.map((i, index) => (
-                        <LocationItem _id={index} position={i.position} tag={i.tag}
-                        address={i.address} title={i.title} key={index} setPos={setPos}/>
-                    ))}
-                    {LocationList(showingMarkers)}
-                </InfiniteScroll> */}
+        <div className="h-full bg-emerald-500 pt-1 pb-2 px-2 overflow-hidden">
+            <div id="locationList" className="h-full bg-white flex flex-col items-start overflow-y-scroll divide-y divide-slate-200">
+                {LocationList(markers)}
+                    {/* <InfiniteScroll
+                        dataLength={showingMarkers.length}
+                        next={loadMore}
+                        hasMore={hasMore}
+                        loader={<h4>Loading...</h4>}
+                        >
+                        {showingMarkers.map((i, index) => (
+                            <LocationItem _id={index} position={i.position} tag={i.tag}
+                            address={i.address} title={i.title} key={index} setPos={setPos}/>
+                        ))}
+                        {LocationList(showingMarkers)}
+                    </InfiniteScroll> */}
+            </div>
         </div>
     )
 }
