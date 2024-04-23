@@ -18,25 +18,6 @@ export const ChatPanel = ({}: ChatPanelProps) => {
         [
             {message: "안녕하세요", isBotSide: true},
             {message: "안녕 오상병", isBotSide: false},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
-            {message: "안녕하세요", isBotSide: true},
         ]
     )
     const {element, onMoveToElement} = useMoveScroll()
@@ -47,8 +28,8 @@ export const ChatPanel = ({}: ChatPanelProps) => {
     const messageList = (messages: MessageProps[]) => {
         const result = []
         for (let i=0; i<messages.length; i++){
-            if (i == messages.length-1) result.push(<ChatMessage ref={element} message={messages[i].message} isBotSide={messages[i].isBotSide}/>)
-            else result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide}/>)
+            if (i == messages.length-1) result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide} key={i}/>)
+            else result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide} key={i}/>)
         }
         onMoveToElement
         return result
@@ -65,7 +46,7 @@ export const ChatPanel = ({}: ChatPanelProps) => {
             </div>
 
             <div className="flex-none flex h-12 items-center justify-center w-full border-t-[1px] border-slate-200">
-                <input className="flex w-full h-full px-3 py-2 text-sm placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed" placeholder="메시지를 입력해주세요"/>       
+                <input id={"chatInput"} className="flex w-full h-full px-3 py-2 text-sm placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed" placeholder="메시지를 입력해주세요"/>       
                 <button className="h-full w-20 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-500">
                     보내기
                 </button>
