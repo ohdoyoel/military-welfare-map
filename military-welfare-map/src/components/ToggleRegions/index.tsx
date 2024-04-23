@@ -67,7 +67,7 @@ export const ToggleRegions = ({toggled, setToggled}: ToggleRegionsProps) => {
     }, [isToggled])
 
     return (
-        <div className="w-full h-10 bg-emerald-500 px-4 flex items-center pb-1">
+        <div className="flex-none w-full h-8 bg-emerald-500 px-4 flex items-center pb-1">
             <div className='w-full h-full grid grid-cols-17 gap-11 content-center overflow-x-scroll'>
                 {toggleRegionButtonList()}
             </div>

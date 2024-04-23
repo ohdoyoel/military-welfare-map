@@ -179,7 +179,7 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
     }
 
     return (
-        <button onClick={handleOnClick} className="w-full h-20 bg-white pr-2 flex flex-row">
+        <button onClick={handleOnClick} className="w-full h-20 scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
             <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
             <div className={`w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}

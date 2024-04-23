@@ -133,7 +133,7 @@ export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
     }, [isToggled])
 
     return (
-        <div className="w-full h-16 bg-emerald-500 px-4 flex items-center py-1">
+        <div className="flex-none w-full h-12 bg-emerald-500 px-4 flex items-center pt-1">
             <div className='w-full h-full grid grid-cols-13 gap-14 content-center overflow-x-auto'>
                 {toggleTagButtonList()}
             </div>
