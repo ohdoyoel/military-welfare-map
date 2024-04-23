@@ -16,7 +16,6 @@ interface MarkerProps {
 }
 
 export const Marker = ({tag, position, address, title, description, telno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
-    console.log(description)
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {

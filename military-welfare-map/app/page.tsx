@@ -18,19 +18,22 @@ import { Header2 } from '@/src/components/Header2'
 import { ToggleTags2 } from '@/src/components/ToggleTags2'
 import { ToggleRegions2 } from '@/src/components/ToggleRegions2'
 import SearchIcon from '@mui/icons-material/Search';
+import ChatIcon from '@mui/icons-material/Chat';
+import { AdsBar } from '@/src/components/AdsBar'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
+  const [isChatOpened, setIsChatOpened] = useState(false)
+
   const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<MarkerType[]>([])
 
   const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>([true, true, true, true, true, true, true, true, false, false, false, false])
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
-  const [isSearch, setIsSearch] = useState(true)
   
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
@@ -43,7 +46,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    console.log(markers)
+    // console.log(markers)
     setIsLoading(false)
   }, [markers])
 
@@ -69,7 +72,7 @@ export default function Home() {
     }, [markers, isTagsToggled, isRegionsToggled, searchText])
 
   useEffect(() => {
-    console.log(filteredMarkers)
+    // console.log(filteredMarkers)
     setMapPos(filteredMarkers.length == 0 ? curPos
               :{lat:filteredMarkers.reduce((r, c) => r + c.position.lat, 0) / filteredMarkers.length,
                 lng:filteredMarkers.reduce((r, c) => r + c.position.lng, 0) / filteredMarkers.length})
@@ -80,39 +83,83 @@ export default function Home() {
     input = document.getElementById("searchInput") as HTMLInputElement;
     setSearchText(input.value)
   }
+
+  const activeSearchInput = () => {
+    let input;
+    input = document.getElementById("searchInput") as HTMLInputElement;
+    input.focus()
+  }
+  useEffect(() => {
+    activeSearchInput()
+  }, [isBarOpened])
+
+  const activeChatInput = () => {
+    let input;
+    input = document.getElementById("chatInput") as HTMLInputElement;
+    // input.focus()
+  }
+  useEffect(() => {
+    activeChatInput()
+  }, [isChatOpened])
   
   return (
     <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
+      
+      {/* InformationPanel */}
       <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-          <Header/>
+        <Header/>
         <SearchInput onKeyUp={onSearchInputKeyUp}/>
         <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
         <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
-        {isSearch ? <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/> : <ChatPanel/>}
-        <NavBar setIsSearch={setIsSearch}/>
+        <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
+        <AdsBar/>
       </div>
 
+      {/* DefaultPanel */}
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <div className='flex'> 
           <Header2/>
-          <button className='w-10 h-10 z-10 bg-white rounded-lg m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(true); console.log('hello')}}>
+          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(true);}}>
             <SearchIcon className='text-gray-500' fontSize='medium'/> 
           </button>
+          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsChatOpened(true); console.log('hello')}}>
+            <ChatIcon className='text-gray-500' fontSize='medium'/> 
+          </button>
         </div>
+        <div className='flex flex-col'> 
         <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
         <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled}/>
+        </div>
       </div>
 
-      <div className={`absolute inset-y-0 w-auto z-20
-                      ${isBarOpened ? `left-[460px]` : `left-0`} flex items-center 
+      {/* InformationPanel Open Btn */}
+      <div className={`absolute inset-y-0 z-10
+                      ${isBarOpened ? `left-[461px]` : `left-0`} flex items-center 
                       `}>
-        <button className='w-6 h-12 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(!isBarOpened)}}>
-          {isBarOpened ? <NavigateBeforeIcon className='text-emerald-500'/> : <NavigateNextIcon className='text-emerald-500'/>}
+        <button className='group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(!isBarOpened)}}>
+          {isBarOpened ? <NavigateBeforeIcon className='text-emerald-500' fontSize='large'/> : <SearchIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
+          {!isBarOpened ? <NavigateNextIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/> : ""}
+        </button>
+      </div>
+
+      {/* ChatPanel */}
+        <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+        <ChatPanel/>
+        <AdsBar/>
+      </div>
+
+      {/* ChatPanel Open Btn */}
+      <div className={`absolute inset-y-0 z-10
+                      ${isChatOpened ? `right-[461px]` : `right-0`} flex items-center 
+                      `}>
+        <button className='group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsChatOpened(!isChatOpened)}}>
+          {isChatOpened ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/> : <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
+          {!isChatOpened ? <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/> : ""}
         </button>
       </div>
 
       <div className='z-10 absolute top-12 right-1
-                        w-8 h-8 bg-white rounded-lg shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'>
+                        w-8 h-8 rounded-3xl shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'>
         <button className='w-full h-full' onClick={() => setMapPos({lat:curPos.lat, lng:curPos.lng})}>
           <img src='/images/current-position.png'></img>
         </button>
