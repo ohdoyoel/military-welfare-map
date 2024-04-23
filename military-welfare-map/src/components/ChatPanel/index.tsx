@@ -38,16 +38,25 @@ export const ChatPanel = ({}: ChatPanelProps) => {
     const pushUserMessage = (message: string) => {
         setMessages([...messages, {message:message, isBotSide: false}])
     }
+
+    const sendMessage = () => {
+        let input;
+        input = document.getElementById("chatInput") as HTMLTextAreaElement;
+        input.value ? pushUserMessage(input.value) : ""
+        input.value = ""
+    }
     
     return (
-        <div className="flex flex-col w-full h-full relative">
-            <div className="w-full h-0 grow bg-emerald-200 px-4 py-4 flex flex-col items-start overflow-y-auto gap-2" onClick={onMoveToElement}>
+        <div className="grow flex flex-col w-full h-full relative">
+            <div className="w-full h-0 grow bg-emerald-500 px-4 py-4 flex flex-col items-start overflow-y-auto gap-1" onClick={onMoveToElement}>
                 {messageList(messages)}
             </div>
 
-            <div className="flex-none flex h-12 items-center justify-center w-full border-t-[1px] border-slate-200">
-                <input id={"chatInput"} className="flex w-full h-full px-3 py-2 text-sm placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed" placeholder="메시지를 입력해주세요"/>       
-                <button className="h-full w-20 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-500">
+            <div className="flex-none flex h-20 w-full border-t-[1px] border-slate-200">
+                <textarea id={"chatInput"} className="flex w-full h-full px-3 py-2 text-lg break-all placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed resize-none"
+                placeholder="메시지를 입력해주세요" required
+                            onKeyDown={(event) => {event.code == "Enter" ? sendMessage() : ''}}/>       
+                <button onClick={sendMessage} className="h-full w-20 text-lg font-medium text-white bg-emerald-600 hover:bg-emerald-500">
                     보내기
                 </button>
             </div>

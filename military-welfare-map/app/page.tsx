@@ -95,8 +95,8 @@ export default function Home() {
 
   const activeChatInput = () => {
     let input;
-    input = document.getElementById("chatInput") as HTMLInputElement;
-    // input.focus()
+    input = document.getElementById("chatInput") as HTMLTextAreaElement;
+    input.focus()
   }
   useEffect(() => {
     activeChatInput()
@@ -143,7 +143,7 @@ export default function Home() {
       </div>
 
       {/* ChatPanel */}
-        <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+      <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <ChatPanel/>
         <AdsBar/>
       </div>
