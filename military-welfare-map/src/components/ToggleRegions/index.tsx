@@ -51,7 +51,7 @@ export const ToggleRegions = ({toggled, setToggled}: ToggleRegionsProps) => {
 
         const result = []
             result.push(
-            <ToggleRegionButton onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={17}/>
+            <ToggleRegionButton onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={16}/>
         )
         for (let i = 0; i < regionData.length; i++) {
             result.push(

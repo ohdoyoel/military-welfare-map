@@ -107,35 +107,35 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
                 }
             }
             if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
-        }
+            }
     }, [isEntireToggled])
+    
+    useEffect(() => {
+        setToggled(isToggled)
+    }, [isToggled])
 
     const toggleTagButtonList = () => {
         const result = []
         result.push(
-            <ToggleTagButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
+            <ToggleTagButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={NUM_OF_TAGS}>
                 <p className='text-sm'>전체</p>
             </ToggleTagButton2>
         )
-        result.push(<div/>)
-        result.push(<div/>)
-        result.push(<div/>)
-        for (let i = 0; i < iconAndLabelData.length; i++) {
+        result.push(<div key={NUM_OF_TAGS+1}/>)
+        result.push(<div key={NUM_OF_TAGS+2}/>)
+        result.push(<div key={NUM_OF_TAGS+3}/>)
+        for (let i = 0; i < NUM_OF_TAGS; i++) {
             result.push(
                 <ToggleTagButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
                     {iconAndLabelData[i].icon}
                     {iconAndLabelData[i].label}
                 </ToggleTagButton2>
             )
-            // if ((i+1) % 4 == 0) result.push(<div/>)
         }
 
         return result
     }
 
-    useEffect(() => {
-        setToggled(isToggled)
-    }, [isToggled])
 
     return (
         <div className="w-fit grid grid-cols-4 pt-4 pb-4 pl-2 gap-2">
