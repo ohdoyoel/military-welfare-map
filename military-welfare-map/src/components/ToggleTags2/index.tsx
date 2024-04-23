@@ -121,7 +121,7 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
                 <p className='text-sm'>전체</p>
             </ToggleTagButton2>
         )
-        result.push(<div key={NUM_OF_TAGS+1}/>)
+        result.push(<div key={NUM_OF_TAGS+1} className='w-0 h-0 bg-gray-500'/>)
         result.push(<div key={NUM_OF_TAGS+2}/>)
         result.push(<div key={NUM_OF_TAGS+3}/>)
         for (let i = 0; i < NUM_OF_TAGS; i++) {
