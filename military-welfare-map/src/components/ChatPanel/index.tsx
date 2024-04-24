@@ -40,10 +40,10 @@ export const ChatPanel = ({}: ChatPanelProps) => {
     }
 
     const sendMessage = () => {
-        let input;
-        input = document.getElementById("chatInput") as HTMLTextAreaElement;
-        input.value ? pushUserMessage(input.value) : ""
-        input.value = ""
+        let textarea = document.getElementById("chatInput") as HTMLTextAreaElement;
+        let content = textarea.value
+        textarea.value = ""
+        content ? pushUserMessage(content) : ""
     }
     
     return (
@@ -55,7 +55,7 @@ export const ChatPanel = ({}: ChatPanelProps) => {
             <div className="flex-none flex h-20 w-full border-t-[1px] border-slate-200">
                 <textarea id={"chatInput"} className="flex w-full h-full px-3 py-2 text-lg break-all placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed resize-none"
                 placeholder="메시지를 입력해주세요" required
-                            onKeyDown={(event) => {event.code == "Enter" ? sendMessage() : ''}}/>       
+                            onKeyUp={(event) => {if (event.code == "Enter") {event.preventDefault(); sendMessage();}}}/>       
                 <button onClick={sendMessage} className="h-full w-20 text-lg font-medium text-white bg-emerald-600 hover:bg-emerald-500">
                     보내기
                 </button>
