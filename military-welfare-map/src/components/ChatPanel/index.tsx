@@ -31,8 +31,15 @@ export const ChatPanel = ({}: ChatPanelProps) => {
         return result
     }
 
+    const scrollDown = () => {
+        let ul = document.getElementById("messages") as HTMLUListElement;
+        console.log(ul.scrollHeight)
+        ul.animate({ scrollTop: ul.scrollHeight }, 0)
+    }
+
     const pushUserMessage = (message: string) => {
         setMessages([...messages, {message:message, isBotSide: false}])
+        scrollDown()
     }
 
     const sendMessage = () => {
@@ -44,12 +51,12 @@ export const ChatPanel = ({}: ChatPanelProps) => {
     
     return (
         <div className="grow flex flex-col w-full">
-            <div className="grow w-full h-0 bg-emerald-500 px-4 py-4 flex flex-col items-start overflow-y-auto gap-1">
+            <ul id={'messages'} className="grow w-full h-0 bg-emerald-500 px-4 py-4 flex flex-col items-start overflow-y-auto gap-1" style={{scrollBehavior:'smooth'}}>
                 {messageList(messages)}
-            </div>
+            </ul>
             <div className="flex-none flex h-20 w-full border-t-[1px] border-slate-200">
                 <textarea id={"chatInput"} className="flex w-full h-full px-3 py-2 text-lg break-all placeholder-slate-400 focus:outline-none disabled:cursor-not-allowed resize-none"
-                placeholder="메시지를 입력해주세요" required
+                placeholder="메시지를 입력해주세요"
                 onKeyDown={(e) => {if (e.code == "Enter") {e.preventDefault(); if (!e.nativeEvent.isComposing) { sendMessage(); }}}}/>       
                 <button onClick={sendMessage} className="h-full w-20 text-lg font-medium text-white bg-emerald-600 hover:bg-emerald-500">
                     보내기
