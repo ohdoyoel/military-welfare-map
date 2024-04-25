@@ -34,6 +34,7 @@ export const Marker = ({tag, position, address, title, description, telno, setPo
         src: `/images/marker${tag}.png`,
         size: {width: 12, height: 12},
         options: {offset: {x: 6, y: 6}},}}
+        opacity={1}
         onClick={() => {
             setPos({lat: position.lat, lng: position.lng})
             setIsVisible(true)
