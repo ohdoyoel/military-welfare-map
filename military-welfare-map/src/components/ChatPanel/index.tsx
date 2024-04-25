@@ -2,6 +2,7 @@ import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
+import { botReply } from "@/src/functions/botReply"
 
 interface ChatPanelProps {
     
@@ -12,15 +13,10 @@ interface MessageProps {
     isBotSide: boolean
 }
 
+const greeting = "안녕하세요"
+
 export const ChatPanel = ({}: ChatPanelProps) => {
-    const [messages, setMessages] = useState<MessageProps[]>(
-        [
-            {message: "안녕하세요", isBotSide: true},
-            {message: "d", isBotSide: true},
-            {message: "안녕 오상병", isBotSide: false},
-            {message: "d", isBotSide: false},
-        ]
-    )
+    const [messages, setMessages] = useState<MessageProps[]>([{message: greeting, isBotSide: true}])
 
     const messageList = (messages: MessageProps[]) => {
         const result = []
@@ -33,20 +29,31 @@ export const ChatPanel = ({}: ChatPanelProps) => {
 
     const scrollDown = () => {
         let ul = document.getElementById("messages") as HTMLUListElement;
-        console.log(ul.scrollHeight)
-        ul.animate({ scrollTop: ul.scrollHeight }, 0)
+        ul.scrollTo({top: ul.scrollHeight, behavior: 'smooth'})
+    }
+
+    useEffect(() => {
+        if (messages[messages.length-1].isBotSide == false) {
+            setTimeout(() => pushBotMessage(botReply(messages[messages.length-1].message)), 1000)
+        }
+        scrollDown()
+    }, [messages])
+
+    const pushBotMessage = (message: string) => {
+        setMessages([...messages, {message:message, isBotSide: true}])
     }
 
     const pushUserMessage = (message: string) => {
         setMessages([...messages, {message:message, isBotSide: false}])
-        scrollDown()
     }
 
     const sendMessage = () => {
         let textarea = document.getElementById("chatInput") as HTMLTextAreaElement;
         let content = textarea.value
+        if (!content.trim()) return;
         textarea.value = ""
-        content.trim() ? pushUserMessage(content) : ""
+        pushUserMessage(content)
+        // pushBotMessage(botReply(content))
     }
     
     return (
