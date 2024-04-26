@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { MapMarker } from "react-kakao-maps-sdk"
-import { InfoWindow } from "../InfoWindow"
+import { CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk"
+import { InfoWindow, tagColorData } from "../InfoWindow"
 
 interface MarkerProps {
     tag: number
@@ -28,19 +28,15 @@ export const Marker = ({tag, position, address, title, description, telno, setPo
     }, [mapClicked])
     
     return (
-        <MapMarker
-        position={position}
-        image={{
-        src: `/images/marker${tag}.png`,
-        size: {width: 12, height: 12},
-        options: {offset: {x: 6, y: 6}},}}
-        opacity={1}
-        onClick={() => {
-            setPos({lat: position.lat, lng: position.lng})
-            setIsVisible(true)
-        }}
-        >
+        <CustomOverlayMap position={position}>
+            <div className={`w-8 h-8 ${tagColorData[tag].normal}`}
+                onClick={() => {
+                setPos({lat: position.lat, lng: position.lng})
+                setIsVisible(true)
+            }}>
+                {tag}
+            </div>
             {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno}/>}
-        </MapMarker>
+        </CustomOverlayMap>
     )
 }

@@ -2,7 +2,7 @@
 
 import { MarkerType } from '@/src/types/data'
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
-import { Map, MapTypeControl, MapMarker, useMap } from 'react-kakao-maps-sdk'
+import { Map, MapTypeControl, MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
 
 interface KakaoMapProps {
@@ -110,6 +110,7 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
         }
         
         return (
+            <>
             <Map 
                 center={mapPos}
                 isPanto={true}
@@ -137,6 +138,7 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                 {makeMapMarkers(markers, mapNE, mapSW)}
                 <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
             </Map>
+            </>
     )
 }
 

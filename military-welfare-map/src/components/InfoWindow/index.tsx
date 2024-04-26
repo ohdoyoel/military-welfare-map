@@ -78,7 +78,7 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
     },
 ]
 
-type tagColorType = {
+export type tagColorType = {
   [key: number]: {
     light: string,
     normal: string,
@@ -86,7 +86,7 @@ type tagColorType = {
   };
 };
 
-const tagColorData:tagColorType = {
+export const tagColorData:tagColorType = {
     0: {
         light: 'bg-red-400',
         normal: 'bg-red-500',
