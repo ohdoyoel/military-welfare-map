@@ -110,7 +110,6 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
         }
         
         return (
-            <>
             <Map 
                 center={mapPos}
                 isPanto={true}
@@ -126,6 +125,7 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                 onCenterChanged={setCenterAndBound}
                 onTileLoaded={setCenterAndBound}
                 >
+                {makeMapMarkers(markers, mapNE, mapSW)}
                 {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
                         image={{
@@ -135,10 +135,8 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                         }}
                     />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                {makeMapMarkers(markers, mapNE, mapSW)}
                 <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
             </Map>
-            </>
     )
 }
 

@@ -13,7 +13,7 @@ import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
 
 interface InfoWindowProps {
-    isVisible?: boolean
+    isVisible: boolean
     pos: {lat:number, lng:number}
     tag: number
     title: string
@@ -169,21 +169,20 @@ export const tagColorData:tagColorType = {
     },
 }
 
-export const InfoWindow = ({pos, tag, address, title, description, telno}: InfoWindowProps) => {
+export const InfoWindow = ({pos, tag, address, title, description, telno, isVisible}: InfoWindowProps) => {
     return (
-        <div className={`w-96 h-48 flex flex-row bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
-                        flex flex-row`}>
-            <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
-            <div className={`w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
+        <div className={` -left-1/2 min-w-96 min-h-48 h-48 flex flex-row bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} style={{position:"relative", zIndex: 100}}>
+            <div className={`flex-none w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
+            <div className={`flex-none w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}
                 <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
             </div>
-            <div className="relative w-full h-full flex flex-col items-start p-2">
+            <div className="relative shrink h-full flex flex-col items-start p-2">
                 <p className='text-left text-lg font-nsb'>{title}</p>
-                <p className='text-left text-base text-balance'>{address}</p>
-                <p className='pt-1 text-left text-sm text-pretty'>{telno}</p>
-                <p className='pt-2 text-left text-xs text-pretty whitespace-pre-wrap'>{description}</p>
-                <a className={`absolute bottom-2 flex flex-col justify-center right-2 w-20 h-8 ${tagColorData[tag].normal} rounded-[3px] place-content-center`}
+                <p className='text-left text-base'>{address}</p>
+                <p className='pt-1 text-left text-sm'>{telno}</p>
+                <p className='pt-2 text-left text-xs whitespace-pre-wrap'>{description}</p>
+                <a className={`absolute bottom-2 grid justify-center right-2 w-20 h-8 ${tagColorData[tag].normal} rounded-[3px] place-content-center`}
                     href={`https://map.kakao.com/link/to/${title},${pos.lat},${pos.lng}`} target='_blank'
                 >
                     <p className="after:content-['_↗'] text-center text-sm align-middle text-white text-pretty">길찾기</p>
