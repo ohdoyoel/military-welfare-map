@@ -92,10 +92,10 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
             for (let i = 0; i < mks.length; i++) {
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat
                     && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng)
-                result.push(
-                    <Marker key={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
+                    result.push(
+                    <Marker key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false} setIdx={setIdx}/>
-                )
+                    )
             }
             return result
         }
