@@ -34,7 +34,7 @@ const tagColorData: tagColorType = {
 export const ToggleTagButton2 = ({children, tag, isToggled, onClicked}: ToggleTagButton2Props) => {
 
     return (
-        <button className={`flex flex-col w-16 h-10
+        <button className={`flex flex-col w-16 h-10 focus:outline-none
                             items-center place-content-center rounded-[3px] z-20
                             ${isToggled
                                 ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg${tagColorData[tag]} text-white `
