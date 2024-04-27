@@ -2,7 +2,7 @@
 
 import { MarkerType } from '@/src/types/data'
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
-import { Map, MapTypeControl, MapMarker, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk'
+import { Map, MapTypeControl, MapMarker, useMap, CustomOverlayMap, MarkerClusterer } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
 
 interface KakaoMapProps {
@@ -20,6 +20,8 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
 
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
+
+    const [tooManyMarkers, setTooManyMarkers] = useState(false)
 
     useEffect(() => {
         setMapPos(pos)
@@ -93,9 +95,12 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat
                     && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng)
                     result.push(
-                    <Marker key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
+                        <Marker key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false} setIdx={setIdx}/>
-                    )
+                        )
+            }
+            if (result.length > 1000) {
+                return [];
             }
             return result
         }
@@ -125,17 +130,30 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                 onCenterChanged={setCenterAndBound}
                 onTileLoaded={setCenterAndBound}
                 >
+                {/* <MarkerClusterer
+                averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+                minLevel={8} // 클러스터 할 최소 지도 레벨
+                calculator={[10, 100, 250, 500]}
+                > */}
                 {makeMapMarkers(markers, mapNE, mapSW)}
-                {!initialLocationState.isLoading &&
+                {/* </MarkerClusterer> */}
+                    {!initialLocationState.isLoading &&
                     <MapMarker position={initialLocationState.center}
                         image={{
                             src: "/images/current-position.png",
                             size: {width: 20, height: 20},
                             options: {offset: {x: 10, y: 10}},
                         }}
+                        onClick={() => setMapPos({
+                            lat: initialLocationState.center.lat,
+                            lng: initialLocationState.center.lng
+                        })}
                     />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
+                {tooManyMarkers &&
+                <div className='absolute bottom-0 right-0 w-96 h-36 bg-white'>
+                </div>}
             </Map>
     )
 }
