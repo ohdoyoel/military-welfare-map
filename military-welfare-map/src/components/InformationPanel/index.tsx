@@ -38,7 +38,7 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
         for (let i = 0; i < posts.length; i++) {
             result.push(
                 <LocationItem _id={i} position={posts[i].position} tag={posts[i].tag}
-                            address={posts[i].address} title={posts[i].title} key={i} setPos={setPos} setIdx={setIdx}/>
+                            address={posts[i].address} title={posts[i].title} key={i} setPos={setPos} setIdx={setIdx} description={posts[i].description}/>
             )
         }
         return result

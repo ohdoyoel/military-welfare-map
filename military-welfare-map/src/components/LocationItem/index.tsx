@@ -22,7 +22,8 @@ interface LocationItemProps {
     }
     tag: number,
     address: string,
-    title: string
+    title: string,
+    description? : string
 }
 
 interface ToggleTagButtonProps {
@@ -172,22 +173,23 @@ const tagColorData:tagColorType = {
     },
 }
 
-export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title}: LocationItemProps) => {
+export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description}: LocationItemProps) => {
     const handleOnClick = () => {
         setPos({lat: position.lat, lng: position.lng})
         setIdx(_id)    
     }
 
     return (
-        <button onClick={handleOnClick} className="w-full h-20 scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
-            <div className={`w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
-            <div className={`w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
+        <button onClick={handleOnClick} className="w-full h-24 scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
+            <div className={`flex-none w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
+            <div className={`flex-none w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}
                 <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
             </div>
-            <div className={`w-full h-full bg-white flex flex-col items-start p-2`}>
-                <p className='text-lg text-start font-nsb'>{title}</p>
-                <p className='text-xs text-start'>{address}</p>
+            <div className={`grow w-0 h-full bg-white flex flex-col items-start p-2`}>
+                <p className='text-lg font-nsb'>{title}</p>
+                <p className='text-sm text-start truncate w-full text-gray-500'>{address}</p>
+                <p className='text-xs text-start truncate w-full text-gray-400'>{description}</p>
             </div>
         </button>
     )

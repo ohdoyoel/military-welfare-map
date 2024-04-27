@@ -3,7 +3,7 @@ import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
 import { botReply, greeting } from "@/src/functions/botReply"
-import { PlayCircleSharp } from "@mui/icons-material"
+import { andInKorean, thatInKorean } from "@/src/functions/korean"
 
 interface ChatPanelProps {
     setTagsToggled: Dispatch<SetStateAction<boolean[]>>
@@ -17,8 +17,20 @@ interface MessageProps {
     isBotSide: boolean
 }
 
+const tagLabelData = [
+    '음식점', '카페', '미용실', '목욕탕', '노래방·PC방·당구장', '숙박업소', '스포츠 경기장', 'TMO·이사업체', '안경점', '병원', '예비군', '골프장', '모두',
+]
+
+const placeLabelData = [
+    '서울특별시', '부산광역시', '대구광역시', '인천광역시',
+    '광주광역시', '대전광역시', '울산광역시', '경기도',
+    '충청북도', '충청남도', '전라북도', '전라남도',
+    '경상북도', '경상남도', '강원도', '제주도', '주변', '전국'
+]
+
 export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([{message: greeting, isBotSide: true}])
+    const [isNear, setIsNear] = useState(false)
 
     const messageList = (messages: MessageProps[]) => {
         const result = []
@@ -34,15 +46,27 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
         ul.scrollTo({top: ul.scrollHeight, behavior: 'smooth'})
     }
 
+    // tag1와(과) ... tag2을(를)
+    const combineTags = (tags: string[]) => {
+        let result = ''
+        for (let i=0; i<tags.length; i++) {
+            const label = tagLabelData[Number(tags[i])]
+            if (i == tags.length-1) result += (label + thatInKorean(label))
+            else result += (label + andInKorean(label) + ' ')
+        }
+        return result
+    }
+
     const replyProperlyTagAndPlc = (tags: string[], plcs: string[]) => {
         if (tags.length > 0 && plcs.length == 0) {
-            pushBotMessage(`선택하신 지역의 ${Number(tags[0])}을 보여드리겠습니다 .`)
+            if (isNear) pushBotMessage(`주변의 ${combineTags(tags)} 보여드리겠습니다 .`)
+            else pushBotMessage(`선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다 .`)
         }
         else if (tags.length == 0 && plcs.length > 0) {
-            pushBotMessage(`${Number(plcs[0])}의 모든 장소를 보여드리겠습니다 .`)
+            pushBotMessage(`${placeLabelData[Number(plcs[0])]}의 모든 장소를 보여드리겠습니다 .`)
         }
         else if (tags.length > 0 && plcs.length > 0) {
-            pushBotMessage(`${Number(plcs[0])}의 ${Number(tags[0])}을 보여드리겠습니다 .`)
+            pushBotMessage(`${placeLabelData[Number(plcs[0])]}의 ${combineTags(tags)} 보여드리겠습니다 .`)
         }
     }
 
@@ -64,7 +88,6 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
             tag.forEach((t) => {
                 if (Number(t) == 12) {
                     tagsToggled = (Array.from({length: 16}, () => true))
-                    return;
                 }
                 else tagsToggled[Number(t)] = true
             })
@@ -77,12 +100,19 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
             })
             let plcsToggled: boolean[] = (Array.from({length: 16}, () => false))
             plc.forEach((p) => {
-                if (Number(p) == 16) {
-                    setDistance(0.05)
+                if (Number(p) == 17) {
                     plcsToggled = (Array.from({length: 16}, () => true))
-                    return;
+                    setDistance(30); setIsNear(false)
                 }
-                else plcsToggled[Number(p)] = true
+                if (Number(p) == 16) {
+                    plcsToggled = (Array.from({length: 16}, () => true))
+                    setDistance(0.05); setIsNear(true)
+                }
+                else {
+                    setDistance(30)
+                    setIsNear(false)
+                    plcsToggled[Number(p)] = true
+                }
             })
             setRegionsToggled(plcsToggled)
         }
