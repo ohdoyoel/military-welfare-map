@@ -78,37 +78,37 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
 ]
 
 export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
-    const [isEntireToggled, setIsEntireToggled] = useState(false)
+    // const [isEntireToggled, setIsEntireToggled] = useState(false)
     const [isToggled, setIsToggled] = useState(toggled)
 
     useEffect(() => {
         setIsToggled(toggled)
     }, [toggled])
 
-    useEffect(() => {
-        let isAllToggled = true;
-        for (let i=0; i<isToggled.length; i++) {
-            if (isToggled[i] == false) {
-                isAllToggled = false;
-                break;
-            }
-        }
-        setIsEntireToggled(isAllToggled)
-    }, [isToggled])
+    // useEffect(() => {
+    //     let isAllToggled = true;
+    //     for (let i=0; i<isToggled.length; i++) {
+    //         if (isToggled[i] == false) {
+    //             isAllToggled = false;
+    //             break;
+    //         }
+    //     }
+    //     setIsEntireToggled(isAllToggled)
+    // }, [isToggled])
     
-    useEffect(() => {
-        if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => true))
-        else {
-            let isAllToggled = true;
-            for (let i=0; i<isToggled.length; i++) {
-                if (isToggled[i] == false) {
-                    isAllToggled = false;
-                    break;
-                }
-            }
-            if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
-            }
-    }, [isEntireToggled])
+    // useEffect(() => {
+    //     if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => true))
+    //     else {
+    //         let isAllToggled = true;
+    //         for (let i=0; i<isToggled.length; i++) {
+    //             if (isToggled[i] == false) {
+    //                 isAllToggled = false;
+    //                 break;
+    //             }
+    //         }
+    //         if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
+    //         }
+    // }, [isEntireToggled])
     
     useEffect(() => {
         setToggled(isToggled)
@@ -116,14 +116,14 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
 
     const toggleTagButtonList = () => {
         const result = []
-        result.push(
-            <ToggleTagButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={NUM_OF_TAGS}>
-                <p className='text-sm'>전체</p>
-            </ToggleTagButton2>
-        )
-        result.push(<div key={NUM_OF_TAGS+1} className='w-0 h-0 bg-gray-500'/>)
-        result.push(<div key={NUM_OF_TAGS+2}/>)
-        result.push(<div key={NUM_OF_TAGS+3}/>)
+        // result.push(
+        //     <ToggleTagButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={NUM_OF_TAGS}>
+        //         <p className='text-sm'>전체</p>
+        //     </ToggleTagButton2>
+        // )
+        // result.push(<div key={NUM_OF_TAGS+1} className='w-0 h-0 bg-gray-500'/>)
+        // result.push(<div key={NUM_OF_TAGS+2}/>)
+        // result.push(<div key={NUM_OF_TAGS+3}/>)
         for (let i = 0; i < NUM_OF_TAGS; i++) {
             result.push(
                 <ToggleTagButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
