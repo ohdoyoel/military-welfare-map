@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 interface ToggleTagButton2Props {
     children: React.ReactNode
     tag: number
@@ -32,9 +34,14 @@ const tagColorData: tagColorType = {
 export const ToggleTagButton2 = ({children, tag, isToggled, onClicked}: ToggleTagButton2Props) => {
 
     return (
-        <button className={`flex flex-col w-16 h-10 ${isToggled ? `bg${tagColorData[tag]} text-white` : `bg-white`} 
-                            items-center place-content-center rounded-[3px] border-l-4 border${tagColorData[tag]} 
-                            shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`}
+        <button className={`flex flex-col w-16 h-10
+                            items-center place-content-center rounded-[3px] z-20
+                            ${isToggled
+                                ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg${tagColorData[tag]} text-white `
+                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 border${tagColorData[tag]} bg-white`
+                            }
+                            `}
+
                 onClick={onClicked}>
             {children}
         </button>

@@ -133,10 +133,12 @@ export default function Home() {
       </div>
 
       {/* InformationPanel Open Btn */}
-      <div className={`absolute inset-y-0 z-10
-                      ${isBarOpened ? `left-[461px]` : `left-0`} flex items-center 
+      <div className={`
+                       flex items-center 
                       `}>
-        <button className='group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(!isBarOpened)}}>
+        <button className={`group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+                          absolute z-10 ${isBarOpened ? `left-[461px]` : `left-0`}`}
+                onClick={() => {setIsBarOpened(!isBarOpened)}}>
           {isBarOpened ? <NavigateBeforeIcon className='text-emerald-500' fontSize='large'/> : <SearchIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
           {!isBarOpened ? <NavigateNextIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/> : ""}
         </button>
@@ -149,14 +151,12 @@ export default function Home() {
       </div>
 
       {/* ChatPanel Open Btn */}
-      <div className={`absolute inset-y-0 z-10
-                      ${isChatOpened ? `right-[461px]` : `right-0`} flex items-center 
-                      `}>
-        <button className='group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsChatOpened(!isChatOpened)}}>
-          {isChatOpened ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/> : <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
-          {!isChatOpened ? <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/> : ""}
-        </button>
-      </div>
+      <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+                        absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
+              onClick={() => {setIsChatOpened(!isChatOpened)}}>
+        {isChatOpened ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/> : <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
+        {!isChatOpened ? <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/> : ""}
+      </button>
 
       <div className='z-10 absolute top-12 right-1
                         w-8 h-8 rounded-3xl shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'>
