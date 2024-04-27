@@ -38,7 +38,7 @@ export const ToggleTagButton2 = ({children, tag, isToggled, onClicked}: ToggleTa
                             items-center place-content-center rounded-[3px] z-20
                             ${isToggled
                                 ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg${tagColorData[tag]} text-white `
-                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 border${tagColorData[tag]} bg-white`
+                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 border${tagColorData[tag]} bg-white text-gray-600`
                             }
                             `}
 

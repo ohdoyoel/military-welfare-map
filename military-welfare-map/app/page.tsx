@@ -119,11 +119,12 @@ export default function Home() {
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <div className='flex'> 
           <Header2/>
-          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(true);}}>
-            <SearchIcon className='text-gray-500' fontSize='medium'/> 
+          <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(true);}}>
+            <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
+            {searchText != "" && <p className='pr-3'>{searchText}</p>}
           </button>
           <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsChatOpened(true); console.log('hello')}}>
-            <ChatIcon className='text-gray-500' fontSize='medium'/> 
+            <ChatIcon className='text-gray-600' fontSize='medium'/> 
           </button>
         </div>
         <div className='flex flex-col'> 
