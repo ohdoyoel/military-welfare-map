@@ -11,7 +11,7 @@ type tagColorType = {
   [key: number]: string;
 };
 
-const tagColorData: tagColorType = {
+export const tagColorData: tagColorType = {
     0: '-red-500',
     1: '-orange-500',
     2: '-amber-500',
@@ -37,7 +37,7 @@ export const ToggleTagButton2 = ({children, tag, isToggled, onClicked}: ToggleTa
         <button className={`flex flex-col w-16 h-10 focus:outline-none
                             items-center place-content-center rounded-[3px] z-20
                             ${isToggled
-                                ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg${tagColorData[tag]} text-white `
+                                ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg${tagColorData[tag]} text-white`
                                 : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 border${tagColorData[tag]} bg-white text-gray-600`
                             }
                             `}

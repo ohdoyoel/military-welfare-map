@@ -4,6 +4,6 @@ const isHello = (input: string): boolean => {
 }
 
 export const botReply = (input: string):string => {
-    if (isHello(input)) return '안녕하세요'
-    return '잘못들었습니다?'
+    if (isHello(input)) return '충성! '
+    return '잘못 들었습니다?'
 }
