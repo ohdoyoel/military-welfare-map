@@ -16,7 +16,7 @@ export const ChatMessage = ({message, isBotSide}: ChatMessageProps) => {
     return (
         <div className="flex flex-col w-full mt-2">
             <p className={`text-lg font-semibold text-white ${!isBotSide ? "text-end" : ""}`}>
-                    {isBotSide ? "병영생활지G도PT" : "나"}
+                    {isBotSide ? "병장 지피티" : "나"}
             </p>
             <div className={`flex items-start gap-2.5 ${isBotSide ? "self-start flex-row-reverse" : "self-end"}`}>
                 <p className="text-base font-normal text-white self-end" suppressHydrationWarning>{nowTime()}</p>
