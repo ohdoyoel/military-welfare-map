@@ -35,7 +35,7 @@ export const ToggleTagButton = ({children, tag, isToggled, onClicked}: ToggleTag
         <button className={`flex flex-col w-[55px] h-full items-center place-content-center rounded-[3px] text-white focus:outline-none
                             ${isToggled
                                 ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg${tagColorData[tag]} `
-                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500`
+                                : `bg-emerald-500`
                             }
                             `}
                 onClick={onClicked}>
