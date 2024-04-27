@@ -64,12 +64,11 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     }, [mapClicked])
     
     return (
-        // 이놈이 zIndex가 0으로 설정됨 (개발자 도구에서 수정하면 바뀜)
-        <CustomOverlayMap position={position} clickable={true}>
-            <button id={`tagmarker${idx}`} className={`grid w-4 h-4 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90`} style={{position:"relative", zIndex:0}}
+        <CustomOverlayMap position={position}>
+            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-4 h-4 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90`} style={{position:"relative", zIndex:0}}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
-                    setIsVisible(true)
+                    setIsVisible(!isVisible)
                 }}>
                 {iconData[tag]}
             </button>
