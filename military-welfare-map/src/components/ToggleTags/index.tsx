@@ -77,45 +77,45 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
 ]
 
 export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
-    const [isEntireToggled, setIsEntireToggled] = useState(false)
+    // const [isEntireToggled, setIsEntireToggled] = useState(false)
     const [isToggled, setIsToggled] = useState(toggled)
 
     useEffect(() => {
         setIsToggled(toggled)
     }, [toggled])
 
-    useEffect(() => {
-        let isAllToggled = true;
-        for (let i=0; i<isToggled.length; i++) {
-            if (isToggled[i] == false) {
-                isAllToggled = false;
-                break;
-            }
-        }
-        setIsEntireToggled(isAllToggled)
-    }, [isToggled])
+    // useEffect(() => {
+    //     let isAllToggled = true;
+    //     for (let i=0; i<isToggled.length; i++) {
+    //         if (isToggled[i] == false) {
+    //             isAllToggled = false;
+    //             break;
+    //         }
+    //     }
+    //     setIsEntireToggled(isAllToggled)
+    // }, [isToggled])
     
-    useEffect(() => {
-        if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => true))
-        else {
-            let isAllToggled = true;
-            for (let i=0; i<isToggled.length; i++) {
-                if (isToggled[i] == false) {
-                    isAllToggled = false;
-                    break;
-                }
-            }
-            if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
-        }
-    }, [isEntireToggled])
+    // useEffect(() => {
+    //     if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => true))
+    //     else {
+    //         let isAllToggled = true;
+    //         for (let i=0; i<isToggled.length; i++) {
+    //             if (isToggled[i] == false) {
+    //                 isAllToggled = false;
+    //                 break;
+    //             }
+    //         }
+    //         if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
+    //     }
+    // }, [isEntireToggled])
 
     const toggleTagButtonList = () => {
         const result = []
-        result.push(
-            <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
-                <p className='text-white text-xs'>전체</p>
-            </ToggleTagButton>
-        )
+        // result.push(
+        //     <ToggleTagButton onClicked={() => setIsEntireToggled(!isEntireToggled)} tag={16} isToggled={isEntireToggled} key={16}>
+        //         <p className='text-white text-xs'>전체</p>
+        //     </ToggleTagButton>
+        // )
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
                 <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
