@@ -50,8 +50,10 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     useEffect(() => {
         let button = document.getElementById(`tagmarker${idx}`) as HTMLButtonElement;
         let customOverlay = button?.parentElement;
+        // console.log(customOverlay)
         let styleWithoutZindex = customOverlay?.getAttribute('style')?.replace('z-index: 0;', '')
         styleWithoutZindex && customOverlay?.setAttribute('style', styleWithoutZindex)
+        // console.log(styleWithoutZindex)
     }, [visible])
 
     useEffect(() => {
@@ -65,7 +67,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     
     return (
         <CustomOverlayMap position={position}>
-            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-4 h-4 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90 z-10`}
+            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90 z-10`}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
                     setIsVisible(!isVisible)

@@ -57,6 +57,8 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
         return result
     }
 
+    // plc1와(과) ... plc2을(를)
+
     const replyProperlyTagAndPlc = (tags: string[], plcs: string[]) => {
         if (tags.length > 0 && plcs.length == 0) {
             if (isNear) pushBotMessage(`주변의 ${combineTags(tags)} 보여드리겠습니다 .`)

@@ -54,7 +54,7 @@ export default function Home() {
   useEffect(() => {
     markers.forEach((x) => {
       x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
-      console.log(x.distance)
+      // console.log(x.distance)
     })
     markers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
   }, [curPos])
