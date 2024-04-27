@@ -119,11 +119,11 @@ export default function Home() {
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <div className='flex'> 
           <Header2/>
-          <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(true);}}>
+          <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
             <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
             {searchText != "" && <p className='pr-3'>{searchText}</p>}
           </button>
-          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsChatOpened(true); console.log('hello')}}>
+          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsChatOpened(true); console.log('hello')}}>
             <ChatIcon className='text-gray-600' fontSize='medium'/> 
           </button>
         </div>
@@ -135,7 +135,7 @@ export default function Home() {
 
       {/* InformationPanel Open Btn */}
       <div className={`flex items-center`}>
-        <button className={`group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+        <button className={`group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                           absolute z-10 ${isBarOpened ? `left-[461px]` : `left-0`}`}
                 onClick={() => {setIsBarOpened(!isBarOpened)}}>
           {isBarOpened ? <NavigateBeforeIcon className='text-emerald-500' fontSize='large'/> : <SearchIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
@@ -151,7 +151,7 @@ export default function Home() {
 
       {/* ChatPanel Open Btn */}
       <div className={`flex items-center`}>
-        <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+        <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                           absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
                 onClick={() => {setIsChatOpened(!isChatOpened)}}>
           {isChatOpened ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/> : <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
