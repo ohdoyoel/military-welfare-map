@@ -4,6 +4,7 @@ import { ToggleRegionButton } from "../ToggleRegionButton"
 interface ToggleRegionsProps {
     toggled: boolean[]
     setToggled: Dispatch<SetStateAction<boolean[]>>
+    setDistance: Dispatch<SetStateAction<number>>
 }
 
 const NUM_OF_REGIONS = 16
@@ -14,7 +15,7 @@ const regionData: string[] = [
     '경북','경남','강원','제주'
 ]
 
-export const ToggleRegions = ({toggled, setToggled}: ToggleRegionsProps) => {
+export const ToggleRegions = ({toggled, setToggled, setDistance}: ToggleRegionsProps) => {
     // const [isEntireToggled, setIsEntireToggled] = useState(true)
     const [isToggled, setIsToggled] = useState(toggled)
 
@@ -90,7 +91,7 @@ export const ToggleRegions = ({toggled, setToggled}: ToggleRegionsProps) => {
     }, [isToggled])
 
     return (
-        <div className="flex-none w-full h-8 bg-emerald-500 px-4 flex items-center pb-1">
+        <div className="flex-none w-full h-8 bg-emerald-500 px-4 flex items-center pb-1" onClick={() => setDistance(30)}>
             <div className='w-full h-full grid grid-cols-17 gap-11 content-center overflow-x-scroll'>
                 {toggleRegionButtonList()}
             </div>

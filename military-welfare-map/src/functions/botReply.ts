@@ -1,9 +1,84 @@
+export const greeting = `
+### 충성!
+_병영생활지도_ 의 챗봇 **병영생활지G도PT** 입니다!
+
+저는 _병영생활지도_ 를 사용하는데 도움을 드리기 위하여 개발되었습니다.
+
+_병영생활지도_ 는 **군인 관련 혜택과 정보를 보여주는 지도 플랫폼**으로, 12개의 태그와 16개의 도시 정보로 이루어져 있습니다.
+
+제가 할 수 있는 기능은 다음과 같습니다.
+
+- 지역 장소 추천 (태그X, 장소O)
+- 지역 태그 추천 (태그O, 장소O)
+`
+
+const isTagOrPlace = (input: string): boolean => {
+    return tagFrom(input).length > 0 || placeFrom(input).length > 0
+}
+
+// return '@tag:0 @tag:1'
+const tagFrom = (input: string): string => {
+    let result = ''
+    if (input.includes('음식')) result += '@tag:0'
+    if (input.includes('카페')) result += '@tag:1'
+    if (input.includes('미용')) result += '@tag:2'
+    if (input.includes('목욕')) result += '@tag:3'
+    if (input.includes('문화') || input.includes('여가')) result += '@tag:4'
+    if (input.includes('숙박')) result += '@tag:5'
+    if (input.includes('스포츠')) result += '@tag:6'
+    if (input.includes('교통') || input.includes('항공')) result += '@tag:7'
+    if (input.includes('안경')) result += '@tag:8'
+    if (input.includes('병원')) result += '@tag:9'
+    if (input.includes('예비군')) result += '@tag:10'
+    if (input.includes('골프')) result += '@tag:11'
+    if (input.includes('모두')) result += '@tag:12'
+    return result
+}
+
+// return '@plc:0 @plc:1'
+const placeFrom = (input: string): string => {
+    let result = ''
+    if (input.includes('서울')) result += '@plc:0'
+    if (input.includes('경기')) result += '@plc:7'
+    if (input.includes('강원')) result += '@plc:14'
+    if (input.includes('인천')) result += '@plc:3'
+    if (input.includes('충북')) result += '@plc:8'
+    if (input.includes('충남')) result += '@plc:9'
+    if (input.includes('대전')) result += '@plc:5'
+    if (input.includes('대구')) result += '@plc:2'
+    if (input.includes('경북')) result += '@plc:12'
+    if (input.includes('경남')) result += '@plc:13'
+    if (input.includes('부산')) result += '@plc:1'
+    if (input.includes('울산')) result += '@plc:6'
+    if (input.includes('전북')) result += '@plc:10'
+    if (input.includes('전남')) result += '@plc:11'
+    if (input.includes('광주')) result += '@plc:4'
+    if (input.includes('제주')) result += '@plc:15'
+    if (input.includes('주변')) result += '@plc:16'
+    return result
+}
+
 const isHello = (input: string): boolean => {
-    if (input.includes('안녕')) return true
-    return false
+    return input.includes('안녕') || input.includes('ㅎㅇ') || input.includes('도움')
+}
+
+const isCalled = (input: string): boolean => {
+    return input.includes('야') || input.includes('어이') || input.includes('ㅇ')
+}
+
+const isThanks = (input: string): boolean => {
+    return input.includes('고마') || input.includes('고맙') || input.includes('땡큐') || input.includes('땡스') || input.includes('ㄳ') || input.includes('ㄱㅅ')
+}
+
+const isNothing = (input: string): boolean => {
+    return input.includes('없') || input.includes('ㄴ')
 }
 
 export const botReply = (input: string):string => {
-    if (isHello(input)) return '충성! '
-    return '잘못 들었습니다?'
+    if (isTagOrPlace(input)) return `${tagFrom(input)} ${placeFrom(input)}`
+    else if (isHello(input)) return greeting
+    else if (isCalled(input)) return '챗봇 병영생활지G도PT !'
+    else if (isThanks(input)) return '아닙니다 ! 더 궁금한 것은 없으십니까 ?'
+    else if (isNothing(input)) return '예 알겠습니다 ! 더 궁금한 것이 있으시면 편하게 질문해주십시오 !'
+    return '잘못 들었습니다 ?'
 }
