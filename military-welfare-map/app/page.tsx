@@ -31,7 +31,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<MarkerType[]>([])
 
-  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>([true, true, true, true, true, true, true, true, false, false, false, false])
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>([true, false, false, false, false, false, false, false, false, false, false, false])
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
   
