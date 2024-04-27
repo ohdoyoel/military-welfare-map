@@ -13,8 +13,10 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
+import zIndex from "@mui/material/styles/zIndex";
 
 interface MarkerProps {
+    idx: number
     tag: number
     position: {lat: number, lng: number}
     address: string
@@ -42,8 +44,15 @@ const iconData = [
     <GolfCourseOutlinedIcon className='text-base text-white'/>,
 ]
 
-export const Marker = ({tag, position, address, title, description, telno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
+export const Marker = ({idx, tag, position, address, title, description, telno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        let button = document.getElementById(`tagmarker${idx}`) as HTMLButtonElement;
+        let customOverlay = button?.parentElement;
+        let styleWithoutZindex = customOverlay?.getAttribute('style')?.replace('z-index: 0;', '')
+        styleWithoutZindex && customOverlay?.setAttribute('style', styleWithoutZindex)
+    }, [visible])
 
     useEffect(() => {
         setIsVisible(visible)
@@ -56,8 +65,8 @@ export const Marker = ({tag, position, address, title, description, telno, setPo
     
     return (
         // 이놈이 zIndex가 0으로 설정됨 (개발자 도구에서 수정하면 바뀜)
-        <CustomOverlayMap position={position} yAnchor={0}> 
-            <button className={`grid w-4 h-4 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90`} style={{position:"relative", zIndex:0}}
+        <CustomOverlayMap position={position} clickable={true}>
+            <button id={`tagmarker${idx}`} className={`grid w-4 h-4 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90`} style={{position:"relative", zIndex:0}}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
                     setIsVisible(true)
