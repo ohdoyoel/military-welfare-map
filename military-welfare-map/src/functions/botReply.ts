@@ -55,6 +55,7 @@ const placeFrom = (input: string): string => {
     if (input.includes('광주')) result += '@plc:4'
     if (input.includes('제주')) result += '@plc:15'
     if (input.includes('주변')) result += '@plc:16'
+    if (input.includes('전국')) result += '@plc:17'
     return result
 }
 
