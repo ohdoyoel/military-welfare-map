@@ -20,9 +20,14 @@ export const ChatMessage = ({message, isBotSide}: ChatMessageProps) => {
             </p>
             <div className={`flex items-start gap-2.5 ${isBotSide ? "self-start flex-row-reverse" : "self-end"}`}>
                 <p className="text-base font-normal text-white self-end" suppressHydrationWarning>{nowTime()}</p>
-                <div className="flex flex-col gap-1 w-fit max-w-[320px]">
+                <div className="flex flex-col gap-1 w-fit max-w-[330px]">
                     <div className={`flex flex-col p-2 bg-white ${isBotSide ? "rounded-r-lg rounded-bl-lg" : "rounded-l-lg rounded-br-lg"} shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-2`}>
-                        <ReactMarkdown className="text-lg font-normal">
+                        <ReactMarkdown className={`prose text-base font-normal`} remarkPlugins={[remarkGfm]}
+                        components={{
+                            p: ({ node, ...props }) => (
+                            <p {...props} className="whitespace-pre-wrap"/>
+                            ),
+                        }}>
                             {message}
                         </ReactMarkdown>
                     </div>
