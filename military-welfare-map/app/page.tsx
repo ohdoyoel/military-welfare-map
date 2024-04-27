@@ -133,9 +133,7 @@ export default function Home() {
       </div>
 
       {/* InformationPanel Open Btn */}
-      <div className={`
-                       flex items-center 
-                      `}>
+      <div className={`flex items-center`}>
         <button className={`group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                           absolute z-10 ${isBarOpened ? `left-[461px]` : `left-0`}`}
                 onClick={() => {setIsBarOpened(!isBarOpened)}}>
@@ -151,12 +149,14 @@ export default function Home() {
       </div>
 
       {/* ChatPanel Open Btn */}
-      <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
-                        absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
-              onClick={() => {setIsChatOpened(!isChatOpened)}}>
-        {isChatOpened ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/> : <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
-        {!isChatOpened ? <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/> : ""}
-      </button>
+      <div className={`flex items-center`}>
+        <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
+                          absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
+                onClick={() => {setIsChatOpened(!isChatOpened)}}>
+          {isChatOpened ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/> : <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>}
+          {!isChatOpened ? <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/> : ""}
+        </button>
+      </div>
 
       <div className='z-10 absolute top-12 right-1
                         w-8 h-8 rounded-3xl shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'>

@@ -172,7 +172,7 @@ export const tagColorData:tagColorType = {
 
 export const InfoWindow = ({pos, tag, address, title, description, telno, isVisible}: InfoWindowProps) => {
     return (
-        <div className={`relative flex flex-col absolute -left-1/2 bottom-56 z-10`}>
+        <div className={`relative flex flex-col absolute -left-1/2 bottom-56 z-20`}>
             <div className="relative flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
                 <div className={`flex-none w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
                 <div className={`flex-none w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
@@ -191,7 +191,6 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, isVisi
                     </a>
                 </div>
             </div>
-            {/* <ArrowDropDownIcon className="absolute -bottom-[21px] w-full self-center text-white drop-shadow-2xl" fontSize="large"/> */}
             <svg fill="#FFFFFF" height="20px" width="20px" viewBox="0 0 28.769 28.769" className="absolute -bottom-[16px] self-center drop-shadow-lg">
                 <path d="M28.678,5.798L14.713,23.499c-0.16,0.201-0.495,0.201-0.658,0L0.088,5.798C-0.009,5.669-0.027,5.501,0.04,5.353 C0.111,5.209,0.26,5.12,0.414,5.12H28.35c0.16,0,0.31,0.089,0.378,0.233C28.798,5.501,28.776,5.669,28.678,5.798z">
                 </path>

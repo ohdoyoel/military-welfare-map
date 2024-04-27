@@ -27,52 +27,52 @@ const NUM_OF_TAGS = 12
 
 const iconAndLabelData: ToggleTagButtonProps[] = [
     {
-        icon: <RestaurantOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>음식점</p>
+        icon: <RestaurantOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>음식점</p>
     },
     {
-        icon: <CoffeeOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>카페</p>
+        icon: <CoffeeOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>카페</p>
     },
     {
-        icon: <ContentCutOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>미용실</p>
+        icon: <ContentCutOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>미용실</p>
     },
     {
-        icon: <HotTubOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>목욕탕</p>
+        icon: <HotTubOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>목욕탕</p>
     },
     {
-        icon: <AttractionsOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>문화·여가</p>
+        icon: <AttractionsOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>문화·여가</p>
     },
     {
-        icon: <HotelOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>숙박</p>
+        icon: <HotelOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>숙박</p>
     },
     {
-        icon: <SportsSoccerOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>스포츠</p>
+        icon: <SportsSoccerOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>스포츠</p>
     },
     {
-        icon: <TrainOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>교통·항공</p>
+        icon: <TrainOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>교통·항공</p>
     },
     {
-        icon: <VisibilityOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>안경점</p>
+        icon: <VisibilityOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>안경점</p>
     },
     {
-        icon: <LocalHospitalOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>병원</p>
+        icon: <LocalHospitalOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>병원</p>
     },
     {
-        icon: <MilitaryTechOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>예비군</p>
+        icon: <MilitaryTechOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>예비군</p>
     },
     {
-        icon: <GolfCourseOutlinedIcon className='text-lg text-white'/>,
-        label: <p className='text-white text-xs'>골프장</p>
+        icon: <GolfCourseOutlinedIcon className='text-lg '/>,
+        label: <p className=' text-xs'>골프장</p>
     },
 ]
 
@@ -134,7 +134,7 @@ export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
 
     return (
         <div className="flex-none w-full h-12 bg-emerald-500 px-4 flex items-center pt-1">
-            <div className='w-full h-full grid grid-cols-13 gap-14 content-center overflow-x-auto'>
+            <div className='w-full h-full grid grid-cols-13 gap-[60px] content-center overflow-x-auto'>
                 {toggleTagButtonList()}
             </div>
         </div>

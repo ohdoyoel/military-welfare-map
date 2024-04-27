@@ -65,7 +65,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     
     return (
         <CustomOverlayMap position={position}>
-            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-4 h-4 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90`} style={{position:"relative", zIndex:0}}
+            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-4 h-4 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90 z-10`}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
                     setIsVisible(!isVisible)

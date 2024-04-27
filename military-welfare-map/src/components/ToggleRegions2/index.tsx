@@ -60,9 +60,15 @@ export const ToggleRegions2 = ({toggled, setToggled}: ToggleRegions2Props) => {
         // result.push(<div key={NUM_OF_REGIONS+1}/>)
         // result.push(<div key={NUM_OF_REGIONS+2}/>)
         // result.push(<div key={NUM_OF_REGIONS+3}/>)
-        for (let i=0; i < NUM_OF_REGIONS; i++) {
+        const order = [
+            0, 7, 14, 3,
+            8, 9, 5, 2,
+            12, 13, 1, 6,
+            10, 11, 4, 15
+        ]
+        for (let i=0; i < order.length; i++) {
             result.push(
-                <ToggleRegionButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx==i ? !item : item))} isToggled={isToggled[i]} label={regionData[i]} key={i}/>
+                <ToggleRegionButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx==order[i] ? !item : item))} isToggled={isToggled[order[i]]} label={regionData[order[i]]} key={i}/>
             )
         }
         return result
