@@ -53,9 +53,32 @@ export const ToggleRegions = ({toggled, setToggled}: ToggleRegionsProps) => {
         // result.push(
         //     <ToggleRegionButton onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={16}/>
         // )
-        for (let i = 0; i < regionData.length; i++) {
+
+        // 서울 0
+        // 경기 7
+        // 강원 14
+        // 인천 3
+        // 충북 8
+        // 충남 9
+        // 대전 5
+        // 대구 2
+        // 경북 12
+        // 경남 13
+        // 부산 1
+        // 울산 6
+        // 전북 10
+        // 전남 11
+        // 광주 4
+        // 제주 15
+        const order = [
+                        0, 7, 14, 3,
+                        8, 9, 5, 2,
+                        12, 13, 1, 6,
+                        10, 11, 4, 15
+                    ]
+        for (let i = 0; i < order.length; i++) {
             result.push(
-                <ToggleRegionButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} isToggled={isToggled[i]} label={regionData[i]} key={i}/>
+                <ToggleRegionButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == order[i] ? !item : item))} isToggled={isToggled[order[i]]} label={regionData[order[i]]} key={i}/>
             )
         }
 
