@@ -92,15 +92,20 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
     }
 
     const beforePushBotMessage = (reply: string) => {
-        if (reply.includes('@user:')) {
+        if (reply.includes('@hi')) {
+            pushBotMessage(greeting[user.current])
+            return
+        }
+        else if (reply.includes('@user:')) {
+            user.current = Number(reply.split('@user:')[1][0])
+            pushBotMessage(greeting[user.current])
+            return
+        }
+        else if (!reply.includes('@tag:') && !reply.includes('@plc:')) {
             pushBotMessage(reply)
             return
         }
 
-        if (!reply.includes('@tag:') && !reply.includes('@plc:')) {
-            pushBotMessage(reply)
-            return
-        }
         let tag:string[] = []
         let plc:string[] = []
         if (reply.includes('@tag:')) {
