@@ -90,14 +90,14 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
     }
 
     return (
-        <button onClick={handleOnClick} className="w-full h-24 scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
+        <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
             <div className={`flex-none w-1 h-full ${tagBgColor[tag].dark} rounded-l-[3px]`}/>
             <div className={`flex-none w-20 h-full ${tagBgColor[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}
                 <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
             </div>
             <div className={`grow w-0 h-full bg-white flex flex-col items-start p-2`}>
-                <p className='text-lg font-nsb'>{title}</p>
+                <p className='text-lg text-start font-nsb'>{title}</p>
                 <p className='text-sm text-start truncate w-full text-gray-500'>{address}</p>
                 <p className='text-xs text-start truncate w-full text-gray-400'>{description}</p>
             </div>
