@@ -37,8 +37,7 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
 - 해군
 - 해병대
 - 민간인
-
-중 어떤 분이신지 여쭤도 되겠습니까?`, isBotSide: true}
+\n중 어떤 분이신지 여쭤도 되겠습니까?`, isBotSide: true}
     ])
     const [isNear, setIsNear] = useState(false)
     const user = useRef(0)
@@ -69,6 +68,15 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
     }
 
     // plc1와(과) ... plc2을(를)
+    const combinePlcs = (plcs: string[]) => {
+        let result = ''
+        for (let i=0; i<plcs.length; i++) {
+            const label = placeLabelData[Number(plcs[i])]
+            if (i == plcs.length-1) result += (label + '의')
+            else result += (label + andInKorean(label) + ' ')
+        }
+        return result
+    }
 
     const replyProperlyTagAndPlc = (tags: string[], plcs: string[]) => {
         if (tags.length > 0 && plcs.length == 0) {
@@ -76,17 +84,20 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
             else pushBotMessage(`선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다 .`)
         }
         else if (tags.length == 0 && plcs.length > 0) {
-            pushBotMessage(`${placeLabelData[Number(plcs[0])]}의 모든 장소를 보여드리겠습니다 .`)
+            pushBotMessage(`${combinePlcs(plcs)} 모든 장소를 보여드리겠습니다 .`)
         }
         else if (tags.length > 0 && plcs.length > 0) {
-            pushBotMessage(`${placeLabelData[Number(plcs[0])]}의 ${combineTags(tags)} 보여드리겠습니다 .`)
+            pushBotMessage(`${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다 .`)
         }
     }
 
     const beforePushBotMessage = (reply: string) => {
-        // pushBotMessage(reply)
+        if (reply.includes('@user:')) {
+            pushBotMessage(reply)
+            return
+        }
 
-        if (!reply.includes('@tag') && !reply.includes('@plc')) {
+        if (!reply.includes('@tag:') && !reply.includes('@plc:')) {
             pushBotMessage(reply)
             return
         }
