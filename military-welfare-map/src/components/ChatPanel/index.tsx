@@ -37,7 +37,7 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
 - 해군
 - 해병대
 - 민간인
-\n중 어떤 분이신지 여쭤도 되겠습니까?`, isBotSide: true}
+\n중 어떤 집단에 속해 계신지 여쭤봐도 되겠습니까?`, isBotSide: true}
     ])
     const [isNear, setIsNear] = useState(false)
     const user = useRef(0)
