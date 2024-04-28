@@ -11,6 +11,7 @@ import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
 import { Dispatch, ReactElement, SetStateAction } from 'react';
+import { tagBgColor } from '@/src/types/tagColor';
 
 interface LocationItemProps {
     _id: number
@@ -82,97 +83,6 @@ export const iconAndLabelData: ToggleTagButtonProps[] = [
     },
 ]
 
-type tagColorType = {
-  [key: number]: {
-    light: string,
-    normal: string,
-    dark: string
-  };
-};
-
-const tagColorData:tagColorType = {
-    0: {
-        light: 'bg-red-400',
-        normal: 'bg-red-500',
-        dark: 'bg-red-600'
-    },
-    1: {
-        light: 'bg-orange-400',
-        normal: 'bg-orange-500',
-        dark: 'bg-orange-600'
-    },
-    2: {
-        light: 'bg-amber-400',
-        normal: 'bg-amber-500',
-        dark: 'bg-amber-600'
-    },
-    3: {
-        light: 'bg-yellow-400',
-        normal: 'bg-yellow-500',
-        dark: 'bg-yellow-600'
-    },
-    4: {
-        light: 'bg-lime-400',
-        normal: 'bg-lime-500',
-        dark: 'bg-lime-600'
-    },
-    5: {
-        light: 'bg-green-400',
-        normal: 'bg-green-500',
-        dark: 'bg-green-600'
-    },
-    6: {
-        light: 'bg-teal-400',
-        normal: 'bg-teal-500',
-        dark: 'bg-teal-600'
-    },
-    7: {
-        light: 'bg-cyan-400',
-        normal: 'bg-cyan-500',
-        dark: 'bg-cyan-600'
-    },
-    8: {
-        light: 'bg-sky-400',
-        normal: 'bg-sky-500',
-        dark: 'bg-sky-600'
-    },
-    9: {
-        light: 'bg-blue-400',
-        normal: 'bg-blue-500',
-        dark: 'bg-blue-600'
-    },
-    10: {
-        light: 'bg-indigo-400',
-        normal: 'bg-indigo-500',
-        dark: 'bg-indigo-600'
-    },
-    11: {
-        light: 'bg-violet-400',
-        normal: 'bg-violet-500',
-        dark: 'bg-violet-600'
-    },
-    12: {
-        light: 'bg-purple-400',
-        normal: 'bg-purple-500',
-        dark: 'bg-purple-600'
-    },
-    13: {
-        light: 'bg-fuchsia-400',
-        normal: 'bg-fuchsia-500',
-        dark: 'bg-fuchsia-600'
-    },
-    14: {
-        light: 'bg-pink-400',
-        normal: 'bg-pink-500',
-        dark: 'bg-pink-600'
-    },
-    15: {
-        light: 'bg-rose-400',
-        normal: 'bg-rose-500',
-        dark: 'bg-rose-600'
-    },
-}
-
 export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description}: LocationItemProps) => {
     const handleOnClick = () => {
         setPos({lat: position.lat, lng: position.lng})
@@ -181,8 +91,8 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
 
     return (
         <button onClick={handleOnClick} className="w-full h-24 scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
-            <div className={`flex-none w-1 h-full ${tagColorData[tag].dark} rounded-l-[3px]`}/>
-            <div className={`flex-none w-20 h-full ${tagColorData[tag].normal} flex flex-col items-center justify-center`}>
+            <div className={`flex-none w-1 h-full ${tagBgColor[tag].dark} rounded-l-[3px]`}/>
+            <div className={`flex-none w-20 h-full ${tagBgColor[tag].normal} flex flex-col items-center justify-center`}>
                 {iconAndLabelData[tag].icon}
                 <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
             </div>

@@ -11,8 +11,7 @@ import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
 import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
-import { ToggleTagButton } from '../ToggleTagButton';
-import { ToggleTagButton2, tagColorData } from '../ToggleTagButton2';
+import { ToggleTagButton2 } from '../ToggleTagButton2';
 
 interface ToggleTags2Props {
     toggled: boolean[]
@@ -148,7 +147,6 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
 
     return (
         <div className="w-fit grid grid-cols-4 pt-4 pb-4 pl-2 gap-2">
-            <div className={`hidden border-red-500 border-orange-500 border-amber-500 border-yellow-500 border-lime-500 border-green-500 border-teal-500 border-cyan-500 border-sky-500 border-blue-500 border-indigo-500 border-violet-500 `}/>
             {toggleTagButtonList()}
         </div>
     )
