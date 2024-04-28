@@ -196,7 +196,8 @@ const ReSetttingMapBounds = ({
     }, [markers])
 
     useEffect(() => {
-        map.setBounds(bounds)
+        if (markers.length == 0) return;
+        else map.setBounds(bounds)
     }, [markers])
   
     return (<p/>)
