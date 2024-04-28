@@ -18,11 +18,11 @@ const regionData: string[] = [
 
 export const ToggleRegions2 = ({toggled, setToggled, setDistance}: ToggleRegions2Props) => {
     // const [isEntireToggled, setIsEntireToggled] = useState(true)
-    const [isToggled, setIsToggled] = useState(toggled)
+    // const [isToggled, setIsToggled] = useState(toggled)
 
-    useEffect(() => {
-        setIsToggled(toggled)
-    }, [toggled])
+    // useEffect(() => {
+    //     setIsToggled(toggled)
+    // }, [toggled])
 
     // useEffect(() => {
     //     let isAllToggled = true;
@@ -49,9 +49,9 @@ export const ToggleRegions2 = ({toggled, setToggled, setDistance}: ToggleRegions
     //         }
     // }, [isEntireToggled])
     
-        useEffect(() => {
-            setToggled(isToggled)
-        }, [isToggled])
+        // useEffect(() => {
+        //     setToggled(isToggled)
+        // }, [isToggled])
 
     const toggleRegionButtonList = () => {
         const result = []
@@ -61,15 +61,15 @@ export const ToggleRegions2 = ({toggled, setToggled, setDistance}: ToggleRegions
         // result.push(<div key={NUM_OF_REGIONS+1}/>)
         // result.push(<div key={NUM_OF_REGIONS+2}/>)
         // result.push(<div key={NUM_OF_REGIONS+3}/>)
-        const order = [
+        const orderToRel = [
             0, 7, 14, 3,
             8, 9, 5, 2,
             12, 13, 1, 6,
             10, 11, 4, 15
         ]
-        for (let i=0; i < order.length; i++) {
+        for (let i=0; i < orderToRel.length; i++) {
             result.push(
-                <ToggleRegionButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx==order[i] ? !item : item))} isToggled={isToggled[order[i]]} label={regionData[order[i]]} key={i}/>
+                <ToggleRegionButton2 onClicked={() => setToggled(isToggled => isToggled.map((toggled, idx) => idx == orderToRel[i] ? !toggled : toggled))} isToggled={toggled[orderToRel[i]]} label={regionData[orderToRel[i]]} key={i}/>
             )
         }
         return result

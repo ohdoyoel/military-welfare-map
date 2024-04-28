@@ -78,7 +78,7 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
 
 export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
     // const [isEntireToggled, setIsEntireToggled] = useState(false)
-    const [isToggled, setIsToggled] = useState(toggled)
+    // const [isToggled, setIsToggled] = useState(toggled)
 
     // const makeHiddenBorderStyle = () => {
     //     let result = "hidden "
@@ -88,9 +88,9 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
     //     return result
     // }
 
-    useEffect(() => {
-        setIsToggled(toggled)
-    }, [toggled])
+    // useEffect(() => {
+    //     setIsToggled(toggled)
+    // }, [toggled])
 
     // useEffect(() => {
     //     let isAllToggled = true;
@@ -117,9 +117,9 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
     //         }
     // }, [isEntireToggled])
     
-    useEffect(() => {
-        setToggled(isToggled)
-    }, [isToggled])
+    // useEffect(() => {
+    //     setToggled(isToggled)
+    // }, [isToggled])
 
 
     const toggleTagButtonList = () => {
@@ -134,7 +134,7 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
         // result.push(<div key={NUM_OF_TAGS+3}/>)
         for (let i = 0; i < NUM_OF_TAGS; i++) {
             result.push(
-                <ToggleTagButton2 onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
+                <ToggleTagButton2 onClicked={() => setToggled(isToggled => isToggled.map((toggled, idx) => idx == i ? !toggled : toggled))} tag={i} isToggled={toggled[i]} key={i}>
                     {iconAndLabelData[i].icon}
                     {iconAndLabelData[i].label}
                 </ToggleTagButton2>
