@@ -4,6 +4,7 @@ import { MarkerType } from '@/src/types/data'
 import { Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from 'react'
 import { Map, MapTypeControl, MapMarker, useMap, MarkerClusterer } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
+import { Alert } from '../Alert';
 
 interface KakaoMapProps {
     pos: {lat: number, lng: number}
@@ -22,6 +23,7 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
 
     const tooManyMarkers = useRef(false)
+    const noMarkers = useRef(false)
 
     useEffect(() => {
         setMapPos(pos)
@@ -99,10 +101,16 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false} setIdx={setIdx}/>
                         )
             }
-            if (result.length > 1000) {
+            if (result.length == 0) {
+                tooManyMarkers.current = false
+                noMarkers.current = true
+                return []
+            } else if (result.length > 1000) {
+                noMarkers.current = false
                 tooManyMarkers.current = true
-                return [];
+                return []
             }
+            noMarkers.current = false
             tooManyMarkers.current = false
             return result
         }
@@ -153,11 +161,18 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                     })}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
+                {!tooManyMarkers.current && !noMarkers.current && <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>}
                 {tooManyMarkers.current &&
-                <div className='absolute bottom-0 right-0 w-96 h-36 bg-white z-10'>
-                    표시해야할 장소가 너무 많습니다! 조건을 줄이거나 지도를 확대해주십시오!
-                </div>
+                <Alert>
+                    <p className='text-lg font-nsb'>표시되는 장소가 너무 많습니다!</p>
+                    <p className='text-base'>검색 조건을 줄이거나 지도를 확대하여 주십시오.</p>
+                </Alert>
+                }
+                {noMarkers.current &&
+                <Alert>
+                    <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
+                    <p className='text-base'>검색 조건을 다시 설정해주십시오.</p>
+                </Alert>
                 }
             </Map>
     )
