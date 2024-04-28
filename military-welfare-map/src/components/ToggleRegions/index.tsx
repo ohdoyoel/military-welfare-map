@@ -57,8 +57,8 @@ export const ToggleRegions = ({toggled, setToggled, setDistance}: ToggleRegionsP
 
         // 서울 0
         // 경기 7
-        // 강원 14
         // 인천 3
+        // 강원 14
         // 충북 8
         // 충남 9
         // 대전 5
@@ -72,7 +72,7 @@ export const ToggleRegions = ({toggled, setToggled, setDistance}: ToggleRegionsP
         // 광주 4
         // 제주 15
         const orderToRel = [
-                        0, 7, 14, 3,
+                        0, 7, 3, 14,
                         8, 9, 5, 2,
                         12, 13, 1, 6,
                         10, 11, 4, 15

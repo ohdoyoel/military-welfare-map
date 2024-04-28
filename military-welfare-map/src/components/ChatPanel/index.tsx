@@ -1,6 +1,6 @@
 import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
 import { botReply, greeting } from "@/src/functions/botReply"
 import { andInKorean, thatInKorean } from "@/src/functions/korean"
@@ -29,8 +29,19 @@ const placeLabelData = [
 ]
 
 export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
-    const [messages, setMessages] = useState<MessageProps[]>([{message: greeting, isBotSide: true}])
+    const [messages, setMessages] = useState<MessageProps[]>([
+        {
+            message: `안녕하십니까! 혹시 
+- 육군
+- 공군
+- 해군
+- 해병대
+- 민간인
+
+중 어떤 분이신지 여쭤도 되겠습니까?`, isBotSide: true}
+    ])
     const [isNear, setIsNear] = useState(false)
+    const user = useRef(0)
 
     const messageList = (messages: MessageProps[]) => {
         const result = []
