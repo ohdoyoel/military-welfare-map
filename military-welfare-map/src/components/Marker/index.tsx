@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk"
-import { InfoWindow, tagColorData } from "../InfoWindow"
+import { InfoWindow } from "../InfoWindow"
 import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
 import ContentCutOutlinedIcon from '@mui/icons-material/ContentCut';
@@ -13,7 +13,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
 import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
-import zIndex from "@mui/material/styles/zIndex";
+import { tagBgColor } from "@/src/types/tagColor";
 
 interface MarkerProps {
     idx: number
@@ -67,7 +67,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     
     return (
         <CustomOverlayMap position={position} onCreate={removeZindex}>
-            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${tagColorData[tag].normal} place-content-center rounded-[3px] opacity-90 z-10`}
+            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${tagBgColor[tag].normal} place-content-center rounded-[3px] opacity-90 z-10`}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
                     setIsVisible(!isVisible)

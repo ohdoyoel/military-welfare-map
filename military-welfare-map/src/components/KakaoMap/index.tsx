@@ -1,8 +1,8 @@
 "use client"
 
 import { MarkerType } from '@/src/types/data'
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
-import { Map, MapTypeControl, MapMarker, useMap, CustomOverlayMap, MarkerClusterer } from 'react-kakao-maps-sdk'
+import { Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from 'react'
+import { Map, MapTypeControl, MapMarker, useMap, MarkerClusterer } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
 
 interface KakaoMapProps {
@@ -21,7 +21,7 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
 
-    const [tooManyMarkers, setTooManyMarkers] = useState(false)
+    const tooManyMarkers = useRef(false)
 
     useEffect(() => {
         setMapPos(pos)
@@ -100,8 +100,10 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                         )
             }
             if (result.length > 1000) {
+                tooManyMarkers.current = true
                 return [];
             }
+            tooManyMarkers.current = false
             return result
         }
 
@@ -132,29 +134,31 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                 >
                 <MarkerClusterer
                 averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-                minLevel={10} // 클러스터 할 최소 지도 레벨
+                minLevel={8} // 클러스터 할 최소 지도 레벨
                 calculator={[10, 100, 200, 300]}
                 minClusterSize={1}
                 >
-                {makeMapMarkers(markers, mapNE, mapSW)}
+                    {makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>
-                    {!initialLocationState.isLoading &&
-                    <MapMarker position={initialLocationState.center}
-                        image={{
-                            src: "/images/current-position.png",
-                            size: {width: 20, height: 20},
-                            options: {offset: {x: 10, y: 10}},
-                        }}
-                        onClick={() => setMapPos({
-                            lat: initialLocationState.center.lat,
-                            lng: initialLocationState.center.lng
-                        })}
-                    />}
+                {!initialLocationState.isLoading &&
+                <MapMarker position={initialLocationState.center}
+                    image={{
+                        src: "/images/current-position.png",
+                        size: {width: 20, height: 20},
+                        options: {offset: {x: 10, y: 10}},
+                    }}
+                    onClick={() => setMapPos({
+                        lat: initialLocationState.center.lat,
+                        lng: initialLocationState.center.lng
+                    })}
+                />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
-                {tooManyMarkers &&
-                <div className='absolute bottom-0 right-0 w-96 h-36 bg-white'>
-                </div>}
+                {tooManyMarkers.current &&
+                <div className='absolute bottom-0 right-0 w-96 h-36 bg-white z-10'>
+                    표시해야할 장소가 너무 많습니다! 조건을 줄이거나 지도를 확대해주십시오!
+                </div>
+                }
             </Map>
     )
 }
