@@ -161,7 +161,7 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                     })}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                {!tooManyMarkers.current && !noMarkers.current && <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>}
+                <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
                 {tooManyMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시되는 장소가 너무 많습니다!</p>
@@ -196,11 +196,7 @@ const ReSetttingMapBounds = ({
     }, [markers])
 
     useEffect(() => {
-        if (markers.length != 0) map.setBounds(bounds)
-        else {
-            map.setCenter(new kakao.maps.LatLng(mapPos.lat, mapPos.lng));
-            map.setLevel(3)
-        }
+        map.setBounds(bounds)
     }, [markers])
   
     return (<p/>)
