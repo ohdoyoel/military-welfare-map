@@ -88,9 +88,9 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, isVisi
                     {iconAndLabelData[tag].icon}
                     <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
                 </div>
-                <div className="w-96 h-full flex flex-col items-start p-2">
+                <div className="w-fit h-full flex flex-col items-start p-2">
                     <p className='text-left text-lg font-nsb'>{title}</p>
-                    <p className='text-left text-base'>{address}</p>
+                    <p className='text-left text-base mr-4'>{address}</p>
                     <p className='pt-1 text-left text-sm'>{telno}</p>
                     <p className='pt-2 text-left text-xs whitespace-pre-wrap'>{description}</p>
                     <a className={`absolute bottom-2 grid justify-center right-2 w-20 h-8 ${tagBgColor[tag].normal} rounded-[3px] place-content-center`}
