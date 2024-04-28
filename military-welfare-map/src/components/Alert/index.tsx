@@ -6,7 +6,7 @@ interface AlertProps {
 
 export const Alert = ({children} : AlertProps) => {
     return (
-        <div className={`absolute top-2 left-0 right-0 m-auto w-[420px] z-10 h-20 bg-white flex flex-row shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`}>
+        <div className={`absolute top-2 left-0 right-0 m-auto w-[500px] z-10 h-20 bg-white flex flex-row shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`}>
             <div className={`flex-none w-1 h-full bg-cyan-600 rounded-l-[3px]`}/>
             <div className={`flex-none w-20 h-full bg-cyan-500 flex flex-col items-center justify-center`}>
                 <ErrorIcon className='text-3xl text-white'/>
