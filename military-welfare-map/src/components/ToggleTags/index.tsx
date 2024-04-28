@@ -78,11 +78,11 @@ const iconAndLabelData: ToggleTagButtonProps[] = [
 
 export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
     // const [isEntireToggled, setIsEntireToggled] = useState(false)
-    const [isToggled, setIsToggled] = useState(toggled)
+    // const [isToggled, setIsToggled] = useState(toggled)
 
-    useEffect(() => {
-        setIsToggled(toggled)
-    }, [toggled])
+    // useEffect(() => {
+    //     setIsToggled(toggled)
+    // }, [toggled])
 
     // useEffect(() => {
     //     let isAllToggled = true;
@@ -118,7 +118,7 @@ export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
         // )
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
-                <ToggleTagButton onClicked={() => setIsToggled(prevState => prevState.map((item, idx) => idx == i ? !item : item))} tag={i} isToggled={isToggled[i]} key={i}>
+                <ToggleTagButton onClicked={() => setToggled(isToggled => isToggled.map((toggled, idx) => idx == i ? !toggled : toggled))} tag={i} isToggled={toggled[i]} key={i}>
                     {iconAndLabelData[i].icon}
                     {iconAndLabelData[i].label}
                 </ToggleTagButton>
@@ -128,9 +128,9 @@ export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
         return result
     }
 
-    useEffect(() => {
-        setToggled(isToggled)
-    }, [isToggled])
+    // useEffect(() => {
+    //     setToggled(isToggled)
+    // }, [isToggled])
 
     return (
         <div className="flex-none w-full h-12 bg-emerald-500 px-4 flex items-center pt-1">
