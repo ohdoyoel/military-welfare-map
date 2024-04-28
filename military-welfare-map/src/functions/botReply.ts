@@ -1,5 +1,24 @@
-export const greeting = `
+// 0 육군 1 해군공군해병대 2 민간인
+export const greeting = [`
 ### 충성!
+_병영생활지도_ 의 챗봇 **병장 지!피!티!** 입니다!
+
+저는 _병영생활지도_ 를 사용하는데 도움을 드리기 위하여 개발되었습니다.
+
+_병영생활지도_ 는 **군인 관련 혜택과 정보를 보여주는 지도 플랫폼**으로, 모든 장소는 12개의 태그와 16개의 도시 정보로 분류됩니다.
+
+제가 할 수 있는 기능은 다음과 같습니다 .
+
+- 지도 컨트롤
+  - 태그와 장소를 입력하면 검색 조건 버튼을 설정하여 장소들을 보여줍니다.
+  - Ex) 경기도의 음식점을 보여줘, 주변에 카페 좀 보여줄래?
+  - 검색 키워드를 입력하고 검색을 입력하면, 키워드를 검색합니다.
+  - Ex) 의정부 검색
+- 장소 추천
+  - 
+`,
+`
+### 필승!
 _병영생활지도_ 의 챗봇 **병장 지!피!티!** 입니다 !
 
 저는 _병영생활지도_ 를 사용하는데 도움을 드리기 위하여 개발되었습니다 .
@@ -10,7 +29,23 @@ _병영생활지도_ 는 **군인 관련 혜택과 정보를 보여주는 지도
 
 - 지역 장소 추천 (태그X, 장소O)
 - 지역 태그 추천 (태그O, 장소O)
+`,
 `
+
+`
+]
+
+const isUserSetting = (input: string): boolean => {
+    return userSetting(input).length > 0
+}
+
+// return '@user:0'
+const userSetting = (input: string): string => {
+    if (input.includes('육군')) return '@user:0'
+    else if (input.includes('민간인') || input.includes('가족')) return '@user:2'
+    else if (input.includes('해군') || input.includes('공군') || input.includes('해병대')) return '@user:3'
+    return ''
+}
 
 const isTagOrPlace = (input: string): boolean => {
     return tagFrom(input).length > 0 || placeFrom(input).length > 0
@@ -76,8 +111,9 @@ const isNothing = (input: string): boolean => {
 }
 
 export const botReply = (input: string):string => {
-    if (isTagOrPlace(input)) return `${tagFrom(input)} ${placeFrom(input)}`
-    else if (isHello(input)) return greeting
+    if (isUserSetting(input)) return `${userSetting(input)}`
+    else if (isTagOrPlace(input)) return `${tagFrom(input)} ${placeFrom(input)}`
+    else if (isHello(input)) return greeting[0]
     else if (isCalled(input)) return '챗봇 병영생활지G도PT !'
     else if (isThanks(input)) return '아닙니다 ! 더 궁금한 것은 없으십니까 ?'
     else if (isNothing(input)) return '예 알겠습니다 ! 더 궁금한 것이 있으시면 편하게 질문해주십시오 !'
