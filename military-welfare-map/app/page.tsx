@@ -2,7 +2,6 @@
 
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
-import { NavBar } from '@/src/components/NavBar'
 import { ChatPanel } from '@/src/components/ChatPanel'
 import { useEffect, useState } from 'react'
 import { SearchInput } from '@/src/components/SearchInput'
@@ -13,13 +12,13 @@ import { MarkerType } from '@/src/types/data'
 import { InformationPanel } from '@/src/components/InformationPanel'
 import { ToggleRegions } from '@/src/components/ToggleRegions'
 import db from '@/public/data/db.json'
-import { iconAndLabelData } from '@/src/components/LocationItem'
 import { Header2 } from '@/src/components/Header2'
 import { ToggleTags2 } from '@/src/components/ToggleTags2'
 import { ToggleRegions2 } from '@/src/components/ToggleRegions2'
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
 import { AdsBar } from '@/src/components/AdsBar'
+import { tagLabel } from '@/src/types/tagIconLabel'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -66,7 +65,7 @@ export default function Home() {
         for (let j = 0; j < isRegionsToggled.length; j++) {
           if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
             && isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
-            && (x.title + x.address + x.telno + x.description + iconAndLabelData[x.tag].label).indexOf(searchText) > -1
+            && (x.title + x.address + x.telno + x.description + tagLabel[x.tag]).indexOf(searchText) > -1
             && x.distance! < distance
           ) return true
         }

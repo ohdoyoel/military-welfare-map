@@ -1,19 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
-import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
-import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
-import ContentCutOutlinedIcon from '@mui/icons-material/ContentCut';
-import HotTubOutlinedIcon from '@mui/icons-material/HotTubOutlined';
-import AttractionsOutlinedIcon from '@mui/icons-material/AttractionsOutlined';
-import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
-import SportsSoccerOutlinedIcon from '@mui/icons-material/SportsSoccerOutlined';
-import TrainOutlinedIcon from '@mui/icons-material/TrainOutlined';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
-import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
-import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
-import { tagBgColor } from "@/src/types/tagColor";
+import { tagOrderBgColor } from "@/src/types/tagColor";
+import { tagIconForMarker } from "@/src/types/tagIconLabel";
 
 interface MarkerProps {
     idx: number
@@ -28,21 +17,6 @@ interface MarkerProps {
     visible: boolean
     setIdx: Dispatch<SetStateAction<number>>
 }
-
-const iconData = [
-    <RestaurantOutlinedIcon className='text-base text-white'/>,
-    <CoffeeOutlinedIcon className='text-base text-white'/>,
-    <ContentCutOutlinedIcon className='text-base text-white'/>,
-    <HotTubOutlinedIcon className='text-base text-white'/>,
-    <AttractionsOutlinedIcon className='text-base text-white'/>,
-    <HotelOutlinedIcon className='text-base text-white'/>,
-    <SportsSoccerOutlinedIcon className='text-base text-white'/>,
-    <TrainOutlinedIcon className='text-base text-white'/>,
-    <VisibilityOutlinedIcon className='text-base text-white'/>,
-    <LocalHospitalOutlinedIcon className='text-base text-white'/>,
-    <MilitaryTechOutlinedIcon className='text-base text-white'/>,
-    <GolfCourseOutlinedIcon className='text-base text-white'/>,
-]
 
 export const Marker = ({idx, tag, position, address, title, description, telno, setPos, mapClicked, visible, setIdx}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(false)
@@ -67,12 +41,12 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     
     return (
         <CustomOverlayMap position={position} onCreate={removeZindex}>
-            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${tagBgColor[tag].normal} place-content-center rounded-[3px] opacity-90 z-10`}
+            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${tagOrderBgColor[tag].normal} place-content-center rounded-[3px] text-white opacity-90 z-10`}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
                     setIsVisible(!isVisible)
                 }}>
-                {iconData[tag]}
+                {tagIconForMarker[tag]}
             </button>
             {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno} isVisible={isVisible}/>}
         </CustomOverlayMap>

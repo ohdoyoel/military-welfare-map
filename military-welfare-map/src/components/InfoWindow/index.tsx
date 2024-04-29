@@ -1,17 +1,6 @@
 import { ReactElement } from "react"
-import { tagBgColor } from "@/src/types/tagColor";
-import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
-import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
-import ContentCutOutlinedIcon from '@mui/icons-material/ContentCut';
-import HotTubOutlinedIcon from '@mui/icons-material/HotTubOutlined';
-import AttractionsOutlinedIcon from '@mui/icons-material/AttractionsOutlined';
-import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
-import SportsSoccerOutlinedIcon from '@mui/icons-material/SportsSoccerOutlined';
-import TrainOutlinedIcon from '@mui/icons-material/TrainOutlined';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
-import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
-import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
+import { tagOrderBgColor } from "@/src/types/tagColor";
+import { tagIconForInfoWindow, tagLabel } from "@/src/types/tagIconLabel";
 
 interface InfoWindowProps {
     isVisible: boolean
@@ -28,72 +17,21 @@ interface ToggleTagButtonProps {
     label: string
 }
 
-const iconAndLabelData: ToggleTagButtonProps[] = [
-    {
-        icon: <RestaurantOutlinedIcon className='text-3xl text-white'/>,
-        label: '음식점'
-    },
-    {
-        icon: <CoffeeOutlinedIcon className='text-3xl text-white'/>,
-        label: '카페'
-    },
-    {
-        icon: <ContentCutOutlinedIcon className='text-3xl text-white'/>,
-        label: '미용실'
-    },
-    {
-        icon: <HotTubOutlinedIcon className='text-3xl text-white'/>,
-        label: '목욕탕'
-    },
-    {
-        icon: <AttractionsOutlinedIcon className='text-3xl text-white'/>,
-        label: '문화·여가'
-    },
-    {
-        icon: <HotelOutlinedIcon className='text-3xl text-white'/>,
-        label: '숙박'
-    },
-    {
-        icon: <SportsSoccerOutlinedIcon className='text-3xl text-white'/>,
-        label: '스포츠'
-    },
-    {
-        icon: <TrainOutlinedIcon className='text-3xl text-white'/>,
-        label: '교통·항공'
-    },
-    {
-        icon: <VisibilityOutlinedIcon className='text-3xl text-white'/>,
-        label: '안경점'
-    },
-    {
-        icon: <LocalHospitalOutlinedIcon className='text-3xl text-white'/>,
-        label: '병원'
-    },
-    {
-        icon: <MilitaryTechOutlinedIcon className='text-3xl text-white'/>,
-        label: '예비군'
-    },
-    {
-        icon: <GolfCourseOutlinedIcon className='text-3xl text-white'/>,
-        label: '골프장'
-    },
-]
-
 export const InfoWindow = ({pos, tag, address, title, description, telno, isVisible}: InfoWindowProps) => {
     return (
         <div className={`relative flex flex-col absolute -left-1/2 bottom-52 z-20`}>
             <div className="relative flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
-                <div className={`flex-none w-1 h-full ${tagBgColor[tag].dark} rounded-l-[3px]`}/>
-                <div className={`flex-none w-20 h-full ${tagBgColor[tag].normal} flex flex-col items-center justify-center`}>
-                    {iconAndLabelData[tag].icon}
-                    <p className='text-sm text-white'>{iconAndLabelData[tag].label}</p>
+                <div className={`flex-none w-1 h-full ${tagOrderBgColor[tag].dark} rounded-l-[3px]`}/>
+                <div className={`flex-none w-20 h-full ${tagOrderBgColor[tag].normal} flex flex-col items-center justify-center text-white`}>
+                    {tagIconForInfoWindow[tag]}
+                    <p className='text-sm'>{tagLabel[tag]}</p>
                 </div>
                 <div className="w-fit h-full flex flex-col items-start p-2">
                     <p className='text-left text-lg font-nsb'>{title}</p>
                     <p className='text-left text-base mr-4'>{address}</p>
                     <p className='pt-1 text-left text-sm'>{telno}</p>
                     <p className='pt-2 text-left text-xs whitespace-pre-wrap'>{description}</p>
-                    <a className={`absolute bottom-2 grid justify-center right-2 w-20 h-8 ${tagBgColor[tag].normal} rounded-[3px] place-content-center`}
+                    <a className={`absolute bottom-2 grid justify-center right-2 w-20 h-8 ${tagOrderBgColor[tag].normal} rounded-[3px] place-content-center`}
                         href={`https://map.kakao.com/link/to/${title},${pos.lat},${pos.lng}`} target='_blank'
                     >
                         <p className="after:content-['_↗'] text-center text-sm align-middle text-white text-pretty">길찾기</p>
