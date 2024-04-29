@@ -18,7 +18,7 @@ import { ToggleRegions2 } from '@/src/components/ToggleRegions2'
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
 import { AdsBar } from '@/src/components/AdsBar'
-import { tagLabel } from '@/src/types/tagIconLabel'
+import { tagLabel, tagSearch } from '@/src/types/tagIconLabel'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -57,6 +57,14 @@ export default function Home() {
     })
     markers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
   }, [curPos])
+
+  const isTrimedTextAllIncluded = (target: string, textWithBlank: string) => {
+    const trimedText = textWithBlank.split(' ')
+    for (let i=0; i<trimedText.length; i++) {
+      if (!target.includes(trimedText[i])) return false
+    }
+    return true
+  }
   
   useEffect(() => {
     // if (distance == 0.1) setDistance(30)
@@ -65,7 +73,7 @@ export default function Home() {
         for (let j = 0; j < isRegionsToggled.length; j++) {
           if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
             && isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
-            && (x.title + x.address + x.telno + x.description + tagLabel[x.tag]).indexOf(searchText) > -1
+            && isTrimedTextAllIncluded(x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag], searchText)
             && x.distance! < distance
           ) return true
         }
