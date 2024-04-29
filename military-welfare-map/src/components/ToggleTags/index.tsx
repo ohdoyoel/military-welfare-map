@@ -116,9 +116,28 @@ export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
         //         <p className='text-white text-xs'>전체</p>
         //     </ToggleTagButton>
         // )
+
+        // 0: 음식점
+        // 1: 카페
+        // 2: 미용실
+        // 3: 목욕탕
+        // 4: 문화/여가
+        // 5: 숙박
+        // 6: 스포츠/레저 (골프장, 체력단련장)
+        // 7: 항공/교통
+        // 8: 안경점
+        // 9: 병원
+        // 10: 예비군
+        // 11: 마트
+        const orderToTag = [
+            0, 1, 11, 2,
+            3, 4, 5, 7,
+            12, 13, 1, 6,
+            6, 9, 8, 10
+        ]
         for (let i = 0; i < iconAndLabelData.length; i++) {
             result.push(
-                <ToggleTagButton onClicked={() => setToggled(isToggled => isToggled.map((toggled, idx) => idx == i ? !toggled : toggled))} tag={i} isToggled={toggled[i]} key={i}>
+                <ToggleTagButton onClicked={() => setToggled(isToggled => isToggled.map((toggled, idx) => idx == orderToTag[i] ? !toggled : toggled))} color={i} isToggled={toggled[orderToTag[i]]} key={i}>
                     {iconAndLabelData[i].icon}
                     {iconAndLabelData[i].label}
                 </ToggleTagButton>
