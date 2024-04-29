@@ -9,7 +9,30 @@ import TrainOutlinedIcon from '@mui/icons-material/TrainOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
 import MilitaryTechOutlinedIcon from '@mui/icons-material/MilitaryTechOutlined';
-import GolfCourseOutlinedIcon from '@mui/icons-material/GolfCourseOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+
+// 0: 음식점
+// 1: 카페
+// 2: 미용실
+// 3: 목욕탕
+// 4: 문화/여가
+// 5: 숙박
+// 6: 스포츠/레저 (골프장, 체력단련장)
+// 7: 항공/교통
+// 8: 안경점
+// 9: 병원
+// 10: 예비군
+// 11: 마트
+export const orderToTag = [
+    0, 1, 11, 2,
+    3, 4, 5, 7,
+    6, 9, 8, 10
+]
+export const tagToOrder = [
+    0, 1, 3, 4,
+    5, 6, 8, 7,
+    10, 9, 11, 2
+]
 
 export const tagIconForMarker = [
     <RestaurantOutlinedIcon className='text-base'/>,
@@ -23,7 +46,7 @@ export const tagIconForMarker = [
     <VisibilityOutlinedIcon className='text-base'/>,
     <LocalHospitalOutlinedIcon className='text-base'/>,
     <MilitaryTechOutlinedIcon className='text-base'/>,
-    <GolfCourseOutlinedIcon className='text-base'/>,
+    <ShoppingCartOutlinedIcon className='text-base'/>,
 ]
 
 // tag to icon
@@ -39,7 +62,7 @@ export const tagIconForButton = [
     <VisibilityOutlinedIcon className='text-lg '/>,
     <LocalHospitalOutlinedIcon className='text-lg '/>,
     <MilitaryTechOutlinedIcon className='text-lg '/>,
-    <GolfCourseOutlinedIcon className='text-lg '/>,
+    <ShoppingCartOutlinedIcon className='text-lg '/>,
 ]
 
 export const tagIconForInfoWindow = [
@@ -54,7 +77,7 @@ export const tagIconForInfoWindow = [
     <VisibilityOutlinedIcon className='text-3xl'/>,
     <LocalHospitalOutlinedIcon className='text-3xl'/>,
     <MilitaryTechOutlinedIcon className='text-3xl'/>,
-    <GolfCourseOutlinedIcon className='text-3xl'/>,
+    <ShoppingCartOutlinedIcon className='text-3xl'/>,
 ]
 
 export const tagLabel = [

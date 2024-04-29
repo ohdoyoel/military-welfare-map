@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { tagOrderBgColor } from '@/src/types/tagColor';
-import { tagIconForInfoWindow, tagLabel } from '@/src/types/tagIconLabel';
+import { tagIconForInfoWindow, tagLabel, tagToOrder } from '@/src/types/tagIconLabel';
 
 interface LocationItemProps {
     _id: number
@@ -24,8 +24,8 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
 
     return (
         <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
-            <div className={`flex-none w-1 h-full ${tagOrderBgColor[tag].dark} rounded-l-[3px]`}/>
-            <div className={`flex-none w-20 h-full ${tagOrderBgColor[tag].normal} flex flex-col items-center justify-center text-white`}>
+            <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
+            <div className={`flex-none w-20 h-full ${tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
                 {tagIconForInfoWindow[tag]}
                 <p className='text-sm'>{tagLabel[tag]}</p>
             </div>
