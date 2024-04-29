@@ -1,14 +1,13 @@
-import { tagBgColor, tagBorderColor } from "@/src/types/tagColor";
-import { useEffect } from "react";
+import { tagOrderBgColor, tagBorderColor } from "@/src/types/tagColor";
 
 interface ToggleTagButton2Props {
     children: React.ReactNode
-    color: number
+    order: number
     isToggled: boolean
     onClicked: () => void
 }
 
-// let tagBgColors = `
+// let tagOrderBgColors = `
 // bg-red-400 bg-red-500 bg-red-600 
 // bg-pink-400 bg-pink-500 bg-pink-600 
 // bg-orange-400 bg-orange-500 bg-orange-600 
@@ -54,13 +53,13 @@ interface ToggleTagButton2Props {
 // border-gray-400 border-gray-500 border-gray-600 
 // `
 
-export const ToggleTagButton2 = ({children, color, isToggled, onClicked}: ToggleTagButton2Props) => {
+export const ToggleTagButton2 = ({children, order, isToggled, onClicked}: ToggleTagButton2Props) => {
     return (
         <button className={`flex flex-col w-16 h-10 focus:outline-none
                             items-center place-content-center rounded-[3px] z-20
                             ${isToggled
-                                ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] ${tagBgColor[color].normal} text-white`
-                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 ${tagBorderColor[color].normal} bg-white text-gray-600`
+                                ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] ${tagOrderBgColor[order].normal} text-white`
+                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 ${tagBorderColor[order].normal} bg-white text-gray-600`
                             }
                             `}
 
