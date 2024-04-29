@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk"
+import { CustomOverlayMap } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
 import { tagOrderBgColor } from "@/src/types/tagColor";
 import { tagIconForMarker } from "@/src/types/tagIconLabel";
@@ -24,10 +24,8 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     const removeZindex = () => {
         let button = document.getElementById(`tagmarker${idx}`) as HTMLButtonElement;
         let customOverlay = button?.parentElement;
-        // console.log(customOverlay)
         let styleWithoutZindex = customOverlay?.getAttribute('style')?.replace('z-index: 0;', '')
         styleWithoutZindex && customOverlay?.setAttribute('style', styleWithoutZindex)
-        // console.log(styleWithoutZindex)
     }
 
     useEffect(() => {
@@ -36,7 +34,6 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
 
     useEffect(() => {
         setIsVisible(false)
-        // setIdx(-1)
     }, [mapClicked])
     
     return (
