@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { CustomOverlayMap } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
 import { tagOrderBgColor } from "@/src/types/tagColor";
-import { tagIconForMarker } from "@/src/types/tagIconLabel";
+import { tagIconForMarker, tagToOrder } from "@/src/types/tagIconLabel";
 
 interface MarkerProps {
     idx: number
@@ -38,7 +38,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     
     return (
         <CustomOverlayMap position={position} onCreate={removeZindex}>
-            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${tagOrderBgColor[tag].normal} place-content-center rounded-[3px] text-white opacity-90 z-10`}
+            <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${tagOrderBgColor[tagToOrder[tag]].normal} place-content-center rounded-[3px] text-white opacity-90 z-10`}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
                     setIsVisible(!isVisible)
