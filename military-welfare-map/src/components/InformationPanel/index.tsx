@@ -1,6 +1,7 @@
 import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { AlertItem } from "../AlertItem"
 // import InfiniteScroll from "react-infinite-scroll-component"
 // import InfiniteScroll from "react-infinite-scroller"
 
@@ -41,6 +42,12 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
                             address={posts[i].address} title={posts[i].title} key={i} setPos={setPos} setIdx={setIdx} description={posts[i].description}/>
             )
         }
+        if (result.length == 0) result.push(
+            <AlertItem>
+                <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
+                <p className='text-base'>검색 조건을 다시 설정하여 주십시오.</p>
+            </AlertItem>
+        )
         return result
     }
 
