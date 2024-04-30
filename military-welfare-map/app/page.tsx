@@ -1,6 +1,7 @@
 "use client"
 
-import db from '@/public/data/db.json'
+import data from '@/public/data/db.json'
+// import { promises as fs } from 'fs';
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
 import { ChatPanel } from '@/src/components/ChatPanel'
@@ -26,11 +27,14 @@ const NUM_OF_REGIONS = 16
 const NUM_OF_FIRE_IN_DB = 1
 
 export default function Home() {
+  // const dbFile = await fs.readFile('data/db.json', 'utf8');
+  // const dbData = JSON.parse(dbFile);
+
   const [isBarOpened, setIsBarOpened] = useState(false)
   const [isChatOpened, setIsChatOpened] = useState(true)
 
   const [isLoading, setIsLoading] = useState(true)
-  const [markers, setMarkers] = useState<MarkerType[]>([])
+  const [markers, setMarkers] = useState<MarkerType[]>(data)
 
   const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>([true, false, false, false, false, false, false, false, false, false, false, false])
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
@@ -43,12 +47,12 @@ export default function Home() {
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const [selectedIdx, setSelectedIdx] = useState(-1)
 
-  useEffect(() => {
-    setMarkers(db)
-  }, [])
+  // useEffect(() => {
+  //   setMarkers(data)
+  // }, [])
 
   useEffect(() => {
-    if (markers.length > 0) {
+    if (markers.length > 0 && isLoading) {
       setIsLoading(false)
       markers.forEach((x, idx) => x.onFire = (idx >= markers.length - NUM_OF_FIRE_IN_DB))
     }

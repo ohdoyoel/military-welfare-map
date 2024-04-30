@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { tagOrderBgColor } from '@/src/types/tagColor';
+import { tagOrderBgColor, tagOrderBgGradientColor } from '@/src/types/tagColor';
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from '@/src/types/tagIconLabel';
 
 interface LocationItemProps {
@@ -14,9 +14,10 @@ interface LocationItemProps {
     address: string,
     title: string,
     description? : string
+    onFire: boolean
 }
 
-export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description}: LocationItemProps) => {
+export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description, onFire}: LocationItemProps) => {
     const handleOnClick = () => {
         setPos({lat: position.lat, lng: position.lng})
         setIdx(_id)    
@@ -25,7 +26,7 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
     return (
         <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
             <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
-            <div className={`flex-none w-20 h-full ${tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
+            <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
                 {tagIconForInfoWindow[tag]}
                 <p className='text-sm'>{tagLabel[tag]}</p>
             </div>
