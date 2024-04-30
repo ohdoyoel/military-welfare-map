@@ -41,19 +41,20 @@ text-cyan-400 text-cyan-500 text-cyan-600
 text-gray-400 text-gray-500 text-gray-600 
 `
 let tagOrderBgGradientColors = `
-bg-gradient-to-br from-red-300 to-red-700
-bg-gradient-to-br from-pink-300 to-pink-700
-bg-gradient-to-br from-orange-300 to-orange-700
-bg-gradient-to-br from-yellow-300 to-yellow-700
-bg-gradient-to-br from-lime-300 to-lime-700
-bg-gradient-to-br from-green-300 to-green-700
-bg-gradient-to-br from-teal-300 to-teal-700
-bg-gradient-to-br from-sky-300 to-sky-700
-bg-gradient-to-br from-blue-300 to-blue-700
-bg-gradient-to-br from-indigo-300 to-indigo-700
-bg-gradient-to-br from-violet-300 to-violet-700
-bg-gradient-to-br from-purple-200 to-purple-600
+bg-gradient-to-br from-red-400 to-red-600
+bg-gradient-to-br from-pink-300 to-pink-600
+bg-gradient-to-br from-orange-300 to-orange-600
+bg-gradient-to-br from-yellow-300 to-yellow-600
+bg-gradient-to-br from-lime-300 to-lime-600
+bg-gradient-to-br from-green-300 to-green-600
+bg-gradient-to-br from-teal-300 to-teal-600
+bg-gradient-to-br from-sky-300 to-sky-600
+bg-gradient-to-br from-blue-300 to-blue-600
+bg-gradient-to-br from-indigo-300 to-indigo-600
+bg-gradient-to-br from-violet-300 to-violet-600
+bg-gradient-to-br from-purple-200 to-purple-500
 `
+
 export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, visible}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(false)
 
