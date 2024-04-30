@@ -80,29 +80,29 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
 
     const replyProperlyTagAndPlc = (tags: string[], plcs: string[]) => {
         if (tags.length > 0 && plcs.length == 0) {
-            if (isNear) pushBotMessage(`주변의 ${combineTags(tags)} 보여드리겠습니다 .`)
-            else pushBotMessage(`선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다 .`)
+            if (isNear) pushMessage(`주변의 ${combineTags(tags)} 보여드리겠습니다 .`, true)
+            else pushMessage(`선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다 .`, true)
         }
         else if (tags.length == 0 && plcs.length > 0) {
-            pushBotMessage(`${combinePlcs(plcs)} 모든 장소를 보여드리겠습니다 .`)
+            pushMessage(`${combinePlcs(plcs)} 선택하신 장소의 종류를 보여드리겠습니다 .`, true)
         }
         else if (tags.length > 0 && plcs.length > 0) {
-            pushBotMessage(`${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다 .`)
+            pushMessage(`${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다 .`, true)
         }
     }
 
     const beforePushBotMessage = (reply: string) => {
         if (reply.includes('@hi')) {
-            pushBotMessage(greeting[user.current])
+            pushMessage(greeting[user.current], true)
             return
         }
         else if (reply.includes('@user:')) {
             user.current = Number(reply.split('@user:')[1][0])
-            pushBotMessage(greeting[user.current])
+            pushMessage(greeting[user.current], true)
             return
         }
         else if (!reply.includes('@tag:') && !reply.includes('@plc:')) {
-            pushBotMessage(reply)
+            pushMessage(reply, true)
             return
         }
 
@@ -155,12 +155,8 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
         scrollDown()
     }, [messages])
 
-    const pushBotMessage = (message: string) => {
-        setMessages([...messages, {message:message, isBotSide: true}])
-    }
-
-    const pushUserMessage = (message: string) => {
-        setMessages([...messages, {message:message, isBotSide: false}])
+    const pushMessage = (message: string, isBot: boolean) => {
+        setMessages([...messages, {message:message, isBotSide: isBot}])
     }
 
     const sendMessage = () => {
@@ -168,7 +164,7 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
         let content = textarea.value
         if (!content.trim()) return;
         textarea.value = ""
-        pushUserMessage(content)
+        pushMessage(content, false)
     }
     
     return (

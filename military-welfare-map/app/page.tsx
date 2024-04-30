@@ -1,5 +1,6 @@
 "use client"
 
+import db from '@/public/data/db.json'
 import { KakaoMap } from '@/src/components/KakaoMap'
 import { Header } from '@/src/components/Header'
 import { ChatPanel } from '@/src/components/ChatPanel'
@@ -11,14 +12,13 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { MarkerType } from '@/src/types/data'
 import { InformationPanel } from '@/src/components/InformationPanel'
 import { ToggleRegions } from '@/src/components/ToggleRegions'
-import db from '@/public/data/db.json'
 import { Header2 } from '@/src/components/Header2'
 import { ToggleTags2 } from '@/src/components/ToggleTags2'
 import { ToggleRegions2 } from '@/src/components/ToggleRegions2'
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
 import { AdsBar } from '@/src/components/AdsBar'
-import { tagLabel, tagSearch } from '@/src/types/tagIconLabel'
+import { tagSearch } from '@/src/types/tagIconLabel'
 import { isTrimedTextAllIncluded } from '@/src/functions/korean'
 
 const NUM_OF_TAGS = 12
@@ -49,6 +49,11 @@ export default function Home() {
   useEffect(() => {
     // console.log(markers)
     setIsLoading(false)
+
+    setMarkers([...markers, {
+      tag: 0,
+      
+    }])
   }, [markers])
 
   useEffect(() => {
