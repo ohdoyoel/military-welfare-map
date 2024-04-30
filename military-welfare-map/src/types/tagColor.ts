@@ -282,3 +282,144 @@ export const tagBorderColor:tagColorType = {
         dark: 'border-gray-600'
     },
 }
+
+let tagFillColors = `
+fill-red-400 fill-red-500 fill-red-600 
+fill-pink-400 fill-pink-500 fill-pink-600 
+fill-orange-400 fill-orange-500 fill-orange-600 
+fill-yellow-400 fill-yellow-500 fill-yellow-600 
+fill-lime-400 fill-lime-500 fill-lime-600 
+fill-green-400 fill-green-500 fill-green-600 
+fill-teal-400 fill-teal-500 fill-teal-600 
+fill-sky-400 fill-sky-500 fill-sky-600 
+fill-blue-400 fill-blue-500 fill-blue-600 
+fill-indigo-400 fill-indigo-500 fill-indigo-600 
+fill-violet-400 fill-violet-500 fill-violet-600 
+fill-purple-400 fill-purple-500 fill-purple-600 
+fill-purple-300 fill-purple-400 fill-purple-500 
+fill-amber-700 fill-amber-800 fill-amber-900
+fill-fuchsia-400 fill-fuchsia-500 fill-fuchsia-600 
+fill-pink-400 fill-pink-500 fill-pink-600 
+fill-rose-400 fill-rose-500 fill-rose-600 
+fill-amber-400 fill-amber-500 fill-amber-600 
+fill-cyan-400 fill-cyan-500 fill-cyan-600 
+fill-gray-400 fill-gray-500 fill-gray-600 
+`
+
+export const tagOrderFillColor:tagColorType = {
+    // 0: {
+    //     light: 'fill-red-400',
+    //     normal: 'fill-red-500',
+    //     dark: 'fill-red-600'
+    // },
+    // 1: {
+    //     light: 'fill-orange-400',
+    //     normal: 'fill-orange-500',
+    //     dark: 'fill-orange-600'
+    // },
+    // 2: {
+    //     light: 'fill-yellow-400',
+    //     normal: 'fill-yellow-500',
+    //     dark: 'fill-yellow-600'
+    // },
+    // 3: {
+    //     light: 'fill-lime-400',
+    //     normal: 'fill-lime-500',
+    //     dark: 'fill-lime-600'
+    // },
+    0: {
+        light: 'fill-red-400',
+        normal: 'fill-red-500',
+        dark: 'fill-red-600'
+    },
+    1: {
+        light: 'fill-pink-400',
+        normal: 'fill-pink-500',
+        dark: 'fill-pink-600'
+    },
+    2: {
+        light: 'fill-orange-400',
+        normal: 'fill-orange-500',
+        dark: 'fill-orange-600'
+    },
+    3: {
+        light: 'fill-yellow-400',
+        normal: 'fill-yellow-500',
+        dark: 'fill-yellow-600'
+    },
+    4: {
+        light: 'fill-lime-400',
+        normal: 'fill-lime-500',
+        dark: 'fill-lime-600'
+    },
+    5: {
+        light: 'fill-green-400',
+        normal: 'fill-green-500',
+        dark: 'fill-green-600'
+    },
+    6: {
+        light: 'fill-teal-400',
+        normal: 'fill-teal-500',
+        dark: 'fill-teal-600'
+    },
+    7: {
+        light: 'fill-sky-400',
+        normal: 'fill-sky-500',
+        dark: 'fill-sky-600'
+    },
+    8: {
+        light: 'fill-blue-400',
+        normal: 'fill-blue-500',
+        dark: 'fill-blue-600'
+    },
+    9: {
+        light: 'fill-indigo-400',
+        normal: 'fill-indigo-500',
+        dark: 'fill-indigo-600'
+    },
+    10: {
+        light: 'fill-violet-400',
+        normal: 'fill-violet-500',
+        dark: 'fill-violet-600'
+    },
+    // 10: {
+    //     light: 'fill-purple-400',
+    //     normal: 'fill-purple-500',
+    //     dark: 'fill-purple-600'
+    // },
+    11: {
+        light: 'fill-purple-300',
+        normal: 'fill-purple-400',
+        dark: 'fill-purple-500'
+    },
+    12: {
+        light: 'fill-amber-600',
+        normal: 'fill-amber-700',
+        dark: 'fill-amber-800'
+    },
+    13: {
+        light: 'fill-pink-400',
+        normal: 'fill-pink-500',
+        dark: 'fill-pink-600'
+    },
+    14: {
+        light: 'fill-rose-400',
+        normal: 'fill-rose-500',
+        dark: 'fill-rose-600'
+    },
+    15: {
+        light: 'fill-amber-400',
+        normal: 'fill-amber-500',
+        dark: 'fill-amber-600'
+    },
+    // 16: {
+    //     light: 'fill-cyan-400',
+    //     normal: 'fill-cyan-500',
+    //     dark: 'fill-cyan-600'
+    // },
+    16: {
+        light: 'fill-gray-400',
+        normal: 'fill-gray-500',
+        dark: 'fill-gray-600'
+    },
+}

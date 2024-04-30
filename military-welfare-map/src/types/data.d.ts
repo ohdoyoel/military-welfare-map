@@ -10,6 +10,7 @@ export type MarkerType = {
     description?: string
     telno?: string
     distance?: number
+    onFire?: boolean
 }
 
 export type APIProps = {
