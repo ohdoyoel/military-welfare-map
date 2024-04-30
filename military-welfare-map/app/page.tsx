@@ -43,7 +43,7 @@ export default function Home() {
 
   useEffect(() => {
     setMarkers(db)
-  }, [])
+  }, [db])
 
   useEffect(() => {
     // console.log(markers)
