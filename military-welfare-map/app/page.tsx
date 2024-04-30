@@ -23,6 +23,7 @@ import { isTrimedTextAllIncluded } from '@/src/functions/korean'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
+const NUM_OF_FIRE_IN_DB = 1
 
 export default function Home() {
   const [isBarOpened, setIsBarOpened] = useState(false)
@@ -34,7 +35,7 @@ export default function Home() {
   const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>([true, false, false, false, false, false, false, false, false, false, false, false])
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
-  const [distance, setDistance] = useState(30)
+  const [distanceRange, setDistanceRange] = useState(30)
   
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
@@ -44,24 +45,23 @@ export default function Home() {
 
   useEffect(() => {
     setMarkers(db)
-  }, [db])
+  }, [])
 
   useEffect(() => {
-    // console.log(markers)
-    setIsLoading(false)
-
-    setMarkers([...markers, {
-      tag: 0,
-      
-    }])
+    if (markers.length > 0) {
+      setIsLoading(false)
+      markers.forEach((x, idx) => x.onFire = (idx >= markers.length - NUM_OF_FIRE_IN_DB))
+    }
   }, [markers])
 
   useEffect(() => {
-    markers.forEach((x) => {
-      x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
-      // console.log(x.distance)
-    })
-    markers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
+    if (markers.length > 0) {
+      markers.forEach((x, idx) => {
+        x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
+      })
+      markers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
+      console.log(markers)
+    }
   }, [curPos])
   
   useEffect(() => {
@@ -72,13 +72,13 @@ export default function Home() {
           if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
             && isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
             && isTrimedTextAllIncluded(x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag], searchText)
-            && x.distance! < distance
+            && x.distance! < distanceRange
           ) return true
         }
       }
       return false
     }))
-    }, [markers, isTagsToggled, isRegionsToggled, searchText, distance])
+    }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange])
 
   useEffect(() => {
     // console.log(filteredMarkers)
@@ -119,7 +119,7 @@ export default function Home() {
         <Header/>
         <SearchInput onKeyUp={onSearchInputKeyUp}/>
         <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-        <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistance}/>
+        <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
         <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
         <AdsBar/>
       </div>
@@ -138,7 +138,7 @@ export default function Home() {
         </div>
         <div className='flex flex-col'> 
         <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-        <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistance}/>
+        <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
         </div>
       </div>
 
@@ -154,7 +154,7 @@ export default function Home() {
 
       {/* ChatPanel */}
       <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-        <ChatPanel setTagsToggled={setIsTagsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistance}/>
+        <ChatPanel setTagsToggled={setIsTagsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
         <AdsBar/>
       </div>
 

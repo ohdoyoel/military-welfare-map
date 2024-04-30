@@ -26,24 +26,6 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selecte
     const tooManyMarkers = useRef(false)
     const noMarkers = useRef(false)
 
-    // useEffect(() => {
-    //     setMapPos(pos)
-    // }, [pos])
-    
-    // const map = useMap()
-    // const bounds = useMemo(() => {
-    //   const bounds = new kakao.maps.LatLngBounds()
-    
-    //   markers.forEach((marker) => {
-    //     bounds.extend(new kakao.maps.LatLng(marker.position.lat, marker.position.lng))
-    //   })
-    //   return bounds
-    // }, [markers])
-
-    // useEffect(() => {
-    //     map.setBounds(bounds)
-    // })
-
     // get current position and mark
 
     const [initialLocationState, setInitialLocationState] = useState({
@@ -99,8 +81,8 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selecte
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat
                     && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
                     result.push(
-                        <Marker key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt}
-                            telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false} setIdx={setIdx}/>
+                        <Marker key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire}
+                            telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false}/>
                         )
                     resultLength += 1
                 }
