@@ -3,7 +3,6 @@ import { tagOrderBgColor } from "@/src/types/tagColor";
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from "@/src/types/tagIconLabel";
 
 interface InfoWindowProps {
-    isVisible: boolean
     pos: {lat:number, lng:number}
     tag: number
     title: string
@@ -12,12 +11,7 @@ interface InfoWindowProps {
     telno?: string
 }
 
-interface ToggleTagButtonProps {
-    icon: ReactElement<any, any>,
-    label: string
-}
-
-export const InfoWindow = ({pos, tag, address, title, description, telno, isVisible}: InfoWindowProps) => {
+export const InfoWindow = ({pos, tag, address, title, description, telno}: InfoWindowProps) => {
     return (
         <div className={`relative flex flex-col absolute -left-1/2 bottom-52 z-20`}>
             <div className="relative flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">

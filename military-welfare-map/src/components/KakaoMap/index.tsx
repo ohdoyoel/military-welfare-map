@@ -7,16 +7,17 @@ import { Marker } from '../Marker';
 import { Alert } from '../Alert';
 
 interface KakaoMapProps {
-    pos: {lat: number, lng: number}
+    mapPos: {lat: number, lng: number}
+    setMapPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     markers: MarkerType[]
     setCurPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     setIdx: Dispatch<SetStateAction<number>>
     selectedIdx: number
 }
 
-export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selectedIdx}: KakaoMapProps) => {
 
-    const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
+    // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
 
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
@@ -25,9 +26,9 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
     const tooManyMarkers = useRef(false)
     const noMarkers = useRef(false)
 
-    useEffect(() => {
-        setMapPos(pos)
-    }, [pos])
+    // useEffect(() => {
+    //     setMapPos(pos)
+    // }, [pos])
     
     // const map = useMap()
     // const bounds = useMemo(() => {
@@ -165,7 +166,7 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
                     })}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                <ReSetttingMapBounds markers={markers} mapPos={mapPos}/>
+                <ReSetttingMapBounds markers={markers}/>
                 {tooManyMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시되는 장소가 너무 많습니다!</p>
@@ -184,10 +185,8 @@ export const KakaoMap = ({pos, markers, setCurPos, setIdx, selectedIdx}: KakaoMa
 
 const ReSetttingMapBounds = ({
     markers,
-    mapPos
   }: {
     markers: MarkerType[],
-    mapPos: {lat: number, lng: number}
   }) => {
     const map = useMap()
     const bounds = useMemo(() => {
