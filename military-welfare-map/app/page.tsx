@@ -54,7 +54,6 @@ export default function Home() {
   useEffect(() => {
     if (markers.length > 0 && isLoading) {
       setIsLoading(false)
-      markers.forEach((x, idx) => x.onFire = (idx >= markers.length - NUM_OF_FIRE_IN_DB))
     }
   }, [markers])
 
@@ -62,9 +61,9 @@ export default function Home() {
     if (markers.length > 0) {
       markers.forEach((x, idx) => {
         x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
+        x.onFire = x.description != undefined && x.description.includes('[MOCK]')
       })
       markers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
-      console.log(markers)
     }
   }, [curPos])
   
