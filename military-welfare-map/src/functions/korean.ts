@@ -15,3 +15,19 @@ export const thatInKorean = (name: string) => {
     }
     return '를'
 }
+
+export const isTrimedTextAllIncluded = (target: string, textWithBlank: string) => {
+  const trimedText = textWithBlank.split(' ')
+  for (let i=0; i<trimedText.length; i++) {
+    if (!target.includes(trimedText[i])) return false
+  }
+  return true
+}
+
+export const isTrimedTextOneIncluded = (target: string, textWithBlank: string) => {
+  const trimedText = textWithBlank.split(' ')
+  for (let i=0; i<trimedText.length; i++) {
+    if (target.includes(trimedText[i])) return true
+  }
+  return false
+}

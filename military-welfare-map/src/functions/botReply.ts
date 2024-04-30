@@ -1,3 +1,6 @@
+import { tagLabel, tagSearch } from "../types/tagIconLabel"
+import { isTrimedTextOneIncluded } from "./korean"
+
 // 0 육군 1 해군공군해병대 2 민간인
 export const greeting = [`
 ### 충성!
@@ -59,19 +62,20 @@ const isTagOrPlace = (input: string): boolean => {
 // return '@tag:0 @tag:1'
 const tagFrom = (input: string): string => {
     let result = ''
-    if (input.includes('음식')) result += '@tag:0'
-    if (input.includes('카페')) result += '@tag:1'
-    if (input.includes('미용')) result += '@tag:2'
-    if (input.includes('목욕')) result += '@tag:3'
-    if (input.includes('문화') || input.includes('여가')) result += '@tag:4'
-    if (input.includes('숙박')) result += '@tag:5'
-    if (input.includes('스포츠')) result += '@tag:6'
-    if (input.includes('교통') || input.includes('항공')) result += '@tag:7'
-    if (input.includes('안경')) result += '@tag:8'
-    if (input.includes('병원')) result += '@tag:9'
-    if (input.includes('예비군')) result += '@tag:10'
-    if (input.includes('골프')) result += '@tag:11'
-    if (input.includes('모두')) result += '@tag:12'
+
+    if (isTrimedTextOneIncluded(input, tagSearch[0])) result += '@tag:0'
+    if (isTrimedTextOneIncluded(input, tagSearch[1])) result += '@tag:1'
+    if (isTrimedTextOneIncluded(input, tagSearch[2])) result += '@tag:2'
+    if (isTrimedTextOneIncluded(input, tagSearch[3])) result += '@tag:3'
+    if (isTrimedTextOneIncluded(input, tagSearch[4])) result += '@tag:4'
+    if (isTrimedTextOneIncluded(input, tagSearch[5])) result += '@tag:5'
+    if (isTrimedTextOneIncluded(input, tagSearch[6])) result += '@tag:6'
+    if (isTrimedTextOneIncluded(input, tagSearch[7])) result += '@tag:7'
+    if (isTrimedTextOneIncluded(input, tagSearch[8])) result += '@tag:8'
+    if (isTrimedTextOneIncluded(input, tagSearch[9])) result += '@tag:9'
+    if (isTrimedTextOneIncluded(input, tagSearch[10])) result += '@tag:10'
+    if (isTrimedTextOneIncluded(input, tagSearch[11])) result += '@tag:11'
+
     return result
 }
 
