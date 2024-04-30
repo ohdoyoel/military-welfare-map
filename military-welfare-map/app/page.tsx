@@ -47,6 +47,8 @@ export default function Home() {
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const [selectedIdx, setSelectedIdx] = useState(-1)
 
+  const [onFireToggled, setOnFireToggled] = useState(false)
+
   // useEffect(() => {
   //   setMarkers(data)
   // }, [])
@@ -179,7 +181,7 @@ export default function Home() {
       </div>
       
       <div className={`w-full h-full`}>
-        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setIdx={setSelectedIdx}/>
+        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setIdx={setSelectedIdx} onFire={onFireToggled} setOnFire={setOnFireToggled}/>
       </div>
 
     </main>
