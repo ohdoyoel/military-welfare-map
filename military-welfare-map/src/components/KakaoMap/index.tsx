@@ -13,9 +13,11 @@ interface KakaoMapProps {
     setCurPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     setIdx: Dispatch<SetStateAction<number>>
     selectedIdx: number
+    onFire: boolean
+    setOnFire: Dispatch<SetStateAction<boolean>>
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selectedIdx}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selectedIdx, onFire, setOnFire}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
@@ -127,14 +129,16 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selecte
                 onCenterChanged={setCenterAndBound}
                 onTileLoaded={setCenterAndBound}
                 >
-                <MarkerClusterer
+                {!onFire && <MarkerClusterer
                 averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
                 minLevel={8} // 클러스터 할 최소 지도 레벨
                 calculator={[10, 100, 200, 300]}
                 minClusterSize={1}
                 >
                     {makeMapMarkers(markers, mapNE, mapSW)}
-                </MarkerClusterer>
+                </MarkerClusterer>}
+                {/* {onFire && 
+                } */}
                 {!initialLocationState.isLoading &&
                 <MapMarker position={initialLocationState.center}
                     image={{
