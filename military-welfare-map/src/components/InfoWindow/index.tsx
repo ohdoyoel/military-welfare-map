@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { tagOrderBgColor } from "@/src/types/tagColor";
+import { tagOrderBgColor, tagOrderBgGradientColor } from "@/src/types/tagColor";
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from "@/src/types/tagIconLabel";
 
 interface InfoWindowProps {
@@ -9,14 +9,15 @@ interface InfoWindowProps {
     address: string
     description?: string
     telno?: string
+    onFire: boolean
 }
 
-export const InfoWindow = ({pos, tag, address, title, description, telno}: InfoWindowProps) => {
+export const InfoWindow = ({pos, tag, address, title, description, telno, onFire}: InfoWindowProps) => {
     return (
         <div className={`relative flex flex-col absolute -left-1/2 bottom-52 z-20`}>
             <div className="relative flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
                 <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
-                <div className={`flex-none w-20 h-full ${tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
+                <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
                     {tagIconForInfoWindow[tag]}
                     <p className='text-sm'>{tagLabel[tag]}</p>
                 </div>
@@ -25,7 +26,7 @@ export const InfoWindow = ({pos, tag, address, title, description, telno}: InfoW
                     <p className='text-left text-base mr-4'>{address}</p>
                     <p className='pt-1 text-left text-sm'>{telno}</p>
                     <p className='pt-2 text-left text-xs whitespace-pre-wrap'>{description}</p>
-                    <a className={`absolute bottom-2 grid justify-center right-2 w-20 h-8 ${tagOrderBgColor[tagToOrder[tag]].normal} rounded-[3px] place-content-center`}
+                    <a className={`absolute bottom-2 grid justify-center right-2 w-20 h-8 ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} rounded-[3px] place-content-center`}
                         href={`https://map.kakao.com/link/to/${title},${pos.lat},${pos.lng}`} target='_blank'
                     >
                         <p className="after:content-['_↗'] text-center text-sm align-middle text-white text-pretty">길찾기</p>
