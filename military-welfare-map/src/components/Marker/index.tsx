@@ -45,7 +45,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
                 }}>
                 {tagIconForMarker[tag]}
             </button>
-            {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno} isVisible={isVisible}/>}
+            {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno}/>}
         </CustomOverlayMap>
     )
 }

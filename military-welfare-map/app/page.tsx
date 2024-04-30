@@ -38,8 +38,8 @@ export default function Home() {
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
-  const [selectedIdx, setSelectedIdx] = useState(-1)
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+  const [selectedIdx, setSelectedIdx] = useState(-1)
 
   useEffect(() => {
     setMarkers(db)
@@ -178,7 +178,7 @@ export default function Home() {
       </div>
       
       <div className={`w-full h-full`}>
-        <KakaoMap pos={mapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setIdx={setSelectedIdx}/>
+        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setIdx={setSelectedIdx}/>
       </div>
 
     </main>
