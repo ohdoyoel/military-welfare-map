@@ -14,7 +14,7 @@ interface InfoWindowProps {
 
 export const InfoWindow = ({pos, tag, address, title, description, telno, onFire}: InfoWindowProps) => {
     return (
-        <div className={`relative flex flex-col absolute -left-1/2 ml-6 bottom-[230px] z-20`}>
+        <div className={`relative flex flex-col absolute -left-1/2 ml-6 bottom-[236px] z-20`}>
             <div className="relative flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
                 <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
                 <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
