@@ -107,5 +107,6 @@ export const tagSearch = [
     '안경점',
     '병원 신체검사 신검',
     '예비군 집결지',
-    '마트 BX bx'
+    '마트 BX bx',
+    '모두'
 ]

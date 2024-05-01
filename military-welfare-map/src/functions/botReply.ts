@@ -75,6 +75,7 @@ const tagFrom = (input: string): string => {
     if (isTrimedTextOneIncluded(input, tagSearch[9])) result += '@tag:9'
     if (isTrimedTextOneIncluded(input, tagSearch[10])) result += '@tag:10'
     if (isTrimedTextOneIncluded(input, tagSearch[11])) result += '@tag:11'
+    if (isTrimedTextOneIncluded(input, tagSearch[12])) result += '@tag:12'
 
     return result
 }

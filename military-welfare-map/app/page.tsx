@@ -76,7 +76,7 @@ export default function Home() {
       if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130 &&
         ((onFireToggled && x.onFire)
         || (!onFireToggled && isTagsToggled[x.tag] && isRegionsToggled[x.region]
-        && isTrimedTextAllIncluded(x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag], searchText)
+        && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag]).toLowerCase(), searchText)
         && x.distance! < distanceRange))
       ) return true
       return false
