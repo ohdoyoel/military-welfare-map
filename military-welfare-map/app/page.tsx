@@ -50,10 +50,6 @@ export default function Home() {
 
   const [onFireToggled, setOnFireToggled] = useState(false)
 
-  // useEffect(() => {
-  //   setMarkers(data)
-  // }, [])
-
   useEffect(() => {
     if (markers.length > 0 && isLoading) {
       setIsLoading(false)

@@ -20,6 +20,7 @@ export const SearchInput = ({searchText, setSearchText, onKeyUp}: SearchInputPro
                     input = document.getElementById("searchInput") as HTMLInputElement;
                     input.value = ''
                     setSearchText(input.value);
+                    input.focus()
                 }}>&times;</button>}
             </div>
         </div>
