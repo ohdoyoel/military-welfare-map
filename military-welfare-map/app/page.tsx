@@ -62,7 +62,7 @@ export default function Home() {
 
   useEffect(() => {
     if (markers.length > 0) {
-      markers.forEach((x, idx) => {
+      markers.forEach((x) => {
         x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
         x.onFire = x.description != undefined && x.description.includes('[MOCK]')
       })
