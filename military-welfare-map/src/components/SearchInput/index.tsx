@@ -15,7 +15,12 @@ export const SearchInput = ({searchText, setSearchText, onKeyUp}: SearchInputPro
                 <SearchIcon className='absolute top-[12px] left-2.5 text-gray-500' fontSize='medium'/>
                 <input id="searchInput" type="text" onKeyUp={onKeyUp}
                         className="h-full w-full p-3 pl-10 text-base text-gray-900 rounded-[3px] focus:outline-none" placeholder="상호명, 주소(지역명), 태그, 전화번호로 검색해보십시오"/>
-                {searchText && <button className="absolute top-[10px] right-2.5 text-xl" onClick={()=>setSearchText('')}>&times;</button>}
+                {searchText && <button className="absolute top-[10px] right-2.5 text-xl" onClick={()=>{
+                    let input;
+                    input = document.getElementById("searchInput") as HTMLInputElement;
+                    input.value = ''
+                    setSearchText(input.value);
+                }}>&times;</button>}
             </div>
         </div>
     )
