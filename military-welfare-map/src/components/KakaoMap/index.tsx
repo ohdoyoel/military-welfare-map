@@ -20,6 +20,7 @@ interface TooltipProps {
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     mapClicked: number
     infoVisible: boolean
+    setSelectedIdx: Dispatch<SetStateAction<number>>
 }
 
 interface KakaoMapProps {
@@ -27,16 +28,15 @@ interface KakaoMapProps {
     setMapPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     markers: MarkerType[]
     setCurPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
-    setIdx: Dispatch<SetStateAction<number>>
+    setSelectedIdx: Dispatch<SetStateAction<number>>
     selectedIdx: number
     onFire: boolean
-    setOnFire: Dispatch<SetStateAction<boolean>>
 }
 
 /**
    * AbstractOverlay를 이용하여 사용자 TooltipMarker를 정의 합니다.
    */
-const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, infoVisible}: TooltipProps) => {
+const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, infoVisible, setSelectedIdx}: TooltipProps) => {
     const map = useMap()
     // Marker로 올려질 node 객체를 생성 합니다.
     const node = useRef(document.createElement("div"))
@@ -358,14 +358,14 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
             )
           : ReactDOM.createPortal(
             <Marker key={idx} idx={idx} tag={tag} position={position} mapClicked={mapClicked} onFire={onFire!}
-            telno={telno} description={description} address={address} title={title} setPos={()=>{}} visible={infoVisible}/>,
+            telno={telno} description={description} address={address} title={title} setPos={setPos} visible={infoVisible} setSelectedIdx={() => setSelectedIdx}/>,
               node.current
             )}
        </>
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selectedIdx, onFire, setOnFire}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx, selectedIdx, onFire}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
@@ -431,7 +431,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selecte
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat
                     && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
                     result.push(
-                        <Marker key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire!}
+                        <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire!}
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false}/>
                         )
                     resultLength += 1
@@ -486,7 +486,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selecte
                     {makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>}
                 {onFire && markers.map((marker, i) => 
-                    <TooltipMarker key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
+                    <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} infoVisible={selectedIdx==i ? true : false}/>
                 )}
                 {!initialLocationState.isLoading &&
@@ -503,6 +503,12 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setIdx, selecte
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 <ReSetttingMapBounds markers={markers}/>
+                {onFire &&
+                <Alert>
+                    <p className='text-lg font-nsb'>지피티 병장이 쏜다!</p>
+                    <p className='text-base'>군인을 위해 대부분을 지병장이 낼테니, 나머지만 내!</p>
+                </Alert>
+                }
                 {tooManyMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시되는 장소가 너무 많습니다!</p>

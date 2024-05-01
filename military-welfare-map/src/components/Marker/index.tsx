@@ -16,6 +16,7 @@ interface MarkerProps {
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     mapClicked: number
     visible: boolean
+    setSelectedIdx: Dispatch<SetStateAction<number>>
 }
 
 // let tagTextColors = `
@@ -55,7 +56,7 @@ interface MarkerProps {
 // bg-gradient-to-br from-purple-200 to-purple-500
 // `
 
-export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, visible}: MarkerProps) => {
+export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, visible, setSelectedIdx}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(visible)
 
     const removeZindex = () => {
@@ -78,6 +79,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
             <button id={`tagmarker${idx}`} className={`absolute -left-[8px] grid w-6 h-6 ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} place-content-center rounded-[3px] text-white opacity-90 z-10`}
                 onClick={() => {
                     setPos({lat: position.lat, lng: position.lng})
+                    setSelectedIdx(idx)
                     setIsVisible(!isVisible)
                     console.log(onFire)
                 }}>
