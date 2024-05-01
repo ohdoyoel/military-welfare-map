@@ -58,25 +58,26 @@ export default function Home() {
 
   useEffect(() => {
     if (markers.length > 0) {
-      markers.forEach((x) => {
+      let tempMarkers = [...markers]
+      tempMarkers.forEach((x) => {
         x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
         x.onFire = x.description != undefined && x.description.includes('[MOCK]')
       })
-      markers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
+      tempMarkers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
+      setMarkers(tempMarkers)
     }
   }, [curPos])
   
   useEffect(() => {
-    // if (distance == 0.1) setDistance(30)
-    setFilteredMarkers(markers.filter((x) => {
-      if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130 &&
+    let tempMarkers = [...markers]
+    tempMarkers = tempMarkers.filter((x) => {
+      return (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130 &&
         ((onFireToggled && x.onFire)
         || (!onFireToggled && isTagsToggled[x.tag] && isRegionsToggled[x.region]
         && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag]).toLowerCase(), searchText)
-        && x.distance! < distanceRange))
-      ) return true
-      return false
-    }))
+        && x.distance! < distanceRange)))
+    })
+    setFilteredMarkers(tempMarkers)
     }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled])
 
   useEffect(() => {
@@ -180,7 +181,8 @@ export default function Home() {
       </div>
       
       <div className={`w-full h-full`}>
-        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled}/>
+        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos}
+                  selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled}/>
       </div>
 
     </main>

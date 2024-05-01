@@ -484,7 +484,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
                 >
                 {makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>}
-                {onFire && markers.map((marker, i) => 
+                {(onFire || tooManyMarkers.current) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} infoVisible={selectedIdx==i ? true : false}/>
                 )}
