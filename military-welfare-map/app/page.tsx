@@ -21,6 +21,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { AdsBar } from '@/src/components/AdsBar'
 import { tagSearch } from '@/src/types/tagIconLabel'
 import { isTrimedTextAllIncluded } from '@/src/functions/korean'
+import { ShowFireButton } from '@/src/components/ShowFireButton'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -47,7 +48,7 @@ export default function Home() {
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const [selectedIdx, setSelectedIdx] = useState(-1)
 
-  const [onFireToggled, setOnFireToggled] = useState(true)
+  const [onFireToggled, setOnFireToggled] = useState(false)
 
   // useEffect(() => {
   //   setMarkers(data)
@@ -72,11 +73,11 @@ export default function Home() {
   useEffect(() => {
     // if (distance == 0.1) setDistance(30)
     setFilteredMarkers(markers.filter((x) => {
-      if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
-        && isTagsToggled[x.tag] && isRegionsToggled[x.region]
+      if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130 &&
+        ((onFireToggled && x.onFire)
+        || (!onFireToggled && isTagsToggled[x.tag] && isRegionsToggled[x.region]
         && isTrimedTextAllIncluded(x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag], searchText)
-        && x.distance! < distanceRange
-        && ((onFireToggled && x.onFire) || (!onFireToggled))
+        && x.distance! < distanceRange))
       ) return true
       return false
     }))
@@ -170,15 +171,20 @@ export default function Home() {
         </button>
       </div>
 
-      <div className='z-10 absolute top-12 right-1
-                        w-8 h-8 rounded-3xl shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'>
-        <button className='w-full h-full' onClick={() => setMapPos({lat:curPos.lat, lng:curPos.lng})}>
+      <div className='z-10 absolute bottom-1 right-1 flex flex-col gap-2'>
+        <ShowFireButton isToggled={onFireToggled} onClicked={() => {
+          setOnFireToggled(!onFireToggled)
+        }}/>
+      </div>
+
+      <div className='z-10 absolute top-12 right-1 flex flex-col gap-2'>
+        <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos({lat:curPos.lat, lng:curPos.lng})}>
           <img src='/images/current-position.png'></img>
         </button>
       </div>
       
       <div className={`w-full h-full`}>
-        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setIdx={setSelectedIdx} onFire={onFireToggled} setOnFire={setOnFireToggled}/>
+        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled}/>
       </div>
 
     </main>
