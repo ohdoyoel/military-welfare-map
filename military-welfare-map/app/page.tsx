@@ -120,7 +120,7 @@ export default function Home() {
       {/* InformationPanel */}
       <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
         <Header/>
-        <SearchInput onKeyUp={onSearchInputKeyUp}/>
+        <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
         <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
         <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
         <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx}/>
