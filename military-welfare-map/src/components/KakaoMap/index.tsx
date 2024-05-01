@@ -479,7 +479,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
                 {!onFire && <MarkerClusterer
                 averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
                 minLevel={8} // 클러스터 할 최소 지도 레벨
-                calculator={[10, 100, 200, 300]}
+                calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
                 >
                 {makeMapMarkers(markers, mapNE, mapSW)}
