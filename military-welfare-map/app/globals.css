@@ -51,3 +51,20 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #d3d3d3;
 }
+
+.tracker {
+  position: absolute;
+  margin: -35px 0 0 -30px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.balloon {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/balloon.png);
+  -ms-transform-origin: 50% 34px;
+  -webkit-transform-origin: 50% 34px;
+  transform-origin: 50% 34px;
+}

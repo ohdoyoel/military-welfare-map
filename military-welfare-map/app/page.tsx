@@ -47,7 +47,7 @@ export default function Home() {
   const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const [selectedIdx, setSelectedIdx] = useState(-1)
 
-  const [onFireToggled, setOnFireToggled] = useState(false)
+  const [onFireToggled, setOnFireToggled] = useState(true)
 
   // useEffect(() => {
   //   setMarkers(data)
@@ -72,18 +72,15 @@ export default function Home() {
   useEffect(() => {
     // if (distance == 0.1) setDistance(30)
     setFilteredMarkers(markers.filter((x) => {
-      for (let i = 0; i < isTagsToggled.length; i++) {
-        for (let j = 0; j < isRegionsToggled.length; j++) {
-          if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
-            && isTagsToggled[i] && x.tag == i && isRegionsToggled[j] && x.region == j
-            && isTrimedTextAllIncluded(x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag], searchText)
-            && x.distance! < distanceRange
-          ) return true
-        }
-      }
+      if (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130
+        && isTagsToggled[x.tag] && isRegionsToggled[x.region]
+        && isTrimedTextAllIncluded(x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag], searchText)
+        && x.distance! < distanceRange
+        && ((onFireToggled && x.onFire) || (!onFireToggled))
+      ) return true
       return false
     }))
-    }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange])
+    }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled])
 
   useEffect(() => {
     // console.log(filteredMarkers)
