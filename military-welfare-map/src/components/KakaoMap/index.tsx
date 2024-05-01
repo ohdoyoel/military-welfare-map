@@ -426,7 +426,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
-            let resultLength = 0
+            // let resultLength = 0
             for (let i = 0; i < mks.length; i++) {
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat
                     && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
@@ -434,15 +434,14 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
                         <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire!}
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false}/>
                         )
-                    resultLength += 1
                 }
-                if (resultLength > 1000) {
+                if (result.length > 900) {
                     noMarkers.current = false
                     tooManyMarkers.current = true
                     return []
                 }
             }
-            if (resultLength == 0) {
+            if (result.length == 0) {
                 tooManyMarkers.current = false
                 noMarkers.current = true
                 return []
@@ -483,10 +482,10 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
                 calculator={[10, 100, 200, 300]}
                 minClusterSize={1}
                 >
-                    {makeMapMarkers(markers, mapNE, mapSW)}
+                {makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>}
                 {onFire && markers.map((marker, i) => 
-                    <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
+                    marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} infoVisible={selectedIdx==i ? true : false}/>
                 )}
                 {!initialLocationState.isLoading &&
@@ -509,13 +508,13 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
                     <p className='text-base'>군인을 위해 대부분을 지병장이 낼테니, 나머지만 내!</p>
                 </Alert>
                 }
-                {tooManyMarkers.current &&
+                {!onFire && tooManyMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시되는 장소가 너무 많습니다!</p>
                     <p className='text-base'>검색 조건을 다시 설정하거나 지도를 확대하여 주십시오.</p>
                 </Alert>
                 }
-                {noMarkers.current &&
+                {!onFire && noMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
                     <p className='text-base'>검색 조건을 다시 설정하거나 지도를 이동시켜 주십시오.</p>
