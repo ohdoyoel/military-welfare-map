@@ -467,7 +467,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={10}
-                onClick={() => {setCnt((cnt+1)%2)}}
+                onClick={() => {setCnt((cnt+1))}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}

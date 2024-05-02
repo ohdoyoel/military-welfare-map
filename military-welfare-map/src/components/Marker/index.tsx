@@ -72,7 +72,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     }, [selectedIdx])
 
     useEffect(() => {
-        setIsVisible(false)
+        setSelectedIdx(-1)
     }, [mapClicked])
     
     return (
