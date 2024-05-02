@@ -8,6 +8,7 @@ import { Alert } from '../Alert';
 import ReactDOM from 'react-dom';
 import { MarkerImage } from '../MarkerImage';
 import { AdsBar } from '../AdsBar';
+import { AdsBarFloat } from '../AdsBarFloat';
 
 interface TooltipProps {
     idx: number
@@ -362,9 +363,9 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
             <>
             <Marker key={idx} idx={idx} tag={tag} position={position} mapClicked={mapClicked} onFire={onFire!}
             telno={telno} description={description} address={address} title={title} setPos={setPos} visible={infoVisible} setSelectedIdx={() => setSelectedIdx}/>
-            {map.getLevel() < 7 && <div className='w-96 z-10 mt-40 bg-white flex flex-row shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px]'>
+            {/* {map.getLevel() < 7 && <div className='w-96 z-10 mt-44 bg-white flex flex-row shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px]'>
               <AdsBar/>
-            </div>}
+            </div>} */}
             </>,
               node.current
             )}
@@ -511,11 +512,15 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     <p className='text-base'>검색 조건을 다시 설정하거나 지도를 확대하여 주십시오.</p>
                 </Alert>
                 }
-                {/* {(tooManyMarkers.current) &&
-                <div className='absolute top-2 right-40 m-auto w-96 z-10 bg-white flex flex-row shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px]'>
-                  <AdsBar/>
+                {(tooManyMarkers.current) &&
+                <div className='absolute top-2 right-40 w-96 z-10 flex flex-col gap-4'>
+                  <AdsBarFloat/>
+                  <AdsBarFloat/>
+                  <AdsBarFloat/>
+                  <AdsBarFloat/>
+                  <AdsBarFloat/>
                 </div>
-                } */}
+                }
                 {!onFire && noMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
