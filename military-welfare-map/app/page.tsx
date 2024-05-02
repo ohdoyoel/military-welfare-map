@@ -45,7 +45,15 @@ export default function Home() {
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
 
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
-  const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+  // const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+  const [curPos, setCurPos] = useState({
+      center: {
+          lat: 33.450701,
+          lng: 126.570667,
+      },
+      errMsg: "",
+      isLoading: true,
+  })
   const [selectedIdx, setSelectedIdx] = useState(-1)
 
   const [onFireToggled, setOnFireToggled] = useState(false)
@@ -60,7 +68,7 @@ export default function Home() {
     if (markers.length > 0) {
       let tempMarkers = [...markers]
       tempMarkers.forEach((x) => {
-        x.distance = (curPos.lat - x.position.lat) ** 2 + (curPos.lng - x.position.lng) ** 2
+        x.distance = (curPos.center.lat - x.position.lat) ** 2 + (curPos.center.lng - x.position.lng) ** 2
         x.onFire = x.description != undefined && x.description.includes('[MOCK]')
       })
       tempMarkers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
@@ -80,12 +88,12 @@ export default function Home() {
     setFilteredMarkers(tempMarkers)
     }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled])
 
-  useEffect(() => {
-    // console.log(filteredMarkers)
-    setMapPos(filteredMarkers.length == 0 ? curPos
-              :{lat:filteredMarkers.reduce((r, c) => r + c.position.lat, 0) / filteredMarkers.length,
-                lng:filteredMarkers.reduce((r, c) => r + c.position.lng, 0) / filteredMarkers.length})
-  }, [filteredMarkers])
+  // useEffect(() => {
+  //   // console.log(filteredMarkers)
+  //   setMapPos(filteredMarkers.length == 0 ? curPos
+  //             :{lat:filteredMarkers.reduce((r, c) => r + c.position.lat, 0) / filteredMarkers.length,
+  //               lng:filteredMarkers.reduce((r, c) => r + c.position.lng, 0) / filteredMarkers.length})
+  // }, [filteredMarkers])
 
   const onSearchInputKeyUp = () => { 
     let input;
@@ -175,13 +183,13 @@ export default function Home() {
       </div>
 
       <div className='z-10 absolute top-12 right-1 flex flex-col gap-2'>
-        <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos({lat:curPos.lat, lng:curPos.lng})}>
+        <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos({lat:curPos.center.lat, lng:curPos.center.lng})}>
           <img src='/images/current-position.png'></img>
         </button>
       </div>
       
       <div className={`w-full h-full`}>
-        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} setCurPos={setCurPos}
+        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos}
                   selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled}/>
       </div>
 

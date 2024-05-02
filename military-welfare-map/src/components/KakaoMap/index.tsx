@@ -27,7 +27,8 @@ interface KakaoMapProps {
     mapPos: {lat: number, lng: number}
     setMapPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     markers: MarkerType[]
-    setCurPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
+    curPos: {center:{lat: number, lng: number}, errMsg:string, isLoading:boolean}
+    setCurPos: Dispatch<SetStateAction<{center:{lat: number, lng: number}, errMsg:string, isLoading:boolean}>>
     setSelectedIdx: Dispatch<SetStateAction<number>>
     selectedIdx: number
     onFire: boolean
@@ -365,7 +366,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx, selectedIdx, onFire}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
@@ -378,20 +379,11 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
 
     // get current position and mark
 
-    const [initialLocationState, setInitialLocationState] = useState({
-        center: {
-            lat: 33.450701,
-            lng: 126.570667,
-        },
-        errMsg: "",
-        isLoading: true,
-    })
-
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    setInitialLocationState((prev) => ({
+                    setCurPos((prev) => ({
                         ...prev,
                         center: {
                             lat: position.coords.latitude,
@@ -399,13 +391,13 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
                         },
                         isLoading: false,
                     }))
-                    setCurPos({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                        })
+                    // setCurPos({
+                    //     lat: position.coords.latitude,
+                    //     lng: position.coords.longitude,
+                    //     })
                     },
                 (err) => {
-                    setInitialLocationState((prev) => ({
+                    setCurPos((prev) => ({
                         ...prev,
                         errMsg: err.message,
                         isLoading: false,
@@ -419,17 +411,16 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
         
         useEffect(() => {
             setMapPos({
-                lat: initialLocationState.center.lat,
-                lng: initialLocationState.center.lng
+                lat: curPos.center.lat,
+                lng: curPos.center.lng
             })
-        }, [initialLocationState])
+        }, [curPos])
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
             // let resultLength = 0
             for (let i = 0; i < mks.length; i++) {
-                if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat
-                    && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
+                if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
                     result.push(
                         <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire!}
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false}/>
@@ -488,16 +479,16 @@ export const KakaoMap = ({mapPos, setMapPos, markers, setCurPos, setSelectedIdx,
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} infoVisible={selectedIdx==i ? true : false}/>
                 )}
-                {!initialLocationState.isLoading &&
-                <MapMarker position={initialLocationState.center}
+                {!curPos.isLoading &&
+                <MapMarker position={curPos.center}
                     image={{
                         src: "/images/current-position.png",
                         size: {width: 20, height: 20},
                         options: {offset: {x: 10, y: 10}},
                     }}
                     onClick={() => setMapPos({
-                        lat: initialLocationState.center.lat,
-                        lng: initialLocationState.center.lng
+                        lat: curPos.center.lat,
+                        lng: curPos.center.lng
                     })}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
