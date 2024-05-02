@@ -21,7 +21,7 @@ interface TooltipProps {
     onFire: boolean
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     mapClicked: number
-    infoVisible: boolean
+    selectedIdx: number
     setSelectedIdx: Dispatch<SetStateAction<number>>
 }
 
@@ -39,7 +39,7 @@ interface KakaoMapProps {
 /**
    * AbstractOverlay를 이용하여 사용자 TooltipMarker를 정의 합니다.
    */
-const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, infoVisible, setSelectedIdx}: TooltipProps) => {
+const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx}: TooltipProps) => {
     const map = useMap()
     // Marker로 올려질 node 객체를 생성 합니다.
     const node = useRef(document.createElement("div"))
@@ -362,7 +362,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
           : ReactDOM.createPortal(
             <>
             <Marker key={idx} idx={idx} tag={tag} position={position} mapClicked={mapClicked} onFire={onFire!}
-            telno={telno} description={description} address={address} title={title} setPos={setPos} visible={infoVisible} setSelectedIdx={() => setSelectedIdx}/>
+            telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={() => setSelectedIdx}/>
             {/* {map.getLevel() < 7 && <div className='w-96 z-10 mt-44 bg-white flex flex-row shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px]'>
               <AdsBar/>
             </div>} */}
@@ -430,7 +430,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
                     result.push(
                         <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire!}
-                            telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} visible={selectedIdx==i ? true : false}/>
+                            telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} selectedIdx={selectedIdx}/>
                         )
                 }
                 if (result.length > 900) {
@@ -467,7 +467,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={10}
-                onClick={() => {setCnt(cnt+1)}}
+                onClick={() => {setCnt((cnt+1)%2)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}
@@ -484,7 +484,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 </MarkerClusterer>}
                 {(onFire || tooManyMarkers.current) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
-                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} infoVisible={selectedIdx==i ? true : false}/>
+                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx}/>
                 )}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}

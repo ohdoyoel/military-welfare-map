@@ -15,7 +15,8 @@ interface MarkerProps {
     onFire: boolean
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     mapClicked: number
-    visible: boolean
+    // visible: boolean
+    selectedIdx: number
     setSelectedIdx: Dispatch<SetStateAction<number>>
 }
 
@@ -56,8 +57,8 @@ interface MarkerProps {
 // bg-gradient-to-br from-purple-200 to-purple-500
 // `
 
-export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, visible, setSelectedIdx}: MarkerProps) => {
-    const [isVisible, setIsVisible] = useState(visible)
+export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx}: MarkerProps) => {
+    const [isVisible, setIsVisible] = useState(idx == selectedIdx)
 
     const removeZindex = () => {
         let button = document.getElementById(`tagmarker${idx}`) as HTMLButtonElement;
@@ -67,8 +68,8 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     }
 
     useEffect(() => {
-        setIsVisible(visible)
-    }, [visible])
+        setIsVisible(selectedIdx == idx)
+    }, [selectedIdx])
 
     useEffect(() => {
         setIsVisible(false)
@@ -81,7 +82,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
                     setPos({lat: position.lat, lng: position.lng})
                     setSelectedIdx(idx)
                     setIsVisible(!isVisible)
-                    console.log(onFire)
+                    console.log(idx)
                 }}>
                 {/* {onFire && <div className={`relative text-5xl ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
                 ⭐
