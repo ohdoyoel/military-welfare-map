@@ -44,8 +44,8 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
         }
         if (result.length == 0) result.push(
             <AlertItem key={-1}>
-                <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
-                <p className='text-base'>검색 조건을 다시 설정하여 주십시오.</p>
+                <p className='text-xl font-nsb text-gray-600'>표시할 장소가 없습니다!</p>
+                <p className='text-lg text-gray-500'>검색 조건을 다시 설정하여 주십시오.</p>
             </AlertItem>
         )
         return result

@@ -476,7 +476,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 >
                 {!onFire && <MarkerClusterer
                 averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-                minLevel={8} // 클러스터 할 최소 지도 레벨
+                minLevel={10} // 클러스터 할 최소 지도 레벨
                 calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
                 >
@@ -500,19 +500,19 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 <ReSetttingMapBounds markers={markers}/>
-                {onFire &&
+                {/* {onFire &&
                 <Alert>
                     <p className='text-lg font-nsb'>지피티 병장이 쏜다!</p>
                     <p className='text-base'>군인을 위해 대부분을 지병장이 낼테니, 나머지만 내!</p>
                 </Alert>
-                }
+                } */}
                 {!onFire && tooManyMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시되는 장소가 너무 많습니다!</p>
                     <p className='text-base'>검색 조건을 다시 설정하거나 지도를 확대하여 주십시오.</p>
                 </Alert>
                 }
-                {(tooManyMarkers.current) &&
+                {/* {(tooManyMarkers.current) &&
                 <div className='absolute top-2 right-40 w-96 z-10 flex flex-col gap-4'>
                   <AdsBarFloat/>
                   <AdsBarFloat/>
@@ -520,7 +520,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                   <AdsBarFloat/>
                   <AdsBarFloat/>
                 </div>
-                }
+                } */}
                 {!onFire && noMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
