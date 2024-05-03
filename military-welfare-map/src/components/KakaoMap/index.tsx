@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import { MarkerImage } from '../MarkerImage';
 import { AdsBar } from '../AdsBar';
 import { AdsBarFloat } from '../AdsBarFloat';
+import { AdsWindow } from '../AdsWindow';
 
 interface TooltipProps {
     idx: number
@@ -363,9 +364,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
             <>
             <Marker key={idx} idx={idx} tag={tag} position={position} mapClicked={mapClicked} onFire={onFire!}
             telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={() => setSelectedIdx}/>
-            {/* {map.getLevel() < 7 && <div className='w-96 z-10 mt-44 bg-white flex flex-row shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px]'>
-              <AdsBar/>
-            </div>} */}
+            <AdsWindow idx={idx} pos={position}/>
             </>,
               node.current
             )}
