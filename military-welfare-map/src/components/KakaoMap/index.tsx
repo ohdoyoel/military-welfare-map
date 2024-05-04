@@ -488,14 +488,18 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 onCenterChanged={setCenterAndBound}
                 onTileLoaded={setCenterAndBound}
                 >
-                {!onFire && <MarkerClusterer
+                {!onFire &&
+                <MarkerClusterer
                 averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-                minLevel={10} // 클러스터 할 최소 지도 레벨
+                minLevel={8} // 클러스터 할 최소 지도 레벨
                 calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
                 >
-                  {makeMapMarkers(markers, mapNE, mapSW)}
-                </MarkerClusterer>}
+                  {
+                    makeMapMarkers(markers, mapNE, mapSW)
+                  }
+                </MarkerClusterer>
+                }
                 {(onFire || tooManyMarkers.current) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>

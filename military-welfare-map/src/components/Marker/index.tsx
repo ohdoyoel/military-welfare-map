@@ -82,7 +82,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     // }, [mapClicked])
     
     return (
-        <CustomOverlayMap position={position} onCreate={removeZindex} clickable={false}>
+        <CustomOverlayMap position={position} onCreate={removeZindex}>
             <button id={`tagmarker${idx}`} className={`grid ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'} place-content-center rounded-[3px] text-white opacity-80 z-10`}
                 onClick={() => {
                     // setPos({lat: position.lat, lng: position.lng})

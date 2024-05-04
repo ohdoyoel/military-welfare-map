@@ -9,9 +9,10 @@ interface InformationPanelProps {
     markers: MarkerType[]
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
     setIdx: Dispatch<SetStateAction<number>>
+    setMarkers: Dispatch<SetStateAction<MarkerType[]>>
 }
 
-export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProps) => {
+export const InformationPanel = ({markers, setPos, setIdx, setMarkers}: InformationPanelProps) => {
     
     // const itemsPerPage = 10;
     // const [hasMore, setHasMore] = useState(true);
@@ -39,7 +40,8 @@ export const InformationPanel = ({markers, setPos, setIdx}: InformationPanelProp
         for (let i = 0; i < posts.length; i++) {
             result.push(
                 <LocationItem _id={i} position={posts[i].position} tag={posts[i].tag}
-                            address={posts[i].address} title={posts[i].title} key={i} setPos={setPos} setIdx={setIdx} description={posts[i].description} onFire={posts[i].onFire!}/>
+                            address={posts[i].address} title={posts[i].title} key={i} setPos={setPos} setIdx={setIdx} description={posts[i].description} onFire={posts[i].onFire!}
+                            star={posts[i].isStar!} setMarkers={setMarkers}/>
             )
         }
         if (result.length == 0) result.push(
