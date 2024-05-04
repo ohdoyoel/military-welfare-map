@@ -11,6 +11,7 @@ export type MarkerType = {
     telno?: string
     distance?: number
     onFire?: boolean
+    isStar?: boolean
 }
 
 export type APIProps = {

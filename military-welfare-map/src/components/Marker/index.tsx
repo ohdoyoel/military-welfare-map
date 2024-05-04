@@ -3,6 +3,7 @@ import { CustomOverlayMap, useMap } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
 import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderTextColor } from "@/src/types/tagColor";
 import { tagIconForMarker, tagToOrder } from "@/src/types/tagIconLabel";
+import { MarkerType } from "@/src/types/data";
 
 interface MarkerProps {
     idx: number
@@ -18,6 +19,8 @@ interface MarkerProps {
     // visible: boolean
     selectedIdx: number
     setSelectedIdx: Dispatch<SetStateAction<number>>
+    star: boolean
+    setMarkers: Dispatch<SetStateAction<MarkerType[]>>
 }
 
 // let tagTextColors = `
@@ -57,7 +60,7 @@ interface MarkerProps {
 // bg-gradient-to-br from-purple-200 to-purple-500
 // `
 
-export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx}: MarkerProps) => {
+export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx, star, setMarkers}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(idx == selectedIdx)
 
     const map = useMap()
@@ -73,19 +76,19 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
         setIsVisible(selectedIdx == idx)
     }, [selectedIdx])
 
-    useEffect(() => {
-        setSelectedIdx(-1)
-        setIsVisible(false)
-    }, [mapClicked])
+    // useEffect(() => {
+    //     setSelectedIdx(-1)
+    //     setIsVisible(false)
+    // }, [mapClicked])
     
     return (
-        <CustomOverlayMap position={position} onCreate={removeZindex}>
+        <CustomOverlayMap position={position} onCreate={removeZindex} clickable={false}>
             <button id={`tagmarker${idx}`} className={`grid ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'} place-content-center rounded-[3px] text-white opacity-80 z-10`}
                 onClick={() => {
                     // setPos({lat: position.lat, lng: position.lng})
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
                     setSelectedIdx(idx)
-                    setIsVisible(true)
+                    setIsVisible(!isVisible)
                     // console.log(idx)
                 }}>
                 {/* {onFire && <div className={`relative text-5xl ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
@@ -95,7 +98,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
                 
                 {tagIconForMarker[tag]}
             </button>
-            {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno} onFire={onFire}/>}
+            {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno} onFire={onFire} star={star} setMarkers={setMarkers}/>}
         </CustomOverlayMap>
     )
 }

@@ -1,6 +1,7 @@
-import { ReactElement } from "react"
+import { Dispatch, ReactElement, SetStateAction } from "react"
 import { tagOrderBgColor, tagOrderBgGradientColor } from "@/src/types/tagColor";
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from "@/src/types/tagIconLabel";
+import { MarkerType } from "@/src/types/data";
 
 interface InfoWindowProps {
     pos: {lat:number, lng:number}
@@ -10,14 +11,30 @@ interface InfoWindowProps {
     description?: string
     telno?: string
     onFire: boolean
+    star: boolean
+    setMarkers: Dispatch<SetStateAction<MarkerType[]>>
 }
 
-export const InfoWindow = ({pos, tag, address, title, description, telno, onFire}: InfoWindowProps) => {
+export const InfoWindow = ({pos, tag, address, title, description, telno, onFire, star, setMarkers}: InfoWindowProps) => {
+    const starToggle = (title: string) => {
+        setMarkers((markers) =>
+            [...markers].map((marker) => {
+                if (marker.title == title) {
+                    marker.isStar = !marker.isStar
+                    return marker
+                }
+                return marker
+        })
+        )
+    }
+
     return (
         <div className={`relative flex flex-col absolute -left-1/2 ${onFire ? `ml-8` : `ml-6`} bottom-[236px] z-20`}>
             <div className="relative flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
                 <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
-                <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
+                <div className={`relative flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
+                    <button className={`absolute top-1 left-0 w-4 h-4 ${star ? `bg-yellow-400`: `bg-white`}`}
+                            onClick={() => starToggle(title)}/>
                     {tagIconForInfoWindow[tag]}
                     <p className='text-sm'>{tagLabel[tag]}</p>
                 </div>
