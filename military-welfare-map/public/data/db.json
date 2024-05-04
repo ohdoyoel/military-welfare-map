@@ -24732,232 +24732,856 @@
         "telno": "033-655-1133"
     },
     {
-        "title": "화성 동원훈련장(해병대사령부)",
+        "title": "(예비군 훈련장 동원훈련장) 31사단 삼도 동원훈련장",
         "tag": 10,
-        "address": "경기도 화성시  경기도 화성시 시청로(봉담읍) 1311",
+        "address": "광주광역시 광산구 쌍내길(내산동) 210",
         "position": {
-            "lat": 37.21862443450871,
-            "lng": 126.88522265888244
+            "lat": 35.1276083,
+            "lng": 126.6581667
+        },
+        "region": 4,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=42396c80-e33c-11e4-b543-00000b022570)",
+        "telno": "062-260-6778"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 가평예비군훈련장",
+        "tag": 10,
+        "address": "경기도 가평군 각담말길(가평읍) 39",
+        "position": {
+            "lat": 37.8616737,
+            "lng": 127.5136999
         },
         "region": 7,
-        "description": "",
-        "telno": "031-356-6113"
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=4a1c97b0-c3ac-11da-9b2a-000001010d15)",
+        "telno": "031-580-2747"
     },
     {
-        "title": "달성예비군훈련장",
+        "title": "(직장 위임훈련장 동원훈련장) 강남/서초 교장(내곡교장) : (52사단 동원훈련장)",
         "tag": 10,
-        "address": "대구광역시 달성군  대구광역시 달성군 비슬로(논공읍) 1736-1",
+        "address": "서울 서초구 신흥말길 79-39",
         "position": {
-            "lat": 35.770279212663,
-            "lng": 128.416809550729
+            "lat": 37.4499763,
+            "lng": 127.0834374
         },
-        "region": 2,
-        "description": "",
-        "telno": "053-611-3113"
+        "region": 0,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=b2aa3a60-ffbb-11dc-8906-0000ac11062e)",
+        "telno": "02-572-9113"
     },
     {
-        "title": "해병대 교육훈련단 예비군관리연대 훈련장",
+        "title": "(직장 위임훈련장 지역훈련장) 강동송파 예비군 훈련장",
         "tag": 10,
-        "address": "20-1번지 연대훈련장(도구예비군훈련장)",
+        "address": "서울 서초구 내곡동 31-61",
         "position": {
-            "lat": 35.983386085419795,
-            "lng": 129.43940244328675
+            "lat": 37.4517154,
+            "lng": 127.0706592
         },
-        "region": -1,
-        "description": "",
-        "telno": "054-290-1903"
-    },
-    {
-        "title": "원주예비군훈련장",
-        "tag": 10,
-        "address": "1대대",
-        "position": {
-            "lat": 37.3702222383787,
-            "lng": 127.914227624606
-        },
-        "region": -1,
-        "description": "",
-        "telno": "033-762-7113"
-    },
-    {
-        "title": "파주 예비군 훈련장",
-        "tag": 10,
-        "address": "경기도 파주시  경기도 파주시 다래울길(월롱면) 165",
-        "position": {
-            "lat": 37.7948871050428,
-            "lng": 126.776113036725
-        },
-        "region": 7,
+        "region": 0,
         "description": "",
         "telno": ""
     },
     {
-        "title": "창원공단예비군훈련장(안민동)",
+        "title": "(예비군 훈련장 지역훈련장) 거제 예비군훈련장",
         "tag": 10,
-        "address": "(안민) 산 92-2",
+        "address": "경상남도 거제시 제산로(양정동) 64-8 거제 예비군훈련장",
         "position": {
-            "lat": 35.1839887352639,
-            "lng": 128.683931257099
-        },
-        "region": -1,
-        "description": "",
-        "telno": ""
-    },
-    {
-        "title": "삼성전자 기흥 예비군훈련장",
-        "tag": 10,
-        "address": "경기도 용인시 기흥구  경기도 용인시 기흥구 삼성로1(농서동188-4)",
-        "position": {
-            "lat": 37.226604023416,
-            "lng": 127.089851088211
-        },
-        "region": 7,
-        "description": "",
-        "telno": ""
-    },
-    {
-        "title": "함양 예비군훈련장",
-        "tag": 10,
-        "address": "경상남도 함양군  경상남도 함양군 하림강변길(함양읍) 43-30",
-        "position": {
-            "lat": 35.4960357667579,
-            "lng": 127.736159622843
+            "lat": 34.8882439315681,
+            "lng": 128.641409877885
         },
         "region": 13,
-        "description": "",
-        "telno": "055-963-1113"
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=beb86e80-c9c1-11da-911c-000001010d15)",
+        "telno": "0556330113"
     },
     {
-        "title": "대구 3예비군훈련장(능성동)",
+        "title": "(예비군 훈련장 지역훈련장) 경상남도 창원시 진해구 행암동 예비군관리대 훈련장",
         "tag": 10,
-        "address": "대구광역시 동구  대구광역시 동구 팔공로(능성동) 1421",
+        "address": "경상남도 창원시 진해구 행암동 324번지(행암로 264번길) 예비군관리대",
         "position": {
-            "lat": 35.9661722738616,
-            "lng": 128.734793112459
+            "lat": 35.1123194025737,
+            "lng": 128.700788049625
         },
-        "region": 2,
-        "description": "",
-        "telno": "053-981-2212"
+        "region": 13,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=21a47ff0-c901-11da-89e3-000001010d15)",
+        "telno": "0555494486"
     },
     {
-        "title": "김포제1예비군훈련장",
+        "title": "(예비군 훈련장 지역훈련장) 경주 예비군훈련장",
         "tag": 10,
-        "address": "경기도 김포시  경기도 김포시 군하로(월곶면) 123",
+        "address": "경상북도 경주시 다불로(동천동) 359",
         "position": {
-            "lat": 37.7048399560283,
-            "lng": 126.559559559496
+            "lat": 35.8537753,
+            "lng": 129.2369419
         },
-        "region": 7,
-        "description": "",
-        "telno": "032-454-6952"
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=4a03d080-db0e-11da-ac3c-000001010d15)",
+        "telno": "0547410113"
     },
     {
-        "title": "미추홀구연수구중구 예비군훈련장",
+        "title": "(예비군 훈련장 지역훈련장) 계양 부평 예비군 훈련장",
         "tag": 10,
-        "address": "인천광역시 남구  인천광역시 미추홀구 주승로(관교동) 152",
+        "address": "인천광역시 서구 아라로51번길(백석동) 56",
         "position": {
-            "lat": 37.4428419786646,
-            "lng": 126.686835957586
+            "lat": 37.5773983,
+            "lng": 126.6809855
         },
         "region": 3,
-        "description": "",
-        "telno": ""
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=8a1735e0-c29a-11da-939f-000001010d15)",
+        "telno": "0325536113"
     },
     {
-        "title": "동구 예비군훈련장",
+        "title": "(예비군 훈련장 지역훈련장) 공주 예비군훈련장",
         "tag": 10,
-        "address": "대전광역시 동구  대전광역시 동구 동부로(용운동) 292",
+        "address": "충청남도 공주시 의당로(금흥동) 114-17",
         "position": {
-            "lat": 36.3392212,
-            "lng": 127.4641269
+            "lat": 36.4827602,
+            "lng": 127.1351789
         },
-        "region": 5,
-        "description": "",
-        "telno": ""
+        "region": 9,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=99c241e0-a753-11da-9018-000001010d15)",
+        "telno": "041-852-8113"
     },
     {
-        "title": "연천 예비군 훈련장",
+        "title": "(예비군 훈련장 지역훈련장) 구미 예비군 훈련장",
         "tag": 10,
-        "address": "경기도 연천군  경기도 연천군 전곡읍 은대리 평화로966번길 연천군 예비군훈련장",
+        "address": "경상북도 구미시 고아읍 송림리 산26-3",
         "position": {
-            "lat": 38.054624058215,
-            "lng": 127.0697025160369
-        },
-        "region": 7,
-        "description": "",
-        "telno": "031-839-2961"
-    },
-    {
-        "title": "완주군예비군훈련장",
-        "tag": 10,
-        "address": "전라북도 완주군  전라북도 완주군 소양면 명덕리 66-3 (완주군)",
-        "position": {
-            "lat": 35.888841940879864,
-            "lng": 127.22804819557392
-        },
-        "region": 10,
-        "description": "",
-        "telno": ""
-    },
-    {
-        "title": "예천 예비군 훈련장",
-        "tag": 10,
-        "address": "경상북도 예천군  경상북도 예천군 도효자로(예천읍) 114",
-        "position": {
-            "lat": 36.6783979308518,
-            "lng": 128.467754516833
+            "lat": 36.1720770235298,
+            "lng": 128.358719791533
         },
         "region": 12,
-        "description": "",
-        "telno": "054-654-0113"
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=715268d0-c3a4-11da-a96b-000001010d15)",
+        "telno": "054-451-5837"
     },
     {
-        "title": "봉화예비군훈련장",
+        "title": "(예비군 훈련장 지역훈련장) 군북 예비군훈련장",
         "tag": 10,
-        "address": "경상북도 봉화군  경상북도 봉화군 예봉로(봉화읍) 1710-230",
+        "address": "경상남도 함안군 군북면 소포리 420-1",
         "position": {
-            "lat": 36.8690825042363,
-            "lng": 128.751799393864
-        },
-        "region": 12,
-        "description": "",
-        "telno": "054-672-0113"
-    },
-    {
-        "title": "김해 예비군훈련장",
-        "tag": 10,
-        "address": "경상남도 김해시  경상남도 김해시 상동로(생림면) 10-72 김해예비군훈련장",
-        "position": {
-            "lat": 35.2948570070294,
-            "lng": 128.87936105577
+            "lat": 35.2630080,
+            "lng": 128.3496130
         },
         "region": 13,
-        "description": "",
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=5ecc8d50-caea-11e5-9b74-00000b022570)",
+        "telno": "0555839399"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 김천예비군훈련장",
+        "tag": 10,
+        "address": "경상북도 김천시 어모면 어모로 76 (사서함 1호)",
+        "position": {
+            "lat": 36.1643571,
+            "lng": 128.1175500
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=54282440-ca8c-11da-b44f-000001010d15)",
+        "telno": "0544390113"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 김포제1예비군훈련장",
+        "tag": 10,
+        "address": "경기도 김포시 군하로(월곶면) 123",
+        "position": {
+            "lat": 37.7048589291767,
+            "lng": 126.559549581486
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=dcbf8750-fe4d-11de-bc66-000001010d0c)",
+        "telno": "032-454-6932,38"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 김해 예비군훈련장",
+        "tag": 10,
+        "address": "경상남도 김해시 상동로(생림면) 10-72 김해예비군훈련장",
+        "position": {
+            "lat": 35.2948560416664,
+            "lng": 128.879359384648
+        },
+        "region": 13,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=f970b700-dfd6-11da-9a0d-000001010d15)",
         "telno": "055-329-2013"
     },
     {
-        "title": "남원 과학화 예비군 훈련장",
+        "title": "(예비군 훈련장 지역훈련장) 남동구 예비군훈련장",
         "tag": 10,
-        "address": "전라북도 남원시  전라북도 남원시 남문로(대산면) 95",
+        "address": "인천광역시 서구 경명대로(공촌동) 725-24",
         "position": {
-            "lat": 35.4048279,
-            "lng": 127.3376422
+            "lat": 37.5538092916923,
+            "lng": 126.690313026623
         },
-        "region": 10,
-        "description": "",
-        "telno": "1522-2573"
+        "region": 3,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=69679e10-c543-11da-ba2b-000001010d15)",
+        "telno": "0325620113"
     },
     {
-        "title": "대구 동구 예비군 훈련장",
+        "title": "(예비군 훈련장 지역훈련장) 달성예비군훈련장",
         "tag": 10,
-        "address": "대구광역시 동구  대구광역시 동구 팔공로(능성동) 1421",
+        "address": "대구광역시 달성군 비슬로(논공읍) 1736-1",
         "position": {
-            "lat": 35.9611229462467,
-            "lng": 128.73351218073
+            "lat": 35.7703034,
+            "lng": 128.4155457
         },
         "region": 2,
-        "description": "",
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=ce644760-e2d6-11dd-82d7-000001010d0c)",
+        "telno": "0536161139"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 당진 예비군훈련장",
+        "tag": 10,
+        "address": "충청남도 당진시 역천로(채운동) 877",
+        "position": {
+            "lat": 36.8895320,
+            "lng": 126.6164750
+        },
+        "region": 9,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=1de70ee0-c484-11da-a96b-000001010d15)",
+        "telno": "0413541113"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 대구 제3예비군훈련장[능성동]",
+        "tag": 10,
+        "address": "대구광역시 동구 팔공로(능성동) 394",
+        "position": {
+            "lat": 35.9612219,
+            "lng": 128.7325571
+        },
+        "region": 2,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=f9a06d00-db09-11da-a738-000001010d15)",
+        "telno": "053-662-1372"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 대구제1예비군훈련장(국우동)",
+        "tag": 10,
+        "address": "대구광역시 북구 구리로(국우동) 183-35",
+        "position": {
+            "lat": 35.9483171344609,
+            "lng": 128.57209662724
+        },
+        "region": 2,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=6e160490-c53b-11da-ba2b-000001010d15)",
+        "telno": "053-320-6915"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 대덕구 예비군훈련장(장동로 111)",
+        "tag": 10,
+        "address": "대전광역시 대덕구 장동로(와동) 111",
+        "position": {
+            "lat": 36.4077071,
+            "lng": 127.4296875
+        },
+        "region": 5,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=be75f820-ca8e-11da-bc12-000001010d15)",
+        "telno": "0426272113"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 동경주예비군훈련장",
+        "tag": 10,
+        "address": "경상북도 경주시 와읍용동동길(문무대왕면) 265",
+        "position": {
+            "lat": 35.8283902,
+            "lng": 129.4421485
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=ec57b640-11ce-11de-953e-000001010d0c)",
+        "telno": "054-299-1991"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 동구 예비군훈련장",
+        "tag": 10,
+        "address": "대전광역시 동구 동부로(용운동) 292",
+        "position": {
+            "lat": 36.3410400507895,
+            "lng": 127.465004650769
+        },
+        "region": 5,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=eb680390-c3aa-11da-a96b-000001010d15)",
+        "telno": "042-284-7252"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 동두천 · 양주시 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 동두천시 못골로(생연동) 88 (양주시동두천시예비군훈련장)",
+        "position": {
+            "lat": 37.9049304,
+            "lng": 127.0708152
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=754cfdd0-c2da-11da-813a-000001010d15)",
+        "telno": "031-530-3773"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 동북구예비군 훈련장",
+        "tag": 10,
+        "address": "울산광역시 북구 황토전길(신현동) 42-1",
+        "position": {
+            "lat": 35.5866099,
+            "lng": 129.4268459
+        },
+        "region": 6,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=a6d9ca70-de4d-11da-ac3c-000001010d15)",
+        "telno": "052-209-4488"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 마산 예비군훈련장",
+        "tag": 10,
+        "address": "경상남도 창원시 마산회원구 삼계숲길(내서읍) 257",
+        "position": {
+            "lat": 35.2305699,
+            "lng": 128.4932290
+        },
+        "region": 13,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=31012900-c0ec-11e1-84e9-000001014c15)",
+        "telno": "055-231-0612"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 무안 예비군훈련장",
+        "tag": 10,
+        "address": "전라남도 무안군 함장로(무안읍) 410",
+        "position": {
+            "lat": 35.0247070,
+            "lng": 126.4619679
+        },
+        "region": 11,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=5209f3f0-c933-11da-89e3-000001010d15)",
+        "telno": "061-454-0113"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 미추홀구연수구중구 예비군훈련장",
+        "tag": 10,
+        "address": "인천광역시 남구 미추홀구 주승로(관교동) 152",
+        "position": {
+            "lat": 37.4428502,
+            "lng": 126.6868293
+        },
+        "region": 3,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=e9d55050-c544-11da-889b-000001010d15)",
+        "telno": "0324231113"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 밀양 예비군훈련장",
+        "tag": 10,
+        "address": "경상남도 밀양시  경상남도 밀양시 조음로(상남면) 80, 밀양예비군훈련장",
+        "position": {
+            "lat": 35.4117506107243,
+            "lng": 128.758712444053
+        },
+        "region": 13,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=6e65b550-c827-11da-89e3-000001010d15)",
+        "telno": "055-533-1443"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 반곡동 일반훈련장",
+        "tag": 10,
+        "address": "강원 원주시 유만길 32-6",
+        "position": {
+            "lat": 37.3222791,
+            "lng": 127.9702938
+        },
+        "region": -1,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=f37292a0-b749-11dc-8b84-0000ac11062b)",
+        "telno": "033-762-7113"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 별내 동원훈련장(55동원지원단)",
+        "tag": 10,
+        "address": "경기도 남양주시 불암산로(별내동) 21",
+        "position": {
+            "lat": 37.6461709,
+            "lng": 127.1088814
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=9c0a2bc0-b557-11e1-a042-000001014c15)",
+        "telno": "031-329-6723"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 부천 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 시흥시 하우로(대야동) 91",
+        "position": {
+            "lat": 37.4636457,
+            "lng": 126.7830182
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=9b968410-c54c-11da-889b-000001010d15)",
+        "telno": "0313126113"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 삼성전자 기흥 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 용인시 기흥구 삼성로1(농서동188-4)",
+        "position": {
+            "lat": 37.2269444725375,
+            "lng": 127.087763746841
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=d91cf360-f7d9-11dd-ba84-0000ac11062e)",
+        "telno": "031--"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 삼성전자통합여단 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 화성시 동탄순환대로24길(중동) 121",
+        "position": {
+            "lat": 37.2099315,
+            "lng": 127.125182
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=b8245af0-58ca-11db-ad17-0000ac11062b)",
         "telno": ""
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 서구 예비군훈련장",
+        "tag": 10,
+        "address": "대전광역시 서구 구봉산북로 184-105 (서구 예비군 훈련장)",
+        "position": {
+            "lat": 36.2900167,
+            "lng": 127.3430750
+        },
+        "region": 5,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=2ea4b810-c865-11da-89e3-000001010d15)",
+        "telno": "042-544-4113"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 서구동구 예비군훈련장",
+        "tag": 10,
+        "address": "인천광역시 서구 인천광역시 계양구 둑실동 252",
+        "position": {
+            "lat": 37.5820272,
+            "lng": 126.6832848
+        },
+        "region": 3,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=116e6fc0-c540-11da-889b-000001010d15)",
+        "telno": "032-562-7873"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 서구예비군 훈련장",
+        "tag": 10,
+        "address": "대구광역시 동구 능성동 423-1",
+        "position": {
+            "lat": 35.9617457272167,
+            "lng": 128.732999083712
+        },
+        "region": 2,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=8410c1f0-c85f-11da-89d4-000001010d15)",
+        "telno": "053-320-6226"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 서귀포 예비군훈련장",
+        "tag": 10,
+        "address": "제주특별자치도 서귀포시 인정오름로(토평동) 144",
+        "position": {
+            "lat": 33.2900913651476,
+            "lng": 126.57325693016
+        },
+        "region": 15,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=792f5eb0-a774-11e4-a095-00000b02256f)",
+        "telno": "064-733-2380"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 송포 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 고양시 일산서구 덕이로(덕이동) 104-36",
+        "position": {
+            "lat": 37.6939472670536,
+            "lng": 126.751163596186
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=c45357d0-ca7d-11da-b44f-000001010d15)",
+        "telno": "0319170112"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 아산 예비군훈련장",
+        "tag": 10,
+        "address": "충청남도 아산시 고불로365번길(배방읍) 50",
+        "position": {
+            "lat": 36.7331175,
+            "lng": 127.0456980
+        },
+        "region": 9,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=1d2799d0-1cf6-11dd-8dc8-000001010d0c)",
+        "telno": "041-545-1656"
+    },
+    {
+        "title": "(예비군 훈련장 과학화훈련장) 여수 만성리 예비군훈련장",
+        "tag": 10,
+        "address": "전라남도 여수시 망양로(만흥동) 167",
+        "position": {
+            "lat": 34.7700329,
+            "lng": 127.7486849
+        },
+        "region": 11,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=326db7b0-c849-11da-89e3-000001010d15)",
+        "telno": "061-653-7113"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 연천 예비군 훈련장",
+        "tag": 10,
+        "address": "경기도 연천군 전곡읍 은대리 평화로966번길 연천군 예비군훈련장",
+        "position": {
+            "lat": 38.0546960,
+            "lng": 127.0694170
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=eb9a8d80-c2b3-11da-813a-000001010d15)",
+        "telno": "031-839-2961"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 영점사격장",
+        "tag": 10,
+        "address": "제주특별자치도 서귀포시 인정오름로(토평동) 144",
+        "position": {
+            "lat": 33.2900913651476,
+            "lng": 126.57325693016
+        },
+        "region": 15,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=cfc92740-a2f2-11e5-ab6c-00000b02256f)",
+        "telno": "0649053803"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 영주 봉화예비군훈련장",
+        "tag": 10,
+        "address": "경상북도 영주시 (이산면) 웃무리로 67-1",
+        "position": {
+            "lat": 36.8300416,
+            "lng": 128.6450625
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=696bf880-c830-11da-89e3-000001010d15)",
+        "telno": "0546395808"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 영천 동원훈련장",
+        "tag": 10,
+        "address": "경상북도 영천시 천문로(오미동) 622-13 또는 영천시 농업기술센터 옆",
+        "position": {
+            "lat": 35.9909189171716,
+            "lng": 128.92596576163
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=9f6d7620-e5e7-11dd-8baf-000001010d15)",
+        "telno": "054-332-6631"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 울릉도 예비군 관리대",
+        "tag": 10,
+        "address": "경상북도 울릉군 울릉읍 사동리 660-11",
+        "position": {
+            "lat": 37.4631783388526,
+            "lng": 130.877929568501
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=54aa1e80-cad9-11da-b44f-000001010d15)",
+        "telno": "054-791-0152"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 울산 울주군 예비군훈련장",
+        "tag": 10,
+        "address": "울산광역시 울주군 언양읍 대암둔기로 100",
+        "position": {
+            "lat": 35.5473582,
+            "lng": 129.1823875
+        },
+        "region": 6,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=4558d6e0-b960-11da-8dbc-000001010d15)",
+        "telno": "0522044050"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 울진 예비군훈련장",
+        "tag": 10,
+        "address": "경상북도 울진군 원남로(근남면) 862",
+        "position": {
+            "lat": 36.9433595,
+            "lng": 129.3811375
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=95bd0570-c851-11da-89e3-000001010d15)",
+        "telno": "0547836113"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 원주(만종)예비군훈련장",
+        "tag": 10,
+        "address": "강원 원주시 상만종길 81-6",
+        "position": {
+            "lat": 37.3701228,
+            "lng": 127.9141995
+        },
+        "region": -1,
+        "description": "",
+        "telno": "033-760-2595"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 유성구 예비군훈련장",
+        "tag": 10,
+        "address": "대전광역시 유성구 하기로143번길 84",
+        "position": {
+            "lat": 36.3939633411845,
+            "lng": 127.342588026752
+        },
+        "region": 5,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=88642250-a7f9-11da-bf7c-000001010d15)",
+        "telno": "042-824-0259"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 의정부시 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 양주시 청담로(고암동) 305",
+        "position": {
+            "lat": 37.8256724,
+            "lng": 127.0654033
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=1837a700-d808-11db-ba3c-000001010d15)",
+        "telno": "0318583061"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 모슬포예비군훈련장 (제91해병대대 종합훈련교장)",
+        "tag": 10,
+        "address": "제주 서귀포시 대정읍 상모리 3376-1",
+        "position": {
+            "lat": 33.2304099,
+            "lng": 126.2623879
+        },
+        "region": -1,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=9182c450-cf3a-11da-9f21-000001010d15)",
+        "telno": "064-797-4911"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 정실예비군훈련장 (제주시 예비군 훈련장)",
+        "tag": 10,
+        "address": "제주 제주시 종천길 60",
+        "position": {
+            "lat": 33.4701734,
+            "lng": 126.5014016
+        },
+        "region": -1,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=bcadbb20-b29d-11e5-ae7d-00000b022570)",
+        "telno": "064-797-4940"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 제철연대훈련장",
+        "tag": 10,
+        "address": "전라남도 광양시  전라남도 광양시 폭포사랑길(금호동)광양제철소 20-26",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 11,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=abf16600-dfe5-11da-b384-0000ac11062b)",
+        "telno": "061-790-4459"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 중.남구 예비군훈련장",
+        "tag": 10,
+        "address": "대구광역시 동구  대구광역시 동구 팔공로(능성동) 1421 제8251부대",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 2,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=89aa7600-c85b-11da-89e3-000001010d15)",
+        "telno": "053-986-0623"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 창원공단예비군훈련장(안민동)",
+        "tag": 10,
+        "address": "(안민) 산 92-2",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": -1,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=d8de6590-64c9-11dc-adb1-0000ac11062e)",
+        "telno": "055-273-5323"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 철원예비군훈련장",
+        "tag": 10,
+        "address": "강원특별자치도 철원군  강원도 철원군 궁예로(갈말읍) 808",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 14,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=3fc8d050-c558-11da-889b-000001010d15)",
+        "telno": "033-452-4485"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 청송 예비군 훈련장",
+        "tag": 10,
+        "address": "경상북도 청송군  경상북도 청송군 청송읍 길안청송로 1668-31",
+        "position": {
+            "lat": 36.432059724476,
+            "lng": 129.045720972999
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=3da4db70-c864-11da-89e3-000001010d15)",
+        "telno": "054-872-8860"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 청안 동원훈련장",
+        "tag": 10,
+        "address": "충청북도 괴산군  충청북도 괴산군 조천로2길(청안면) 86",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 8,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=88eeb850-c177-11e0-883d-000001014c15)",
+        "telno": "837-1570"
+    },
+    {
+        "title": "(예비군 훈련장 과학화훈련장) 청안예비군훈련장",
+        "tag": 10,
+        "address": "충청북도 괴산군  충청북도 괴산군 조천로2길(청안면) 86",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 8,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=6360e7d0-5f4c-11db-9dd7-000001010d15)",
+        "telno": "043-836-3113"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 칠곡 동원훈련장",
+        "tag": 10,
+        "address": "경상북도 칠곡군  경상북도 칠곡군 아곡8길(왜관읍) 50",
+        "position": {
+            "lat": 36.0216309818394,
+            "lng": 128.432482839144
+        },
+        "region": 12,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=1b21f8b0-cb59-11da-b6a5-000001010d15)",
+        "telno": "054-975-2201"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 파주훈련장",
+        "tag": 10,
+        "address": "경기도 파주시  경기도 파주시 다래울길(월롱면) 165",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=d769b9a0-c540-11da-889b-000001010d15)",
+        "telno": "0319450030"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 평택해군동원훈련장",
+        "tag": 10,
+        "address": "경기도 평택시  경기도 평택시 2함대길(포승읍) 91 (네비설정:평택해군동원훈련장, 서해회관, 평택해군호텔)",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=50eda290-6961-11e0-bb31-000001014c16)",
+        "telno": "031-685-4532"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 포스코 예비군 훈련장(포항)",
+        "tag": 10,
+        "address": "포항시 남구 동촌동 5번지",
+        "position": {
+            "lat": 35.9988235106819,
+            "lng": 129.389477333896
+        },
+        "region": -1,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=49ca66e0-e939-11da-bbfb-0000ac11062e)",
+        "telno": ""
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 포천 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 포천시  경기도 포천시 일동면 화대리 86-3",
+        "position": {
+            "lat": 37.9570507568042,
+            "lng": 127.338238496419
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=3a21fde0-c551-11da-889b-000001010d15)",
+        "telno": "031-538-2937"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 합천표준동원훈련장",
+        "tag": 10,
+        "address": "경상남도 합천군  경상남도 합천군 합천대로(삼가면) 455",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 13,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=7a99ee10-c2ad-11da-813a-000001010d15)",
+        "telno": "055-931-5722"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 해병대 교육훈련단 예비군관리연대 훈련장",
+        "tag": 10,
+        "address": "20-1번지 연대훈련장(도구예비군훈련장)",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": -1,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=d43dc060-a5c3-11e4-ae57-00000b022570)",
+        "telno": "054-290-1037"
+    },
+    {
+        "title": "(직장 위임훈련장 지역훈련장) 현대중공업예비군교육장(구)",
+        "tag": 10,
+        "address": "방어진순환도로 1000(전하동)현대중공업",
+        "position": {
+            "lat": 35.5035398690559,
+            "lng": 129.434511260357
+        },
+        "region": -1,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=7f714700-f1d1-11da-bd24-0000ac11062e)",
+        "telno": "052-202-2713"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 호계 예비군훈련장",
+        "tag": 10,
+        "address": "경기도 의왕시  경기도 의왕시 갈미1로(내손동) 63 호계예비군훈련장",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=a98e6380-c62d-11da-9b83-000001010d15)",
+        "telno": "031-8045-2799"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 홍천예비군훈련장",
+        "tag": 10,
+        "address": "강원특별자치도 춘천시  강원도 홍천군 홍천읍 상오안리161  2395부대",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 14,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=29d38eb0-7cbb-11da-b0ac-000001010d15)",
+        "telno": "0332558113"
+    },
+    {
+        "title": "(예비군 훈련장 동원훈련장) 화성 동원훈련장(해병대사령부)",
+        "tag": 10,
+        "address": "경기도 화성시  경기도 화성시 시청로(봉담읍) 1311",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 7,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=ca098570-417b-11e1-96e1-000001014c16)",
+        "telno": "031-8012-2674"
+    },
+    {
+        "title": "(예비군 훈련장 지역훈련장) 화순 예비군훈련장",
+        "tag": 10,
+        "address": "전라남도 화순군  전라남도 화순군 능주면 내동길 36",
+        "position": {
+            "lat": 0,
+            "lng": 0
+        },
+        "region": 11,
+        "description": "@img(https://www.yebigun1.mil.kr/cmm/fms/getTCImage.do?atchFileId=184a2f90-c5d2-11da-9b83-000001010d15)",
+        "telno": "062-260-6989"
     },
     {
         "title": "풍기통합읍대",
