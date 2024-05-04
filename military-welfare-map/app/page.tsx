@@ -70,6 +70,7 @@ export default function Home() {
       tempMarkers.forEach((x) => {
         x.distance = (curPos.center.lat - x.position.lat) ** 2 + (curPos.center.lng - x.position.lng) ** 2
         x.onFire = x.description != undefined && x.description.includes('[MOCK]')
+        x.isStar = false
       })
       tempMarkers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
       setMarkers(tempMarkers)
@@ -86,7 +87,7 @@ export default function Home() {
         && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
-    }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled])
+    }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled])
 
   // useEffect(() => {
   //   // console.log(filteredMarkers)
@@ -190,7 +191,7 @@ export default function Home() {
       
       <div className={`w-full h-full`}>
         <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos}
-                  selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled}/>
+                  selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} setMarkers={setMarkers}/>
       </div>
 
     </main>

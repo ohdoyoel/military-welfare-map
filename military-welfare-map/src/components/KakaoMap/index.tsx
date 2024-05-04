@@ -24,6 +24,8 @@ interface TooltipProps {
     mapClicked: number
     selectedIdx: number
     setSelectedIdx: Dispatch<SetStateAction<number>>
+    star: boolean
+    setMarkers: Dispatch<SetStateAction<MarkerType[]>>
 }
 
 interface KakaoMapProps {
@@ -35,12 +37,13 @@ interface KakaoMapProps {
     setSelectedIdx: Dispatch<SetStateAction<number>>
     selectedIdx: number
     onFire: boolean
+    setMarkers: Dispatch<SetStateAction<MarkerType[]>>
 }
 
 /**
    * AbstractOverlay를 이용하여 사용자 TooltipMarker를 정의 합니다.
    */
-const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx}: TooltipProps) => {
+const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx, star, setMarkers}: TooltipProps) => {
     const map = useMap()
     // Marker로 올려질 node 객체를 생성 합니다.
     const node = useRef(document.createElement("div"))
@@ -361,19 +364,16 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
               map.getNode()
             )
           : ReactDOM.createPortal(
-            // <div>
             <Marker key={idx} idx={idx} tag={tag} position={position} mapClicked={mapClicked} onFire={onFire!}
-            telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={() => setSelectedIdx}/>
-            // {/* <AdsWindow idx={idx} pos={position}/> */}
-            // </div>
-            ,
+            telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={() => setSelectedIdx}
+            star={star} setMarkers={setMarkers}/>,
               node.current
             )}
        </>
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, setMarkers}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
@@ -430,7 +430,8 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
                     result.push(
                         <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire!}
-                            telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} selectedIdx={selectedIdx}/>
+                            telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} selectedIdx={selectedIdx}
+                            star={mks[i].isStar!} setMarkers={setMarkers}/>
                         )
                 }
                 if (result.length > 900) {
@@ -497,7 +498,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 </MarkerClusterer>}
                 {(onFire || tooManyMarkers.current) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
-                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx}/>
+                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
                 {onFire && floatingAds(markers)}
                 {!curPos.isLoading &&
