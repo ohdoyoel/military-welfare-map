@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
-import { tagOrderBgColor, tagOrderBgGradientColor } from '@/src/types/tagColor';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderTextColor } from '@/src/types/tagColor';
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from '@/src/types/tagIconLabel';
 import { MarkerType } from '@/src/types/data';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -23,6 +23,7 @@ interface LocationItemProps {
 }
 
 export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description, onFire, star, setMarkers}: LocationItemProps) => {
+    const imgSrcRef = useRef('')
     const handleOnClick = () => {
         setPos({lat: position.lat, lng: position.lng})
         setIdx(_id)    
@@ -38,21 +39,26 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
         })
         )
     }
+    useEffect(() => {
+        if (description?.includes('@img(')) {
+            imgSrcRef.current = description.substring(description.indexOf('(') + 1, description.lastIndexOf(')'))
+        }
+    }, [])
 
     return (
-        <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
+        <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white flex flex-row">
             <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
-            <div className={`relative flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
-                <button className={`absolute top-0 left-1`} onClick={() => starToggle(title)}>
-                    {star ? <FavoriteIcon className='text-lg'/> : <FavoriteBorderIcon className='text-lg'/>}
-                </button>
+            <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
                 {tagIconForInfoWindow[tag]}
                 <p className='text-sm'>{tagLabel[tag]}</p>
             </div>
             <div className={`grow w-0 h-full bg-white flex flex-col items-start p-2`}>
-                <p className='text-lg text-start font-nsb'>{title}</p>
+                <p className='text-lg text-start font-nsb leading-5'>{title}</p>
                 <p className='text-sm text-start truncate w-full text-gray-500'>{address}</p>
-                <p className='text-xs text-start truncate w-full text-gray-400'>{description}</p>
+                <p className='text-xs text-start truncate w-full text-gray-400'>{imgSrcRef.current ? description?.substring(description.lastIndexOf(')')+1) : description}</p>
+            </div>
+            <div className={`flex-none w-10 h-full grid place-content-center ${tagOrderTextColor[tagToOrder[tag]].normal}`} onClick={() => starToggle(title)}>
+                    {star ? <FavoriteIcon className='text-lg'/> : <FavoriteBorderIcon className='text-lg'/>}
             </div>
         </button>
     )
