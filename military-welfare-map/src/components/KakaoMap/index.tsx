@@ -38,6 +38,7 @@ interface KakaoMapProps {
     selectedIdx: number
     onFire: boolean
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
+    isStarToggled: boolean
 }
 
 /**
@@ -373,7 +374,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, setMarkers}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, setMarkers, isStarToggled}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
     const [cnt, setCnt] = useState(0)
@@ -540,10 +541,16 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                   <AdsBarFloat/>
                 </div>
                 } */}
-                {!onFire && noMarkers.current &&
+                {!isStarToggled && !onFire && noMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
                     <p className='text-base'>검색 조건을 다시 설정하거나 지도를 이동시켜 주십시오.</p>
+                </Alert>
+                }
+                {isStarToggled && !onFire && noMarkers.current &&
+                <Alert>
+                    <p className='text-lg font-nsb'>찜한 장소가 없습니다!</p>
+                    <p className='text-base'>장소들을 ♥찜하여 나만의 지도를 만들어 보십시오.</p>
                 </Alert>
                 }
             </Map>

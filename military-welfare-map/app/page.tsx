@@ -22,6 +22,8 @@ import { AdsBar } from '@/src/components/AdsBar'
 import { tagSearch } from '@/src/types/tagIconLabel'
 import { isTrimedTextAllIncluded } from '@/src/functions/korean'
 import { ShowFireButton } from '@/src/components/ShowFireButton'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { ShowStarsPanel } from '@/src/components/ShowStarsPanel'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -33,30 +35,31 @@ export default function Home() {
 
   const [isBarOpened, setIsBarOpened] = useState(false)
   const [isChatOpened, setIsChatOpened] = useState(false)
-
+  
   const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<MarkerType[]>(data)
-
+  
   const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>([true, false, false, false, false, false, false, false, false, false, false, false])
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
   const [distanceRange, setDistanceRange] = useState(30)
   
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
-
+  
   const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   // const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const [curPos, setCurPos] = useState({
-      center: {
-          lat: 33.450701,
-          lng: 126.570667,
-      },
-      errMsg: "",
-      isLoading: true,
+    center: {
+      lat: 33.450701,
+      lng: 126.570667,
+    },
+    errMsg: "",
+    isLoading: true,
   })
   const [selectedIdx, setSelectedIdx] = useState(-1)
-
+  
   const [onFireToggled, setOnFireToggled] = useState(false)
+  const [isStarToggled, setIsStarToggled] = useState(false)
 
   useEffect(() => {
     if (markers.length > 0 && isLoading) {
@@ -82,12 +85,14 @@ export default function Home() {
     tempMarkers = tempMarkers.filter((x) => {
       return (33 < x.position.lat && x.position.lat < 42 && 124 < x.position.lng && x.position.lng < 130 &&
         ((onFireToggled && x.onFire)
-        || (!onFireToggled && isTagsToggled[x.tag] && isRegionsToggled[x.region]
-        && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag]).toLowerCase(), searchText)
-        && x.distance! < distanceRange)))
+        || (!onFireToggled && (isStarToggled && x.isStar))
+        || (!onFireToggled && !isStarToggled
+          && isTagsToggled[x.tag] && isRegionsToggled[x.region]
+          && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag]).toLowerCase(), searchText.toLowerCase())
+          && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
-    }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled])
+    }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
 
   // useEffect(() => {
   //   // console.log(filteredMarkers)
@@ -125,7 +130,7 @@ export default function Home() {
       
       {/* InformationPanel */}
       <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-        <Header/>
+        <Header isStarToggled={isStarToggled} setIsStarToggled={setIsStarToggled}/>
         <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
         <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
         <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
@@ -137,6 +142,13 @@ export default function Home() {
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <div className='flex'> 
           <Header2/>
+          <button className={`w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
+                            ${isStarToggled
+                              ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
+                              : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
+                            `} onClick={() => {setIsStarToggled(!isStarToggled); setIsBarOpened(true)}}>
+            <FavoriteIcon fontSize='medium'/>
+          </button>
           <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
             <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
             {searchText != "" && <p className='pr-3'>{searchText}</p>}
@@ -177,6 +189,10 @@ export default function Home() {
         </button>
       </div>
 
+      {/* <div className='z-10 absolute bottom-1 left-1 flex flex-col gap-2'>
+        <ShowStarsPanel markers={markers}/>
+      </div> */}
+
       <div className='z-10 absolute bottom-1 right-1 flex flex-col gap-2'>
         <ShowFireButton isToggled={onFireToggled} onClicked={() => {
           setOnFireToggled(!onFireToggled)
@@ -191,7 +207,7 @@ export default function Home() {
       
       <div className={`w-full h-full`}>
         <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos}
-                  selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} setMarkers={setMarkers}/>
+                  selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} setMarkers={setMarkers} isStarToggled={isStarToggled}/>
       </div>
 
     </main>
