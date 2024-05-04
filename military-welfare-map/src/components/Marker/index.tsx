@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { CustomOverlayMap } from "react-kakao-maps-sdk"
+import { CustomOverlayMap, useMap } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
 import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderTextColor } from "@/src/types/tagColor";
 import { tagIconForMarker, tagToOrder } from "@/src/types/tagIconLabel";
@@ -60,6 +60,8 @@ interface MarkerProps {
 export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(idx == selectedIdx)
 
+    const map = useMap()
+
     const removeZindex = () => {
         let button = document.getElementById(`tagmarker${idx}`) as HTMLButtonElement;
         let customOverlay = button?.parentElement;
@@ -73,16 +75,18 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
 
     useEffect(() => {
         setSelectedIdx(-1)
+        setIsVisible(false)
     }, [mapClicked])
     
     return (
         <CustomOverlayMap position={position} onCreate={removeZindex}>
-            <button id={`tagmarker${idx}`} className={`grid ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'} place-content-center rounded-[3px] text-white opacity-70 z-10`}
+            <button id={`tagmarker${idx}`} className={`grid ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'} place-content-center rounded-[3px] text-white opacity-80 z-10`}
                 onClick={() => {
-                    setPos({lat: position.lat, lng: position.lng})
+                    // setPos({lat: position.lat, lng: position.lng})
+                    map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
                     setSelectedIdx(idx)
-                    setIsVisible(!isVisible)
-                    console.log(idx)
+                    setIsVisible(true)
+                    // console.log(idx)
                 }}>
                 {/* {onFire && <div className={`relative text-5xl ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
                 ⭐

@@ -30,26 +30,6 @@ bg-gray-400 bg-gray-500 bg-gray-600
 `
 
 export const tagOrderBgColor:tagColorType = {
-    // 0: {
-    //     light: 'bg-red-400',
-    //     normal: 'bg-red-500',
-    //     dark: 'bg-red-600'
-    // },
-    // 1: {
-    //     light: 'bg-orange-400',
-    //     normal: 'bg-orange-500',
-    //     dark: 'bg-orange-600'
-    // },
-    // 2: {
-    //     light: 'bg-yellow-400',
-    //     normal: 'bg-yellow-500',
-    //     dark: 'bg-yellow-600'
-    // },
-    // 3: {
-    //     light: 'bg-lime-400',
-    //     normal: 'bg-lime-500',
-    //     dark: 'bg-lime-600'
-    // },
     0: {
         light: 'bg-red-400',
         normal: 'bg-red-500',
@@ -105,11 +85,6 @@ export const tagOrderBgColor:tagColorType = {
         normal: 'bg-violet-500',
         dark: 'bg-violet-600'
     },
-    // 10: {
-    //     light: 'bg-purple-400',
-    //     normal: 'bg-purple-500',
-    //     dark: 'bg-purple-600'
-    // },
     11: {
         light: 'bg-purple-300',
         normal: 'bg-purple-400',
@@ -135,11 +110,6 @@ export const tagOrderBgColor:tagColorType = {
         normal: 'bg-amber-500',
         dark: 'bg-amber-600'
     },
-    // 16: {
-    //     light: 'bg-cyan-400',
-    //     normal: 'bg-cyan-500',
-    //     dark: 'bg-cyan-600'
-    // },
     16: {
         light: 'bg-gray-400',
         normal: 'bg-gray-500',
@@ -175,40 +145,9 @@ export const tagOrderBgGradientColor = [
     'bg-gradient-to-br from-indigo-300 to-indigo-600',
     'bg-gradient-to-br from-violet-300 to-violet-600',
     'bg-gradient-to-br from-purple-200 to-purple-500',
-
-    // 12: {
-    //     light: 'bg-amber-600',
-    //     normal: 'bg-amber-700',
-    //     dark: 'bg-amber-800'
-    // },
-    // 13: {
-    //     light: 'bg-pink-400',
-    //     normal: 'bg-pink-500',
-    //     dark: 'bg-pink-600'
-    // },
-    // 14: {
-    //     light: 'bg-rose-400',
-    //     normal: 'bg-rose-500',
-    //     dark: 'bg-rose-600'
-    // },
-    // 15: {
-    //     light: 'bg-amber-400',
-    //     normal: 'bg-amber-500',
-    //     dark: 'bg-amber-600'
-    // },
-    // 16: {
-    //     light: 'bg-cyan-400',
-    //     normal: 'bg-cyan-500',
-    //     dark: 'bg-cyan-600'
-    // },
-    // 16: {
-    //     light: 'bg-gray-400',
-    //     normal: 'bg-gray-500',
-    //     dark: 'bg-gray-600'
-    // },
 ]
 
-let tagBorderColors = `
+let tagOrderBorderColors = `
 border-red-400 border-red-500 border-red-600 
 border-pink-400 border-pink-500 border-pink-600 
 border-orange-400 border-orange-500 border-orange-600 
@@ -231,27 +170,7 @@ border-cyan-400 border-cyan-500 border-cyan-600
 border-gray-400 border-gray-500 border-gray-600 
 `
 
-export const tagBorderColor:tagColorType = {
-    // 0: {
-    //     light: 'border-red-400',
-    //     normal: 'border-red-500',
-    //     dark: 'border-red-600'
-    // },
-    // 1: {
-    //     light: 'border-orange-400',
-    //     normal: 'border-orange-500',
-    //     dark: 'border-orange-600'
-    // },
-    // 2: {
-    //     light: 'border-yellow-400',
-    //     normal: 'border-yellow-500',
-    //     dark: 'border-yellow-600'
-    // },
-    // 3: {
-    //     light: 'border-lime-400',
-    //     normal: 'border-lime-500',
-    //     dark: 'border-lime-600'
-    // },
+export const tagOrderBorderColor:tagColorType = {
     0: {
         light: 'border-red-400',
         normal: 'border-red-500',
@@ -307,15 +226,10 @@ export const tagBorderColor:tagColorType = {
         normal: 'border-violet-500',
         dark: 'border-violet-600'
     },
-    // 10: {
-    //     light: 'border-purple-400',
-    //     normal: 'border-purple-500',
-    //     dark: 'border-purple-600'
-    // },
     11: {
         light: 'border-purple-300',
         normal: 'border-purple-400',
-        dark: 'border-purple-600'
+        dark: 'border-purple-500'
     },
     12: {
         light: 'border-amber-600',
@@ -368,26 +282,6 @@ text-gray-400 text-gray-500 text-gray-600
 `
 
 export const tagOrderTextColor:tagColorType = {
-    // 0: {
-    //     light: 'text-red-400',
-    //     normal: 'text-red-500',
-    //     dark: 'text-red-600'
-    // },
-    // 1: {
-    //     light: 'text-orange-400',
-    //     normal: 'text-orange-500',
-    //     dark: 'text-orange-600'
-    // },
-    // 2: {
-    //     light: 'text-yellow-400',
-    //     normal: 'text-yellow-500',
-    //     dark: 'text-yellow-600'
-    // },
-    // 3: {
-    //     light: 'text-lime-400',
-    //     normal: 'text-lime-500',
-    //     dark: 'text-lime-600'
-    // },
     0: {
         light: 'text-red-400',
         normal: 'text-red-500',
@@ -443,11 +337,6 @@ export const tagOrderTextColor:tagColorType = {
         normal: 'text-violet-500',
         dark: 'text-violet-600'
     },
-    // 10: {
-    //     light: 'text-purple-400',
-    //     normal: 'text-purple-500',
-    //     dark: 'text-purple-600'
-    // },
     11: {
         light: 'text-purple-300',
         normal: 'text-purple-400',
@@ -473,14 +362,98 @@ export const tagOrderTextColor:tagColorType = {
         normal: 'text-amber-500',
         dark: 'text-amber-600'
     },
-    // 16: {
-    //     light: 'text-cyan-400',
-    //     normal: 'text-cyan-500',
-    //     dark: 'text-cyan-600'
-    // },
     16: {
         light: 'text-gray-400',
         normal: 'text-gray-500',
         dark: 'text-gray-600'
     },
+}
+
+
+export const tagOrderHexColor:tagColorType = {
+    0: {
+        light: '#f87171',
+        normal: '#ef4444',
+        dark: '#dc2626'
+    },
+    1: {
+        light: '#f472b6',
+        normal: '#ec4899',
+        dark: '#db2777'
+    },
+    2: {
+        light: '#fb923c',
+        normal: '#f97316',
+        dark: '#ea580c'
+    },
+    3: {
+        light: '#facc15',
+        normal: '#eab308',
+        dark: '#ca8a04'
+    },
+    4: {
+        light: '#a3e635',
+        normal: '#84cc16',
+        dark: '#65a30d'
+    },
+    5: {
+        light: '#4ade80',
+        normal: '#22c55e',
+        dark: '#16a34a'
+    },
+    6: {
+        light: '#2dd4bf',
+        normal: '#14b8a6',
+        dark: '#0d9488'
+    },
+    7: {
+        light: '#38bdf8',
+        normal: '#0ea5e9',
+        dark: '#0284c7'
+    },
+    8: {
+        light: '#60a5fa',
+        normal: '#3b82f6',
+        dark: '#2563eb'
+    },
+    9: {
+        light: '#818cf8',
+        normal: '#6366f1',
+        dark: '#4f46e5'
+    },
+    10: {
+        light: '#a78bfa',
+        normal: '#8b5cf6',
+        dark: '#7c3aed'
+    },
+    11: {
+        light: '#d8b4fe',
+        normal: '#c084fc',
+        dark: '#a855f7'
+    },
+    // 12: {
+    //     light: 'text-amber-600',
+    //     normal: 'text-amber-700',
+    //     dark: 'text-amber-800'
+    // },
+    // 13: {
+    //     light: 'text-pink-400',
+    //     normal: 'text-pink-500',
+    //     dark: 'text-pink-600'
+    // },
+    // 14: {
+    //     light: 'text-rose-400',
+    //     normal: 'text-rose-500',
+    //     dark: 'text-rose-600'
+    // },
+    // 15: {
+    //     light: 'text-amber-400',
+    //     normal: 'text-amber-500',
+    //     dark: 'text-amber-600'
+    // },
+    // 16: {
+    //     light: 'text-gray-400',
+    //     normal: 'text-gray-500',
+    //     dark: 'text-gray-600'
+    // },
 }
