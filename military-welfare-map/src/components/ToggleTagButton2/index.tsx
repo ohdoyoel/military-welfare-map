@@ -1,4 +1,4 @@
-import { tagOrderBgColor, tagBorderColor } from "@/src/types/tagColor";
+import { tagOrderBgColor, tagOrderBorderColor } from "@/src/types/tagColor";
 
 interface ToggleTagButton2Props {
     children: React.ReactNode
@@ -30,7 +30,7 @@ interface ToggleTagButton2Props {
 // bg-gray-400 bg-gray-500 bg-gray-600 
 // `
 
-// let tagBorderColors = `
+// let tagOrderBorderColors = `
 // border-red-400 border-red-500 border-red-600 
 // border-pink-400 border-pink-500 border-pink-600 
 // border-orange-400 border-orange-500 border-orange-600 
@@ -59,7 +59,7 @@ export const ToggleTagButton2 = ({children, order, isToggled, onClicked}: Toggle
                             items-center place-content-center rounded-[3px] z-20
                             ${isToggled
                                 ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] ${tagOrderBgColor[order].normal} text-white`
-                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 ${tagBorderColor[order].normal} bg-white text-gray-600`
+                                : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 ${tagOrderBorderColor[order].normal} bg-white text-gray-600`
                             }
                             `}
 

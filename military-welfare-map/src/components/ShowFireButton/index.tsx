@@ -1,4 +1,4 @@
-import { tagOrderBgColor, tagBorderColor } from "@/src/types/tagColor";
+import { tagOrderBgColor, tagOrderBorderColor } from "@/src/types/tagColor";
 
 interface ShowFireButtonProps {
     isToggled: boolean

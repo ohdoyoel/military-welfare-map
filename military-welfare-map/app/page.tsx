@@ -32,7 +32,7 @@ export default function Home() {
   // const dbData = JSON.parse(dbFile);
 
   const [isBarOpened, setIsBarOpened] = useState(false)
-  const [isChatOpened, setIsChatOpened] = useState(true)
+  const [isChatOpened, setIsChatOpened] = useState(false)
 
   const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<MarkerType[]>(data)
@@ -140,7 +140,7 @@ export default function Home() {
             <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
             {searchText != "" && <p className='pr-3'>{searchText}</p>}
           </button>
-          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsChatOpened(!isChatOpened); console.log('hello')}}>
+          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
             <ChatIcon className='text-gray-600' fontSize='medium'/> 
           </button>
         </div>

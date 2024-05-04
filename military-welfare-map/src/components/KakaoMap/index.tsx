@@ -2,7 +2,7 @@
 
 import { MarkerType } from '@/src/types/data'
 import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Map, MapTypeControl, MapMarker, useMap, MarkerClusterer, AbstractOverlay } from 'react-kakao-maps-sdk'
+import { Map, MapTypeControl, MapMarker, useMap, MarkerClusterer, AbstractOverlay, Polyline } from 'react-kakao-maps-sdk'
 import { Marker } from '../Marker';
 import { Alert } from '../Alert';
 import ReactDOM from 'react-dom';
@@ -361,11 +361,12 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
               map.getNode()
             )
           : ReactDOM.createPortal(
-            <>
+            // <div>
             <Marker key={idx} idx={idx} tag={tag} position={position} mapClicked={mapClicked} onFire={onFire!}
             telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={() => setSelectedIdx}/>
-            <AdsWindow idx={idx} pos={position}/>
-            </>,
+            // {/* <AdsWindow idx={idx} pos={position}/> */}
+            // </div>
+            ,
               node.current
             )}
        </>
@@ -455,6 +456,19 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
             setMapSW({lat:SW.getLat(), lng:SW.getLng()})
             const latlng = map.getCenter()
             setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
+            // console.log(map.getLevel())
+        }
+
+        const floatingAds = (markers:MarkerType[]) => {
+          let result = []
+          let adsIdx = 0;
+          for (let i=0; i<markers.length; i++) {
+            if (markers[i].onFire) {
+              result.push(<AdsWindow key={i} idx={adsIdx} pos={markers[i].position} tag={markers[i].tag}/>)
+              adsIdx += 1
+            }
+          }
+          return result
         }
         
         return (
@@ -466,7 +480,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={10}
-                onClick={() => {setCnt((cnt+1))}}
+                onClick={() => {setCnt((cnt+1)); console.log(cnt)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}
@@ -479,12 +493,13 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
                 >
-                {makeMapMarkers(markers, mapNE, mapSW)}
+                  {makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>}
                 {(onFire || tooManyMarkers.current) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx}/>
                 )}
+                {onFire && floatingAds(markers)}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
                     image={{
