@@ -77,26 +77,22 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     }, [selectedIdx])
 
     // useEffect(() => {
-    //     setSelectedIdx(-1)
     //     setIsVisible(false)
     // }, [mapClicked])
     
     return (
         <CustomOverlayMap position={position} onCreate={removeZindex}>
-            <button id={`tagmarker${idx}`} className={`grid ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'} place-content-center rounded-[3px] text-white opacity-80 z-10`}
+            <button id={`tagmarker${idx}`} className={`grid ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : ''} place-content-center rounded-[3px] text-white opacity-80 z-10`}
                 onClick={() => {
-                    // setPos({lat: position.lat, lng: position.lng})
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
                     setSelectedIdx(idx)
                     setIsVisible(!isVisible)
-                    // console.log(idx)
                 }}>
-                {/* {onFire && <div className={`relative text-5xl ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
-                ⭐
-                <div className="absolute top-0 w-full text-white">{tagIconForMarker[tag]}</div>
-                </div>} */}
-                
-                {tagIconForMarker[tag]}
+                {star && <div className={`relative ${onFire ? 'text-5xl' : 'text-3xl'} align-[4px] ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
+                ❤
+                <div className="absolute -top-1 w-full text-white">{tagIconForMarker[tag]}</div>
+                </div>}
+                {!star && tagIconForMarker[tag]}
             </button>
             {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno} onFire={onFire} star={star} setMarkers={setMarkers}/>}
         </CustomOverlayMap>
