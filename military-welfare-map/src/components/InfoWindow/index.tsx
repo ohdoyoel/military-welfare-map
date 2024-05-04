@@ -53,10 +53,9 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, onFire
                     <p className='text-left text-lg font-nsb'>{title}</p>
                     <p className='text-left text-base mr-4'>{address}</p>
                     <p className='pt-1 text-left text-sm'>{telno}</p>
-                    <p className='pt-2 text-left text-xs whitespace-pre-wrap'>{description}</p>
+                    <p className='pt-2 text-left text-xs whitespace-pre-wrap'>{imgSrcRef.current ? description?.substring(description.lastIndexOf(')')+1) : description}</p>
                     <a className={`absolute bottom-2 grid justify-center right-2 w-20 h-8 ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} rounded-[3px] place-content-center`}
-                        href={`https://map.kakao.com/link/to/${title},${pos.lat},${pos.lng}`} target='_blank'
-                    >
+                        href={`https://map.kakao.com/link/to/${title},${pos.lat},${pos.lng}`} target='_blank'>
                         <p className="after:content-['_↗'] text-center text-sm align-middle text-white text-pretty">길찾기</p>
                     </a>
                 </div>
