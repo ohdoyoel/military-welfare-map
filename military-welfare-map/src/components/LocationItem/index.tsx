@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction } from 'react';
 import { tagOrderBgColor, tagOrderBgGradientColor } from '@/src/types/tagColor';
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from '@/src/types/tagIconLabel';
 import { MarkerType } from '@/src/types/data';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 interface LocationItemProps {
     _id: number
@@ -41,8 +43,9 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
         <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white pr-2 flex flex-row">
             <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
             <div className={`relative flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
-                <button className={`absolute top-1 left-0 w-4 h-4 ${star ? `bg-yellow-400`: `bg-white`}`}
-                        onClick={() => starToggle(title)}/>
+                <button className={`absolute top-0 left-1`} onClick={() => starToggle(title)}>
+                    {star ? <FavoriteIcon className='text-lg'/> : <FavoriteBorderIcon className='text-lg'/>}
+                </button>
                 {tagIconForInfoWindow[tag]}
                 <p className='text-sm'>{tagLabel[tag]}</p>
             </div>
