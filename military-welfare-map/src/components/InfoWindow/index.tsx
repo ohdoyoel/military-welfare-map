@@ -2,6 +2,8 @@ import { Dispatch, ReactElement, SetStateAction } from "react"
 import { tagOrderBgColor, tagOrderBgGradientColor } from "@/src/types/tagColor";
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from "@/src/types/tagIconLabel";
 import { MarkerType } from "@/src/types/data";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 interface InfoWindowProps {
     pos: {lat:number, lng:number}
@@ -33,8 +35,9 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, onFire
             <div className="relative flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
                 <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
                 <div className={`relative flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
-                    <button className={`absolute top-1 left-0 w-4 h-4 ${star ? `bg-yellow-400`: `bg-white`}`}
-                            onClick={() => starToggle(title)}/>
+                    <button className={`absolute top-1 left-1`} onClick={() => starToggle(title)}>
+                    {star ? <FavoriteIcon className='text-lg'/> : <FavoriteBorderIcon className='text-lg'/>}
+                    </button>
                     {tagIconForInfoWindow[tag]}
                     <p className='text-sm'>{tagLabel[tag]}</p>
                 </div>
