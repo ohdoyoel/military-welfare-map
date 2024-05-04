@@ -142,19 +142,19 @@ export default function Home() {
       <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
         <div className='flex'> 
           <Header2/>
-          <button className={`w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
-                            ${isStarToggled
-                              ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
-                              : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
-                            `} onClick={() => {setIsStarToggled(!isStarToggled); setIsBarOpened(true)}}>
-            <FavoriteIcon fontSize='medium'/>
-          </button>
           <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
             <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
             {searchText != "" && <p className='pr-3'>{searchText}</p>}
           </button>
           <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
             <ChatIcon className='text-gray-600' fontSize='medium'/> 
+          </button>
+          <button className={`w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
+                            ${isStarToggled
+                              ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
+                              : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
+                            `} onClick={() => {setIsStarToggled(!isStarToggled); setIsBarOpened(true)}}>
+            <FavoriteIcon fontSize='medium'/>
           </button>
         </div>
         <div className='flex flex-col'> 
