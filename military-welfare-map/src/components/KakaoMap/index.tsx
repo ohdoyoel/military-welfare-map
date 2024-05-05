@@ -21,7 +21,6 @@ interface TooltipProps {
     telno?: string
     onFire: boolean
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
-    mapClicked: number
     selectedIdx: number
     setSelectedIdx: Dispatch<SetStateAction<number>>
     star: boolean
@@ -44,7 +43,7 @@ interface KakaoMapProps {
 /**
    * AbstractOverlay를 이용하여 사용자 TooltipMarker를 정의 합니다.
    */
-const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx, star, setMarkers}: TooltipProps) => {
+const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, selectedIdx, setSelectedIdx, star, setMarkers}: TooltipProps) => {
     const map = useMap()
     // Marker로 올려질 node 객체를 생성 합니다.
     const node = useRef(document.createElement("div"))
@@ -365,7 +364,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
               map.getNode()
             )
           : ReactDOM.createPortal(
-            <Marker key={idx} idx={idx} tag={tag} position={position} mapClicked={mapClicked} onFire={onFire!}
+            <Marker key={idx} idx={idx} tag={tag} position={position} onFire={onFire!}
             telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={() => setSelectedIdx}
             star={star} setMarkers={setMarkers}/>,
               node.current
@@ -377,7 +376,6 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
 export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, setMarkers, isStarToggled}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
-    const [cnt, setCnt] = useState(0)
 
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
@@ -431,7 +429,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
             for (let i = 0; i < mks.length; i++) {
                 if (SW.lat < mks[i].position.lat && mks[i].position.lat < NE.lat && SW.lng < mks[i].position.lng && mks[i].position.lng < NE.lng) {
                     result.push(
-                        <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} mapClicked={cnt} onFire={mks[i].onFire!}
+                        <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} onFire={mks[i].onFire!}
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} selectedIdx={selectedIdx}
                             star={mks[i].isStar!} setMarkers={setMarkers}/>
                         )
@@ -483,7 +481,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={level}
-                onClick={() => {setCnt((cnt+1)); console.log(cnt)}}
+                onClick={() => setSelectedIdx(-1)}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}
@@ -502,7 +500,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 </MarkerClusterer>
                 }
                 {(onFire || level >= 11) && markers.map((marker, i) => 
-                    marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
+                    marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
                 {(onFire || level >= 11) && floatingAdsOnFire(markers)}
