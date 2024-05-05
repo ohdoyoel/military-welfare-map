@@ -381,6 +381,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
 
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
+    const [level, setLevel] = useState(10);
 
     const tooManyMarkers = useRef(false)
     const noMarkers = useRef(false)
@@ -461,12 +462,12 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
             // console.log(map.getLevel())
         }
 
-        const floatingAds = (markers:MarkerType[]) => {
+        const floatingAdsOnFire = (markers:MarkerType[]) => {
           let result = []
           let adsIdx = 0;
           for (let i=0; i<markers.length; i++) {
             if (markers[i].onFire) {
-              result.push(<AdsWindow key={i} idx={adsIdx} pos={markers[i].position} tag={markers[i].tag}/>)
+              result.push(<AdsWindow key={i} idx={adsIdx} title={markers[i].title} pos={markers[i].position} tag={markers[i].tag}/>)
               adsIdx += 1
             }
           }
@@ -481,13 +482,14 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     width: "100%",
                     height: "100%",
                 }}
-                level={10}
+                level={level}
                 onClick={() => {setCnt((cnt+1)); console.log(cnt)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}
                 onCenterChanged={setCenterAndBound}
                 onTileLoaded={setCenterAndBound}
+                onZoomChanged={(map) => setLevel(map.getLevel())}
                 >
                 {!onFire &&
                 <MarkerClusterer
@@ -496,16 +498,14 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
                 >
-                  {
-                    makeMapMarkers(markers, mapNE, mapSW)
-                  }
+                  {makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>
                 }
-                {(onFire || tooManyMarkers.current) && markers.map((marker, i) => 
+                {(onFire || level >= 10) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
-                {onFire && floatingAds(markers)}
+                {(onFire || level >= 10) && floatingAdsOnFire(markers)}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
                     image={{
@@ -532,15 +532,6 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     <p className='text-base'>검색 조건을 다시 설정하거나 지도를 확대하여 주십시오.</p>
                 </Alert>
                 }
-                {/* {(tooManyMarkers.current) &&
-                <div className='absolute top-2 right-40 w-96 z-10 flex flex-col gap-4'>
-                  <AdsBarFloat/>
-                  <AdsBarFloat/>
-                  <AdsBarFloat/>
-                  <AdsBarFloat/>
-                  <AdsBarFloat/>
-                </div>
-                } */}
                 {!isStarToggled && !onFire && noMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시할 장소가 없습니다!</p>
