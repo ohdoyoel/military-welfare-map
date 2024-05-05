@@ -398,10 +398,6 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                         },
                         isLoading: false,
                     }))
-                    // setCurPos({
-                    //     lat: position.coords.latitude,
-                    //     lng: position.coords.longitude,
-                    //     })
                     },
                 (err) => {
                     setCurPos((prev) => ({
@@ -518,12 +514,6 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 <ReSetttingMapBounds markers={markers}/>
-                {/* {onFire &&
-                <Alert>
-                    <p className='text-lg font-nsb'>지피티 병장이 쏜다!</p>
-                    <p className='text-base'>군인을 위해 대부분을 지병장이 낼테니, 나머지만 내!</p>
-                </Alert>
-                } */}
                 {!onFire && tooManyMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>표시되는 장소가 너무 많습니다!</p>
@@ -540,6 +530,12 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 <Alert>
                     <p className='text-lg font-nsb'>찜한 장소가 없습니다!</p>
                     <p className='text-base'>장소들을 ♥찜하여 나만의 지도를 만들어 보십시오.</p>
+                </Alert>
+                }
+                {isStarToggled && !onFire && !noMarkers.current &&
+                <Alert>
+                    <p className='text-lg font-nsb'>찜한 장소만 표시하는 중입니다!</p>
+                    <p className='text-base'>찜한 장소는 다음과 같습니다.</p>
                 </Alert>
                 }
             </Map>
