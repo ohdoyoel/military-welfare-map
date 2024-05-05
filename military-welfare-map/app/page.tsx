@@ -24,6 +24,7 @@ import { isTrimedTextAllIncluded } from '@/src/functions/korean'
 import { ShowFireButton } from '@/src/components/ShowFireButton'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ShowStarsPanel } from '@/src/components/ShowStarsPanel'
+import { validateDB } from '@/src/functions/validateDB'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -60,6 +61,10 @@ export default function Home() {
   
   const [onFireToggled, setOnFireToggled] = useState(false)
   const [isStarToggled, setIsStarToggled] = useState(false)
+
+  useEffect(() => {
+    validateDB(markers)
+  }, [])
 
   useEffect(() => {
     if (markers.length > 0 && isLoading) {
