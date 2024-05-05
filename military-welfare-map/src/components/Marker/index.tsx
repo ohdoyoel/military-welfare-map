@@ -69,7 +69,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
         let button = document.getElementById(`tagmarker${idx}`) as HTMLButtonElement;
         let customOverlay = button?.parentElement;
         let styleWithoutZindexAndMargin = customOverlay?.getAttribute('style')?.replace('z-index: 0;', '')
-        styleWithoutZindexAndMargin = styleWithoutZindexAndMargin?.replace('margin:', '')
+        // styleWithoutZindexAndMargin = styleWithoutZindexAndMargin?.replace('margin:', '')
         styleWithoutZindexAndMargin && customOverlay?.setAttribute('style', styleWithoutZindexAndMargin)
     }
 
@@ -82,7 +82,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     // }, [mapClicked])
     
     return (
-        <CustomOverlayMap position={position} onCreate={removeZindexAndMargin}>
+        <CustomOverlayMap position={position} onCreate={removeZindexAndMargin} xAnchor={0.5} yAnchor={0.5}>
             <button id={`tagmarker${idx}`} className={`grid ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : (onFire ? 'w-8 h-8': 'w-6 h-6')} place-content-center rounded-[3px] text-white opacity-80 z-10`}
                 onClick={() => {
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
