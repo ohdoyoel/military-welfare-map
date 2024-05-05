@@ -82,13 +82,13 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     
     return (
         <CustomOverlayMap position={position} onCreate={removeZindex}>
-            <button id={`tagmarker${idx}`} className={`grid ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : ''} place-content-center rounded-[3px] text-white opacity-80 z-10`}
+            <button id={`tagmarker${idx}`} className={`grid ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : (onFire ? 'w-8 h-8': 'w-6 h-6')} place-content-center rounded-[3px] text-white opacity-80 z-10`}
                 onClick={() => {
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
                     setSelectedIdx(idx)
                     setIsVisible(!isVisible)
                 }}>
-                {star && <div className={`relative ${onFire ? 'text-5xl' : 'text-3xl'} align-[4px] ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
+                {star && <div className={`relative ${onFire ? 'text-5xl' : 'text-4xl'} mt-2 ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
                 ❤
                 <div className="absolute -top-1 w-full text-white">{tagIconForMarker[tag]}</div>
                 </div>}
