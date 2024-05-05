@@ -36,9 +36,12 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, onFire
             imgSrcRef.current = description.substring(description.indexOf('(') + 1, description.lastIndexOf(')'))
         }
     }, [])
+    // ${onFire ? `ml-8` : `ml-6`} 
 
     return (
-        <div className={`relative flex flex-col absolute -left-1/2 ${onFire ? `ml-8` : `ml-6`} bottom-[236px] z-40`}>
+        <div className={`relative flex flex-col z-40
+        -ml-[202px] -mt-[236px]
+        `}>
             <div className="flex flex-row h-48 bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
                 <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
                 <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>

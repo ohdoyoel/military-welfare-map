@@ -15,7 +15,6 @@ interface MarkerProps {
     telno?: string
     onFire: boolean
     setPos: Dispatch<SetStateAction<{lat: number, lng: number}>>
-    mapClicked: number
     // visible: boolean
     selectedIdx: number
     setSelectedIdx: Dispatch<SetStateAction<number>>
@@ -60,30 +59,29 @@ interface MarkerProps {
 // bg-gradient-to-br from-purple-200 to-purple-500
 // `
 
-export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, mapClicked, selectedIdx, setSelectedIdx, star, setMarkers}: MarkerProps) => {
+export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, selectedIdx, setSelectedIdx, star, setMarkers}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(idx == selectedIdx)
 
     const map = useMap()
 
     const removeZindexAndMargin = () => {
         let button = document.getElementById(`tagmarker${idx}`) as HTMLButtonElement;
+        button?.setAttribute('style', onFire ? 'margin-left: -16px; margin-top: -16px;' : 'margin-left: -12px; margin-top: -12px;')
+
         let customOverlay = button?.parentElement;
         let styleWithoutZindexAndMargin = customOverlay?.getAttribute('style')?.replace('z-index: 0;', '')
-        // styleWithoutZindexAndMargin = styleWithoutZindexAndMargin?.replace('margin:', '')
+        styleWithoutZindexAndMargin = styleWithoutZindexAndMargin?.replace('margin:', '')
         styleWithoutZindexAndMargin && customOverlay?.setAttribute('style', styleWithoutZindexAndMargin)
     }
 
     useEffect(() => {
         setIsVisible(selectedIdx == idx)
     }, [selectedIdx])
-
-    // useEffect(() => {
-    //     setIsVisible(false)
-    // }, [mapClicked])
     
     return (
-        <CustomOverlayMap position={position} onCreate={removeZindexAndMargin} xAnchor={0.5} yAnchor={0.5}>
-            <button id={`tagmarker${idx}`} className={`grid ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : (onFire ? 'w-8 h-8': 'w-6 h-6')} place-content-center rounded-[3px] text-white opacity-80 z-10`}
+        <CustomOverlayMap position={position} onCreate={removeZindexAndMargin} clickable={true}>
+            <button id={`tagmarker${idx}`} className={`grid  place-content-center rounded-[3px] text-white opacity-80 z-10
+                    ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : (onFire ? 'w-8 h-8': 'w-6 h-6')}`}
                 onClick={() => {
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
                     setSelectedIdx(idx)
