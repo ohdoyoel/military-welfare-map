@@ -501,11 +501,11 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                   {makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>
                 }
-                {(onFire || level >= 10) && markers.map((marker, i) => 
+                {(onFire || level >= 11) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} mapClicked={cnt} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
-                {(onFire || level >= 10) && floatingAdsOnFire(markers)}
+                {(onFire || level >= 11) && floatingAdsOnFire(markers)}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
                     image={{
