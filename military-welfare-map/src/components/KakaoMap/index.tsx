@@ -365,7 +365,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
             )
           : ReactDOM.createPortal(
             <Marker key={idx} idx={idx} tag={tag} position={position} onFire={onFire!}
-            telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={() => setSelectedIdx}
+            telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx}
             star={star} setMarkers={setMarkers}/>,
               node.current
             )}
