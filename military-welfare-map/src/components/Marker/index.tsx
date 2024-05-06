@@ -80,7 +80,7 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     
     return (
         <CustomOverlayMap position={position} onCreate={removeZindexAndMargin} clickable={true}>
-            <button id={`tagmarker${idx}`} className={`grid  place-content-center rounded-[3px] text-white opacity-80 z-10
+            <button id={`tagmarker${idx}`} className={`grid  place-content-center rounded-[3px] text-white opacity-80 z-20
                     ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : (onFire ? 'w-8 h-8': 'w-6 h-6')}`}
                 onClick={() => {
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
