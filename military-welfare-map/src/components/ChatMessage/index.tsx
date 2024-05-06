@@ -25,7 +25,19 @@ export const ChatMessage = ({message, isBotSide}: ChatMessageProps) => {
                         <ReactMarkdown className={`prose text-base font-normal`} remarkPlugins={[remarkGfm]}
                         components={{
                             p: ({ node, ...props }) => (
-                            <p {...props} className="whitespace-pre-wrap"/>
+                            <p {...props} className="my-2"/>
+                            ),
+                            li: ({ node, ...props }) => (
+                                <li {...props} className="my-0"/>
+                            ),
+                            ul: ({ node, ...props }) => (
+                                <ul {...props} className="my-1" style={{paddingInlineEnd: 0}}/>
+                            ),
+                            h2: ({ node, ...props }) => (
+                                <h2 {...props} className="my-1"/>
+                            ),
+                            h3: ({ node, ...props }) => (
+                                <h3 {...props} className="my-1"/>
                             ),
                         }}>
                             {message}

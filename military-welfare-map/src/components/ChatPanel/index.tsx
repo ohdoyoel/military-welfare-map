@@ -31,13 +31,13 @@ const placeLabelData = [
 export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([
         {
-            message: `안녕하십니까! 혹시 
+            message: `안녕하십니까!
 - 육군
-- 공군
 - 해군
 - 해병대
-- 민간인
-\n중 어떤 집단에 속해 계신지 여쭤봐도 되겠습니까?`, isBotSide: true}
+- 공군
+- 민간인 (군 가족 및 지인)
+\n중 어떤 집단에 속하여 계십니까?`, isBotSide: true}
     ])
     const [isNear, setIsNear] = useState(false)
     const user = useRef(0)
