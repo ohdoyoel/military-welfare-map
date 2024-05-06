@@ -135,8 +135,7 @@ const placeFrom = (input: string): string => {
 // return `@search:영북`
 const searchTextFrom = (input: string): string => {
     let result = ''
-    let splittedInput = input.split(' ')
-    if (splittedInput.lastIndexOf('검색') >= 1) result = '@search:' + splittedInput[splittedInput.lastIndexOf('검색') - 1]
+    if (input.lastIndexOf('검색') >= 1) result = '@search:' + input.substring(0, input.lastIndexOf('검색'))
     return result
 }
 

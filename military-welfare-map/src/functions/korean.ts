@@ -1,3 +1,5 @@
+import { Result } from "postcss"
+
 export const andInKorean = (name: string) => {
     const lastChar = name.charCodeAt(name.length - 1)
     const isThereLastChar = (lastChar - 0xac00) % 28
@@ -30,4 +32,12 @@ export const isTrimedTextOneIncluded = (target: string, textWithBlank: string) =
     if (target.includes(trimedText[i])) return true
   }
   return false
+}
+
+export const booleanArrayToList = (ba: boolean[]) => {
+  let result = []
+  for (let i=0; i<ba.length; i++) {
+    if (ba[i]) result.push(i.toString())
+  }
+  return result
 }

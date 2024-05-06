@@ -207,6 +207,12 @@ export default function Home() {
     setFilteredMarkers(tempMarkers)
     }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
 
+  useEffect(() => {
+    let input;
+    input = document.getElementById("searchInput") as HTMLInputElement;
+    input.value = searchText
+  }, [searchText])
+
   const onSearchInputKeyUp = () => { 
     let input;
     input = document.getElementById("searchInput") as HTMLInputElement;
@@ -281,7 +287,7 @@ export default function Home() {
 
       {/* ChatPanel */}
       <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-        <ChatPanel markers={markers} setPos={setMapPos} setLevel={setLevel} setIdx={setSelectedIdx} setTagsToggled={setIsTagsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
+        <ChatPanel markers={markers} setIdx={setSelectedIdx} tagsToggled={isTagsToggled} setTagsToggled={setIsTagsToggled} regionsToggled={isRegionsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
         <AdsBar/>
       </div>
 
