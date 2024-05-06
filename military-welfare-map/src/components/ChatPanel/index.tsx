@@ -5,6 +5,8 @@ import { ChatMessage } from "../ChatMessage"
 import { botReply, greeting } from "@/src/functions/botReply"
 import { andInKorean, booleanArrayToList, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
 import { tagSearch } from "@/src/types/tagIconLabel"
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Friends } from "../Friends"
 
 interface ChatPanelProps {
     markers: MarkerType[]
@@ -49,6 +51,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
 \n중 어떤 집단에 속하여 계십니까?`, isBotSide: true, tag: -1}
     ])
     const [isNear, setIsNear] = useState(false)
+    const [isFriendsOpened, setIsFriendsOpened] = useState(false)
     const user = useRef(0)
 
     const messageList = (messages: MessageProps[]) => {
@@ -243,7 +246,14 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     }
     
     return (
-        <div className="grow flex flex-col w-full">
+        <div className="grow relative flex flex-col w-full">
+            {isFriendsOpened && <Friends setIsFriendsOpened={setIsFriendsOpened}/>}
+            <div className="flex-none flex flex-row h-12 w-full bg-emerald-500 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] z-10 text-white">
+                <button className="w-10 h-10 my-1 mx-1 hover:bg-emerald-600 hover:rounded-[3px]" onClick={() => setIsFriendsOpened(true)}>
+                    <ArrowBackIcon fontSize="medium"/>
+                </button>
+                <p className="grid place-content-center text-xl font-bold">병장 지피티</p>
+            </div>
             <ul id={'messages'} className="grow w-full h-0 bg-emerald-500 px-4 py-4 flex flex-col items-start overflow-y-auto gap-1" style={{scrollBehavior:'smooth'}}>
                 {messageList(messages)}
             </ul>

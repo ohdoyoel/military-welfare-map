@@ -231,10 +231,10 @@ export default function Home() {
   const activeChatInput = () => {
     let input;
     input = document.getElementById("chatInput") as HTMLTextAreaElement;
-    input.focus()
+    input && input.focus()
   }
   useEffect(() => {
-    activeChatInput()
+    isChatOpened && activeChatInput()
   }, [isChatOpened])
   
   return (
