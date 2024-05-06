@@ -99,7 +99,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         setSearchText(rcmdMarker.title)
         setIdx(0)
         pushRcmdMessage(
-            `### ${rcmdMarker.title}\n#### ${rcmdMarker.address}\n##### ${rcmdMarker.telno}\n##### ${rcmdMarker.description}   
+            `### ${rcmdMarker.title}\n#### ${rcmdMarker.address}\n##### ${rcmdMarker.telno}\n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;')}   
 [길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
             true,
             rcmdMarker.tag)
