@@ -44,7 +44,7 @@ export const AdsWindow = ({idx, title, pos, tag}: AdsWindowProps) => {
     }  
 
     return (
-        <div>
+        <>
         <CustomOverlayMap position={pos} zIndex={20}>
             <a href="" className={`${titleToMargin[title]} border-4 ${tagOrderBorderColor[tagToOrder[tag]].light} w-[380px] h-[128px] bg-slate-200 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px] flex items-center justify-center`}>
                 <p className="text-4xl font-nse text-slate-100">This Is Advertising</p>
@@ -59,7 +59,7 @@ export const AdsWindow = ({idx, title, pos, tag}: AdsWindowProps) => {
             strokeColor={tagOrderHexColor[tagToOrder[tag]].normal} // 선의 색깔입니다
             strokeOpacity={0.7} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
             strokeStyle={"shortdash"} // 선의 스타일입니다
-        />,
-        </div>
+        />
+        </>
     )
 }
