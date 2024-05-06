@@ -10,6 +10,7 @@ import { MarkerImage } from '../MarkerImage';
 import { AdsBar } from '../AdsBar';
 import { AdsBarFloat } from '../AdsBarFloat';
 import { AdsWindow } from '../AdsWindow';
+import { AlertOnFire } from '../AlertOnFire';
 
 interface TooltipProps {
     idx: number
@@ -500,11 +501,11 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
                 {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && floatingAdsOnFire(markers)}
-                {noMarkers.current && onFireMarkers.map((marker, i) => 
+                {!onFire && noMarkers.current && onFireMarkers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
-                {noMarkers.current && floatingAdsOnFire(onFireMarkers)}
+                {!onFire && noMarkers.current && floatingAdsOnFire(onFireMarkers)}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
                     image={{
@@ -519,6 +520,12 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 <ReSetttingMapBounds markers={markers}/>
+                {onFire &&
+                <AlertOnFire>
+                    <p className='text-lg font-nsb'>💰 지피티 병장이 쏜다!</p>
+                    <p className='text-base'>병영생활지도와 제휴를 맺은 🎖️업소를 소개합니다.</p>
+                </AlertOnFire>
+                }
                 {!onFire && tooManyMarkers.current &&
                 <Alert>
                     <p className='text-lg font-nsb'>⚠️ 표시되는 장소가 너무 많습니다!</p>
