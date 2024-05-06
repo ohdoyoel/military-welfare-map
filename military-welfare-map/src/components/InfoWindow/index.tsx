@@ -46,7 +46,7 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, onFire
                     {tagIconForInfoWindow[tag]}
                     <p className='text-sm'>{tagLabel[tag]}</p>
                 </div>
-                <div className="relative w-fit h-full flex flex-col items-start p-2" style={{minWidth: '320px'}}>
+                <div className="relative w-fit h-full flex flex-col items-start p-2" style={{minWidth: '320px', maxWidth: '540px'}}>
                     <p className='text-left text-lg font-nsb'>{title}</p>
                     <p className='text-left text-base mr-4'>{address}</p>
                     <p className='pt-1 text-left text-sm'>{telno}</p>
