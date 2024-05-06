@@ -457,7 +457,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
         }
 
         const floatingAdsOnFire = (markers:MarkerType[]) => {
-          let result = []
+          let result:JSX.Element[] = []
           let adsIdx = 0;
           for (let i=0; i<markers.length; i++) {
             if (markers[i].onFire) {
@@ -493,8 +493,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 minClusterSize={1}
                 >
                   {makeMapMarkers(markers, mapNE, mapSW)}
-                </MarkerClusterer>
-                }
+                </MarkerClusterer>}
                 {(onFire || level >= 11) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
