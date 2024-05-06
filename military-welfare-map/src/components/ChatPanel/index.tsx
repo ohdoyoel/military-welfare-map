@@ -3,9 +3,14 @@ import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
 import { botReply, greeting } from "@/src/functions/botReply"
-import { andInKorean, thatInKorean } from "@/src/functions/korean"
+import { andInKorean, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
+import { tagSearch } from "@/src/types/tagIconLabel"
 
 interface ChatPanelProps {
+    markers: MarkerType[]
+    setPos: Dispatch<SetStateAction<{lat:number, lng:number}>>
+    setLevel: Dispatch<SetStateAction<number>>
+    setIdx: Dispatch<SetStateAction<number>>
     setTagsToggled: Dispatch<SetStateAction<boolean[]>>
     setRegionsToggled: Dispatch<SetStateAction<boolean[]>>
     setSearchText: Dispatch<SetStateAction<string>>
@@ -15,6 +20,7 @@ interface ChatPanelProps {
 interface MessageProps {
     message: string,
     isBotSide: boolean
+    tag: number
 }
 
 const tagLabelData = [
@@ -28,7 +34,7 @@ const placeLabelData = [
     '경상북도', '경상남도', '강원특별자치도', '제주특별자치도', '주변', '전국'
 ]
 
-export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
+export const ChatPanel = ({markers, setPos, setLevel, setIdx, setTagsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([
         {
             message: `안녕하십니까!
@@ -37,7 +43,7 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
 - 해병대
 - 공군
 - 민간인 (군 가족 및 지인)
-\n중 어떤 집단에 속하여 계십니까?`, isBotSide: true}
+\n중 어떤 집단에 속하여 계십니까?`, isBotSide: true, tag: -1}
     ])
     const [isNear, setIsNear] = useState(false)
     const user = useRef(0)
@@ -45,8 +51,7 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
     const messageList = (messages: MessageProps[]) => {
         const result = []
         for (let i=0; i<messages.length; i++){
-            if (i == messages.length-1) result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide} key={i}/>)
-            else result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide} key={i}/>)
+            result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide} tag={messages[i].tag} key={i}/>)
         }
         return result
     }
@@ -67,7 +72,7 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
         return result
     }
 
-    // plc1와(과) ... plc2을(를)
+    // plc1와(과) ... plc2의
     const combinePlcs = (plcs: string[]) => {
         let result = ''
         for (let i=0; i<plcs.length; i++) {
@@ -78,16 +83,46 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
         return result
     }
 
-    const replyProperlyTagAndPlc = (tags: string[], plcs: string[]) => {
-        if (tags.length > 0 && plcs.length == 0) {
-            if (isNear) pushMessage(`주변의 ${combineTags(tags)} 보여드리겠습니다 .`, true)
-            else pushMessage(`선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다 .`, true)
-        }
-        else if (tags.length == 0 && plcs.length > 0) {
-            pushMessage(`${combinePlcs(plcs)} 선택하신 장소의 종류를 보여드리겠습니다 .`, true)
-        }
-        else if (tags.length > 0 && plcs.length > 0) {
-            pushMessage(`${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다 .`, true)
+    const replyRcmdProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
+        const filtered = markers.filter((marker) => {
+            return (tags.includes(marker.tag.toString()) && plcs.includes(marker.region.toString())
+                && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase()))
+        })
+
+        const randomIdx = Math.floor(Math.random() * (filtered.length-1))        
+        const rcmdMarker = filtered[randomIdx]
+        setSearchText(rcmdMarker.title)
+        setIdx(0)
+        pushRcmdMessage(
+            `### ${rcmdMarker.title}\n#### ${rcmdMarker.address}\n##### ${rcmdMarker.telno}\n##### ${rcmdMarker.description}   
+[길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
+            true,
+            rcmdMarker.tag)
+    }
+
+    const replyProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
+        if (searchText == '') {
+            if (tags.length > 0 && plcs.length == 0) {
+                if (isNear) pushMessage(`주변의 ${combineTags(tags)} 보여드리겠습니다.`, true)
+                else pushMessage(`선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다.`, true)
+            }
+            else if (tags.length == 0 && plcs.length > 0) {
+                pushMessage(`${combinePlcs(plcs)} 선택하신 태그를 보여드리겠습니다.`, true)
+            }
+            else if (tags.length > 0 && plcs.length > 0) {
+                pushMessage(`${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다.`, true)
+            }
+        } else {
+            if (tags.length > 0 && plcs.length == 0) {
+                if (isNear) pushMessage(`${searchText}의 검색 결과 중, 주변의 ${combineTags(tags)} 보여드리겠습니다.`, true)
+                else pushMessage(`${searchText}의 검색 결과 중, 선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다.`, true)
+            }
+            else if (tags.length == 0 && plcs.length > 0) {
+                pushMessage(`${searchText}의 검색 결과 중, ${combinePlcs(plcs)} 선택하신 장소의 종류를 보여드리겠습니다.`, true)
+            }
+            else if (tags.length > 0 && plcs.length > 0) {
+                pushMessage(`${searchText}의 검색 결과 중, ${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다.`, true)
+            }
         }
     }
 
@@ -101,13 +136,14 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
             pushMessage(greeting[user.current], true)
             return
         }
-        else if (!reply.includes('@tag:') && !reply.includes('@plc:')) {
+        else if (!reply.includes('@tag:') && !reply.includes('@plc:') && !reply.includes('@search:')) {
             pushMessage(reply, true)
             return
         }
 
         let tag:string[] = []
         let plc:string[] = []
+        let searchText = ''
         if (reply.includes('@tag:')) {
             reply.split('@tag:').forEach((item, idx) => {
                 if (idx == 0) return
@@ -145,7 +181,21 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
             })
             setRegionsToggled(plcsToggled)
         }
-        replyProperlyTagAndPlc(tag, plc)
+        if (reply.includes('@search:')) {
+            searchText = reply.split('@search:')[1]
+            setSearchText(searchText)
+        } else {
+            searchText = ''
+            setSearchText(searchText)
+        }
+
+        if (reply.includes('@rcmd')) {
+            replyRcmdProperlyTagAndPlcAndSearch(tag, plc, searchText)
+            return
+        } else {
+            replyProperlyTagAndPlcAndSearch(tag, plc, searchText)
+            return
+        }
     }
 
     useEffect(() => {
@@ -155,8 +205,12 @@ export const ChatPanel = ({setTagsToggled, setRegionsToggled, setSearchText, set
         scrollDown()
     }, [messages])
 
+    const pushRcmdMessage = (message: string, isBot: boolean, tag: number) => {
+        setMessages([...messages, {message:message, isBotSide: isBot, tag: tag}])
+    }
+
     const pushMessage = (message: string, isBot: boolean) => {
-        setMessages([...messages, {message:message, isBotSide: isBot}])
+        setMessages([...messages, {message:message, isBotSide: isBot, tag:-1}])
     }
 
     const sendMessage = () => {

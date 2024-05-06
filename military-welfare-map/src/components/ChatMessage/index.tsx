@@ -1,12 +1,15 @@
+import { tagOrderBgColor, tagOrderBorderColor, tagOrderTextColor } from "@/src/types/tagColor";
+import { tagToOrder } from "@/src/types/tagIconLabel";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 interface ChatMessageProps {
     message: string
     isBotSide: boolean
+    tag: number
 }
 
-export const ChatMessage = ({message, isBotSide}: ChatMessageProps) => {
+export const ChatMessage = ({message, isBotSide, tag}: ChatMessageProps) => {
     
     const nowTime = () : string => {
         const date = new Date()
@@ -21,9 +24,12 @@ export const ChatMessage = ({message, isBotSide}: ChatMessageProps) => {
             <div className={`flex items-start gap-2.5 ${isBotSide ? "self-start flex-row-reverse" : "self-end"}`}>
                 <p className="text-base font-normal text-white self-end" suppressHydrationWarning>{nowTime()}</p>
                 <div className="flex flex-col gap-1 w-fit max-w-[330px]">
-                    <div className={`flex flex-col p-2 bg-white ${isBotSide ? "rounded-r-lg rounded-bl-lg" : "rounded-l-lg rounded-br-lg"} shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-2`}>
-                        <ReactMarkdown className={`prose text-base font-normal`} remarkPlugins={[remarkGfm]}
+                    <div className={`flex flex-col p-2 bg-white ${isBotSide ? "rounded-r-lg rounded-bl-lg" : "rounded-l-lg rounded-br-lg"} shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 ${tag!=-1 && tagOrderBorderColor[tagToOrder[tag]].normal}`}>
+                        <ReactMarkdown className={`prose relative text-base font-normal`} remarkPlugins={[remarkGfm]}
                         components={{
+                            a: ({ node, ...props }) => (
+                                <a {...props} target="_blank" className={`${tag!=-1 && tagOrderBgColor[tagToOrder[tag]].normal} mt-3 p-1 text-white no-underline inline-block`}/>
+                                ),
                             p: ({ node, ...props }) => (
                             <p {...props} className="my-2"/>
                             ),

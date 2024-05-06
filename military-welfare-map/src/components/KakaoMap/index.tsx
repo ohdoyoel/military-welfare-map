@@ -40,6 +40,9 @@ interface KakaoMapProps {
     onFireMarkers: MarkerType[]
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
     isStarToggled: boolean
+    isChatOpened: boolean
+    level: number
+    setLevel: Dispatch<SetStateAction<number>>
 }
 
 /**
@@ -375,13 +378,12 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, level, setLevel}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
-    const [level, setLevel] = useState(10);
 
     const tooManyMarkers = useRef(false)
     const noMarkers = useRef(false)
@@ -414,12 +416,12 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
 
         // move map function
         
-        useEffect(() => {
-            setMapPos({
-                lat: curPos.center.lat,
-                lng: curPos.center.lng
-            })
-        }, [curPos])
+        // useEffect(() => {
+        //     setMapPos({
+        //         lat: curPos.center.lat,
+        //         lng: curPos.center.lng
+        //     })
+        // }, [curPos])
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
@@ -492,7 +494,6 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 minLevel={8} // 클러스터 할 최소 지도 레벨
                 calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
-                // styles={[{zIndex: -1}, {zIndex: -1}, {zIndex: -1}, {zIndex: -1}]}
                 >
                   {!onFire && makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>
