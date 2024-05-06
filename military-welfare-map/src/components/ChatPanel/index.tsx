@@ -3,15 +3,15 @@ import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
 import { botReply, greeting } from "@/src/functions/botReply"
-import { andInKorean, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
+import { andInKorean, booleanArrayToList, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
 import { tagSearch } from "@/src/types/tagIconLabel"
 
 interface ChatPanelProps {
     markers: MarkerType[]
-    setPos: Dispatch<SetStateAction<{lat:number, lng:number}>>
-    setLevel: Dispatch<SetStateAction<number>>
     setIdx: Dispatch<SetStateAction<number>>
+    tagsToggled: boolean[]
     setTagsToggled: Dispatch<SetStateAction<boolean[]>>
+    regionsToggled: boolean[]
     setRegionsToggled: Dispatch<SetStateAction<boolean[]>>
     setSearchText: Dispatch<SetStateAction<string>>
     setDistance: Dispatch<SetStateAction<number>>
@@ -24,17 +24,20 @@ interface MessageProps {
 }
 
 const tagLabelData = [
-    '음식점', '카페', '미용실', '목욕탕', '노래방·PC방·당구장', '숙박업소', '스포츠', 'TMO·이사업체', '군 제휴 안경점', '군병원과 병무청지정병원', '예비군집결지', 'BX(영외마트)', '모두',
+    '음식점', '카페', '미용실', '목욕탕',
+    '문화·여가 시설', '숙박업소', '운동 시설',
+    '', '군 제휴 안경점', '군병원과 병무청지정병원',
+    '예비군집결지', 'BX(영외마트)', '모두',
 ]
 
 const placeLabelData = [
     '서울특별시', '부산광역시', '대구광역시', '인천광역시',
     '광주광역시', '대전광역시', '울산광역시', '경기도',
-    '충청북도', '충청남도', '전라북특별자치도', '전라남도',
+    '충청북도', '충청남도', '전북특별자치도', '전라남도',
     '경상북도', '경상남도', '강원특별자치도', '제주특별자치도', '주변', '전국'
 ]
 
-export const ChatPanel = ({markers, setPos, setLevel, setIdx, setTagsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
+export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regionsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([
         {
             message: `안녕하십니까!
@@ -61,23 +64,25 @@ export const ChatPanel = ({markers, setPos, setLevel, setIdx, setTagsToggled, se
         ul.scrollTo({top: ul.scrollHeight, behavior: 'smooth'})
     }
 
-    // tag1와(과) ... tag2을(를)
+    // tag1와(과) ... tag2
     const combineTags = (tags: string[]) => {
+        if (tags.length == 12) return '모든 장소'
         let result = ''
         for (let i=0; i<tags.length; i++) {
             const label = tagLabelData[Number(tags[i])]
-            if (i == tags.length-1) result += (label + thatInKorean(label))
+            if (i == tags.length-1) result += label
             else result += (label + andInKorean(label) + ' ')
         }
         return result
     }
 
-    // plc1와(과) ... plc2의
+    // plc1와(과) ... plc2
     const combinePlcs = (plcs: string[]) => {
+        if (plcs.length == 16) return '전국'
         let result = ''
         for (let i=0; i<plcs.length; i++) {
             const label = placeLabelData[Number(plcs[i])]
-            if (i == plcs.length-1) result += (label + '의')
+            if (i == plcs.length-1) result += label
             else result += (label + andInKorean(label) + ' ')
         }
         return result
@@ -101,27 +106,35 @@ export const ChatPanel = ({markers, setPos, setLevel, setIdx, setTagsToggled, se
     }
 
     const replyProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
+        const combineTagsString = combineTags(tags)
+        const tagsToggledString = combineTags(booleanArrayToList(tagsToggled))
+        const combinePlcsString = combinePlcs(plcs)
+        const plcsToggledString = combinePlcs(booleanArrayToList(regionsToggled))
+
         if (searchText == '') {
             if (tags.length > 0 && plcs.length == 0) {
-                if (isNear) pushMessage(`주변의 ${combineTags(tags)} 보여드리겠습니다.`, true)
-                else pushMessage(`선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다.`, true)
+                if (isNear) pushMessage(`주변의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
+                else pushMessage(`${plcsToggledString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
             }
             else if (tags.length == 0 && plcs.length > 0) {
-                pushMessage(`${combinePlcs(plcs)} 선택하신 태그를 보여드리겠습니다.`, true)
+                pushMessage(`${combinePlcsString}의 ${tagsToggledString+thatInKorean(tagsToggledString)} 보여드리겠습니다.`, true)
             }
             else if (tags.length > 0 && plcs.length > 0) {
-                pushMessage(`${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다.`, true)
+                pushMessage(`${combinePlcsString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
             }
         } else {
-            if (tags.length > 0 && plcs.length == 0) {
-                if (isNear) pushMessage(`${searchText}의 검색 결과 중, 주변의 ${combineTags(tags)} 보여드리겠습니다.`, true)
-                else pushMessage(`${searchText}의 검색 결과 중, 선택하신 지역의 ${combineTags(tags)} 보여드리겠습니다.`, true)
+            if (tags.length == 0 && plcs.length == 0) {
+                pushMessage(`${plcsToggledString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다..`, true)
+            }
+            else if (tags.length > 0 && plcs.length == 0) {
+                if (isNear) pushMessage(`주변의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+                else pushMessage(`${plcsToggledString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
             }
             else if (tags.length == 0 && plcs.length > 0) {
-                pushMessage(`${searchText}의 검색 결과 중, ${combinePlcs(plcs)} 선택하신 장소의 종류를 보여드리겠습니다.`, true)
+                pushMessage(`${combinePlcsString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
             }
             else if (tags.length > 0 && plcs.length > 0) {
-                pushMessage(`${searchText}의 검색 결과 중, ${combinePlcs(plcs)} ${combineTags(tags)} 보여드리겠습니다.`, true)
+                pushMessage(`${combinePlcsString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
             }
         }
     }
@@ -182,8 +195,16 @@ export const ChatPanel = ({markers, setPos, setLevel, setIdx, setTagsToggled, se
             setRegionsToggled(plcsToggled)
         }
         if (reply.includes('@search:')) {
-            searchText = reply.split('@search:')[1]
+            searchText = reply.split('@search:')[1].trim()
             setSearchText(searchText)
+            if (tag.length==0) {
+                setTagsToggled(Array.from({length: 12}, () => true))
+                tag = Array.from(Array(12).keys()).map((x) => x.toString())
+            }
+            if (plc.length==0) {
+                setRegionsToggled(Array.from({length: 16}, () => true))
+                plc = Array.from(Array(16).keys()).map((x) => x.toString())
+            }
         } else {
             searchText = ''
             setSearchText(searchText)
