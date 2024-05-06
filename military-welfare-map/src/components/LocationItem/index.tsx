@@ -25,7 +25,7 @@ interface LocationItemProps {
 export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description, onFire, star, setMarkers}: LocationItemProps) => {
     const imgSrcRef = useRef('')
     const handleOnClick = () => {
-        setPos({lat: position.lat, lng: position.lng})
+        setPos(position)
         setIdx(_id)    
     }
     const starToggle = (title: string) => {

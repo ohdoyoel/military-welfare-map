@@ -154,7 +154,7 @@ export default function Home() {
   
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
   
-  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
+  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37, lng: 128})
   // const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const [curPos, setCurPos] = useState({
     center: {
@@ -165,6 +165,7 @@ export default function Home() {
     isLoading: true,
   })
   const [selectedIdx, setSelectedIdx] = useState(-1)
+  const [level, setLevel] = useState(13);
   
   const [onFireToggled, setOnFireToggled] = useState(false)
   const [isStarToggled, setIsStarToggled] = useState(false)
@@ -280,7 +281,7 @@ export default function Home() {
 
       {/* ChatPanel */}
       <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-        <ChatPanel setTagsToggled={setIsTagsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
+        <ChatPanel markers={markers} setPos={setMapPos} setLevel={setLevel} setIdx={setSelectedIdx} setTagsToggled={setIsTagsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
         <AdsBar/>
       </div>
 
@@ -305,13 +306,13 @@ export default function Home() {
       </div>
 
       <div className='z-10 absolute top-12 right-1 flex flex-col gap-2'>
-        <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos({lat:curPos.center.lat, lng:curPos.center.lng})}>
+        <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos(curPos.center)}>
           <img src='/images/current-position.png'></img>
         </button>
       </div>
       
       <div className={`w-full h-full`}>
-        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos}
+        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} level={level} setLevel={setLevel}
                   selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!} setMarkers={setMarkers} isStarToggled={isStarToggled}/>
       </div>
 
