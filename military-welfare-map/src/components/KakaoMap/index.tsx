@@ -36,6 +36,7 @@ interface KakaoMapProps {
     setSelectedIdx: Dispatch<SetStateAction<number>>
     selectedIdx: number
     onFire: boolean
+    onFireMarkers: MarkerType[]
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
     isStarToggled: boolean
 }
@@ -373,7 +374,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, setMarkers, isStarToggled}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
@@ -388,28 +389,28 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
 
     useEffect(() => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setCurPos((prev) => ({
-                        ...prev,
-                        center: {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        },
-                        isLoading: false,
-                    }))
-                    },
-                (err) => {
-                    setCurPos((prev) => ({
-                        ...prev,
-                        errMsg: err.message,
-                        isLoading: false,
-                    }))
-                }
-                )
-            }
+          navigator.geolocation.getCurrentPosition(
+              (position) => {
+                  setCurPos((prev) => ({
+                      ...prev,
+                      center: {
+                          lat: position.coords.latitude,
+                          lng: position.coords.longitude,
+                      },
+                      isLoading: false,
+                  }))
+                  },
+              (err) => {
+                  setCurPos((prev) => ({
+                      ...prev,
+                      errMsg: err.message,
+                      isLoading: false,
+                  }))
+              }
+              )
+          }
         }, [])
-        
+
         // move map function
         
         useEffect(() => {
@@ -485,20 +486,25 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 onTileLoaded={setCenterAndBound}
                 onZoomChanged={(map) => setLevel(map.getLevel())}
                 >
-                {!onFire &&
                 <MarkerClusterer
                 averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
                 minLevel={8} // 클러스터 할 최소 지도 레벨
                 calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
+                // styles={[{zIndex: -1}, {zIndex: -1}, {zIndex: -1}, {zIndex: -1}]}
                 >
-                  {makeMapMarkers(markers, mapNE, mapSW)}
-                </MarkerClusterer>}
-                {(onFire || level >= 11) && markers.map((marker, i) => 
+                  {!onFire && makeMapMarkers(markers, mapNE, mapSW)}
+                </MarkerClusterer>
+                {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
-                {(onFire || level >= 11) && floatingAdsOnFire(markers)}
+                {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && floatingAdsOnFire(markers)}
+                {noMarkers.current && onFireMarkers.map((marker, i) => 
+                    marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
+                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
+                )}
+                {noMarkers.current && floatingAdsOnFire(onFireMarkers)}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
                     image={{
