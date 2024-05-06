@@ -206,13 +206,6 @@ export default function Home() {
     setFilteredMarkers(tempMarkers)
     }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
 
-  // useEffect(() => {
-  //   // console.log(filteredMarkers)
-  //   setMapPos(filteredMarkers.length == 0 ? curPos
-  //             :{lat:filteredMarkers.reduce((r, c) => r + c.position.lat, 0) / filteredMarkers.length,
-  //               lng:filteredMarkers.reduce((r, c) => r + c.position.lng, 0) / filteredMarkers.length})
-  // }, [filteredMarkers])
-
   const onSearchInputKeyUp = () => { 
     let input;
     input = document.getElementById("searchInput") as HTMLInputElement;
