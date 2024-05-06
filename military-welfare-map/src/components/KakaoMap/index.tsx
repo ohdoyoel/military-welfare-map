@@ -471,6 +471,12 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
           }
           return result
         }
+
+        // const getLevel = () => {
+        //   const map = useMap()
+        //   if (!map) return 0;
+        //   return map.getLevel()
+        // }
         
         return (
             <Map 
@@ -495,18 +501,18 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 calculator={[50, 100, 200, 300]}
                 minClusterSize={1}
                 >
-                  {!onFire && makeMapMarkers(markers, mapNE, mapSW)}
+                {!onFire && makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>
-                {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && markers.map((marker, i) => 
+                {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && (level >= 8) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
                 {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && floatingAdsOnFire(markers)}
-                {!onFire && noMarkers.current && onFireMarkers.map((marker, i) => 
+                {(!onFire && !isStarToggled && !tooManyMarkers.current && noMarkers.current) && onFireMarkers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
-                {!onFire && noMarkers.current && floatingAdsOnFire(onFireMarkers)}
+                {(!onFire && !isStarToggled && !tooManyMarkers.current && noMarkers.current) && floatingAdsOnFire(onFireMarkers)}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
                     image={{
