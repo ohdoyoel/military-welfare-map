@@ -455,8 +455,8 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
             setMapNE({lat:NE.getLat(), lng:NE.getLng()})
             const SW = map.getBounds().getSouthWest()
             setMapSW({lat:SW.getLat(), lng:SW.getLng()})
-            const latlng = map.getCenter()
-            setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
+            // const latlng = map.getCenter()
+            // setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
             // console.log(map.getLevel())
         }
 
@@ -494,6 +494,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 onCenterChanged={setCenterAndBound}
                 onTileLoaded={setCenterAndBound}
                 onZoomChanged={(map) => setLevel(map.getLevel())}
+                keyboardShortcuts={true}
                 >
                 <MarkerClusterer
                 averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
