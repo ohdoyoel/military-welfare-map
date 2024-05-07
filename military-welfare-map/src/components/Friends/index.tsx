@@ -111,20 +111,24 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
                     <span className="text-sm mx-1 text-slate-400">CSS</span>
                 </div>
             </a>
-            <div className="flex-none flex flex-row items-center w-full py-2">
-                <div className="w-12 h-12 bg-emerald-500 mx-4 rounded-[20px]"/>
+            <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href="https://apis.map.kakao.com/">
+                <div className="w-12 h-12 mx-4 rounded-[20px] border-[1px] bg-slate-200 border-slate-300 grid place-content-center">
+                    <img width={'30px'} height={'30px'} src="/images/kakaomap.png" alt="/images/kakaomap.png"/>
+                </div>
                 <div className="flex flex-col">
                     <span className="text-xl mx-1">Kakao 지도 Web API</span>
                     <span className="text-sm mx-1 text-slate-400">Map</span>
                 </div>
-            </div>
-            <div className="flex-none flex flex-row items-center w-full pt-2 pb-4 border-b-2 border-slate-200 ">
-                <div className="w-12 h-12 bg-emerald-500 mx-4 rounded-[20px]"/>
+            </a>
+            <a className="flex-none flex flex-row items-center w-full pt-2 pb-4 border-b-2 border-slate-200 hover:bg-slate-100" href="https://www.netlify.com/">
+                <div className="w-12 h-12 mx-4 grid place-content-center">
+                    <img className="rounded-[20px] border-[1px] bg-slate-200 border-slate-300" src="/images/netlify.webp" alt="/images/netlify.webp"/>
+                </div>
                 <div className="flex flex-col">
                     <span className="text-xl mx-1">Netlify</span>
                     <span className="text-sm mx-1 text-slate-400">Deploy</span>
                 </div>
-            </div>
+            </a>
         </div>
     )
 }
