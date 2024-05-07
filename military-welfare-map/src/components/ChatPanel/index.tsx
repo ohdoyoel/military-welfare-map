@@ -254,7 +254,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
                 </button>
                 <p className="grid place-content-center text-xl font-bold">병장 지피티</p>
             </div>
-            <ul id={'messages'} className="grow w-full h-0 bg-emerald-500 px-4 py-4 flex flex-col items-start overflow-y-auto gap-1" style={{scrollBehavior:'smooth'}}>
+            <ul id={'messages'} className="grow w-full h-0 bg-emerald-500 pl-2 pr-4 py-4 flex flex-col items-start overflow-y-auto gap-1" style={{scrollBehavior:'smooth'}}>
                 {messageList(messages)}
             </ul>
             <div className="flex-none flex h-20 w-full border-t-[1px] border-slate-200">
