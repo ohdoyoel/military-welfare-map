@@ -170,9 +170,9 @@ export default function Home() {
   const [onFireToggled, setOnFireToggled] = useState(false)
   const [isStarToggled, setIsStarToggled] = useState(false)
 
-  // useEffect(() => {
-  //   validateDB(markers)
-  // }, [])
+  useEffect(() => {
+    validateDB(markers)
+  }, [])
 
   useEffect(() => {
     if (markers.length > 0 && isLoading) {
