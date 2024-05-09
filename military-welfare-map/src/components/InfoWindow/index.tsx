@@ -49,7 +49,7 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, onFire
                     <p className='text-left text-lg font-nsb whitespace-pre-wrap'>{title}</p>
                     <p className='text-left text-base mr-4 whitespace-pre-wrap leading-5'>{address}</p>
                     <p className='pt-1 text-left text-sm'>{telno}</p>
-                    <p className='pt-2 w-full h-full text-left text-xs whitespace-pre-wrap overflow-y-auto'>{imgSrc ? description?.substring(description.lastIndexOf(')')+1) : description}</p>                    
+                    <p className='pt-2 w-full h-full text-left text-xs whitespace-pre-wrap'>{imgSrc ? description?.substring(description.lastIndexOf(')')+1) : description}</p>                    
                     <button className={`absolute bottom-2 right-24 w-8 h-8 grid place-content-center`} onClick={() => starToggle(title)}>
                         {star ? <FavoriteIcon className={`text-lg ${tagOrderTextColor[tagToOrder[tag]].normal}`}/> : <FavoriteBorderIcon className={`text-lg ${tagOrderTextColor[tagToOrder[tag]].normal}`}/>}
                     </button>
