@@ -434,7 +434,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                             star={mks[i].isStar!} setMarkers={setMarkers}/>
                         )
                 }
-                if (result.length > 900) {
+                if (result.length > 1000) {
                     noMarkers.current = false
                     tooManyMarkers.current = true
                     return []
