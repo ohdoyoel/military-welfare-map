@@ -45,7 +45,7 @@ export const AdsWindow = ({idx, title, pos, tag}: AdsWindowProps) => {
 
     return (
         <>
-        <CustomOverlayMap position={pos} zIndex={20}>
+        <CustomOverlayMap position={pos} zIndex={title == "🎖️ 진해군항제" ? undefined : 20}>
             <a href="" className={`${titleToMargin[title]} border-4 ${tagOrderBorderColor[tagToOrder[tag]].light} w-[380px] h-[128px] bg-slate-200 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px] flex items-center justify-center`}>
                 <p className="text-4xl font-nse text-slate-100">This Is Advertising</p>
             </a>
