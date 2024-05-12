@@ -2,7 +2,7 @@ import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
-import { botReply, greeting } from "@/src/functions/botReply"
+import { ads, botReply, greeting, help } from "@/src/functions/botReply"
 import { andInKorean, booleanArrayToList, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
 import { tagSearch } from "@/src/types/tagIconLabel"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -47,7 +47,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
 - 해군
 - 해병대
 - 공군
-- 민간인 (군 가족 및 지인)
+- 민간인 (군 가족 및 지인)   
 \n중 어떤 집단에 속하여 계십니까?`, isBotSide: true, tag: -1}
     ])
     const [isNear, setIsNear] = useState(false)
@@ -73,6 +73,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         let result = ''
         for (let i=0; i<tags.length; i++) {
             const label = tagLabelData[Number(tags[i])]
+            console.log(label)
             if (i == tags.length-1) result += label
             else result += (label + andInKorean(label) + ' ')
         }
@@ -147,6 +148,14 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             pushMessage(greeting[user.current], true)
             return
         }
+        else if (reply.includes('@help')) {
+            pushMessage(help, true)
+            return
+        }
+        else if (reply.includes('@ads')) {
+            pushMessage(ads, true)
+            return
+        }
         else if (reply.includes('@user:')) {
             user.current = Number(reply.split('@user:')[1][0])
             pushMessage(greeting[user.current], true)
@@ -168,7 +177,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             let tagsToggled: boolean[] = (Array.from({length: 12}, () => false))
             tag.forEach((t) => {
                 if (Number(t) == 12) {
-                    tagsToggled = (Array.from({length: 16}, () => true))
+                    tagsToggled = (Array.from({length: 12}, () => true))
                 }
                 else tagsToggled[Number(t)] = true
             })
@@ -197,6 +206,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             })
             setRegionsToggled(plcsToggled)
         }
+
         if (reply.includes('@search:')) {
             searchText = reply.split('@search:')[1].trim()
             setSearchText(searchText)
