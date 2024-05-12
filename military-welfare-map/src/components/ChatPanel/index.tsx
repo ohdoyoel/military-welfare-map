@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
 import { ads, botReply, greeting, help } from "@/src/functions/botReply"
 import { andInKorean, booleanArrayToList, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
-import { tagSearch } from "@/src/types/tagIconLabel"
+import { rcmdMsg, tagSearch } from "@/src/types/tagIconLabel"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Friends } from "../Friends"
 
@@ -92,24 +92,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         return result
     }
 
-    const replyRcmdProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
-        const filtered = markers.filter((marker) => {
-            return (tags.includes(marker.tag.toString()) && plcs.includes(marker.region.toString())
-                && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase()))
-        })
-
-        const randomIdx = Math.floor(Math.random() * (filtered.length-1))        
-        const rcmdMarker = filtered[randomIdx]
-        setSearchText(rcmdMarker.title)
-        setIdx(0)
-        pushRcmdMessage(
-            `### ${rcmdMarker.title}\n#### ${rcmdMarker.address}\n##### ${rcmdMarker.telno}\n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;')}   
-[길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
-            true,
-            rcmdMarker.tag)
-    }
-
-    const replyProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
+    const explain = (tags: string[], plcs: string[], searchText:string, isRcmd:boolean) => {
         const combineTagsString = combineTags(tags)
         const tagsToggledString = combineTags(booleanArrayToList(tagsToggled))
         const combinePlcsString = combinePlcs(plcs)
@@ -117,32 +100,100 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
 
         if (searchText == '') {
             if (tags.length > 0 && plcs.length == 0) {
-                if (isNear) pushMessage(`주변의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
-                else pushMessage(`${plcsToggledString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
+                if (isNear) return `주변의 ${combineTagsString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
+                else return `${plcsToggledString}의 ${combineTagsString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
             }
             else if (tags.length == 0 && plcs.length > 0) {
-                pushMessage(`${combinePlcsString}의 ${tagsToggledString+thatInKorean(tagsToggledString)} 보여드리겠습니다.`, true)
+                return `${combinePlcsString}의 ${tagsToggledString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(tagsToggledString) + ' 보여드리겠습니다.'}`
             }
             else if (tags.length > 0 && plcs.length > 0) {
-                pushMessage(`${combinePlcsString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
+                return `${combinePlcsString}의 ${combineTagsString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
             }
         } else {
             if (tags.length == 0 && plcs.length == 0) {
-                pushMessage(`${plcsToggledString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다..`, true)
+                return `${plcsToggledString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과${isRcmd ? ' 속 하나를 추천해드리겠습니다.' : '를 보여드리겠습니다.'}`
             }
             else if (tags.length > 0 && plcs.length == 0) {
-                if (isNear) pushMessage(`주변의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
-                else pushMessage(`${plcsToggledString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+                if (isNear) return `주변의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과${isRcmd ? ' 속 하나를 추천해드리겠습니다.' : '를 보여드리겠습니다.'}`
+                else return `${plcsToggledString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과${isRcmd ? ' 속 하나를 추천해드리겠습니다.' : '를 보여드리겠습니다.'}`
             }
             else if (tags.length == 0 && plcs.length > 0) {
-                pushMessage(`${combinePlcsString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+                return `${combinePlcsString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과${isRcmd ? ' 속 하나를 추천해드리겠습니다.' : '를 보여드리겠습니다.'}`
             }
             else if (tags.length > 0 && plcs.length > 0) {
-                pushMessage(`${combinePlcsString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+                return `${combinePlcsString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과${isRcmd ? ' 속 하나를 추천해드리겠습니다.' : '를 보여드리겠습니다.'}`
             }
         }
+
+        return ''
     }
 
+    const replyRcmdProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
+        const filtered = markers.filter((marker) => {
+            return ((tags.length > 0 ? (tags.includes(marker.tag.toString()) || tags.includes('12')) : tagsToggled[marker.tag]) && (plcs.length > 0 ? (plcs.includes(marker.region.toString()) || plcs.includes('16') || plcs.includes('17')) : regionsToggled[marker.tag])
+                && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase()))
+        })
+
+        if (filtered.length == 0) {
+            pushMessage(`추천드릴 장소가 없습니다! 검색 조건을 다시 설정해주십시오.`, true)
+            return
+        }
+
+        const randomIdx = Math.floor(Math.random() * (filtered.length-1))        
+        const rcmdMarker = filtered[randomIdx]
+        setSearchText(rcmdMarker.title)
+        setIdx(0)
+        pushRcmdMessage(
+            `${explain(tags, plcs, searchText, true)}
+            \n${rcmdMsg[rcmdMarker.tag]}
+            \n### ${rcmdMarker.title}
+            \n**${rcmdMarker.address}**
+            \n##### ${rcmdMarker.telno}
+            \n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;')}   
+[길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
+            true,
+            rcmdMarker.tag)
+    }
+
+    const replyProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
+        // const combineTagsString = combineTags(tags)
+        // const tagsToggledString = combineTags(booleanArrayToList(tagsToggled))
+        // const combinePlcsString = combinePlcs(plcs)
+        // const plcsToggledString = combinePlcs(booleanArrayToList(regionsToggled))
+
+        // if (searchText == '') {
+        //     if (tags.length > 0 && plcs.length == 0) {
+        //         if (isNear) pushMessage(`주변의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
+        //         else pushMessage(`${plcsToggledString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
+        //     }
+        //     else if (tags.length == 0 && plcs.length > 0) {
+        //         pushMessage(`${combinePlcsString}의 ${tagsToggledString+thatInKorean(tagsToggledString)} 보여드리겠습니다.`, true)
+        //     }
+        //     else if (tags.length > 0 && plcs.length > 0) {
+        //         pushMessage(`${combinePlcsString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
+        //     }
+        // } else {
+        //     if (tags.length == 0 && plcs.length == 0) {
+        //         pushMessage(`${plcsToggledString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다..`, true)
+        //     }
+        //     else if (tags.length > 0 && plcs.length == 0) {
+        //         if (isNear) pushMessage(`주변의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+        //         else pushMessage(`${plcsToggledString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+        //     }
+        //     else if (tags.length == 0 && plcs.length > 0) {
+        //         pushMessage(`${combinePlcsString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+        //     }
+        //     else if (tags.length > 0 && plcs.length > 0) {
+        //         pushMessage(`${combinePlcsString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
+        //     }
+        // }
+        pushMessage(explain(tags, plcs, searchText, false), true)
+    }
+
+    // if search -> 
+    //          tag가 없으면 -> tag는 모두 true
+    //          plc가 없으면 -> plc는 모두 true
+    // else -> tag, plc는 이전 것을 따름
     const beforePushBotMessage = (reply: string) => {
         if (reply.includes('@hi')) {
             pushMessage(greeting[user.current], true)
@@ -169,6 +220,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         let tag:string[] = []
         let plc:string[] = []
         let searchText = ''
+
         if (reply.includes('@tag:')) {
             reply.split('@tag:').forEach((item, idx) => {
                 if (idx == 0) return
@@ -209,7 +261,6 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
 
         if (reply.includes('@search:')) {
             searchText = reply.split('@search:')[1].trim()
-            setSearchText(searchText)
             if (tag.length==0) {
                 setTagsToggled(Array.from({length: 12}, () => true))
                 tag = Array.from(Array(12).keys()).map((x) => x.toString())
@@ -218,10 +269,8 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
                 setRegionsToggled(Array.from({length: 16}, () => true))
                 plc = Array.from(Array(16).keys()).map((x) => x.toString())
             }
-        } else {
-            searchText = ''
-            setSearchText(searchText)
         }
+        setSearchText(searchText)
 
         if (reply.includes('@rcmd')) {
             replyRcmdProperlyTagAndPlcAndSearch(tag, plc, searchText)
