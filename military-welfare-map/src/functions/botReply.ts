@@ -12,20 +12,8 @@ export const greeting = [`
 ### 병영생활지도란?
 *병영생활지도* 는 *군인을 돕고자 하는 마음에서 탄생한 지도 플랫폼* 으로, 그 안에는 각종 혜택과 정보들이 **12개의 태그와 16개의 지역으로 분류**되어 있습니다.
 
-### 지 병장의 주특기는?
-제가 수행하는 일들을 다음과 같이 소개합니다!
-
-- 지도 컨트롤
-    - 태그와 장소를 입력하면 검색 조건 버튼을 설정하여 장소들을 보여줍니다.
-    - Ex) 경기도의 음식점을 보여줘, 주변에 카페 좀 보여줄래?
-    - 검색 키워드를 입력하고 검색을 입력하면, 키워드를 검색합니다.
-    - Ex) 의정부 검색
-- 장소 추천
-    - 태그와 장소를 입력하면 검색 조건 버튼을 설정하여 장소들을 보여줍니다.
-    - Ex) 경기도의 음식점을 보여줘, 주변에 카페 좀 보여줄래?
-- 광고 수주
-    - 광고를 넣고 싶으십니까? 넣고 싶다고 말하십시오!
-    - Ex) 나 광고 넣고 싶으니까 너희 사장 데려와
+제가 할 수 있는 일에 대해 궁금하시다면 물어봐주십시오!   
+  *Ex) 너 주특기가 뭐야?*
 `,
 `
 ## 필승!
@@ -36,6 +24,9 @@ export const greeting = [`
 
 ### 병영생활지도란?
 *병영생활지도* 는 *군인을 돕고자 하는 마음에서 탄생한 지도 플랫폼* 으로, 그 안에는 각종 혜택과 정보들이 **12개의 태그와 16개의 지역으로 분류**되어 있습니다.
+
+제가 할 수 있는 일에 대해 궁금하시다면 물어봐주십시오!   
+  *Ex) 너 주특기가 뭐야?*
 `,
 `
 ## 차렷!! 경례! 필!!!!! 승!!!!!
@@ -45,7 +36,10 @@ export const greeting = [`
 그러니 사용하면서 궁금한 점이 생기실 경우 언제든지 저를 호출하여 주십쇼!
 
 ### 병영생활지도란?
-*병영생활지도* 는 *군인을 돕고자 하는 마음에서 탄생한 지도 플랫폼* 으로, 그 안에는 각종 혜택과 정보들이 **12개의 태그와 16개의 지역으로 분류**되어 있습니다.
+*병영생활지도* 는 *군인을 돕고자 하는 마음에서 탄생한 지도 플랫폼* 으로, 그 안에는 각종 혜택과 정보들이 **12개의 태그와 16개의 지역으로 분류**되어 있습니드아!
+
+제가 할 수 있는 일에 대해 궁금하시다면 물어봐주십시오!   
+  *Ex) 니 주특기가 뭐냐?*
 `,
 `
 ## 필승!
@@ -56,6 +50,9 @@ export const greeting = [`
 
 ### 병영생활지도란?
 *병영생활지도* 는 *군인을 돕고자 하는 마음에서 탄생한 지도 플랫폼* 으로, 그 안에는 각종 혜택과 정보들이 **12개의 태그와 16개의 지역으로 분류**되어 있습니다.
+
+제가 할 수 있는 일에 대해 궁금하시다면 물어봐주십시오!   
+  *Ex) 너 특기가 어떻게 돼?*
 `,
 `
 ## 안녕하십니까!
@@ -66,8 +63,33 @@ export const greeting = [`
 
 ### 병영생활지도란?
 *병영생활지도* 는 *군인을 돕고자 하는 마음에서 탄생한 지도 플랫폼* 으로, 그 안에는 각종 혜택과 정보들이 **12개의 태그와 16개의 지역으로 분류**되어 있습니다.
+
+제가 드릴 수 있는 도움에 대해 궁금하시다면 물어봐주십시오!   
+  *Ex) 너 특기가 어떻게 돼?*
 `
 ]
+
+export const help = `
+### 지피티 병장의 주특기는?
+제가 수행하는 일들을 다음과 같이 소개합니다!
+
+- 지도 컨트롤
+    - 태그와 장소를 입력하면 해당되는 장소들을 보여줍니다.
+    - Ex) 경기도의 음식점을 보여줘 / 주변에 카페 좀 보여줄래?
+    - 검색 키워드를 입력하고 검색을 입력하면, 키워드를 검색합니다.
+    - Ex) 의정부 검색
+- 장소 추천
+    - 태그와 장소를 입력하면 검색 조건 버튼을 설정하여 장소들을 보여줍니다.
+    - Ex) 경기도의 음식점을 보여줘, 주변에 카페 좀 보여줄래?
+- 광고 수주
+    - 광고를 넣고 싶으십니까? 넣고 싶다고 말하십시오!
+    - Ex) 나 광고 넣고 싶으니까 너희 사장 데려와
+`
+
+export const ads = `
+### 광고를 넣고 싶은 업소의 사장님이십니까?
+\`ohdoyoel@naver.com\` 로 문의 부탁드립니다.
+`
 
 const isUserSetting = (input: string): boolean => {
     return userSetting(input).length > 0
@@ -135,7 +157,13 @@ const placeFrom = (input: string): string => {
 // return `@search:영북`
 const searchTextFrom = (input: string): string => {
     let result = ''
-    if (input.lastIndexOf('검색') >= 1) result = '@search:' + input.substring(0, input.lastIndexOf('검색'))
+    const trimmedInput = input.split(' ')
+    for (let i = 0; i < trimmedInput.length; i++) {
+        if (trimmedInput[i].includes('검색')) {
+            result = '@search:' + trimmedInput[i-1]
+            break;
+        }
+    }
     return result
 }
 
@@ -146,11 +174,19 @@ const isRcmd = (input: string): string => {
 }
 
 const isHello = (input: string): boolean => {
-    return input.includes('안녕') || input.includes('ㅎㅇ') || input.includes('도움')
+    return input.includes('안녕') || input.includes('ㅎㅇ')
 }
 
 const isCalled = (input: string): boolean => {
     return input.includes('야') || input.includes('어이') || input.includes('ㅇ')
+}
+
+const isHelp = (input: string): boolean => {
+    return input.includes('도움') || input.includes('도와줘') || input.includes('특기')
+}
+
+const isAds = (input: string): boolean => {
+    return input.includes('광고')
 }
 
 const isThanks = (input: string): boolean => {
@@ -167,6 +203,8 @@ export const botReply = (input: string):string => {
     else if (isTagOrPlaceOrSearch(input)) return `${isRcmd(input)} ${tagFrom(input)} ${placeFrom(input)} ${searchTextFrom(input)}`
     else if (isHello(input)) return `@hi`
     else if (isCalled(input)) return '***병장 지! 피! 티!***'
+    else if (isHelp(input)) return `@help`
+    else if (isAds(input)) return `@ads`
     else if (isThanks(input)) return '아닙니다 ! 더 궁금한 것은 없으십니까 ?'
     else if (isNothing(input)) return '예 알겠습니다! 더 궁금한 것이 있으시면 편하게 질문해주십시오!'
     return '잘못 들었습니다?'
