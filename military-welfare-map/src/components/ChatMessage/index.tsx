@@ -27,9 +27,9 @@ export const ChatMessage = ({message, isBotSide, tag}: ChatMessageProps) => {
                 </p>
                 <div className={`flex items-start gap-2.5 ${isBotSide ? "self-start flex-row-reverse" : "self-end"}`}>
                     <p className="text-base font-normal text-white self-end" suppressHydrationWarning>{nowTime()}</p>
-                    <div className="flex flex-col gap-1 w-fit max-w-[330px]">
+                    <div className="flex flex-col gap-1 w-fit max-w-[335px]">
                         <div className={`flex flex-col py-1 px-2 bg-white ${isBotSide ? "rounded-r-lg rounded-bl-lg" : "rounded-l-lg rounded-br-lg"} shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 ${tag!=-1 && tagOrderBorderColor[tagToOrder[tag]].normal}`}>
-                            <ReactMarkdown className={`prose relative text-base`} remarkPlugins={[remarkGfm]}
+                            <ReactMarkdown className={`prose text-[16px]`} remarkPlugins={[remarkGfm]}
                             components={{
                                 a: ({ node, ...props }) => (
                                     <a {...props} target="_blank" className={`${tag!=-1 && tagOrderBgColor[tagToOrder[tag]].normal} mt-3 p-1 text-white no-underline inline-block`}/>
@@ -38,10 +38,13 @@ export const ChatMessage = ({message, isBotSide, tag}: ChatMessageProps) => {
                                 <p {...props} className="my-2"/>
                                 ),
                                 li: ({ node, ...props }) => (
-                                    <li {...props} className="my-0"/>
+                                    <li {...props} className="my-0 mr-2"/>
                                 ),
                                 ul: ({ node, ...props }) => (
-                                    <ul {...props} className="my-1" style={{paddingInlineEnd: 0}}/>
+                                    <ul {...props} className="my-1"/>
+                                ),
+                                ol: ({ node, ...props }) => (
+                                    <ol {...props} className="my-2"/>
                                 ),
                                 h2: ({ node, ...props }) => (
                                     <h2 {...props} className="my-1"/>
