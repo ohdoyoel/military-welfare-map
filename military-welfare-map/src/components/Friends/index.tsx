@@ -1,17 +1,18 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import usedData from '@/public/data/usedData.json'
+import { Profile } from "../Profile"
 
 interface FriendsProps {
     setIsFriendsOpened: Dispatch<SetStateAction<boolean>>
 }
 
 export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
-    const [dyProfileOpened, setDyProfileOpened] = useState(false)
-    const [smProfileOpened, setSmProfileOpened] = useState(false)
+    const [isProfileOpened, setIsProfileOpened] = useState(false)
     const [usedDataOpened, setUsedDataOpened] = useState(false)
 
     return (
         <div className="absolute inset-x-0 inset-y-0 flex flex-col w-full bg-slate-50 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] z-20 overflow-y-auto">
+            {isProfileOpened && <Profile setIsProfileOpened={setIsProfileOpened}/>}
             <div className="flex-none flex flex-row justify-start w-full">
                 <p className="text-4xl font-bold m-4">개발자 정보</p>
             </div>
@@ -36,16 +37,16 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
 
             <div className="flex flex-col pb-2 border-b-2 border-slate-200 ">
                 <p className="flex-none text-slate-400 mx-4 my-2">지피티 병장의 후임들</p>
-                <div className="flex-none flex flex-row items-center w-full py-2">
+                <div className="flex-none flex flex-row items-center w-full py-2 cursor-pointer hover:bg-slate-100" onClick={() => setIsProfileOpened(true)}>
                     <div className="w-12 h-12 mx-4">
-                        <img className="rounded-[20px] border-[1px] border-slate-300" src="/images/sumin.jfif" alt="/images/sumin.jfif"/>
+                        <img className="rounded-[20px] border-[1px] border-slate-300 hover:bg-slate-100" src="/images/sumin.jfif" alt="/images/sumin.jfif"/>
                     </div>
                     <div className="flex flex-col">
                         <span className="text-lg mx-1">상병 채수민</span>
                         <span className="text-sm mx-1 text-slate-400">디자이너⋅기획가</span>
                     </div>
                 </div>
-                <div className="flex-none flex flex-row items-center w-full py-2">
+                <div className="flex-none flex flex-row items-center w-full py-2 cursor-pointer hover:bg-slate-100" onClick={() => setIsProfileOpened(true)}>
                     <div className="w-12 h-12 mx-4">
                         <img className="rounded-[20px] border-[1px] border-slate-300" src="/images/doyeol.jfif" alt="/images/doyeol.jfif"/>
                     </div>

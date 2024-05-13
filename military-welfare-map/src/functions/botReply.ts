@@ -203,8 +203,8 @@ export const botReply = (input: string):string => {
     if (isUserSetting(input)) return `${userSetting(input)}`
     else if (isTagOrPlaceOrSearch(input)) return `${isRcmd(input)} ${tagFrom(input)} ${placeFrom(input)} ${searchTextFrom(input)}`
     else if (isHello(input)) return `@hi`
-    else if (isCalled(input)) return '***병장 지! 피! 티!***'
     else if (isHelp(input)) return `@help`
+    else if (isCalled(input)) return '***병장 지! 피! 티!***'
     else if (isAds(input)) return `@ads`
     else if (isThanks(input)) return '아닙니다 ! 더 궁금한 것은 없으십니까 ?'
     else if (isNothing(input)) return '예 알겠습니다! 더 궁금한 것이 있으시면 편하게 질문해주십시오!'
