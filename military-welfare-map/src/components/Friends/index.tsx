@@ -14,11 +14,10 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
             <div className="flex-none flex flex-row justify-start w-full">
                 <p className="text-4xl font-bold m-4">개발자 정보</p>
             </div>
-
-            <div className="flex-none flex flex-row items-center w-full border-b-2 border-slate-200">
+            {/* <div className="flex-none flex flex-row items-center w-full border-b-2 border-slate-200">
                 <div className="w-16 h-16 bg-blue-200 m-4 rounded-[20px]"/>
                 <p className="text-2xl m-2">나</p>
-            </div>
+            </div> */}
             
             <div className="flex flex-col pb-2 border-b-2 border-slate-200 ">
                 <p className="flex-none text-slate-400 mx-4 mt-2">챗봇</p>
@@ -131,12 +130,12 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
                 <p className="flex-none text-slate-400 mx-4 mt-2">활용공공데이터</p>
                 {usedData.map(({title, imgSrc, desc, link}) => (
                     <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href={link} target="_blank">
-                        <div className="flex-none w-12 h-12 mx-4 rounded-[20px] border-[1px] border-slate-300 ">
+                        <div className="flex-none w-8 h-8 mx-4 rounded-[12px] border-[1px] border-slate-300 ">
                             <img className="p-1.5" src={imgSrc} alt={imgSrc} />
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-lg mx-1">{title}</span>
-                            <span className="text-sm mx-1 text-slate-400">{desc}</span>
+                            <span className="text-base mx-1">{title}</span>
+                            <span className="text-xs mx-1 text-slate-400">{desc}</span>
                         </div>
                     </a>
                 ))}
