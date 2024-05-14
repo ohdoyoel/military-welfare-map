@@ -21,7 +21,7 @@ export const Header = ({isStarToggled, setIsStarToggled}: HeaderProps) => {
                                 `}
                                 onClick={() => setIsStarToggled(!isStarToggled)}>
                 <p className="text-xs text-white font-nsr">찜한 장소</p>
-                {isStarToggled ? <FavoriteIcon className="text-base"/> : <FavoriteBorder className="text-base"/>}
+                {isStarToggled ? <FavoriteIcon fontSize="small"/> : <FavoriteBorder fontSize="small"/>}
             </button>
         </div>
     )
