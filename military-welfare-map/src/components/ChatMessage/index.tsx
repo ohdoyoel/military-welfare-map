@@ -1,5 +1,6 @@
 import { tagOrderBgColor, tagOrderBorderColor, tagOrderTextColor } from "@/src/types/tagColor";
 import { tagToOrder } from "@/src/types/tagIconLabel";
+import { Dispatch, SetStateAction } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -7,9 +8,10 @@ interface ChatMessageProps {
     message: string
     isBotSide: boolean
     tag: number
+    setIsProfileOpened: Dispatch<SetStateAction<boolean>>
 }
 
-export const ChatMessage = ({message, isBotSide, tag}: ChatMessageProps) => {
+export const ChatMessage = ({message, isBotSide, tag, setIsProfileOpened}: ChatMessageProps) => {
     
     const nowTime = () : string => {
         const date = new Date()
@@ -18,7 +20,7 @@ export const ChatMessage = ({message, isBotSide, tag}: ChatMessageProps) => {
     
     return (
             <div className={`flex flex-row  w-full mt-2 ${!isBotSide && `justify-end`}`}>
-                {isBotSide && <div className="w-8 h-8 mr-2 my-1">
+                {isBotSide && <div className="w-8 h-8 mr-2 my-1 cursor-pointer" onClick={() => setIsProfileOpened(true)}>
                     <img className="rounded-[20px] border-[1px] border-emerald-300 bg-gradient-to-br from-emerald-300 to-emerald-600" src="/images/gpt.png" alt="/images/gpt.png"/>
                 </div>}
             <div className="flex flex-col">
@@ -35,7 +37,7 @@ export const ChatMessage = ({message, isBotSide, tag}: ChatMessageProps) => {
                                     <a {...props} target="_blank" className={`${tag!=-1 && tagOrderBgColor[tagToOrder[tag]].normal} mt-3 p-1 text-white no-underline inline-block`}/>
                                     ),
                                 p: ({ node, ...props }) => (
-                                <p {...props} className="my-2"/>
+                                <p {...props} className="my-2 leading-6"/>
                                 ),
                                 li: ({ node, ...props }) => (
                                     <li {...props} className="my-0 mr-2"/>
