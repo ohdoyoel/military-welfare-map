@@ -7,6 +7,7 @@ import { andInKorean, booleanArrayToList, isTrimedTextAllIncluded, thatInKorean 
 import { rcmdMsg, tagSearch } from "@/src/types/tagIconLabel"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Friends } from "../Friends"
+import { Profile } from "../Profile"
 
 interface ChatPanelProps {
     markers: MarkerType[]
@@ -52,12 +53,13 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     ])
     const [isNear, setIsNear] = useState(false)
     const [isFriendsOpened, setIsFriendsOpened] = useState(false)
+    const [isProfileOpened, setIsProfileOpened] = useState(false)
     const user = useRef(0)
 
     const messageList = (messages: MessageProps[]) => {
         const result = []
         for (let i=0; i<messages.length; i++){
-            result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide} tag={messages[i].tag} key={i}/>)
+            result.push(<ChatMessage message={messages[i].message} isBotSide={messages[i].isBotSide} tag={messages[i].tag} setIsProfileOpened={setIsProfileOpened} key={i}/>)
         }
         return result
     }
@@ -306,7 +308,8 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     
     return (
         <div className="grow relative flex flex-col w-full">
-            {isFriendsOpened && <Friends setIsFriendsOpened={setIsFriendsOpened}/>}
+            {isFriendsOpened && <Friends setIsFriendsOpened={setIsFriendsOpened} setIsProfileOpened={setIsProfileOpened}/>}
+            {isProfileOpened && <Profile setIsProfileOpened={setIsProfileOpened}/>}
             <div className="flex-none flex flex-row h-12 w-full bg-emerald-500 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] z-10 text-white">
                 <button className="w-10 h-10 my-1 mx-1 hover:bg-emerald-600 hover:rounded-[3px]" onClick={() => setIsFriendsOpened(true)}>
                     <ArrowBackIcon fontSize="medium"/>

@@ -4,17 +4,16 @@ import { Profile } from "../Profile"
 
 interface FriendsProps {
     setIsFriendsOpened: Dispatch<SetStateAction<boolean>>
+    setIsProfileOpened: Dispatch<SetStateAction<boolean>>
 }
 
-export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
-    const [isProfileOpened, setIsProfileOpened] = useState(false)
+export const Friends = ({setIsFriendsOpened, setIsProfileOpened}: FriendsProps) => {
     const [usedDataOpened, setUsedDataOpened] = useState(false)
 
     return (
         <div className="absolute inset-x-0 inset-y-0 flex flex-col w-full bg-slate-50 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] z-20 overflow-y-auto">
-            {isProfileOpened && <Profile setIsProfileOpened={setIsProfileOpened}/>}
             <div className="flex-none flex flex-row justify-start w-full">
-                <p className="text-4xl font-bold m-4">개발자 정보</p>
+                <p className="text-4xl font-bold m-4">개발 정보</p>
             </div>
             {/* <div className="flex-none flex flex-row items-center w-full border-b-2 border-slate-200">
                 <div className="w-16 h-16 bg-blue-200 m-4 rounded-[20px]"/>
@@ -37,16 +36,16 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
 
             <div className="flex flex-col pb-2 border-b-2 border-slate-200 ">
                 <p className="flex-none text-slate-400 mx-4 my-2">지피티 병장의 후임들</p>
-                <div className="flex-none flex flex-row items-center w-full py-2 cursor-pointer hover:bg-slate-100" onClick={() => setIsProfileOpened(true)}>
+                <div className="flex-none flex flex-row items-center w-full py-2 cursor-pointer hover:bg-stone-100" onClick={() => setIsProfileOpened(true)}>
                     <div className="w-12 h-12 mx-4">
-                        <img className="rounded-[20px] border-[1px] border-slate-300 hover:bg-slate-100" src="/images/sumin.jfif" alt="/images/sumin.jfif"/>
+                        <img className="rounded-[20px] border-[1px] border-slate-300 hover:bg-stone-100" src="/images/sumin.jfif" alt="/images/sumin.jfif"/>
                     </div>
                     <div className="flex flex-col">
                         <span className="text-lg mx-1">상병 채수민</span>
                         <span className="text-sm mx-1 text-slate-400">디자이너⋅기획가</span>
                     </div>
                 </div>
-                <div className="flex-none flex flex-row items-center w-full py-2 cursor-pointer hover:bg-slate-100" onClick={() => setIsProfileOpened(true)}>
+                <div className="flex-none flex flex-row items-center w-full py-2 cursor-pointer hover:bg-stone-100" onClick={() => setIsProfileOpened(true)}>
                     <div className="w-12 h-12 mx-4">
                         <img className="rounded-[20px] border-[1px] border-slate-300" src="/images/doyeol.jfif" alt="/images/doyeol.jfif"/>
                     </div>
@@ -59,7 +58,7 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
 
             <div className="flex flex-col pb-2 border-b-2 border-slate-200 ">
                 <p className="flex-none text-slate-400 mx-4 my-2">도움주신 분들</p>
-                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href={'https://www.mnd.go.kr/mbshome/mbs/mnd/index.jsp'} target="_blank">
+                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href={'https://www.mnd.go.kr/mbshome/mbs/mnd/index.jsp'} target="_blank">
                     <div className="w-12 h-12 mx-4 rounded-[20px] border-[1px] border-slate-300 ">
                         <img className="p-1.5" src="/images/mnd.png" alt="/images/mnd.png" />
                     </div>
@@ -68,7 +67,7 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
                         <span className="text-sm mx-1 text-slate-400">정예선진강군</span>
                     </div>
                 </a>
-                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href={'https://www.mma.go.kr/index.do'} target="_blank">
+                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href={'https://www.mma.go.kr/index.do'} target="_blank">
                     <div className="w-12 h-12 mx-4 ">
                         <img className="rounded-[20px] border-[1px] border-slate-300 p-1" src="/images/mma.gif" alt="/images/mma.gif" />
                     </div>
@@ -77,7 +76,7 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
                         <span className="text-sm mx-1 text-slate-400">공정하고 정의로운, 병역이 자랑스러운 대한민국</span>
                     </div>
                 </a>
-                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href={'https://www.dapa.go.kr/dapa/main.do'} target="_blank">
+                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href={'https://www.dapa.go.kr/dapa/main.do'} target="_blank">
                     <div className="w-12 h-12 mx-4 rounded-[20px] border-[1px] border-slate-300 ">
                         <img className="p-1.5" src="/images/dapa.png" alt="/images/dapa.png" />
                     </div>
@@ -90,7 +89,7 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
 
             <div className="flex flex-col pb-2 border-b-2 border-slate-200 ">
                 <p className="flex-none text-slate-400 mx-4 my-2">활용 기술</p>
-                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href="https://nextjs.org/" target="_blank">
+                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href="https://nextjs.org/" target="_blank">
                     <div className="w-12 h-12 mx-4 rounded-[20px] border-[1px] border-slate-300 grid place-content-center">
                         <img src="/images/nextjs.png" alt="/images/nextjs.png"/>
                     </div>
@@ -99,7 +98,7 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
                         <span className="text-sm mx-1 text-slate-400">JSX</span>
                     </div>
                 </a>
-                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href="https://tailwindcss.com/" target="_blank">
+                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href="https://tailwindcss.com/" target="_blank">
                     <div className="w-12 h-12 mx-4 rounded-[20px] border-[1px] border-slate-300 grid place-content-center">
                         <img width={'36px'} height={'36px'} src="/images/tailwindcss.svg" alt="/images/tailwindcss.svg"/>
                     </div>
@@ -108,7 +107,7 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
                         <span className="text-sm mx-1 text-slate-400">CSS</span>
                     </div>
                 </a>
-                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href="https://apis.map.kakao.com/" target="_blank">
+                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href="https://apis.map.kakao.com/" target="_blank">
                     <div className="w-12 h-12 mx-4 rounded-[20px] border-[1px] bg-slate-200 border-slate-300 grid place-content-center">
                         <img width={'30px'} height={'30px'} src="/images/kakaomap.png" alt="/images/kakaomap.png"/>
                     </div>
@@ -117,7 +116,7 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
                         <span className="text-sm mx-1 text-slate-400">Map API</span>
                     </div>
                 </a>
-                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href="https://www.netlify.com/" target="_blank">
+                <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href="https://www.netlify.com/" target="_blank">
                     <div className="w-12 h-12 mx-4 grid place-content-center">
                         <img className="rounded-[20px] border-[1px] bg-slate-200 border-slate-300" src="/images/netlify.webp" alt="/images/netlify.webp"/>
                     </div>
@@ -129,11 +128,15 @@ export const Friends = ({setIsFriendsOpened}: FriendsProps) => {
             </div>
 
             <div className="flex flex-col pb-2 border-b-2 border-slate-200">
-                <p className="flex-none text-slate-400 mx-4 my-2 cursor-pointer" onClick={() => setUsedDataOpened(!usedDataOpened)}>
-                    활용공공데이터 {usedDataOpened ? '▼' : '◄'}
-                </p>
+                <div className="flex-none flex flex-row justify-between text-slate-400 mx-4 my-2 cursor-pointer" onClick={() => setUsedDataOpened(!usedDataOpened)}>
+                    <p>
+                    {usedDataOpened ? '▼' : '►'}
+                    </p>
+                    <p>활용공공데이터</p>
+                    <p className="w-72"/>
+                </div>
                 {usedDataOpened && usedData.map(({title, imgSrc, desc, link}) => (
-                    <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-slate-100" href={link} target="_blank">
+                    <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href={link} target="_blank">
                         <div className="flex-none w-8 h-8 mx-4 rounded-[12px] border-[1px] border-slate-300 ">
                             <img className="p-1.5" src={imgSrc} alt={imgSrc} />
                         </div>
