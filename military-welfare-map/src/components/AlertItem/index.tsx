@@ -1,4 +1,4 @@
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { InfoOutlined} from '@mui/icons-material';
 
 interface AlertItemProps {
     children: React.ReactNode
@@ -13,7 +13,7 @@ export const AlertItem = ({children} : AlertItemProps) => {
                 <p className='text-sm text-white'>알림</p>
             </div> */}
             <div className={`grow h-full bg-white text-gray-600 flex flex-col items-center justify-center px-4 rounded-r-[3px]`}>
-                <InfoOutlinedIcon className='w-16 h-16 text-gray-600 mb-4'/>
+                <InfoOutlined className='w-16 h-16 text-gray-600 mb-4'/>
                 {children}
             </div>
         </div>
