@@ -78,18 +78,21 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
         setIsVisible(selectedIdx == idx)
     }, [selectedIdx])
     
+    // onFire -> gradation && size up
+    // isStarred -> heart shape
     return (
         <CustomOverlayMap position={position} onCreate={removeZindexAndMargin} clickable={true}>
-            <button id={`tagmarker${idx}`} className={`grid  place-content-center rounded-[3px] text-white opacity-80 z-20
-                    ${!star ? (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6') : (onFire ? 'w-8 h-8': 'w-6 h-6')}`}
+            <button id={`tagmarker${idx}`} className={`grid place-content-center rounded-[3px] text-white opacity-80 z-20
+                                                    ${!star && (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6')}
+                                                    ${onFire ? 'w-8 h-8' : 'w-6 h-6'}`}
                 onClick={() => {
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng), )
                     setSelectedIdx(idx)
                     setIsVisible(!isVisible)
                 }}>
-                {star && <div className={`relative ${onFire ? 'text-5xl' : 'text-4xl'} mt-2 ${tagOrderTextColor[tagToOrder[tag]].normal}`}>
-                ❤
-                <div className="absolute -top-1 w-full text-white">{tagIconForMarker[tag]}</div>
+                {star && <div className={`relative mt-2`}>
+                <p className={`${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' text-5xl' : tagOrderBgColor[tagToOrder[tag]].normal + ' text-4xl'} text-transparent bg-clip-text`}>❤</p>
+                <div className={`absolute ${onFire ? 'top-2' : 'top-1'} w-full text-white`}>{tagIconForMarker[tag]}</div>
                 </div>}
                 {!star && tagIconForMarker[tag]}
             </button>
