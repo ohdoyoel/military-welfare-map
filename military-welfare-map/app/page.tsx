@@ -25,6 +25,7 @@ import { ShowFireButton } from '@/src/components/ShowFireButton'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ShowStarsPanel } from '@/src/components/ShowStarsPanel'
 import { validateDB } from '@/src/functions/validateDB'
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -238,100 +239,106 @@ export default function Home() {
   }, [isChatOpened])
   
   return (
-    <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
-      
-      {/* InformationPanel */}
-      <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-        <Header isStarToggled={isStarToggled} setIsStarToggled={setIsStarToggled}/>
-        <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
-        <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-        <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
-        <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx} setMarkers={setMarkers}/>
-        <AdsBar/>
-      </div>
+    <StyledEngineProvider injectFirst>
+      {/* <ThemeProvider theme={muiTheme}> */}
 
-      {/* DefaultPanel */}
-      <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
-        <div className='flex'> 
-          <Header2/>
-          <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
-            <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
-            {searchText != "" && <p className='pr-3'>{searchText}</p>}
-          </button>
-          <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
-            <ChatIcon className='text-gray-600' fontSize='medium'/> 
-          </button>
-          <button className={`w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
-                            ${isStarToggled
-                              ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
-                              : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
-                            `} onClick={() => {setIsStarToggled(!isStarToggled); setIsBarOpened(true)}}>
-            <FavoriteIcon fontSize='medium'/>
-          </button>
-        </div>
-        <div className='flex flex-col'> 
-        <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-        <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
-        </div>
-      </div>
+        <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
+          
+          {/* InformationPanel */}
+          <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+            <Header isStarToggled={isStarToggled} setIsStarToggled={setIsStarToggled}/>
+            <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
+            <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+            <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
+            <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx} setMarkers={setMarkers}/>
+            <AdsBar/>
+          </div>
 
-      {/* InformationPanel Open Btn */}
-      <div className={`flex items-center`}>
-        <button className={`group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
-                          absolute z-10 ${isBarOpened ? `left-[461px]` : `left-0`}`}
-                onClick={() => {setIsBarOpened(!isBarOpened)}}>
-          {isBarOpened
-          ? <NavigateBeforeIcon className='text-emerald-500 inline' fontSize='large'/>
-          : (<>
-            <SearchIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>
-              <NavigateNextIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/>
-            </>)
-          }
-        </button>
-      </div>
+          {/* DefaultPanel */}
+          <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
+            <div className='flex'> 
+              <Header2/>
+              <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
+                <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
+                {searchText != "" && <p className='pr-3'>{searchText}</p>}
+              </button>
+              <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
+                <ChatIcon className='text-gray-600' fontSize='medium'/> 
+              </button>
+              <button className={`w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
+                                ${isStarToggled
+                                  ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
+                                  : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
+                                `} onClick={() => {setIsStarToggled(!isStarToggled); setIsBarOpened(true)}}>
+                <FavoriteIcon fontSize='medium'/>
+              </button>
+            </div>
+            <div className='flex flex-col'> 
+            <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+            <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
+            </div>
+          </div>
 
-      {/* ChatPanel */}
-      <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-        <ChatPanel markers={markers} setIdx={setSelectedIdx} tagsToggled={isTagsToggled} setTagsToggled={setIsTagsToggled} regionsToggled={isRegionsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
-        <AdsBar/>
-      </div>
+          {/* InformationPanel Open Btn */}
+          <div className={`flex items-center`}>
+            <button className={`group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
+                              absolute z-10 ${isBarOpened ? `left-[461px]` : `left-0`}`}
+                    onClick={() => {setIsBarOpened(!isBarOpened)}}>
+              {isBarOpened
+              ? <NavigateBeforeIcon className='text-emerald-500 inline' fontSize='large'/>
+              : (<>
+                <SearchIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>
+                  <NavigateNextIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/>
+                </>)
+              }
+            </button>
+          </div>
 
-      {/* ChatPanel Open Btn */}
-      <div className={`flex items-center`}>
-        <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
-                          absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
-                onClick={() => {setIsChatOpened(!isChatOpened)}}>
-          {isChatOpened
-          ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/>
-          : (<>
-            <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>
-            <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/>
-            </>)
-          }
-        </button>
-      </div>
+          {/* ChatPanel */}
+          <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+            <ChatPanel markers={markers} setIdx={setSelectedIdx} tagsToggled={isTagsToggled} setTagsToggled={setIsTagsToggled} regionsToggled={isRegionsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
+            <AdsBar/>
+          </div>
 
-      {/* <div className='z-10 absolute bottom-1 left-1 flex flex-col gap-2'>
-        <ShowStarsPanel markers={markers}/>
-      </div> */}
+          {/* ChatPanel Open Btn */}
+          <div className={`flex items-center`}>
+            <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
+                              absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
+                    onClick={() => {setIsChatOpened(!isChatOpened)}}>
+              {isChatOpened
+              ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/>
+              : (<>
+                <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>
+                <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/>
+                </>)
+              }
+            </button>
+          </div>
 
-      <div className='z-10 absolute bottom-1 right-1 flex flex-col gap-2'>
-        <ShowFireButton isToggled={onFireToggled} onClicked={() => {
-          setOnFireToggled(!onFireToggled)
-        }}/>
-      </div>
+          {/* <div className='z-10 absolute bottom-1 left-1 flex flex-col gap-2'>
+            <ShowStarsPanel markers={markers}/>
+          </div> */}
 
-      <div className='z-10 absolute top-12 right-1 flex flex-col gap-2'>
-        <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos(curPos.center)}>
-          <img src='/images/current-position.png'></img>
-        </button>
-      </div>
-      
-      <div className={`w-full h-full`}>
-        <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} level={level} setLevel={setLevel}
-                  selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!} setMarkers={setMarkers} isStarToggled={isStarToggled}/>
-      </div>
+          <div className='z-10 absolute bottom-1 right-1 flex flex-col gap-2'>
+            <ShowFireButton isToggled={onFireToggled} onClicked={() => {
+              setOnFireToggled(!onFireToggled)
+            }}/>
+          </div>
 
-    </main>
+          <div className='z-10 absolute top-12 right-1 flex flex-col gap-2'>
+            <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos(curPos.center)}>
+              <img src='/images/current-position.png'></img>
+            </button>
+          </div>
+          
+          <div className={`w-full h-full`}>
+            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} level={level} setLevel={setLevel}
+                      selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!} setMarkers={setMarkers} isStarToggled={isStarToggled}/>
+          </div>
+          
+        </main>
+
+      {/* </ThemeProvider> */}
+    </StyledEngineProvider>
   )
 }
