@@ -1,6 +1,26 @@
 import { MarkerType } from "../types/data";
 
+const matrix = (m:number, n:number, initial:number) => {
+    var a, i, j, mat = [];
+    for (i = 0; i < m; i ++) {
+        a = [];
+        for (j = 0; j < n; j += 1) a[j] = initial;
+        mat[i] = a;
+    }
+    return mat;
+};
+
+const consoleLogMatrix = (mat:number[][]) => {
+    for (let i=0; i<mat.length; i++) {
+        let row = ''
+        for (let j=0; j<mat[0].length; j++) row += (mat[i][j].toString()+' ')
+        console.log(row)
+    }
+}
+
 export const validateDB = (markers :MarkerType[]) => {
+    // if (markers.length == 0) return
+
     console.log('VALIDATION START')
 
     for (let i=0; i<markers.length-1; i++) {
@@ -38,6 +58,13 @@ export const validateDB = (markers :MarkerType[]) => {
         }
     }
     console.log('LONGEST DESC : ' + longestDesc  + ', LENGTH: ' + lenOfLongestDesc)
+
+    let freqTable = matrix(12, 16, 0)
+    for (let i=0; i<markers.length-1; i++) {
+        freqTable[markers[i].tag][markers[i].region] += 1
+    }
+    console.log(freqTable)
+    // consoleLogMatrix(freqTable)
 
     console.log('VALIDATION END')
 }
