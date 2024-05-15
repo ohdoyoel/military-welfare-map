@@ -137,7 +137,7 @@ export const Friends = ({setIsFriendsOpened, setIsProfileOpened}: FriendsProps) 
                 </div>
                 {usedDataOpened && usedData.map(({title, imgSrc, desc, link}, idx) => (
                     <a className="flex-none flex flex-row items-center w-full py-2 hover:bg-stone-100" href={link} target="_blank" key={idx}>
-                        <div className="flex-none w-8 h-8 mx-4 rounded-[12px] border-[1px] border-slate-300 ">
+                        <div className="flex-none w-8 h-8 mx-4 rounded-[12px] border-[1px] border-slate-300 grid place-content-center">
                             <img className="p-1.5" src={imgSrc} alt={imgSrc} />
                         </div>
                         <div className="flex flex-col">
