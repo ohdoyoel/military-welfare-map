@@ -138,9 +138,9 @@ export const Friends = ({setIsFriendsOpened, setIsProfileOpened}: FriendsProps) 
                         <div className="flex-none w-8 h-8 mx-4 rounded-[12px] border-[1px] border-slate-300 grid place-content-center">
                             <img className="px-1" src={imgSrc} alt={imgSrc} />
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-base mx-1 pr-4">{title}</span>
-                            <span className="text-xs mx-1 text-slate-400 pr-4">{desc}</span>
+                        <div className="grow flex flex-col">
+                            <p className="text-base mx-1 pr-4 w-full line-clamp-1">{title}</p>
+                            <p className="text-xs mx-1 text-slate-400 pr-4 w-full text-start line-clamp-1">{desc}</p>
                         </div>
                     </a>
                 ))}
