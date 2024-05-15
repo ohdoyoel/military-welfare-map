@@ -2,95 +2,101 @@
     {
         "title":"공용캐릭터 군인반신상",
         "imgSrc":"/images/dpsg.svg",
-        "desc":"국방부_공용캐릭터 군인반신상",
-        "link":"https://opendata.mnd.go.kr/openinf/fileview2.jsp?infId=OA-9581"
+        "desc":"군에서 활용할 수 있는 공용캐릭터",
+        "link":"https://www.data.go.kr/data/15089146/fileData.do"
     },
     {
         "title":"병사 할인 혜택 정보",
         "imgSrc":"/images/kafwa.svg",
-        "desc":"병사 할인 혜택 정보",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9493"
+        "desc":"국방부-업체/기관 간 MOU 체결 등에 따른 병사 할인 혜택",
+        "link":"https://www.data.go.kr/data/15013069/openapi.do"
     },
     {
         "title":"국군복지단 복지시설",
         "imgSrc":"/images/mnd.png",
-        "desc":"전군 복지 휴양시설 위치정보 목록",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9533"
+        "desc":"국군복지단에서 운영하는 군 복지시설의 정보",
+        "link":"https://www.data.go.kr/data/15050544/fileData.do"
     },
     {
-        "title":"병무청_병역명문가 예우시설 목록",
+        "title":"병역명문가 예우시설 목록",
         "imgSrc":"/images/mma.gif",
-        "desc":"병역명문가 예우시설의 지역별 현황 정보 제공",
+        "desc":"시설이용료 감면·면제 등 예우시설의 지역별 현황 정보 제공",
         "link":"https://www.data.go.kr/data/15119041/fileData.do"
     },
     {
         "title":"국군복지단 영외마트 운영 현황",
         "imgSrc":"/images/kafwa.svg",
-        "desc":"마트현황종합",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9645"
+        "desc":"국군복지단에서 운영하는 영외마트의 정보",
+        "link":"https://www.data.go.kr/data/15126305/fileData.do"
     },
     {
-        "title":"국방부_육군 안보견학 현장체험",
+        "title":"육군 안보견학 현장체험 정보",
         "imgSrc":"/images/roka.svg",
-        "desc":"육군에서 주최하는 안보현장 행사소개, 위치, 신청방법 등 안내",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9470"
+        "desc":"육군 주요 부대에서 제공하는 안보견학 현장체험 정보",
+        "link":"https://www.data.go.kr/data/15095237/openapi.do"
     },
     {
         "title":"군 복지시설 주변 관광지 정보",
         "imgSrc":"/images/kafwa.svg",
         "desc":"군 복지시설 주변 관광지 정보",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9492"
+        "link":"https://www.data.go.kr/data/15013068/openapi.do"
     },
     {
-        "title":"국방부_국군복지단 복지시설 상세현황",
+        "title":"국군복지단 복지지설 상세 현황",
         "imgSrc":"/images/mnd.png",
-        "desc":"국방부_국군복지단 복지시설 상세현황",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9569"
+        "desc":"국군복지단 복지시설에 대한 정보 안내",
+        "link":"https://www.data.go.kr/data/15061910/fileData.do"
     },
     {
         "title":"군 복지 휴양시설 정보",
         "imgSrc":"/images/mnd.png",
-        "desc":"전군 복지 휴양시설 위치정보 목록",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9441"
+        "desc":"군에서 운영하는 복지시설 정보",
+        "link":"https://www.data.go.kr/data/15050542/openapi.do"
     },
     {
         "title":"TMO(여행장병 안내소) 정보",
         "imgSrc":"/images/roktc.webp",
-        "desc":"TMO(여행장병 안내소) 정보",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9595"
+        "desc":"주요 역의 TMO 위치 및 연락처 정보",
+        "link":"https://www.data.go.kr/data/15013070/openapi.do"
     },
     {
         "title":"체력단련장 정보",
         "imgSrc":"/images/mnd.png",
         "desc":"전군 복지 체력단련장 위치 정보 목록",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9440"
+        "link":"https://www.data.go.kr/data/3034736/openapi.do"
     },
     {
         "title":"군병원 정보",
         "imgSrc":"/images/afmc.webp",
-        "desc":"군 병원 위치정보(주소, 전화번호, 교통편 등) 안내",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9436"
+        "desc":"군 병원 위치정보 안내",
+        "link":"https://www.data.go.kr/data/3034721/openapi.do"
     },
     {
-        "title":"병무청_지정병원",
+        "title":"병무청 지정병원",
         "imgSrc":"/images/mma.gif",
-        "desc":"병무청지정병원",
-        "link":"https://www.data.go.kr/data/15064429/fileData.do#/tab-layer-openapi"
+        "desc":"병무청 지정병원",
+        "link":"https://www.data.go.kr/data/15064429/fileData.do"
     },
     {
         "title":"군 제휴 안경점",
         "imgSrc":"/images/roka.svg",
-        "desc":"군 제휴 안경 업소",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9644"
+        "desc":"대한안경사협회 소속 군 제휴 안경업소",
+        "link":"https://www.data.go.kr/data/15127676/fileData.do"
+    },
+    {
+        "title":"예비군 훈련장 연락처 정보",
+        "imgSrc":"/images/mnd.png",
+        "desc":"예비군 부대 및 훈련장에 대한 정보",
+        "link":"https://www.data.go.kr/data/15050548/openapi.do"
     },
     {
         "title":"예비군 부대 연락처",
         "imgSrc":"/images/mnd.png",
-        "desc":"예비군훈련장 안내",
-        "link":"https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9465"
+        "desc":"전국 예비군 부대의 명칭, 전화번호, 주소 정보",
+        "link":"https://www.data.go.kr/data/15050549/fileData.do"
     },
     {
-        "title":"경기도 파주시_군장병할인업소현황",
+        "title":"경기도 파주시 군장병할인업소 현황",
         "imgSrc":"/images/paju.svg",
         "desc":"파주시 관내 주둔 군인(사병) 대상 할인업소 데이터",
         "link":"https://www.data.go.kr/data/15126366/fileData.do"
@@ -102,61 +108,61 @@
         "link":"https://www.pcs21.net/ktour/contents.do?key=10443"
     },
     {
-        "title":"경기도 고양시 덕양구 군장병할인업소",
+        "title":"경기도 고양시 덕양구 군장병우대업소",
         "imgSrc":"/images/goyang.svg",
         "desc":"군장병 우대업소 : 덕양구청 > 생활정보 > 사회·복지 > 군장병 우대업소",
         "link":"https://www.goyang.go.kr/dygu/sldrPrfrBsns/BD_selectSldrPrfrBsnsList.do?q_searchKeyTy=&q_searchVal=&q_rowPerPage=4&q_currPage=1&q_sortName=&q_sortOrder=&"
     },
     {
-        "title":"강원도 홍천군 군장병할인업소",
+        "title":"강원도 홍천군 군용사할인업소",
         "imgSrc":"/images/hongcheon.svg",
         "desc":"군용사 할인업소 현황 목록 - 음식점 정보 - 식도락여행 - 홍천군 문화관광포털",
         "link":"https://www.hongcheon.go.kr/tour/selectTourCntntsWebBbsList.do?key=1940&ctgry=20"
     },
     {
-        "title":"경기도 양주시 군장병할인업소",
+        "title":"경기도 양주시 군장병할인우대업소",
         "imgSrc":"/images/yangju.svg",
         "desc":"식품공중위생 새소식",
         "link":"https://www.yangju.go.kr/www/selectBbsNttView.do?key=679&bbsNo=81&nttNo=158058&searchCtgry=&searchCnd=all&searchKrwd=&pageIndex=1&integrDeptCode="
     },
     {
-        "title":"경상북도 영천시_군장병 할인업소현황",
+        "title":"경상북도 영천시 군장병할인업소 현황",
         "imgSrc":"/images/yeongcheon.svg",
-        "desc":"경상북도 영천시 군장병 할인업소현황",
-        "link":"https://www.data.go.kr/data/15044647/fileData.do#/tab-layer-openapi"
+        "desc":"경상북도 영천시 군장병할인업소 현황",
+        "link":"https://www.data.go.kr/data/15044647/fileData.do"
     },
     {
-        "title":"강원도 철원군 군장병할인업소 외식업",
+        "title":"강원도 철원군 군장병우대업소 외식업",
         "imgSrc":"/images/cheolwon.svg",
         "desc":"외식업 - 철원군청",
         "link":"https://www.cwg.go.kr/www/contents.do?key=354"
     },
     {
-        "title":"강원도 철원군 군장병할인업소 숙박 및 민박업",
+        "title":"강원도 철원군 군장병우대업소 숙박 및 민박업",
         "imgSrc":"/images/cheolwon.svg",
         "desc":"숙박 및 민박업 - 철원군청",
         "link":"https://www.cwg.go.kr/www/contents.do?key=355"
     },
     {
-        "title":"강원도 철원군 군장병할인업소 기타업",
+        "title":"강원도 철원군 군장병우대업소 기타업",
         "imgSrc":"/images/cheolwon.svg",
         "desc":"기타업 - 철원군청",
         "link":"https://www.cwg.go.kr/www/contents.do?key=1500"
     },
     {
-        "title":"강원도 철원군 군장병할인업소 음식점",
+        "title":"강원도 철원군 군장병우대업소 음식점",
         "imgSrc":"/images/cheolwon.svg",
         "desc":"음식점 - 철원군청",
         "link":"https://www.cwg.go.kr/www/contents.do?key=357"
     },
     {
-        "title":"강원도 철원군 군장병할인업소 숙박업",
+        "title":"강원도 철원군 군장병우대업소 숙박업",
         "imgSrc":"/images/cheolwon.svg",
         "desc":"숙박업 - 철원군청",
         "link":"https://www.cwg.go.kr/www/contents.do?key=358"
     },
     {
-        "title":"강원도 철원군 군장병할인업소 이미용업",
+        "title":"강원도 철원군 군장병우대업소 이미용업",
         "imgSrc":"/images/cheolwon.svg",
         "desc":"이미용업 - 철원군청",
         "link":"https://www.cwg.go.kr/www/contents.do?key=359"
@@ -168,55 +174,49 @@
         "link":"https://www.ddc.go.kr/ddc/contents.do?key=1570"
     },
     {
-        "title":"강원도 인제군 군장병할인업소",
+        "title":"강원도 인제군 군장병우대업소 음식점",
         "imgSrc":"/images/inje.svg",
         "desc":"음식점 | 인제군청 > 인제알림 > 군장병 정보제공 > 군장병우대업소(상품권환급) > 음식점",
         "link":"https://www.inje.go.kr/portal/inje-news/soldier/givePreference/restaurant"
     },
     {
-        "title":"강원도 인제군 군장병할인업소 음식점",
-        "imgSrc":"/images/inje.svg",
-        "desc":"음식점 | 인제군청 > 인제알림 > 군장병 정보제공 > 군장병우대업소(상품권환급) > 음식점",
-        "link":"https://www.inje.go.kr/portal/inje-news/soldier/givePreference/restaurant"
-    },
-    {
-        "title":"강원도 인제군 군장병할인업소 숙박업",
+        "title":"강원도 인제군 군장병우대업소 숙박업",
         "imgSrc":"/images/inje.svg",
         "desc":"숙박업 | 인제군청 > 인제알림 > 군장병 정보제공 > 군장병우대업소(상품권환급) > 숙박업",
         "link":"https://www.inje.go.kr/portal/inje-news/soldier/givePreference/lodgingIndustry"
     },
     {
-        "title":"강원도 인제군 군장병할인업소 이·미용업",
+        "title":"강원도 인제군 군장병우대업소 이·미용업",
         "imgSrc":"/images/inje.svg",
         "desc":"이·미용업 | 인제군청 > 인제알림 > 군장병 정보제공 > 군장병우대업소(상품권환급) > 이·미용업",
         "link":"https://www.inje.go.kr/portal/inje-news/soldier/givePreference/hair"
     },
     {
-        "title":"강원도 인제군 군장병할인업소 PC방",
+        "title":"강원도 인제군 군장병우대업소 PC방",
         "imgSrc":"/images/inje.svg",
         "desc":"PC방 | 인제군청 > 인제알림 > 군장병 정보제공 > 군장병우대업소(상품권환급) > PC방",
         "link":"https://www.inje.go.kr/portal/inje-news/soldier/givePreference/pcroom"
     },
     {
-        "title":"강원도 속초시 군장병할인업소 음식점",
+        "title":"강원도 속초시 군장병할인우대업소 음식점",
         "imgSrc":"/images/sokcho.svg",
         "desc":"음식점 | 시민은 하나로, 속초는 미래로! > 정보공개 > 시정/통계정보 > 국군장병지원 > 할인업소 현황 > 음식점",
         "link":"https://www.sokcho.go.kr/portal/openinfo/civic_stats_info/militarysupports/discount/eatery"
     },
     {
-        "title":"강원도 속초시 군장병할인업소 숙박업소",
+        "title":"강원도 속초시 군장병할인우대업소 숙박업소",
         "imgSrc":"/images/sokcho.svg",
         "desc":"숙박업소 | 시민은 하나로, 속초는 미래로! > 정보공개 > 시정/통계정보 > 국군장병지원 > 할인업소 현황 > 숙박업소",
         "link":"https://www.sokcho.go.kr/portal/openinfo/civic_stats_info/militarysupports/discount/lodge"
     },
     {
-        "title":"강원도 속초시 군장병할인업소 카페/노래방",
+        "title":"강원도 속초시 군장병할인우대업소 카페/노래방",
         "imgSrc":"/images/sokcho.svg",
         "desc":"카페/노래방 | 시민은 하나로, 속초는 미래로! > 정보공개 > 시정/통계정보 > 국군장병지원 > 할인업소 현황 > 카페/노래방",
         "link":"https://www.sokcho.go.kr/portal/openinfo/civic_stats_info/militarysupports/discount/cafe-singingroom"
     },
     {
-        "title":"강원도 속초시 군장병할인업소 기타업소",
+        "title":"강원도 속초시 군장병할인우대업소 기타업소",
         "imgSrc":"/images/sokcho.svg",
         "desc":"기타업소 | 시민은 하나로, 속초는 미래로! > 정보공개 > 시정/통계정보 > 국군장병지원 > 할인업소 현황 > 기타업소",
         "link":"https://www.sokcho.go.kr/portal/openinfo/civic_stats_info/militarysupports/discount/etcsale"
@@ -258,67 +258,67 @@
         "link":"https://www.gyeongju.go.kr/open_content/ko/page.do?pageNo=1&pagePrvNxt=1&pageRef=0&pageOrder=0&step=258&parm_bod_uid=251635&srchVoteType=-1&parm_mnu_uid=0&srchEnable=1&srchBgpUid=-1&srchKeyword=%EA%B5%B0&srchSDate=1960-01-01&srchColumn=bod_title&srchEDate=9999-12-31&mnu_uid=416&"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 음식업",
+        "title":"강원도 동해시 군장병우대할인업소 음식업",
         "imgSrc":"/images/donghae.svg",
         "desc":"음식업 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=543"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 숙박업",
+        "title":"강원도 동해시 군장병우대할인업소 숙박업",
         "imgSrc":"/images/donghae.svg",
         "desc":"숙박업 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=1696"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 목욕업",
+        "title":"강원도 동해시 군장병우대할인업소 목욕업",
         "imgSrc":"/images/donghae.svg",
         "desc":"목욕업 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=544"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 영화관",
+        "title":"강원도 동해시 군장병우대할인업소 영화관",
         "imgSrc":"/images/donghae.svg",
         "desc":"영화관 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=545"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 커피숍",
+        "title":"강원도 동해시 군장병우대할인업소 커피숍",
         "imgSrc":"/images/donghae.svg",
         "desc":"커피숍 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=551"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 스포츠관련업",
+        "title":"강원도 동해시 군장병우대할인업소 스포츠관련업",
         "imgSrc":"/images/donghae.svg",
         "desc":"스포츠관련업 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=546"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 사진관",
+        "title":"강원도 동해시 군장병우대할인업소 사진관",
         "imgSrc":"/images/donghae.svg",
         "desc":"사진관 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=547"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 미용업",
+        "title":"강원도 동해시 군장병우대할인업소 미용업",
         "imgSrc":"/images/donghae.svg",
         "desc":"미용업 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=548"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 대리운전",
+        "title":"강원도 동해시 군장병우대할인업소 대리운전",
         "imgSrc":"/images/donghae.svg",
         "desc":"대리운전 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=549"
     },
     {
-        "title":"강원도 동해시 군장병할인업소 렌트카",
+        "title":"강원도 동해시 군장병우대할인업소 렌트카",
         "imgSrc":"/images/donghae.svg",
         "desc":"렌트카 - 대표홈페이지",
         "link":"https://www.dh.go.kr/www/contents.do?key=550"
     },
     {
-        "title":"강원도 양구군 군장병할인업소",
+        "title":"강원도 양구군 군장병우대업소",
         "imgSrc":"/images/yanggu.svg",
         "desc":"국토의 정중앙 양구에 오신걸 환영합니다.",
         "link":"https://www.yanggu.go.kr/user_sub?gid=www&mu_idx=368"
