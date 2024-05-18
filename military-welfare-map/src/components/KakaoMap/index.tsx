@@ -530,32 +530,32 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 <ReSetttingMapBounds markers={markers}/>
                 {onFire &&
                 <AlertOnFire>
-                    <p className='text-lg font-nsb'>💰 지피티 병장이 쏜다!</p>
-                    <p className='text-base'>병영생활지도와 제휴를 맺은 🎖️업소를 소개합니다.</p>
+                    <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>
+                    <p className='sm:text-base text-[8px]'>병영생활지도와 제휴를 맺은 🎖️업소를 소개합니다.</p>
                 </AlertOnFire>
                 }
                 {!onFire && tooManyMarkers.current &&
                 <Alert>
-                    <p className='text-lg font-nsb'>⚠️ 표시되는 장소가 너무 많습니다!</p>
-                    <p className='text-base'>검색 조건을 다시 설정하거나 지도를 확대하여 주십시오.</p>
+                    <p className='sm:text-lg text-base font-nsb'>⚠️ 표시되는 장소가 너무 많습니다!</p>
+                    <p className='sm:text-base text-[8px]'>검색 조건을 다시 설정하거나 지도를 확대하여 주십시오.</p>
                 </Alert>
                 }
                 {!isStarToggled && !onFire && noMarkers.current &&
                 <Alert>
-                    <p className='text-lg font-nsb'>⚠️ 표시할 장소가 없습니다!</p>
-                    <p className='text-base'>검색 조건을 다시 설정하거나 지도를 이동시켜 주십시오.</p>
+                    <p className='sm:text-lg text-base  font-nsb'>⚠️ 표시할 장소가 없습니다!</p>
+                    <p className='sm:text-base text-[8px]'>검색 조건을 다시 설정하거나 지도를 이동시켜 주십시오.</p>
                 </Alert>
                 }
                 {isStarToggled && !onFire && noMarkers.current &&
                 <Alert>
-                    <p className='text-lg font-nsb'>⚠️ 현재 찜한 장소가 없습니다!</p>
-                    <p className='text-base'>장소들을 💕찜하여 여러분만의 지도를 만들어 보십시오.</p>
+                    <p className='sm:text-lg text-base  font-nsb'>⚠️ 현재 찜한 장소가 없습니다!</p>
+                    <p className='sm:text-base text-[8px]'>장소들을 💕찜하여 여러분만의 지도를 만들어 보십시오.</p>
                 </Alert>
                 }
                 {isStarToggled && !onFire && !noMarkers.current &&
                 <Alert>
-                    <p className='text-lg font-nsb'>💕 찜한 장소만 표시하는 중입니다!</p>
-                    <p className='text-base'>어디 좋은데 가시나 봅니다?</p>
+                    <p className='sm:text-lg text-base  font-nsb'>💕 찜한 장소만 표시하는 중입니다!</p>
+                    <p className='sm:text-base text-[8px]'>어디 좋은데 가시나 봅니다?</p>
                 </Alert>
                 }
             </Map>

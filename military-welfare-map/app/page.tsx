@@ -245,7 +245,7 @@ export default function Home() {
         <main className={`flex flex-nowrap flex-row w-screen h-screen ${isLoading ? `opacity-50`:``}`}>
           
           {/* InformationPanel */}
-          <div className={`fixed ${isBarOpened ? `w-[460px]` : `hidden`} h-full z-10 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+          <div className={`fixed ${isBarOpened ? `w-screen sm:w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
             <Header isStarToggled={isStarToggled} setIsStarToggled={setIsStarToggled}/>
             <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
             <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
@@ -258,14 +258,14 @@ export default function Home() {
           <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
             <div className='flex'> 
               <Header2/>
-              <button className='flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
+              <button className='sm:block hidden flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
                 <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
                 {searchText != "" && <p className='pr-3'>{searchText}</p>}
               </button>
-              <button className='w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
+              <button className='sm:block hidden w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
                 <ChatIcon className='text-gray-600' fontSize='medium'/> 
               </button>
-              <button className={`w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
+              <button className={`sm:block hidden w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
                                 ${isStarToggled
                                   ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
                                   : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
@@ -273,7 +273,7 @@ export default function Home() {
                 <FavoriteIcon fontSize='medium'/>
               </button>
             </div>
-            <div className='flex flex-col'> 
+            <div className='sm:flex hidden flex-col'> 
             <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
             <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
             </div>
@@ -281,14 +281,14 @@ export default function Home() {
 
           {/* InformationPanel Open Btn */}
           <div className={`flex items-center`}>
-            <button className={`group w-12 h-20 bg-white rounded-r-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
-                              absolute z-10 ${isBarOpened ? `left-[461px]` : `left-0`}`}
+            <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
+                              absolute z-20 ${isBarOpened ? `right-0 sm:left-[461px] rounded-l-[3px] sm:rounded-r-[3px]` : `left-0 rounded-r-[3px]`}`}
                     onClick={() => {setIsBarOpened(!isBarOpened)}}>
               {isBarOpened
-              ? <NavigateBeforeIcon className='text-emerald-500 inline' fontSize='large'/>
+              ? <NavigateBeforeIcon className='text-3xl sm:text-4xl text-emerald-500 inline'/>
               : (<>
-                <SearchIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>
-                  <NavigateNextIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/>
+                <SearchIcon className='text-3xl sm:text-4xl text-emerald-500 group-hover:hidden'/>
+                  <NavigateNextIcon className='text-3xl sm:text-4xl text-emerald-500 hidden group-hover:inline'/>
                 </>)
               }
             </button>
@@ -301,15 +301,15 @@ export default function Home() {
           </div>
 
           {/* ChatPanel Open Btn */}
-          <div className={`flex items-center`}>
+          <div className={`sm:flex hidden flex items-center`}>
             <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                               absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
               {isChatOpened
-              ? <NavigateNextIcon className='text-emerald-500' fontSize='large'/>
+              ? <NavigateNextIcon className='text-4xl text-emerald-500'/>
               : (<>
-                <ChatIcon className='text-emerald-500 group-hover:hidden' fontSize='large'/>
-                <NavigateBeforeIcon className='text-emerald-500 hidden group-hover:inline' fontSize='large'/>
+                <ChatIcon className='text-4xl text-emerald-500 group-hover:hidden'/>
+                <NavigateBeforeIcon className='text-4xl text-emerald-500 hidden group-hover:inline'/>
                 </>)
               }
             </button>
