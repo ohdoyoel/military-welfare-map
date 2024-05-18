@@ -10,7 +10,7 @@ interface HeaderProps {
 export const Header = ({isStarToggled, setIsStarToggled}: HeaderProps) => {
         return (
         <div className='flex-none w-full h-14 bg-emerald-500 flex justify-between items-center'>
-            <a href="" className="flex flex-row p-4">
+            <a href="" className="flex flex-row m-1 sm:m-2 p-1 sm:p-2">
                 <p className="text-2xl text-white font-nsb">병영생활</p>
                 <p className="text-2xl text-white font-nse">지도</p>
             </a>
