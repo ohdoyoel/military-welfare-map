@@ -59,6 +59,16 @@ export const validateDB = (markers :MarkerType[]) => {
     }
     console.log('LONGEST DESC : ' + longestDesc  + ', LENGTH: ' + lenOfLongestDesc)
 
+    let numOfMostLineDesc = 0
+    let mostLineDesc = ''
+    for (let i=0; i<markers.length-1; i++) {
+        if (markers[i].description != undefined && (markers[i].description!.split('\n').length > numOfMostLineDesc)) {
+            numOfMostLineDesc = markers[i].description!.split('\n').length
+            mostLineDesc = markers[i].description!
+        }
+    }
+    console.log('MOST LINE DESC : ' + mostLineDesc + ', LENGTH: ' + numOfMostLineDesc)
+
     let freqTable = matrix(12, 16, 0)
     for (let i=0; i<markers.length-1; i++) {
         freqTable[markers[i].tag][markers[i].region] += 1
