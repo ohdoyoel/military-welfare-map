@@ -258,7 +258,7 @@ export default function Home() {
           <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
             <div className='flex'> 
               <Header2/>
-              <button className='sm:block hidden flex flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
+              <button className='sm:flex hidden flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
                 <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
                 {searchText != "" && <p className='pr-3'>{searchText}</p>}
               </button>
@@ -287,7 +287,7 @@ export default function Home() {
               {isBarOpened
               ? <NavigateBeforeIcon className='text-3xl sm:text-4xl text-emerald-500 inline'/>
               : (<>
-                <SearchIcon className='text-3xl sm:text-4xl text-emerald-500 group-hover:hidden'/>
+                  <SearchIcon className='text-3xl sm:text-4xl text-emerald-500 group-hover:hidden'/>
                   <NavigateNextIcon className='text-3xl sm:text-4xl text-emerald-500 hidden group-hover:inline'/>
                 </>)
               }
@@ -301,9 +301,9 @@ export default function Home() {
           </div>
 
           {/* ChatPanel Open Btn */}
-          <div className={`flex items-center`}>
+          <div className={`hidden sm:flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
-                              absolute z-20 ${isChatOpened ? `left-0 sm:right-[461px] rounded-r-[3px] sm:rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
+                              absolute z-20 ${isChatOpened ? `right-[461px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
               {isChatOpened
               ? <NavigateNextIcon className='text-3xl sm:text-4xl text-emerald-500'/>
