@@ -20,13 +20,15 @@ interface LocationItemProps {
     onFire: boolean
     star: boolean
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
+    setLevel: Dispatch<SetStateAction<number>>
 }
 
-export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description, onFire, star, setMarkers}: LocationItemProps) => {
+export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title, description, onFire, star, setMarkers, setLevel}: LocationItemProps) => {
     const imgSrcRef = useRef('')
     const handleOnClick = () => {
+        setLevel(3)
         setPos(position)
-        setIdx(_id)    
+        setIdx(_id)  
     }
     const starToggle = (title: string) => {
         setMarkers((markers) =>
