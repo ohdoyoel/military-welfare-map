@@ -295,21 +295,21 @@ export default function Home() {
           </div>
 
           {/* ChatPanel */}
-          <div className={`fixed right-0 ${isChatOpened ? `w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+          <div className={`fixed right-0 ${isChatOpened ? `w-screen sm:w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
             <ChatPanel markers={markers} setIdx={setSelectedIdx} tagsToggled={isTagsToggled} setTagsToggled={setIsTagsToggled} regionsToggled={isRegionsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} setDistance={setDistanceRange}/>
             <AdsBar/>
           </div>
 
           {/* ChatPanel Open Btn */}
-          <div className={`sm:flex hidden flex items-center`}>
-            <button className={`group w-12 h-20 bg-white rounded-l-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
-                              absolute z-10 ${isChatOpened ? `right-[461px]` : `right-0`}`}
+          <div className={`flex items-center`}>
+            <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
+                              absolute z-20 ${isChatOpened ? `left-0 sm:right-[461px] rounded-r-[3px] sm:rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
               {isChatOpened
-              ? <NavigateNextIcon className='text-4xl text-emerald-500'/>
+              ? <NavigateNextIcon className='text-3xl sm:text-4xl text-emerald-500'/>
               : (<>
-                <ChatIcon className='text-4xl text-emerald-500 group-hover:hidden'/>
-                <NavigateBeforeIcon className='text-4xl text-emerald-500 hidden group-hover:inline'/>
+                <ChatIcon className='text-3xl sm:text-4xl text-emerald-500 group-hover:hidden'/>
+                <NavigateBeforeIcon className='text-3xl sm:text-4xl text-emerald-500 hidden group-hover:inline'/>
                 </>)
               }
             </button>
