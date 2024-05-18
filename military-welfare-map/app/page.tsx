@@ -250,7 +250,7 @@ export default function Home() {
             <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
             <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
             <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
-            <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx} setMarkers={setMarkers}/>
+            <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx} setMarkers={setMarkers} setLevel={setLevel}/>
             <AdsBar/>
           </div>
 
