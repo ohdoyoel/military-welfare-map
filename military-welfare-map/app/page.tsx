@@ -19,13 +19,15 @@ import { ToggleRegions2 } from '@/src/components/ToggleRegions2'
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
 import { AdsBar } from '@/src/components/AdsBar'
-import { tagSearch } from '@/src/types/tagIconLabel'
+import { orderToTag, tagIconForMarker, tagLabel, tagSearch, tagToOrder } from '@/src/types/tagIconLabel'
 import { isTrimedTextAllIncluded } from '@/src/functions/korean'
 import { ShowFireButton } from '@/src/components/ShowFireButton'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ShowStarsPanel } from '@/src/components/ShowStarsPanel'
 import { validateDB } from '@/src/functions/validateDB'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import { Marker } from '@/src/components/Marker'
+import { tagOrderBgColor } from '@/src/types/tagColor'
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -341,4 +343,31 @@ export default function Home() {
       {/* </ThemeProvider> */}
     </StyledEngineProvider>
   )
+
+//   <div className='ml-96 mt-60 flex flex-row gap-1'>
+//   {Array.from(Array(12).keys()).map((idx) => {
+//     const tag = orderToTag[idx]
+//     return (
+//     <div className='flex flex-col items-center w-24'>
+//     <button id={`tagmarker${tag}`} className={`grid place-content-center rounded-[3px] text-white opacity-100 z-20
+//                                           ${
+//                                             // !star && (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8':
+//                                             tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'
+//                                           // )
+//                                         }
+//                                           ${
+//                                             // onFire ? 'w-8 h-8' :
+//                                             'w-6 h-6'}`}>
+//       {/* {star && <div className={`relative mt-2`}> */}
+//       {/* <p className={`${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' text-5xl' : tagOrderBgColor[tagToOrder[tag]].normal + ' text-4xl'} text-transparent bg-clip-text`}>❤</p>
+//       <div className={`absolute ${onFire ? 'top-2' : 'top-1'} w-full text-white`}>{tagIconForMarker[tag]}</div>
+//       </div>} */}
+//       {
+//         // !star &&
+//         tagIconForMarker[tag]}
+//     </button>
+//     <p>{tag}: {tagLabel[tag]}</p>
+//     </div>
+//   )})}
+// </div>
 }
