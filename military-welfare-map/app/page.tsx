@@ -26,7 +26,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ShowStarsPanel } from '@/src/components/ShowStarsPanel'
 import { validateDB } from '@/src/functions/validateDB'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
-import { Marker } from '@/src/components/Marker'
 import { tagOrderBgColor } from '@/src/types/tagColor'
 
 const NUM_OF_TAGS = 12
@@ -334,8 +333,9 @@ export default function Home() {
           </div>
           
           <div className={`w-full h-full`}>
-            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} level={level} setLevel={setLevel}
-                      selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!} setMarkers={setMarkers} isStarToggled={isStarToggled}/>
+            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened}
+                      level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!}
+                      setMarkers={setMarkers} isStarToggled={isStarToggled}/>
           </div>
           
         </main>
@@ -343,6 +343,7 @@ export default function Home() {
       {/* </ThemeProvider> */}
     </StyledEngineProvider>
   )
+}
 
 //   <div className='ml-96 mt-60 flex flex-row gap-1'>
 //   {Array.from(Array(12).keys()).map((idx) => {
@@ -370,4 +371,3 @@ export default function Home() {
 //     </div>
 //   )})}
 // </div>
-}
