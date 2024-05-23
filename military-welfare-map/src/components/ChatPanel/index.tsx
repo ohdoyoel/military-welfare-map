@@ -17,6 +17,7 @@ interface ChatPanelProps {
     regionsToggled: boolean[]
     setRegionsToggled: Dispatch<SetStateAction<boolean[]>>
     setSearchText: Dispatch<SetStateAction<string>>
+    distance: number
     setDistance: Dispatch<SetStateAction<number>>
 }
 
@@ -40,7 +41,7 @@ const placeLabelData = [
     '경상북도', '경상남도', '강원특별자치도', '제주특별자치도', '주변', '전국'
 ]
 
-export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regionsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
+export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regionsToggled, setRegionsToggled, setSearchText, distance, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([
         {
             message: `안녕하십니까!
@@ -133,7 +134,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     const replyRcmdProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
         const filtered = markers.filter((marker) => {
             return ((tags.length > 0 ? (tags.includes(marker.tag.toString()) || tags.includes('12')) : tagsToggled[marker.tag]) && (plcs.length > 0 ? (plcs.includes(marker.region.toString()) || plcs.includes('16') || plcs.includes('17')) : regionsToggled[marker.tag])
-                && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase()))
+                && marker.distance! < distance && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase()))
         })
 
         if (filtered.length == 0) {
