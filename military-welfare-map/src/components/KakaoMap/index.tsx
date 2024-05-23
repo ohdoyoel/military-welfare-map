@@ -455,8 +455,8 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
             setMapNE({lat:NE.getLat(), lng:NE.getLng()})
             const SW = map.getBounds().getSouthWest()
             setMapSW({lat:SW.getLat(), lng:SW.getLng()})
-            // const latlng = map.getCenter()
-            // setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
+            const latlng = map.getCenter()
+            setMapPos({lat:latlng.getLat(), lng:latlng.getLng()})
             // console.log(map.getLevel())
         }
 
@@ -479,7 +479,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
         // }
         
         return (
-            <Map 
+            <Map
                 center={mapPos}
                 isPanto={true}
                 style={{
@@ -521,10 +521,10 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                         size: {width: 20, height: 20},
                         options: {offset: {x: 10, y: 10}},
                     }}
-                    onClick={() => setMapPos({
-                        lat: curPos.center.lat,
-                        lng: curPos.center.lng
-                    })}
+                    onClick={(marker) => {
+                      setMapPos(curPos.center)
+                      console.log(curPos.center)
+                    }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
                 <ReSetttingMapBounds markers={markers}/>
