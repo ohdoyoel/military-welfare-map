@@ -149,9 +149,9 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         pushRcmdMessage(
             `${explain(tags, plcs, searchText, true)}
             \n${rcmdMsg[rcmdMarker.tag]}
-            \n### ${rcmdMarker.title}
-            \n**${rcmdMarker.address}**
-            \n##### ${rcmdMarker.telno}
+            \n### ${rcmdMarker.title.trim()}
+            \n**${rcmdMarker.address.trim()}**
+            \n##### ${rcmdMarker.telno?.trim()}
             \n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;')}   
 [길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
             true,
