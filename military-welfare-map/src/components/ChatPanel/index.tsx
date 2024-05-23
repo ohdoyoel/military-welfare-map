@@ -147,7 +147,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         setSearchText(rcmdMarker.title)
         setIdx(0)
         pushRcmdMessage(
-            `${explain(tags, plcs, searchText, true)}
+            `### ${explain(tags, plcs, searchText, true)}
             \n${rcmdMsg[rcmdMarker.tag]}
             \n### ${rcmdMarker.title.trim()}
             \n**${rcmdMarker.address.trim()}**
