@@ -284,7 +284,7 @@ export default function Home() {
           {/* InformationPanel Open Btn */}
           <div className={`flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
-                              absolute z-20 ${isBarOpened ? `right-0 sm:left-[461px] rounded-l-[3px] sm:rounded-r-[3px]` : `left-0 rounded-r-[3px]`}`}
+                              absolute z-20 ${isBarOpened ? `right-0 sm:left-[460px] rounded-l-[3px] sm:rounded-r-[3px]` : `left-0 rounded-r-[3px]`}`}
                     onClick={() => {setIsBarOpened(!isBarOpened)}}>
               {isBarOpened
               ? <NavigateBeforeIcon className='text-3xl sm:text-4xl text-emerald-500 inline'/>
@@ -305,7 +305,7 @@ export default function Home() {
           {/* ChatPanel Open Btn */}
           <div className={`hidden sm:flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
-                              absolute z-20 ${isChatOpened ? `right-[461px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
+                              absolute z-20 ${isChatOpened ? `right-[460px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
               {isChatOpened
               ? <NavigateNextIcon className='text-3xl sm:text-4xl text-emerald-500'/>

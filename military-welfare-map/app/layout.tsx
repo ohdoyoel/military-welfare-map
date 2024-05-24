@@ -5,6 +5,9 @@ import Script from 'next/script'
 export const metadata: Metadata = {
   title: '병영생활지도',
   description: '',
+  icons: {
+		icon: "/icon.png",
+	},
 }
 
 export default function RootLayout({
