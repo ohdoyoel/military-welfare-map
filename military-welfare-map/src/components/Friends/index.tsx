@@ -11,7 +11,7 @@ export const Friends = ({setIsFriendsOpened, setIsProfileOpened}: FriendsProps) 
     const [usedDataOpened, setUsedDataOpened] = useState(false)
 
     return (
-        <div className="absolute inset-x-0 inset-y-0 flex flex-col w-full bg-slate-50 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] z-20 overflow-y-auto">
+        <div className="absolute inset-x-0 inset-y-0 flex flex-col w-full bg-slate-50 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] z-30 overflow-y-auto overflow-x-hidden">
             <div className="flex-none flex flex-row justify-start w-full">
                 <p className="text-4xl font-bold my-4 mx-4 mb-2">개발 정보</p>
             </div>
