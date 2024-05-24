@@ -92,6 +92,12 @@ export const ads = `
 성심껏 답변해 드리겠습니다!
 `
 
+export const err = `
+### 오류를 발견하셨습니까?
+\`ohdoyoel@naver.com\` 로 내용을 보내주시면,
+더 나은 병영생활지도가 되겠습니다!
+`
+
 const isUserSetting = (input: string): boolean => {
     return userSetting(input).length > 0
 }
@@ -190,6 +196,10 @@ const isAds = (input: string): boolean => {
     return input.includes('광고')
 }
 
+const isErr = (input: string): boolean => {
+    return input.includes('오류')
+}
+
 const isThanks = (input: string): boolean => {
     return input.includes('고마') || input.includes('고맙') || input.includes('땡큐') || input.includes('땡스') || input.includes('ㄳ') || input.includes('ㄱㅅ')
 }
@@ -205,6 +215,7 @@ export const botReply = (input: string):string => {
     else if (isHelp(input)) return `@help`
     else if (isCalled(input)) return '***병장 지! 피! 티!***'
     else if (isAds(input)) return `@ads`
+    else if (isErr(input)) return `@err`
     else if (isThanks(input)) return '아닙니다 ! 더 궁금한 것은 없으십니까 ?'
     else if (isNothing(input)) return '예 알겠습니다! 더 궁금한 것이 있으시면 편하게 질문해주십시오!'
     return '잘못 들었습니다?'
