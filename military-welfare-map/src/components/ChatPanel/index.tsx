@@ -2,7 +2,7 @@ import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
-import { ads, botReply, greeting, help } from "@/src/functions/botReply"
+import { ads, botReply, greeting, help, err } from "@/src/functions/botReply"
 import { andInKorean, booleanArrayToList, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
 import { rcmdMsg, tagSearch } from "@/src/types/tagIconLabel"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -208,6 +208,10 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         }
         else if (reply.includes('@ads')) {
             pushMessage(ads, true)
+            return
+        }
+        else if (reply.includes('@err')) {
+            pushMessage(err, true)
             return
         }
         else if (reply.includes('@user:')) {
