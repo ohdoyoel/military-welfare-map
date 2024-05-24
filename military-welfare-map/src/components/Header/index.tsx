@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import MapIcon from '@mui/icons-material/Map';
 
 interface HeaderProps {
     isStarToggled: boolean
@@ -11,6 +12,7 @@ export const Header = ({isStarToggled, setIsStarToggled}: HeaderProps) => {
         return (
         <div className='flex-none w-full h-14 bg-emerald-500 flex justify-between items-center'>
             <a href="" className="flex flex-row m-1 sm:m-2 p-1 sm:p-2">
+                <MapIcon className='text-3xl text-white mr-1'/>
                 <p className="text-2xl text-white font-nsb">병영생활</p>
                 <p className="text-2xl text-white font-nse">지도</p>
             </a>

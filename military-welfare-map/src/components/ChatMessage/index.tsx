@@ -40,13 +40,13 @@ export const ChatMessage = ({message, isBotSide, tag, setIsProfileOpened}: ChatM
                                 <p {...props} className="my-2 leading-6"/>
                                 ),
                                 li: ({ node, ...props }) => (
-                                    <li {...props} className="my-0 mr-2"/>
+                                    <li {...props} className="my-0 mr-2 leading-6"/>
                                 ),
                                 ul: ({ node, ...props }) => (
-                                    <ul {...props} className="my-1"/>
+                                    <ul {...props} className="my-1 leading-6"/>
                                 ),
                                 ol: ({ node, ...props }) => (
-                                    <ol {...props} className="my-2"/>
+                                    <ol {...props} className="my-2 leading-6"/>
                                 ),
                                 h2: ({ node, ...props }) => (
                                     <h2 {...props} className="my-1"/>
