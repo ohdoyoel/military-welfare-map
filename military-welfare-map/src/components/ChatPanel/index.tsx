@@ -103,14 +103,14 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
 
         if (searchText == '') {
             if (tags.length > 0 && plcs.length == 0) {
-                if (isNear) return `주변의 ${combineTagsString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
-                else return `${plcsToggledString}의 ${combineTagsString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
+                if (isNear) return `주변의 ${combineTagsString}${isRcmd ? ' 중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
+                else return `${plcsToggledString}의 ${combineTagsString}${isRcmd ? ' 중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
             }
             else if (tags.length == 0 && plcs.length > 0) {
-                return `${combinePlcsString}의 ${tagsToggledString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(tagsToggledString) + ' 보여드리겠습니다.'}`
+                return `${combinePlcsString}의 ${tagsToggledString}${isRcmd ? ' 중 하나를 추천해드리겠습니다.' : thatInKorean(tagsToggledString) + ' 보여드리겠습니다.'}`
             }
             else if (tags.length > 0 && plcs.length > 0) {
-                return `${combinePlcsString}의 ${combineTagsString} ${isRcmd ? '중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
+                return `${combinePlcsString}의 ${combineTagsString}${isRcmd ? ' 중 하나를 추천해드리겠습니다.' : thatInKorean(combineTagsString) + ' 보여드리겠습니다.'}`
             }
         } else {
             if (tags.length == 0 && plcs.length == 0) {
