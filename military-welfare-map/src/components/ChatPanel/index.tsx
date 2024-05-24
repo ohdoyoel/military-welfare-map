@@ -2,7 +2,7 @@ import { MarkerType } from "@/src/types/data"
 import { LocationItem } from "../LocationItem"
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { ChatMessage } from "../ChatMessage"
-import { ads, botReply, greeting, help } from "@/src/functions/botReply"
+import { ads, botReply, greeting, help, err } from "@/src/functions/botReply"
 import { andInKorean, booleanArrayToList, isTrimedTextAllIncluded, thatInKorean } from "@/src/functions/korean"
 import { rcmdMsg, tagSearch } from "@/src/types/tagIconLabel"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -17,6 +17,7 @@ interface ChatPanelProps {
     regionsToggled: boolean[]
     setRegionsToggled: Dispatch<SetStateAction<boolean[]>>
     setSearchText: Dispatch<SetStateAction<string>>
+    distance: number
     setDistance: Dispatch<SetStateAction<number>>
 }
 
@@ -40,7 +41,7 @@ const placeLabelData = [
     '경상북도', '경상남도', '강원특별자치도', '제주특별자치도', '주변', '전국'
 ]
 
-export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regionsToggled, setRegionsToggled, setSearchText, setDistance}: ChatPanelProps) => {
+export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regionsToggled, setRegionsToggled, setSearchText, distance, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([
         {
             message: `안녕하십니까!
@@ -133,7 +134,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     const replyRcmdProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
         const filtered = markers.filter((marker) => {
             return ((tags.length > 0 ? (tags.includes(marker.tag.toString()) || tags.includes('12')) : tagsToggled[marker.tag]) && (plcs.length > 0 ? (plcs.includes(marker.region.toString()) || plcs.includes('16') || plcs.includes('17')) : regionsToggled[marker.tag])
-                && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase()))
+                && marker.distance! < distance && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase()))
         })
 
         if (filtered.length == 0) {
@@ -146,11 +147,11 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         setSearchText(rcmdMarker.title)
         setIdx(0)
         pushRcmdMessage(
-            `${explain(tags, plcs, searchText, true)}
+            `### ${explain(tags, plcs, searchText, true)}
             \n${rcmdMsg[rcmdMarker.tag]}
-            \n### ${rcmdMarker.title}
-            \n**${rcmdMarker.address}**
-            \n##### ${rcmdMarker.telno}
+            \n### ${rcmdMarker.title.trim()}
+            \n**${rcmdMarker.address.trim()}**
+            \n##### ${rcmdMarker.telno?.trim()}
             \n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;')}   
 [길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
             true,
@@ -207,6 +208,10 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         }
         else if (reply.includes('@ads')) {
             pushMessage(ads, true)
+            return
+        }
+        else if (reply.includes('@err')) {
+            pushMessage(err, true)
             return
         }
         else if (reply.includes('@user:')) {
