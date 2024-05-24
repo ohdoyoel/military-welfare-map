@@ -27,6 +27,7 @@ import { ShowStarsPanel } from '@/src/components/ShowStarsPanel'
 import { validateDB } from '@/src/functions/validateDB'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { tagOrderBgColor } from '@/src/types/tagColor'
+import MapIcon from '@mui/icons-material/Map';
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -336,6 +337,8 @@ export default function Home() {
             <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened}
                       level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!}
                       setMarkers={setMarkers} isStarToggled={isStarToggled}/>
+            {/* <MapIcon className='m-96 text-3xl sm:text-4xl text-emerald-500 border-2'/> */}
+
           </div>
           
         </main>
