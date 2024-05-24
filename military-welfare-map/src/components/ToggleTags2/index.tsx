@@ -28,7 +28,7 @@ export const ToggleTags2 = ({toggled, setToggled}: ToggleTags2Props) => {
 
 
     return (
-        <div className="w-fit grid grid-cols-4 pt-4 pb-4 pl-2 gap-2">
+        <div className="w-fit grid grid-cols-4 pt-2 pb-4 pl-2 gap-2">
             {toggleTagButtonList()}
         </div>
     )
