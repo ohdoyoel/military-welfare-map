@@ -1,7 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ToggleRegionButton } from "../ToggleRegionButton"
+import { ToggleRegionAllButton } from "../ToggleRegionAllButton"
 
 interface ToggleRegionsProps {
+    toggleState: number
+    allToggleClicked: () => void
     toggled: boolean[]
     setToggled: Dispatch<SetStateAction<boolean[]>>
     setDistance: Dispatch<SetStateAction<number>>
@@ -15,45 +18,14 @@ const regionData: string[] = [
     '경북','경남','강원','제주'
 ]
 
-export const ToggleRegions = ({toggled, setToggled, setDistance}: ToggleRegionsProps) => {
-    // const [isEntireToggled, setIsEntireToggled] = useState(true)
-    // const [isToggled, setIsToggled] = useState(toggled)
-
-    // useEffect(() => {
-    //     setIsToggled(toggled)
-    // }, [toggled])
-
-    // useEffect(() => {
-    //     let isAllToggled = true;
-    //     for (let i=0; i<isToggled.length; i++) {
-    //         if (isToggled[i] == false) {
-    //             isAllToggled = false;
-    //             break;
-    //         }
-    //     }
-    //     setIsEntireToggled(isAllToggled)
-    // }, [isToggled])
-    
-    // useEffect(() => {
-    //     if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => true))
-    //     else {
-    //         let isAllToggled = true;
-    //         for (let i=0; i<isToggled.length; i++) {
-    //             if (isToggled[i] == false) {
-    //                 isAllToggled = false;
-    //                 break;
-    //             }
-    //         }
-    //         if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => false))
-    //     }
-    // }, [isEntireToggled])
+export const ToggleRegions = ({toggleState, allToggleClicked, toggled, setToggled, setDistance}: ToggleRegionsProps) => {
 
     const toggleRegionButtonList = () => {
 
         const result = []
-        // result.push(
-        //     <ToggleRegionButton onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={16}/>
-        // )
+        result.push(
+            <ToggleRegionAllButton toggleState={toggleState} onClicked={allToggleClicked} label={"전국"} key={16}/>
+        )
 
         // 서울 0
         // 경기 7

@@ -150,7 +150,9 @@ export default function Home() {
     }
 ])
   
-  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => false))
+  const [tagToggleState, setTagToggleState] = useState(0)
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => false))
+  const [regionToggleState, setRegionToggleState] = useState(2)
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
   const [distanceRange, setDistanceRange] = useState(30)
@@ -208,7 +210,7 @@ export default function Home() {
           && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
-    }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
+  }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
 
   useEffect(() => {
     let input;
@@ -239,6 +241,61 @@ export default function Home() {
   useEffect(() => {
     isChatOpened && activeChatInput()
   }, [isChatOpened])
+
+  // all Tag Logic
+  const tagToggleAllButtonClicked = () => {
+    if (tagToggleState == 0) {
+      setTagToggleState(2)
+    } else  {
+      setTagToggleState(0)
+    }
+  }
+
+  useEffect(() => {
+    if (tagToggleState == 0) {
+      setIsTagsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
+    } else if (tagToggleState == 2) {
+      setIsTagsToggled(Array.from({length: NUM_OF_TAGS}, () => true))
+    }
+  }, [tagToggleState])
+
+  useEffect(() => {
+    if (isTagsToggled.every((val) => !val)) {
+      setTagToggleState(0)
+    } else if (isTagsToggled.every((val) => val)) {
+      setTagToggleState(2)
+    } else {
+      setTagToggleState(1)
+    }
+  }, [isTagsToggled])
+
+  // all Region Logic
+  const regionToggleAllButtonClicked = () => {
+    if (regionToggleState == 0) {
+      setRegionToggleState(2)
+    } else  {
+      setRegionToggleState(0)
+    }
+  }
+
+  useEffect(() => {
+    if (regionToggleState == 0) {
+      setIsRegionsToggled(Array.from({length: NUM_OF_REGIONS}, () => false))
+    } else if (regionToggleState == 2) {
+      setIsRegionsToggled(Array.from({length: NUM_OF_REGIONS}, () => true))
+    }
+  }, [regionToggleState])
+
+  useEffect(() => {
+    if (isRegionsToggled.every((val) => !val)) {
+      setRegionToggleState(0)
+    } else if (isRegionsToggled.every((val) => val)) {
+      setRegionToggleState(2)
+    } else {
+      setRegionToggleState(1)
+    }
+  }, [isRegionsToggled])
+  
   
   return (
     <StyledEngineProvider injectFirst>
@@ -250,8 +307,8 @@ export default function Home() {
           <div className={`fixed ${isBarOpened ? `w-screen sm:w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
             <Header isStarToggled={isStarToggled} setIsStarToggled={setIsStarToggled}/>
             <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
-            <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-            <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
+            <ToggleTags toggleState={tagToggleState} allToggleClicked={tagToggleAllButtonClicked} toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+            <ToggleRegions toggleState={regionToggleState} allToggleClicked={regionToggleAllButtonClicked} toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
             <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx} setMarkers={setMarkers} setLevel={setLevel}/>
             <AdsBar/>
           </div>
@@ -260,29 +317,29 @@ export default function Home() {
           <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
             <div className='flex'> 
               <Header2/>
-              <button className='sm:flex hidden flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
+              {!onFireToggled && <button className='sm:flex hidden flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
                 <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
                 {searchText != "" && <p className='pr-3'>{searchText}</p>}
-              </button>
-              <button className='sm:block hidden w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
+              </button>}
+              {!onFireToggled && <button className='sm:block hidden w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
                 <ChatIcon className='text-gray-600' fontSize='medium'/> 
-              </button>
-              <button className={`sm:block hidden w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
+              </button>}
+              {!onFireToggled && <button className={`sm:block hidden w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
                                 ${isStarToggled
                                   ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
                                   : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
                                 `} onClick={() => {setIsStarToggled(!isStarToggled); setIsBarOpened(true)}}>
                 <FavoriteIcon fontSize='medium'/>
-              </button>
+              </button>}
             </div>
-            <div className='sm:flex hidden flex-col'> 
-            <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-            <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
-            </div>
+            {!onFireToggled && <div className='sm:flex hidden flex-col'> 
+            <ToggleTags2 toggleState={tagToggleState} allToggleClicked={tagToggleAllButtonClicked} toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+            <ToggleRegions2 toggleState={regionToggleState} allToggleClicked={regionToggleAllButtonClicked} toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
+            </div>}
           </div>
 
           {/* InformationPanel Open Btn */}
-          <div className={`flex items-center`}>
+          {!onFireToggled && <div className={`flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                               absolute z-20 ${isBarOpened ? `right-0 sm:left-[460px] rounded-l-[3px] sm:rounded-r-[3px]` : `left-0 rounded-r-[3px]`}`}
                     onClick={() => {setIsBarOpened(!isBarOpened)}}>
@@ -294,7 +351,7 @@ export default function Home() {
                 </>)
               }
             </button>
-          </div>
+          </div>}
 
           {/* ChatPanel */}
           <div className={`fixed right-0 ${isChatOpened ? `w-screen sm:w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
@@ -303,7 +360,7 @@ export default function Home() {
           </div>
 
           {/* ChatPanel Open Btn */}
-          <div className={`hidden sm:flex items-center`}>
+          {!onFireToggled && <div className={`hidden sm:flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                               absolute z-10 ${isChatOpened ? `right-[460px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
@@ -315,7 +372,7 @@ export default function Home() {
                 </>)
               }
             </button>
-          </div>
+          </div>}
 
           {/* <div className='z-10 absolute bottom-1 left-1 flex flex-col gap-2'>
             <ShowStarsPanel markers={markers}/>

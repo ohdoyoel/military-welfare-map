@@ -139,6 +139,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
 
         if (filtered.length == 0) {
             pushMessage(`추천드릴 장소가 없습니다! 검색 조건을 다시 설정해주십시오.`, true)
+            setIdx(-1)
             return
         }
 
@@ -159,37 +160,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     }
 
     const replyProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
-        // const combineTagsString = combineTags(tags)
-        // const tagsToggledString = combineTags(booleanArrayToList(tagsToggled))
-        // const combinePlcsString = combinePlcs(plcs)
-        // const plcsToggledString = combinePlcs(booleanArrayToList(regionsToggled))
-
-        // if (searchText == '') {
-        //     if (tags.length > 0 && plcs.length == 0) {
-        //         if (isNear) pushMessage(`주변의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
-        //         else pushMessage(`${plcsToggledString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
-        //     }
-        //     else if (tags.length == 0 && plcs.length > 0) {
-        //         pushMessage(`${combinePlcsString}의 ${tagsToggledString+thatInKorean(tagsToggledString)} 보여드리겠습니다.`, true)
-        //     }
-        //     else if (tags.length > 0 && plcs.length > 0) {
-        //         pushMessage(`${combinePlcsString}의 ${combineTagsString+thatInKorean(combineTagsString)} 보여드리겠습니다.`, true)
-        //     }
-        // } else {
-        //     if (tags.length == 0 && plcs.length == 0) {
-        //         pushMessage(`${plcsToggledString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다..`, true)
-        //     }
-        //     else if (tags.length > 0 && plcs.length == 0) {
-        //         if (isNear) pushMessage(`주변의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
-        //         else pushMessage(`${plcsToggledString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
-        //     }
-        //     else if (tags.length == 0 && plcs.length > 0) {
-        //         pushMessage(`${combinePlcsString}의 ${tagsToggledString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
-        //     }
-        //     else if (tags.length > 0 && plcs.length > 0) {
-        //         pushMessage(`${combinePlcsString}의 ${combineTagsString} 중, ${searchText+thatInKorean(searchText)} 검색한 결과를 보여드리겠습니다.`, true)
-        //     }
-        // }
+        setIdx(-1)
         pushMessage(explain(tags, plcs, searchText, false), true)
     }
 
