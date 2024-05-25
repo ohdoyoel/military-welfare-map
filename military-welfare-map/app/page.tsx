@@ -150,7 +150,9 @@ export default function Home() {
     }
 ])
   
-  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => false))
+  const [tagToggleState, setTagToggleState] = useState(0)
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => false))
+  const [regionToggleState, setRegionToggleState] = useState(2)
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
   const [distanceRange, setDistanceRange] = useState(30)
@@ -208,7 +210,7 @@ export default function Home() {
           && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
-    }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
+  }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
 
   useEffect(() => {
     let input;
@@ -239,6 +241,61 @@ export default function Home() {
   useEffect(() => {
     isChatOpened && activeChatInput()
   }, [isChatOpened])
+
+  // all Tag Logic
+  const tagToggleAllButtonClicked = () => {
+    if (tagToggleState == 0) {
+      setTagToggleState(2)
+    } else  {
+      setTagToggleState(0)
+    }
+  }
+
+  useEffect(() => {
+    if (tagToggleState == 0) {
+      setIsTagsToggled(Array.from({length: NUM_OF_TAGS}, () => false))
+    } else if (tagToggleState == 2) {
+      setIsTagsToggled(Array.from({length: NUM_OF_TAGS}, () => true))
+    }
+  }, [tagToggleState])
+
+  useEffect(() => {
+    if (isTagsToggled.every((val) => !val)) {
+      setTagToggleState(0)
+    } else if (isTagsToggled.every((val) => val)) {
+      setTagToggleState(2)
+    } else {
+      setTagToggleState(1)
+    }
+  }, [isTagsToggled])
+
+  // all Region Logic
+  const regionToggleAllButtonClicked = () => {
+    if (regionToggleState == 0) {
+      setRegionToggleState(2)
+    } else  {
+      setRegionToggleState(0)
+    }
+  }
+
+  useEffect(() => {
+    if (regionToggleState == 0) {
+      setIsRegionsToggled(Array.from({length: NUM_OF_REGIONS}, () => false))
+    } else if (regionToggleState == 2) {
+      setIsRegionsToggled(Array.from({length: NUM_OF_REGIONS}, () => true))
+    }
+  }, [regionToggleState])
+
+  useEffect(() => {
+    if (isRegionsToggled.every((val) => !val)) {
+      setRegionToggleState(0)
+    } else if (isRegionsToggled.every((val) => val)) {
+      setRegionToggleState(2)
+    } else {
+      setRegionToggleState(1)
+    }
+  }, [isRegionsToggled])
+  
   
   return (
     <StyledEngineProvider injectFirst>
@@ -250,8 +307,8 @@ export default function Home() {
           <div className={`fixed ${isBarOpened ? `w-screen sm:w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
             <Header isStarToggled={isStarToggled} setIsStarToggled={setIsStarToggled}/>
             <SearchInput searchText={searchText} setSearchText={setSearchText} onKeyUp={onSearchInputKeyUp}/>
-            <ToggleTags toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-            <ToggleRegions toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
+            <ToggleTags toggleState={tagToggleState} allToggleClicked={tagToggleAllButtonClicked} toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+            <ToggleRegions toggleState={regionToggleState} allToggleClicked={regionToggleAllButtonClicked} toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
             <InformationPanel markers={filteredMarkers} setPos={setMapPos} setIdx={setSelectedIdx} setMarkers={setMarkers} setLevel={setLevel}/>
             <AdsBar/>
           </div>
@@ -276,8 +333,8 @@ export default function Home() {
               </button>}
             </div>
             {!onFireToggled && <div className='sm:flex hidden flex-col'> 
-            <ToggleTags2 toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-            <ToggleRegions2 toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
+            <ToggleTags2 toggleState={tagToggleState} allToggleClicked={tagToggleAllButtonClicked} toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+            <ToggleRegions2 toggleState={regionToggleState} allToggleClicked={regionToggleAllButtonClicked} toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
             </div>}
           </div>
 

@@ -1,8 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ToggleRegionButton } from "../ToggleRegionButton"
 import { ToggleRegionButton2 } from "../ToggleRegionButton2"
+import { ToggleRegionAllButton2 } from "../ToggleRegionAllButton2"
 
 interface ToggleRegions2Props {
+    toggleState: number
+    allToggleClicked: () => void
     toggled: boolean[]
     setToggled: Dispatch<SetStateAction<boolean[]>>
     setDistance: Dispatch<SetStateAction<number>>
@@ -16,47 +19,12 @@ const regionData: string[] = [
     '경북','경남','강원','제주'
 ]
 
-export const ToggleRegions2 = ({toggled, setToggled, setDistance}: ToggleRegions2Props) => {
-    // const [isEntireToggled, setIsEntireToggled] = useState(true)
-    // const [isToggled, setIsToggled] = useState(toggled)
-
-    // useEffect(() => {
-    //     setIsToggled(toggled)
-    // }, [toggled])
-
-    // useEffect(() => {
-    //     let isAllToggled = true;
-    //     for (let i=0; i<isToggled.length; i++) {
-    //         if (isToggled[i] == false) {
-    //             isAllToggled = false;
-    //             break;
-    //         }
-    //     }
-    //     setIsEntireToggled(isAllToggled)
-    // }, [isToggled])
-    
-    // useEffect(() => {
-    //     if (isEntireToggled) setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => true))
-    //     else {
-    //         let isAllToggled = true;
-    //         for (let i=0; i<isToggled.length; i++) {
-    //             if (isToggled[i] == false) {
-    //                 isAllToggled = false;
-    //                 break;
-    //             }
-    //         }
-    //         if (isAllToggled) setIsToggled(Array.from({length: NUM_OF_REGIONS}, () => false))
-    //         }
-    // }, [isEntireToggled])
-    
-        // useEffect(() => {
-        //     setToggled(isToggled)
-        // }, [isToggled])
+export const ToggleRegions2 = ({toggleState, allToggleClicked, toggled, setToggled, setDistance}: ToggleRegions2Props) => {
 
     const toggleRegionButtonList = () => {
         const result = []
         // result.push(
-        //     <ToggleRegionButton2 onClicked={() => setIsEntireToggled(!isEntireToggled)} isToggled={isEntireToggled} label={"전체"} key={NUM_OF_REGIONS}/>
+            
         // )
         // result.push(<div key={NUM_OF_REGIONS+1}/>)
         // result.push(<div key={NUM_OF_REGIONS+2}/>)
@@ -93,8 +61,11 @@ export const ToggleRegions2 = ({toggled, setToggled, setDistance}: ToggleRegions
     }
 
     return (
-        <div className="w-fit grid grid-cols-4 pl-2 gap-2" onClick={() => {setDistance(30)}}>
-            {toggleRegionButtonList()}
+        <div className="flex flex-row ml-2">
+            <ToggleRegionAllButton2 toggleState={toggleState} onClicked={allToggleClicked} label={"전국"} key={NUM_OF_REGIONS}/>
+            <div className="w-fit grid grid-cols-4 pl-2 gap-2" onClick={() => {setDistance(30)}}>
+                {toggleRegionButtonList()}
+            </div>
         </div>
     )
 }
