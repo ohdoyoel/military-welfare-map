@@ -1,18 +1,31 @@
 import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
 import { ToggleTagButton } from '../ToggleTagButton';
 import { orderToTag, tagIconForButton, tagLabel } from '@/src/types/tagIconLabel';
+import { ToggleTagAllButton } from '../ToggleTagAllButton';
+import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 
 interface ToggleTagsProps {
+    toggleState: number
+    allToggleClicked: () => void
     toggled: boolean[]
     setToggled: Dispatch<SetStateAction<boolean[]>>
 }
 
 const NUM_OF_TAGS = 12
 
-export const ToggleTags = ({toggled, setToggled}: ToggleTagsProps) => {
+export const ToggleTags = ({toggleState, allToggleClicked, toggled, setToggled}: ToggleTagsProps) => {
 
     const toggleTagButtonList = () => {
         const result = []
+
+        result.push(
+            <ToggleTagAllButton toggleState={toggleState} onClicked={allToggleClicked}>
+                {toggleState == 0 ? <CheckBoxOutlineBlankOutlinedIcon className='text-lg' key={0}/> : toggleState == 1 ? <IndeterminateCheckBoxIcon className='text-lg' key={0}/> : <CheckBoxIcon className='text-lg' key={0}/>}
+                <p className='text-xs'>모든 태그</p>
+            </ToggleTagAllButton>
+        )
 
         for (let i = 0; i < NUM_OF_TAGS; i++) {
             result.push(

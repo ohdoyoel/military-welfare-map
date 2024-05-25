@@ -74,7 +74,7 @@ export const help = `
 제가 수행하는 일들을 다음과 같이 소개합니다!
 
 - 지도 컨트롤
-    - 태그와 장소를 입력하면, 해당되는 결과들을 보여드립니다.
+    - 태그와 지역을 입력하면, 해당되는 결과들을 보여드립니다.
     - Ex) *강원도의 카페를 보여줘*, *주변의 국군복지단 마트 좀 알려줄래?*
     - 보다 구체적인 요청 사항이 있어도, 문제 없습니다!
     - Ex) *경기도의 음식점 중에 포천 검색해줘*
@@ -140,21 +140,21 @@ const tagFrom = (input: string): string => {
 // return '@plc:0 @plc:1'
 const placeFrom = (input: string): string => {
     let result = ''
-    if (input.includes('서울')) result += '@plc:0'
-    if (input.includes('경기')) result += '@plc:7'
+    if (input.includes('서울') || input.includes('수도권')) result += '@plc:0'
+    if (input.includes('경기') || input.includes('수도권')) result += '@plc:7'
     if (input.includes('강원')) result += '@plc:14'
-    if (input.includes('인천')) result += '@plc:3'
-    if (input.includes('충북')) result += '@plc:8'
-    if (input.includes('충남')) result += '@plc:9'
-    if (input.includes('대전')) result += '@plc:5'
-    if (input.includes('대구')) result += '@plc:2'
-    if (input.includes('경북')) result += '@plc:12'
-    if (input.includes('경남')) result += '@plc:13'
-    if (input.includes('부산')) result += '@plc:1'
-    if (input.includes('울산')) result += '@plc:6'
-    if (input.includes('전북')) result += '@plc:10'
-    if (input.includes('전남')) result += '@plc:11'
-    if (input.includes('광주')) result += '@plc:4'
+    if (input.includes('인천') || input.includes('수도권')) result += '@plc:3'
+    if (input.includes('충북') || input.includes('충청북') || input.includes('충청')) result += '@plc:8'
+    if (input.includes('충남') || input.includes('충청남') || input.includes('충청')) result += '@plc:9'
+    if (input.includes('대전') || input.includes('충청')) result += '@plc:5'
+    if (input.includes('대구') || input.includes('경상')) result += '@plc:2'
+    if (input.includes('경북') || input.includes('경상북') || input.includes('경상')) result += '@plc:12'
+    if (input.includes('경남') || input.includes('경상남') || input.includes('경상')) result += '@plc:13'
+    if (input.includes('부산') || input.includes('경상')) result += '@plc:1'
+    if (input.includes('울산') || input.includes('경상')) result += '@plc:6'
+    if (input.includes('전북') || input.includes('전라북') || input.includes('전라')) result += '@plc:10'
+    if (input.includes('전남') || input.includes('전라남') || input.includes('전라')) result += '@plc:11'
+    if (input.includes('광주') || input.includes('전라')) result += '@plc:4'
     if (input.includes('제주')) result += '@plc:15'
     if (input.includes('주변')) result += '@plc:16'
     if (input.includes('전국')) result += '@plc:17'
