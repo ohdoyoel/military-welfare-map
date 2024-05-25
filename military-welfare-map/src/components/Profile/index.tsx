@@ -7,7 +7,7 @@ interface ProfileProps {
 export const Profile = ({setIsProfileOpened}: ProfileProps) => {
 
     return (
-        <div className="absolute inset-x-0 inset-y-0 flex flex-col w-full bg-slate-50 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] z-40 overflow-y-auto">
+        <div className="absolute inset-x-0 inset-y-0 flex flex-col w-full bg-slate-50 z-40 overflow-y-auto">
             <div className="flex-none flex flex-row justify-between w-full">
                 <p className="text-4xl font-bold m-4">병사 프로필</p>
                 <p className="text-4xl font-extrabold m-4 cursor-pointer" onClick={() => setIsProfileOpened(false)}>✕</p>
