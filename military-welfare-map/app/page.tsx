@@ -28,6 +28,7 @@ import { validateDB } from '@/src/functions/validateDB'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { tagOrderBgColor } from '@/src/types/tagColor'
 import MapIcon from '@mui/icons-material/Map';
+import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -150,8 +151,8 @@ export default function Home() {
     }
 ])
   
-  const [tagToggleState, setTagToggleState] = useState(0)
-  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => false))
+  const [tagToggleState, setTagToggleState] = useState(2)
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => true))
   const [regionToggleState, setRegionToggleState] = useState(2)
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
@@ -170,7 +171,7 @@ export default function Home() {
     isLoading: true,
   })
   const [selectedIdx, setSelectedIdx] = useState(-1)
-  const [level, setLevel] = useState(13);
+  const [level, setLevel] = useState(5);
   
   const [onFireToggled, setOnFireToggled] = useState(false)
   const [isStarToggled, setIsStarToggled] = useState(false)
@@ -196,6 +197,7 @@ export default function Home() {
       tempMarkers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
       setMarkers(tempMarkers)
     }
+    setMapPos(curPos.center)
   }, [curPos])
   
   useEffect(() => {
@@ -314,27 +316,30 @@ export default function Home() {
           </div>
 
           {/* DefaultPanel */}
-          <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10`} >
-            <div className='flex'> 
+          <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10 p-1`} >
+            <div className='relative flex gap-0.5 w-fit bg-slate-200 rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'> 
               <Header2/>
-              {!onFireToggled && <button className='sm:flex hidden flex-row w-fit h-10 z-10 bg-white rounded-[3px] m-2 py-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => {setIsBarOpened(true);}}>
+              {!onFireToggled && <button className='group sm:flex hidden flex-row w-fit h-10 z-10 bg-white py-2 focus:outline-none rounded-[3px]' onClick={() => {setIsBarOpened(true);}}>
+                <div className="hidden group-hover:block absolute bg-gray-600 inset-y-0 my-auto h-6 -right-[60px] py-1 px-2 after:content-[''] after:absolute after:w-0 after:h-0 after:border-4 after:border-gray-600 after:-left-0.5 after:top-1/2 after:-translate-y-1/2 after:rotate-45 text-gray-200 text-xs rounded-[3px]">검색창</div>
                 <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
                 {searchText != "" && <p className='pr-3'>{searchText}</p>}
               </button>}
-              {!onFireToggled && <button className='sm:block hidden w-10 h-10 z-10 bg-white rounded-[3px] m-2 p-2 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none' onClick={() => setIsChatOpened(!isChatOpened)}>
+              {!onFireToggled && <button className='group sm:block hidden w-10 h-10 z-10 bg-white p-2 focus:outline-none rounded-[3px]' onClick={() => setIsChatOpened(!isChatOpened)}>
+                <div className="hidden group-hover:block absolute bg-gray-600 inset-y-0 my-auto h-6 -right-[120px] py-1 px-2 after:content-[''] after:absolute after:w-0 after:h-0 after:border-4 after:border-gray-600 after:-left-0.5 after:top-1/2 after:-translate-y-1/2 after:rotate-45 text-gray-200 text-xs rounded-[3px]">지피티 병장과 채팅</div>
                 <ChatIcon className='text-gray-600' fontSize='medium'/> 
               </button>}
-              {!onFireToggled && <button className={`sm:block hidden w-10 h-10 z-10 rounded-[3px] m-2 p-2  focus:outline-none
+              {!onFireToggled && <button className={`group sm:block hidden w-10 h-10 z-10 p-2 focus:outline-none rounded-[3px]
                                 ${isStarToggled
                                   ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
-                                  : `shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] bg-white text-gray-600`} 
+                                  : `bg-white text-gray-600`} 
                                 `} onClick={() => {setIsStarToggled(!isStarToggled); setIsBarOpened(true)}}>
+                <div className="hidden group-hover:block absolute bg-gray-600 inset-y-0 my-auto h-6 -right-[74px] py-1 px-2 after:content-[''] after:absolute after:w-0 after:h-0 after:border-4 after:border-gray-600 after:-left-0.5 after:top-1/2 after:-translate-y-1/2 after:rotate-45 text-gray-200 text-xs rounded-[3px]">찜한 장소</div>
                 <FavoriteIcon fontSize='medium'/>
               </button>}
             </div>
-            {!onFireToggled && <div className='sm:flex hidden flex-col'> 
-            <ToggleTags2 toggleState={tagToggleState} allToggleClicked={tagToggleAllButtonClicked} toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
-            <ToggleRegions2 toggleState={regionToggleState} allToggleClicked={regionToggleAllButtonClicked} toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
+            {!onFireToggled && <div className='hidden sm:flex flex-col mt-0.5 gap-1.5'> 
+              <ToggleTags2 toggleState={tagToggleState} allToggleClicked={tagToggleAllButtonClicked} toggled={isTagsToggled} setToggled={setIsTagsToggled}/>
+              <ToggleRegions2 toggleState={regionToggleState} allToggleClicked={regionToggleAllButtonClicked} toggled={isRegionsToggled} setToggled={setIsRegionsToggled} setDistance={setDistanceRange}/>
             </div>}
           </div>
 
@@ -360,7 +365,7 @@ export default function Home() {
           </div>
 
           {/* ChatPanel Open Btn */}
-          {!onFireToggled && <div className={`hidden sm:flex items-center`}>
+          {(!onFireToggled || !isStarToggled) && <div className={`hidden sm:flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                               absolute z-10 ${isChatOpened ? `right-[460px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
@@ -374,27 +379,26 @@ export default function Home() {
             </button>
           </div>}
 
-          {/* <div className='z-10 absolute bottom-1 left-1 flex flex-col gap-2'>
-            <ShowStarsPanel markers={markers}/>
-          </div> */}
-
           <div className='z-10 absolute bottom-1 right-1 flex flex-col gap-2'>
             <ShowFireButton isToggled={onFireToggled} onClicked={() => {
               setOnFireToggled(!onFireToggled)
             }}/>
           </div>
 
-          <div className='z-10 absolute top-12 right-1 flex flex-col gap-2'>
-            <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos(curPos.center)}>
-              <img src='/images/current-position.png'></img>
+          <div className='z-10 absolute top-11 right-1 flex flex-col gap-2'>
+            <button className='group w-8 h-8 rounded-[3px] bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => {
+              // setLevel(5)
+              setMapPos(curPos.center)
+            }}>
+              <div className="hidden group-hover:block absolute bg-gray-600 inset-y-0 my-auto h-6 -left-[60px] py-1 px-2 after:content-[''] after:absolute after:w-0 after:h-0 after:border-4 after:border-gray-600 after:-right-0.5 after:top-1/2 after:-translate-y-1/2 after:rotate-45 text-gray-200 text-xs rounded-[3px]">현위치</div>
+              <GpsFixedIcon className='text-2xl text-gray-600'/>
             </button>
           </div>
           
           <div className={`w-full h-full`}>
-            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened}
+            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} regionState={regionToggleState}
                       level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!}
                       setMarkers={setMarkers} isStarToggled={isStarToggled}/>
-            {/* <MapIcon className='m-96 text-3xl sm:text-4xl text-emerald-500 border-2'/> */}
 
           </div>
           
@@ -404,6 +408,8 @@ export default function Home() {
     </StyledEngineProvider>
   )
 }
+
+// {/* <MapIcon className='m-96 text-3xl sm:text-4xl text-emerald-500 border-2'/> */}
 
 //   <div className='ml-96 mt-60 flex flex-row gap-1'>
 //   {Array.from(Array(12).keys()).map((idx) => {

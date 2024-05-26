@@ -41,6 +41,7 @@ interface KakaoMapProps {
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
     isStarToggled: boolean
     isChatOpened: boolean
+    regionState: number
     level: number
     setLevel: Dispatch<SetStateAction<number>>
 }
@@ -378,7 +379,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, level, setLevel}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, regionState, level, setLevel}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
@@ -487,7 +488,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={level}
-                onClick={() => setSelectedIdx(-1)}
+                onClick={() => {setSelectedIdx(-1)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}
@@ -508,12 +509,12 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
-                {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && floatingAdsOnFire(markers)}
+                {/* {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && floatingAdsOnFire(markers)} */}
                 {(!onFire && !isStarToggled && !tooManyMarkers.current && noMarkers.current) && onFireMarkers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
                 )}
-                {(!onFire && !isStarToggled && !tooManyMarkers.current && noMarkers.current) && floatingAdsOnFire(onFireMarkers)}
+                {/* {(!onFire && !isStarToggled && !tooManyMarkers.current && noMarkers.current) && floatingAdsOnFire(onFireMarkers)} */}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
                     image={{
@@ -527,7 +528,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                <ReSetttingMapBounds markers={markers}/>
+                {(onFire || regionState == 1 || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
                 {onFire &&
                 <AlertOnFire>
                     <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>

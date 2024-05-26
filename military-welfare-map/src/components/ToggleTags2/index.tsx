@@ -34,12 +34,12 @@ export const ToggleTags2 = ({toggleState, allToggleClicked, toggled, setToggled}
 
 
     return (
-        <div className="flex flex-row ml-2">
+        <div className="flex flex-row mt-1">
             <ToggleTagAllButton2 toggleState={toggleState} onClicked={allToggleClicked}>
                 {toggleState == 0 ? <CheckBoxOutlineBlankOutlinedIcon className='text-lg' key={0}/> : toggleState == 1 ? <IndeterminateCheckBoxIcon className='text-lg' key={0}/> : <CheckBoxIcon className='text-lg' key={0}/>}
                 <p className=' text-xs'>모든 태그</p>
             </ToggleTagAllButton2>
-            <div className="w-fit grid grid-cols-4 pt-2 pb-4 pl-2 gap-2">
+            <div className="w-fit grid grid-cols-4 ml-1 gap-1">
                 {toggleTagButtonList()}
             </div>
         </div>

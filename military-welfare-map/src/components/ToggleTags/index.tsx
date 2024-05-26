@@ -21,7 +21,7 @@ export const ToggleTags = ({toggleState, allToggleClicked, toggled, setToggled}:
         const result = []
 
         result.push(
-            <ToggleTagAllButton toggleState={toggleState} onClicked={allToggleClicked}>
+            <ToggleTagAllButton toggleState={toggleState} onClicked={allToggleClicked} key={12}>
                 {toggleState == 0 ? <CheckBoxOutlineBlankOutlinedIcon className='text-lg' key={0}/> : toggleState == 1 ? <IndeterminateCheckBoxIcon className='text-lg' key={0}/> : <CheckBoxIcon className='text-lg' key={0}/>}
                 <p className='text-xs'>모든 태그</p>
             </ToggleTagAllButton>

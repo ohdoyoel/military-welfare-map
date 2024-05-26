@@ -49,6 +49,21 @@ export const tagIconForMarker = [
     <ShoppingCartOutlinedIcon className='text-base' key={11}/>,
 ]
 
+export const tagIconForOnFireMarker = [
+    <RestaurantOutlinedIcon className='text-2xl' key={0}/>,
+    <CoffeeOutlinedIcon className='text-2xl' key={1}/>,
+    <ContentCutOutlinedIcon className='text-2xl' key={2}/>,
+    <HotTubOutlinedIcon className='text-2xl' key={3}/>,
+    <AttractionsOutlinedIcon className='text-2xl' key={4}/>,
+    <HotelOutlinedIcon className='text-2xl' key={5}/>,
+    <SportsSoccerOutlinedIcon className='text-2xl' key={6}/>,
+    <TrainOutlinedIcon className='text-2xl' key={7}/>,
+    <VisibilityOutlinedIcon className='text-2xl' key={8}/>,
+    <LocalHospitalOutlinedIcon className='text-2xl' key={9}/>,
+    <MilitaryTechOutlinedIcon className='text-2xl' key={10}/>,
+    <ShoppingCartOutlinedIcon className='text-2xl' key={11}/>,
+]
+
 // tag to icon
 export const tagIconForButton = [
     <RestaurantOutlinedIcon className='text-lg' key={0}/>,
