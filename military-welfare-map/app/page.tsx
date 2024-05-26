@@ -365,7 +365,7 @@ export default function Home() {
           </div>
 
           {/* ChatPanel Open Btn */}
-          {!onFireToggled && <div className={`hidden sm:flex items-center`}>
+          {(!onFireToggled || !isStarToggled) && <div className={`hidden sm:flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                               absolute z-10 ${isChatOpened ? `right-[460px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>

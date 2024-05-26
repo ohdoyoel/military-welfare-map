@@ -41,6 +41,16 @@ const placeLabelData = [
     '경상북도', '경상남도', '강원특별자치도', '제주특별자치도', '주변', '전국'
 ]
 
+const onFireTitle = [
+    "🎖️ 국방부치킨",
+    "🎖️ 병무청과일탕후루",
+    "🎖️ 방위사업청플리마켓",
+    "🎖️ 논산훈련소정문이발소",
+    "🎖️ 도구해수욕장해병목욕탕",
+    "🎖️ 진해군항제",
+    "🎖️ 가리산레포츠파크"
+]
+
 export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regionsToggled, setRegionsToggled, setSearchText, distance, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([
         {
@@ -143,8 +153,21 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             return
         }
 
-        const randomIdx = Math.floor(Math.random() * (filtered.length-1))        
-        const rcmdMarker = filtered[randomIdx]
+        let rcmdMarkerIdx = 0
+
+        for (let i=0; i<onFireTitle.length; i++) {
+            let cand = filtered.findIndex((val) => val.title == onFireTitle[i])
+            if (cand != -1) {
+                rcmdMarkerIdx = cand
+                break
+            }
+        }
+
+        if (rcmdMarkerIdx == -1) {
+            rcmdMarkerIdx = Math.floor(Math.random() * (filtered.length-1))
+        }
+   
+        const rcmdMarker = filtered[rcmdMarkerIdx]
         setSearchText(rcmdMarker.title)
         setIdx(0)
         pushRcmdMessage(
@@ -153,7 +176,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             \n### ${rcmdMarker.title.trim()}
             \n**${rcmdMarker.address.trim()}**
             \n##### ${rcmdMarker.telno?.trim()}
-            \n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;')}   
+            \n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;').replace(/@img(.*)/gi, '')}   
 [길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
             true,
             rcmdMarker.tag)
