@@ -41,6 +41,7 @@ interface KakaoMapProps {
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
     isStarToggled: boolean
     isChatOpened: boolean
+    regionState: number
     level: number
     setLevel: Dispatch<SetStateAction<number>>
 }
@@ -378,7 +379,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, level, setLevel}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, regionState, level, setLevel}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
@@ -487,7 +488,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={level}
-                onClick={() => setSelectedIdx(-1)}
+                onClick={() => {setSelectedIdx(-1)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}
@@ -527,7 +528,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                <ReSetttingMapBounds markers={markers}/>
+                {(regionState == 1) && <ReSetttingMapBounds markers={markers}/>}
                 {onFire &&
                 <AlertOnFire>
                     <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>
