@@ -528,7 +528,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                {(onFire || regionState == 1 || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
+                {(isChatOpened || onFire || regionState == 1 || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
                 {onFire &&
                 <AlertOnFire>
                     <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>
