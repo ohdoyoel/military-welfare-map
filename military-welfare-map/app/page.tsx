@@ -365,7 +365,7 @@ export default function Home() {
           </div>
 
           {/* ChatPanel Open Btn */}
-          {(!onFireToggled || !isStarToggled) && <div className={`hidden sm:flex items-center`}>
+          {(!onFireToggled && !isStarToggled) && <div className={`hidden sm:flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                               absolute z-10 ${isChatOpened ? `right-[460px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
@@ -385,7 +385,7 @@ export default function Home() {
             }}/>
           </div>
 
-          <div className='z-10 absolute top-11 right-1 flex flex-col gap-2'>
+          <div className='z-10 absolute top-11 right-1 gap-2'>
             <button className='group w-8 h-8 rounded-[3px] bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => {
               // setLevel(5)
               setMapPos(curPos.center)
