@@ -61,9 +61,9 @@ export const ToggleRegions2 = ({toggleState, allToggleClicked, toggled, setToggl
     }
 
     return (
-        <div className="flex flex-row ml-2">
+        <div className="flex flex-row">
             <ToggleRegionAllButton2 toggleState={toggleState} onClicked={allToggleClicked} label={"전국"} key={NUM_OF_REGIONS}/>
-            <div className="w-fit grid grid-cols-4 pl-2 gap-2" onClick={() => {setDistance(30)}}>
+            <div className="w-fit grid grid-cols-4 ml-1 gap-1" onClick={() => {setDistance(30)}}>
                 {toggleRegionButtonList()}
             </div>
         </div>
