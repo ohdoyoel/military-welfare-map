@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { CustomOverlayMap, useMap } from "react-kakao-maps-sdk"
 import { InfoWindow } from "../InfoWindow"
 import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderTextColor } from "@/src/types/tagColor";
-import { tagIconForMarker, tagToOrder } from "@/src/types/tagIconLabel";
+import { tagIconForMarker, tagIconForOnFireMarker, tagToOrder } from "@/src/types/tagIconLabel";
 import { MarkerType } from "@/src/types/data";
 
 interface MarkerProps {
@@ -84,17 +84,18 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
         <CustomOverlayMap position={position} onCreate={removeZindexAndMargin} clickable={true}>
             <button id={`tagmarker${idx}`} className={`grid place-content-center rounded-[3px] text-white opacity-80 z-20
                                                     ${!star && (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6')}
-                                                    ${onFire ? 'w-8 h-8' : 'w-6 h-6'}`}
+                                                    `}
                 onClick={() => {
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng))
                     setSelectedIdx(idx)
                     setIsVisible(!isVisible)
                 }}>
-                {star && <div className={`relative mt-2`}>
-                <p className={`${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' text-5xl' : tagOrderBgColor[tagToOrder[tag]].normal + ' text-4xl'} text-transparent bg-clip-text`}>❤</p>
-                <div className={`absolute ${onFire ? 'top-2' : 'top-1'} w-full text-white`}>{tagIconForMarker[tag]}</div>
+                {star && <div className={`relative ${onFire ? `h-[32px]` : `h-[24px]`}`}>
+                    <p className={`${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' text-6xl -ml-3 -mt-2' : tagOrderBgColor[tagToOrder[tag]].normal + ' text-4xl -ml-1 -mt-1'} text-transparent bg-clip-text`}>❤</p>
+                    {onFire ? <div className={`absolute top-1 right-1.5 w-full text-white`}>{tagIconForOnFireMarker[tag]}</div>
+                    : <div className={`absolute top-0 right-0.5 w-full text-white`}>{tagIconForMarker[tag]}</div>}
                 </div>}
-                {!star && tagIconForMarker[tag]}
+                {!star && (onFire ? tagIconForOnFireMarker[tag] : tagIconForMarker[tag])}
             </button>
             {isVisible && <InfoWindow tag={tag} pos={position} title={title} address={address} description={description} telno={telno} onFire={onFire} star={star} setMarkers={setMarkers}/>}
         </CustomOverlayMap>
