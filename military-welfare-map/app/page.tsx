@@ -317,18 +317,18 @@ export default function Home() {
 
           {/* DefaultPanel */}
           <div className={`fixed ${isBarOpened ? `hidden` : ``} z-10 p-1`} >
-            <div className='relative flex gap-0.5 w-fit bg-slate-200 rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]'> 
+            <div className='relative flex gap-1 w-fit rounded-[3px] '> 
               <Header2/>
-              {!onFireToggled && <button className='group sm:flex hidden flex-row w-fit h-10 z-10 bg-white py-2 focus:outline-none rounded-[3px]' onClick={() => {setIsBarOpened(true);}}>
+              {!onFireToggled && <button className='group sm:flex hidden flex-row w-fit h-10 z-10 bg-white py-2 focus:outline-none rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => {setIsBarOpened(true);}}>
                 <div className="hidden group-hover:block absolute bg-gray-600 inset-y-0 my-auto h-6 -right-[60px] py-1 px-2 after:content-[''] after:absolute after:w-0 after:h-0 after:border-4 after:border-gray-600 after:-left-0.5 after:top-1/2 after:-translate-y-1/2 after:rotate-45 text-gray-200 text-xs rounded-[3px]">검색창</div>
                 <SearchIcon className='w-10 text-gray-600' fontSize='medium'/>
                 {searchText != "" && <p className='pr-3'>{searchText}</p>}
               </button>}
-              {!onFireToggled && <button className='group sm:block hidden w-10 h-10 z-10 bg-white p-2 focus:outline-none rounded-[3px]' onClick={() => setIsChatOpened(!isChatOpened)}>
+              {!onFireToggled && <button className='group sm:block hidden w-10 h-10 z-10 bg-white p-2 focus:outline-none rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]' onClick={() => setIsChatOpened(!isChatOpened)}>
                 <div className="hidden group-hover:block absolute bg-gray-600 inset-y-0 my-auto h-6 -right-[120px] py-1 px-2 after:content-[''] after:absolute after:w-0 after:h-0 after:border-4 after:border-gray-600 after:-left-0.5 after:top-1/2 after:-translate-y-1/2 after:rotate-45 text-gray-200 text-xs rounded-[3px]">지피티 병장과 채팅</div>
                 <ChatIcon className='text-gray-600' fontSize='medium'/> 
               </button>}
-              {!onFireToggled && <button className={`group sm:block hidden w-10 h-10 z-10 p-2 focus:outline-none rounded-[3px]
+              {!onFireToggled && <button className={`group sm:block hidden w-10 h-10 z-10 p-2 focus:outline-none rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]
                                 ${isStarToggled
                                   ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-emerald-500 text-white`
                                   : `bg-white text-gray-600`} 
