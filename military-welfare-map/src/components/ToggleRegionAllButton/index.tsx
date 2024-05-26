@@ -11,8 +11,8 @@ export const ToggleRegionAllButton = ({toggleState, onClicked, label}: ToggleReg
                             ${toggleState == 0
                                 ? `bg-emerald-500`
                                 : toggleState == 1 
-                                    ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-zinc-400`
-                                    : `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-zinc-500`
+                                    ? `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-gray-400`
+                                    : `shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.3)] bg-gray-500`
                             }
                             `}
                 onClick={onClicked}>

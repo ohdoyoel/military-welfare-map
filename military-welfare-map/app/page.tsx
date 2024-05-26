@@ -150,8 +150,8 @@ export default function Home() {
     }
 ])
   
-  const [tagToggleState, setTagToggleState] = useState(0)
-  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => false))
+  const [tagToggleState, setTagToggleState] = useState(2)
+  const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => true))
   const [regionToggleState, setRegionToggleState] = useState(2)
   const [isRegionsToggled, setIsRegionsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_REGIONS}, () => true))
   const [searchText, setSearchText] = useState<string>("")
@@ -159,7 +159,7 @@ export default function Home() {
   
   const [filteredMarkers, setFilteredMarkers] = useState<MarkerType[]>([])
   
-  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 37, lng: 128})
+  const [mapPos, setMapPos] = useState<{lat: number, lng: number}>({lat: 30, lng: 128})
   // const [curPos, setCurPos] = useState<{lat: number, lng: number}>({lat: 37.5306063, lng: 126.9743034})
   const [curPos, setCurPos] = useState({
     center: {
@@ -170,7 +170,7 @@ export default function Home() {
     isLoading: true,
   })
   const [selectedIdx, setSelectedIdx] = useState(-1)
-  const [level, setLevel] = useState(13);
+  const [level, setLevel] = useState(4);
   
   const [onFireToggled, setOnFireToggled] = useState(false)
   const [isStarToggled, setIsStarToggled] = useState(false)
