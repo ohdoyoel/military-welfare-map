@@ -28,6 +28,7 @@ import { validateDB } from '@/src/functions/validateDB'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { tagOrderBgColor } from '@/src/types/tagColor'
 import MapIcon from '@mui/icons-material/Map';
+import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 
 const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
@@ -374,10 +375,6 @@ export default function Home() {
             </button>
           </div>}
 
-          {/* <div className='z-10 absolute bottom-1 left-1 flex flex-col gap-2'>
-            <ShowStarsPanel markers={markers}/>
-          </div> */}
-
           <div className='z-10 absolute bottom-1 right-1 flex flex-col gap-2'>
             <ShowFireButton isToggled={onFireToggled} onClicked={() => {
               setOnFireToggled(!onFireToggled)
@@ -385,8 +382,8 @@ export default function Home() {
           </div>
 
           <div className='z-10 absolute top-12 right-1 flex flex-col gap-2'>
-            <button className='w-8 h-8 rounded-full shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos(curPos.center)}>
-              <img src='/images/current-position.png'></img>
+            <button className='w-8 h-8 rounded-[3px] bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] place-self-end' onClick={() => setMapPos(curPos.center)}>
+              <GpsFixedIcon className='text-2xl text-gray-600'/>
             </button>
           </div>
           
@@ -394,7 +391,6 @@ export default function Home() {
             <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened}
                       level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!}
                       setMarkers={setMarkers} isStarToggled={isStarToggled}/>
-            {/* <MapIcon className='m-96 text-3xl sm:text-4xl text-emerald-500 border-2'/> */}
 
           </div>
           
@@ -404,6 +400,8 @@ export default function Home() {
     </StyledEngineProvider>
   )
 }
+
+// {/* <MapIcon className='m-96 text-3xl sm:text-4xl text-emerald-500 border-2'/> */}
 
 //   <div className='ml-96 mt-60 flex flex-row gap-1'>
 //   {Array.from(Array(12).keys()).map((idx) => {
