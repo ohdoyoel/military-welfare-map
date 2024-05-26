@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction, useEffect, useRef, useState } from "react"
-import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderTextColor } from "@/src/types/tagColor";
+import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderBorderColor, tagOrderTextColor } from "@/src/types/tagColor";
 import { tagIconForInfoWindow, tagLabel, tagToOrder } from "@/src/types/tagIconLabel";
 import { MarkerType } from "@/src/types/data";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -38,7 +38,7 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, onFire
     }, [])
 
     return (
-        <div className={`relative cursor-default flex flex-col z-40 -ml-[202px] ${onFire ? '-mt-[240px]' : '-mt-[236px]'} `}>
+        <div className={`relative cursor-default flex flex-col z-40  ${onFire ? '-mt-[240px] -ml-[370px]' : '-mt-[236px] -ml-[202px]'} `}>
             <div className="flex flex-row h-48 w-screen sm:w-auto bg-white rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]">
                 <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
                 <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
@@ -62,8 +62,11 @@ export const InfoWindow = ({pos, tag, address, title, description, telno, onFire
                     <img className="cursor-pointer h-full p-2 bg-slate-200 rounded-[3px] shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]" src={imgSrc} alt={'약도'}
                         onClick={() => window.open(imgSrc, '_blank')}/>
                 }
+                {onFire && <a href="" className={`border-4 ${tagOrderBorderColor[tagToOrder[tag]].light} bg-slate-200 w-96 shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] rounded-[3px] flex items-center justify-center`}>
+                    <p className="text-4xl font-nse text-slate-100 whitespace-pre-line text-center">This Is Advertising</p>
+                </a>}
             </div>
-            <div className="absolute left-[192px] -bottom-[12px]" style={{width:'22px', height: '12px', background: 'url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png)'}}/>
+            <div className={`absolute ${onFire ? `left-[360px]` : `left-[192px]`} -bottom-[12px]`} style={{width:'22px', height: '12px', background: 'url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png)'}}/>
         </div>
     )
 }
