@@ -42,6 +42,7 @@ interface KakaoMapProps {
     isStarToggled: boolean
     isChatOpened: boolean
     regionState: number
+    searchText: string
     level: number
     setLevel: Dispatch<SetStateAction<number>>
 }
@@ -379,7 +380,7 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, regionState, level, setLevel}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, regionState, searchText, level, setLevel}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
@@ -528,7 +529,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                {(isChatOpened || onFire || regionState == 1 || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
+                {(searchText || isChatOpened || onFire || regionState == 1 || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
                 {onFire &&
                 <AlertOnFire>
                     <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>
