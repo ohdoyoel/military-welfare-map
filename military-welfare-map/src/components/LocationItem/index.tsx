@@ -57,7 +57,7 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
             <div className={`grow w-0 h-full bg-white flex flex-col items-start p-2`}>
                 <p className='text-lg text-start font-nsb leading-5'>{title}</p>
                 <p className='text-sm text-start truncate w-full text-gray-500'>{address}</p>
-                <p className='text-xs text-start truncate w-full text-gray-400'>{imgSrcRef.current ? description?.substring(description.lastIndexOf(')')+1) : description}</p>
+                <p className='text-xs text-start truncate w-full text-gray-400'>{description!.replace(/@img(.*)/gi, '')}</p>
             </div>
             <div className={`flex-none w-10 h-full grid place-content-center ${tagOrderTextColor[tagToOrder[tag]].normal}`} onClick={() => starToggle(title)}>
                     {star ? <FavoriteIcon className='text-lg'/> : <FavoriteBorderIcon className='text-lg'/>}
