@@ -153,7 +153,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             return
         }
 
-        let rcmdMarkerIdx = 0
+        let rcmdMarkerIdx = -1
 
         for (let i=0; i<onFireTitle.length; i++) {
             let cand = filtered.findIndex((val) => val.title == onFireTitle[i])
