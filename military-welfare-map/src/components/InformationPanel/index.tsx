@@ -20,11 +20,9 @@ export const InformationPanel = ({markers, setPos, setIdx, setMarkers, setLevel}
     useEffect(() => {
         let locList =  document.getElementById('locationList') as HTMLDivElement
         locList.addEventListener('scrollend', () => {
-            console.log(locList.scrollTop)
-            console.log(locList.clientHeight)
-            console.log(locList.scrollHeight)
-            if ((locList.scrollTop + locList.clientHeight) >= locList.scrollHeight - 10) {
+            if ((locList.scrollTop + locList.clientHeight) >= locList.scrollHeight) {
                 setPage((page) => page+1)
+                locList.scrollTo(0, locList.scrollHeight)
             }
         })
     }, [])
@@ -66,7 +64,7 @@ export const InformationPanel = ({markers, setPos, setIdx, setMarkers, setLevel}
     }
 
     return (
-        <div className="grow bg-emerald-500 pt-1 pb-2 px-2 overflow-hidden" onClick={() => {setPage(page+1)}}>
+        <div className="grow bg-emerald-500 pt-1 pb-2 px-2 overflow-hidden">
             <div id="locationList" className="snap-y h-full bg-white flex flex-col items-start overflow-y-scroll divide-y divide-slate-200">
                 {LocationList(markers)}
             </div>
