@@ -212,7 +212,7 @@ export default function Home() {
           && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
-  }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled])
+  }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled, curPos])
 
   useEffect(() => {
     let input;
@@ -399,7 +399,6 @@ export default function Home() {
             <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} regionState={regionToggleState} searchText={searchText}
                       level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!}
                       setMarkers={setMarkers} isStarToggled={isStarToggled}/>
-
           </div>
           
         </main>
@@ -411,29 +410,18 @@ export default function Home() {
 
 // {/* <MapIcon className='m-96 text-3xl sm:text-4xl text-emerald-500 border-2'/> */}
 
-//   <div className='ml-96 mt-60 flex flex-row gap-1'>
-//   {Array.from(Array(12).keys()).map((idx) => {
-//     const tag = orderToTag[idx]
-//     return (
-//     <div className='flex flex-col items-center w-24'>
-//     <button id={`tagmarker${tag}`} className={`grid place-content-center rounded-[3px] text-white opacity-100 z-20
-//                                           ${
-//                                             // !star && (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8':
-//                                             tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'
-//                                           // )
-//                                         }
-//                                           ${
-//                                             // onFire ? 'w-8 h-8' :
-//                                             'w-6 h-6'}`}>
-//       {/* {star && <div className={`relative mt-2`}> */}
-//       {/* <p className={`${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' text-5xl' : tagOrderBgColor[tagToOrder[tag]].normal + ' text-4xl'} text-transparent bg-clip-text`}>❤</p>
-//       <div className={`absolute ${onFire ? 'top-2' : 'top-1'} w-full text-white`}>{tagIconForMarker[tag]}</div>
-//       </div>} */}
-//       {
-//         // !star &&
-//         tagIconForMarker[tag]}
-//     </button>
-//     <p>{tag}: {tagLabel[tag]}</p>
-//     </div>
-//   )})}
-// </div>
+{/* <div className='absolute ml-96 mt-60 grid grid-cols-4 gap-3'>
+{Array.from(Array(12).keys()).map((idx) => {
+  const tag = orderToTag[idx]
+  return (
+  <div className='flex flex-col items-center'>
+  <button id={`tagmarker${tag}`} className={`grid place-content-center rounded-[3px] text-white opacity-100 z-20
+                                        ${
+                                          tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6'
+                                      }`}>
+    {tagIconForMarker[tag]}
+  </button>
+  <p>{tagLabel[tag]}</p>
+  </div>
+)})}
+</div> */}

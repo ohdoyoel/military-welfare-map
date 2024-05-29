@@ -528,7 +528,6 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                     onClick={(marker) => {
                       setMapPos(curPos.center)
-                      console.log(curPos.center)
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
