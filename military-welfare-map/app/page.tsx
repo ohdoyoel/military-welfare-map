@@ -212,7 +212,7 @@ export default function Home() {
           && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
-  }, [isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled, curPos])
+  }, [markers, isTagsToggled, isRegionsToggled, searchText, distanceRange, onFireToggled, isStarToggled, curPos])
 
   useEffect(() => {
     let input;

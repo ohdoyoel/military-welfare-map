@@ -48,7 +48,7 @@ export const LocationItem = ({_id, setPos, setIdx, position, tag, address, title
     }, [])
 
     return (
-        <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white flex flex-row">
+        <button onClick={handleOnClick} className="w-full h-fit scroll-mt-2 snap-start bg-white flex flex-row" style={{minHeight:'72px'}}>
             <div className={`flex-none w-1 h-full ${tagOrderBgColor[tagToOrder[tag]].dark} rounded-l-[3px]`}/>
             <div className={`flex-none w-20 h-full ${onFire ? tagOrderBgGradientColor[tagToOrder[tag]]: tagOrderBgColor[tagToOrder[tag]].normal} flex flex-col items-center justify-center text-white`}>
                 {tagIconForInfoWindow[tag]}
