@@ -31,7 +31,7 @@ export const InformationPanel = ({markers, setPos, setIdx, setMarkers, setLevel}
         let locList =  document.getElementById('locationList') as HTMLDivElement
         locList.scrollTo(0,0)
         setPage(1)
-    }, [markers])
+    }, [markers.length])
     
     const LocationList = (posts: MarkerType[]) => {
         const result = []
