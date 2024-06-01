@@ -5,7 +5,7 @@ import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderTextColor } from "@/s
 import { tagIconForMarker, tagIconForOnFireMarker, tagToOrder } from "@/src/types/tagIconLabel";
 import { MarkerType } from "@/src/types/data";
 import { AdsWindow } from "../AdsWindow";
-import { onFireMarkersTitleToIdx } from "@/app/page";
+import { onFireMarkersTitleToIdx } from "@/src/types/tagIconLabel";
 
 interface MarkerProps {
     idx: number
