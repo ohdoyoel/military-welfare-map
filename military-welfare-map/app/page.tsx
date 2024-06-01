@@ -142,16 +142,6 @@ const onFireMarkersData = [
   }
 ]
 
-export const onFireMarkersTitleToIdx : {[key:string]:number} = {
-  "🎖️ 국방부치킨": 0,
-  "🎖️ 병무청과일탕후루":1,
-  "🎖️ 방위사업청플리마켓":2,
-  "🎖️ 논산훈련소정문이발소":3,
-  "🎖️ 도구해수욕장해병목욕탕":4,
-  "🎖️ 진해군항제":5,
-  "🎖️ 가리산레포츠파크":6,
-}
-
 export default function Home() {
   // const dbFile = await fs.readFile('data/db.json', 'utf8');
   // const dbData = JSON.parse(dbFile);
