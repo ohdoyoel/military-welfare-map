@@ -26,6 +26,8 @@ interface TooltipProps {
     setSelectedIdx: Dispatch<SetStateAction<number>>
     star: boolean
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
+    hoveredIdx: number
+    setHoveredIdx: Dispatch<SetStateAction<number>>
 }
 
 interface KakaoMapProps {
@@ -38,6 +40,8 @@ interface KakaoMapProps {
     selectedIdx: number
     onFire: boolean
     onFireMarkers: MarkerType[]
+    hoveredIdx: number
+    setHoveredIdx: Dispatch<SetStateAction<number>>
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
     isStarToggled: boolean
     isChatOpened: boolean
@@ -50,7 +54,7 @@ interface KakaoMapProps {
 /**
    * AbstractOverlay를 이용하여 사용자 TooltipMarker를 정의 합니다.
    */
-const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, selectedIdx, setSelectedIdx, star, setMarkers}: TooltipProps) => {
+const TooltipMarker = ({idx, tag, position, address, title, description, telno, onFire, setPos, selectedIdx, setSelectedIdx, star, setMarkers, hoveredIdx, setHoveredIdx}: TooltipProps) => {
     const map = useMap()
     // Marker로 올려질 node 객체를 생성 합니다.
     const node = useRef(document.createElement("div"))
@@ -373,14 +377,14 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
           : ReactDOM.createPortal(
             <Marker key={idx} idx={idx} tag={tag} position={position} onFire={onFire!}
             telno={telno} description={description} address={address} title={title} setPos={setPos} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx}
-            star={star} setMarkers={setMarkers}/>,
+            star={star} setMarkers={setMarkers} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}/>,
               node.current
             )}
        </>
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, setMarkers, isStarToggled, isChatOpened, regionState, searchText, level, setLevel}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, hoveredIdx, setHoveredIdx, setMarkers, isStarToggled, isChatOpened, regionState, searchText, level, setLevel}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
@@ -433,7 +437,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     result.push(
                         <Marker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={mks[i].tag} position={mks[i].position} onFire={mks[i].onFire!}
                             telno={mks[i].telno} description={mks[i].description} address={mks[i].address} title={mks[i].title} setPos={setMapPos} selectedIdx={selectedIdx}
-                            star={mks[i].isStar!} setMarkers={setMarkers}/>
+                            star={mks[i].isStar!} setMarkers={setMarkers} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}/>
                         )
                 }
                 if (result.length > 1000) {
@@ -489,7 +493,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={level}
-                onClick={() => {setSelectedIdx(-1)}}
+                onClick={() => {setSelectedIdx(-1); setHoveredIdx(-1)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
                 onBoundsChanged={setCenterAndBound}
@@ -508,16 +512,17 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 </MarkerClusterer>
                 {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && (level >= 8) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
-                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
+                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}/>
                 )}
                 {onFire && (level <= 8) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
-                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
+                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}/>
                 )}
+                {!onFire && hoveredIdx!=-1 && floatingAdsOnFire([onFireMarkers[hoveredIdx]])}
                 {onFire && floatingAdsOnFire(markers)}
                 {(!onFire && !isStarToggled && !tooManyMarkers.current && noMarkers.current) && onFireMarkers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
-                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers}/>
+                    telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}/>
                 )}
                 {!curPos.isLoading &&
                 <MapMarker position={curPos.center}
