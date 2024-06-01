@@ -34,6 +34,124 @@ const NUM_OF_TAGS = 12
 const NUM_OF_REGIONS = 16
 const NUM_OF_FIRE_IN_DB = 1
 
+const onFireMarkersData = [
+  {
+      "title": "🎖️ 국방부치킨",
+      "tag": 0,
+      "address": "서울특별시 용산구 한강로동 이태원로 22",
+      "position": {
+          "lat": 37.5306063,
+          "lng": 126.9743034
+      },
+      "region": 0,
+      "description": "대한민국 국방부가 군 장병들에게 공짜로 치킨을 쏩니다! [MOCK]",
+      "telno": "02-748-1111",
+      "distance": 0.0925290779174901,
+      "onFire": true,
+      "isStar": false
+  },
+  {
+      "title": "🎖️ 병무청과일탕후루",
+      "tag": 1,
+      "address": "서울특별시 영등포구 여의대방로43길 13",
+      "position": {
+          "lat": 37.5055216,
+          "lng": 126.9192084
+      },
+      "region": 1,
+      "description": "먹으면 신체검사 1급은 따놓은 당상! 달콤한 탕후루로 나누는 끈끈한 전우애! 군 장병 인증 시 50% 할인, SNS 홍보 시 1+1 이벤트 중! [MOCK]",
+      "telno": "1588-9090",
+      "distance": 0.12252739497615867,
+      "onFire": true,
+      "isStar": false
+  },
+  {
+      "title": "🎖️ 방위사업청플리마켓",
+      "tag": 11,
+      "address": "경기도 과천시 47 정부 중앙동 관문로 청사 3동",
+      "position": {
+          "lat": 37.4253371,
+          "lng": 126.9836011
+      },
+      "region": 7,
+      "description": "중고로 안파는 무기가 없다! 공중 급유 가능 전투기와 적의 모공도 볼 수 있는 정찰 위성까지! 군인에게는 위성 구매 시 20% 할인 및 AK47 무료 증정, SNS 구매 인증 시 공격형 드론 사은품 [MOCK]",
+      "telno": "1577-1118",
+      "distance": 0.16137730084690088,
+      "onFire": true,
+      "isStar": false
+  },
+  {
+      "title": "🎖️ 논산훈련소정문이발소",
+      "tag": 2,
+      "address": "충남 논산시 연무읍 득안대로 491 (금곡리)",
+      "position": {
+          "lat": 36.1145279,
+          "lng": 127.0979632
+      },
+      "region": 9,
+      "description": "훈련소 처음이라 무서우시죠? 현역 입대 장병의 머리는 공짜로 잘라드립니다! 군복무의 시작을 저희 이발소와 함께하세요! (3mm만 조발 한정) [MOCK]",
+      "telno": "1577-8007",
+      "distance": 2.8893212411942626,
+      "onFire": true,
+      "isStar": false
+  },
+  {
+      "title": "🎖️ 도구해수욕장해병목욕탕",
+      "tag": 3,
+      "address": "경북 포항시 남구 동해면 도구리 729-17",
+      "position": {
+          "lat": 35.9922,
+          "lng": 129.4427701
+      },
+      "region": 12,
+      "description": "극기주를 체험할 수 있는 해수욕장 뷰의 목욕탕! 해병대 입대•현역 장병 인증시 출입 무료, SNS 인증 시 식혜 제공 [MOCK]",
+      "telno": "054-270-6224",
+      "distance": 8.88310873849848,
+      "onFire": true,
+      "isStar": false
+  },
+  {
+      "title": "🎖️ 진해군항제",
+      "tag": 4,
+      "address": "경남 창원시 진해구 대천동 3",
+      "position": {
+          "lat": 35.1493942,
+          "lng": 128.659554
+      },
+      "region": 13,
+      "description": "@img(https://www.urinews.co.kr/imgdata/urinews_co_kr/202403/2024031848378682.jpg)군 장병 인증 시 진해벛꽃샌드, 진해제과벛꽃빵 중 택1 증정 [MOCK]",
+      "telno": "055-552-8532",
+      "distance": 9.583520604997052,
+      "onFire": true,
+      "isStar": false
+  },
+  {
+      "title": "🎖️ 가리산레포츠파크",
+      "tag": 6,
+      "address": "강원 홍천군 두촌면 가리산길 426 가리산자연휴양림내 가리산레포츠파크",
+      "position": {
+          "lat": 37.8656358,
+          "lng": 127.9811498
+      },
+      "region": 14,
+      "description": "@img(https://www.hongcheon.go.kr/site/tour/images/contents/cts1899_img.jpg)‘경찰, 군 훈련 시스템’과 동일한 규격의 GRP 밀리터리 서바이벌! 군 장병 인증 시 50% 할인 및 추가 탄약 증정! 부대 만발 인증 시 [MOCK]",
+      "telno": "0507-1417-8138",
+      "distance": 0.807274867787601,
+      "onFire": true,
+      "isStar": false
+  }
+]
+
+export const onFireMarkersTitleToIdx : {[key:string]:number} = {
+  "🎖️ 국방부치킨": 0,
+  "🎖️ 병무청과일탕후루":1,
+  "🎖️ 방위사업청플리마켓":2,
+  "🎖️ 논산훈련소정문이발소":3,
+  "🎖️ 도구해수욕장해병목욕탕":4,
+  "🎖️ 진해군항제":5,
+  "🎖️ 가리산레포츠파크":6,
+}
+
 export default function Home() {
   // const dbFile = await fs.readFile('data/db.json', 'utf8');
   // const dbData = JSON.parse(dbFile);
@@ -43,113 +161,8 @@ export default function Home() {
   
   const [isLoading, setIsLoading] = useState(true)
   const [markers, setMarkers] = useState<MarkerType[]>(data)
-  const [onFireMarkers, setOnFireMarkers] = useState<MarkerType[]>([
-    {
-        "title": "🎖️ 국방부치킨",
-        "tag": 0,
-        "address": "서울특별시 용산구 한강로동 이태원로 22",
-        "position": {
-            "lat": 37.5306063,
-            "lng": 126.9743034
-        },
-        "region": 0,
-        "description": "대한민국 국방부가 군 장병들에게 공짜로 치킨을 쏩니다! [MOCK]",
-        "telno": "02-748-1111",
-        "distance": 0.0925290779174901,
-        "onFire": true,
-        "isStar": false
-    },
-    {
-        "title": "🎖️ 병무청과일탕후루",
-        "tag": 1,
-        "address": "서울특별시 영등포구 여의대방로43길 13",
-        "position": {
-            "lat": 37.5055216,
-            "lng": 126.9192084
-        },
-        "region": 1,
-        "description": "먹으면 신체검사 1급은 따놓은 당상! 달콤한 탕후루로 나누는 끈끈한 전우애! 군 장병 인증 시 50% 할인, SNS 홍보 시 1+1 이벤트 중! [MOCK]",
-        "telno": "1588-9090",
-        "distance": 0.12252739497615867,
-        "onFire": true,
-        "isStar": false
-    },
-    {
-        "title": "🎖️ 방위사업청플리마켓",
-        "tag": 11,
-        "address": "경기도 과천시 47 정부 중앙동 관문로 청사 3동",
-        "position": {
-            "lat": 37.4253371,
-            "lng": 126.9836011
-        },
-        "region": 7,
-        "description": "중고로 안파는 무기가 없다! 공중 급유 가능 전투기와 적의 모공도 볼 수 있는 정찰 위성까지! 군인에게는 위성 구매 시 20% 할인 및 AK47 무료 증정, SNS 구매 인증 시 공격형 드론 사은품 [MOCK]",
-        "telno": "1577-1118",
-        "distance": 0.16137730084690088,
-        "onFire": true,
-        "isStar": false
-    },
-    {
-        "title": "🎖️ 논산훈련소정문이발소",
-        "tag": 2,
-        "address": "충남 논산시 연무읍 득안대로 491 (금곡리)",
-        "position": {
-            "lat": 36.1145279,
-            "lng": 127.0979632
-        },
-        "region": 9,
-        "description": "훈련소 처음이라 무서우시죠? 현역 입대 장병의 머리는 공짜로 잘라드립니다! 군복무의 시작을 저희 이발소와 함께하세요! (3mm만 조발 한정) [MOCK]",
-        "telno": "1577-8007",
-        "distance": 2.8893212411942626,
-        "onFire": true,
-        "isStar": false
-    },
-    {
-        "title": "🎖️ 도구해수욕장해병목욕탕",
-        "tag": 3,
-        "address": "경북 포항시 남구 동해면 도구리 729-17",
-        "position": {
-            "lat": 35.9922,
-            "lng": 129.4427701
-        },
-        "region": 12,
-        "description": "극기주를 체험할 수 있는 해수욕장 뷰의 목욕탕! 해병대 입대•현역 장병 인증시 출입 무료, SNS 인증 시 식혜 제공 [MOCK]",
-        "telno": "054-270-6224",
-        "distance": 8.88310873849848,
-        "onFire": true,
-        "isStar": false
-    },
-    {
-        "title": "🎖️ 진해군항제",
-        "tag": 4,
-        "address": "경남 창원시 진해구 대천동 3",
-        "position": {
-            "lat": 35.1493942,
-            "lng": 128.659554
-        },
-        "region": 13,
-        "description": "@img(https://www.urinews.co.kr/imgdata/urinews_co_kr/202403/2024031848378682.jpg)군 장병 인증 시 진해벛꽃샌드, 진해제과벛꽃빵 중 택1 증정 [MOCK]",
-        "telno": "055-552-8532",
-        "distance": 9.583520604997052,
-        "onFire": true,
-        "isStar": false
-    },
-    {
-        "title": "🎖️ 가리산레포츠파크",
-        "tag": 6,
-        "address": "강원 홍천군 두촌면 가리산길 426 가리산자연휴양림내 가리산레포츠파크",
-        "position": {
-            "lat": 37.8656358,
-            "lng": 127.9811498
-        },
-        "region": 14,
-        "description": "@img(https://www.hongcheon.go.kr/site/tour/images/contents/cts1899_img.jpg)‘경찰, 군 훈련 시스템’과 동일한 규격의 GRP 밀리터리 서바이벌! 군 장병 인증 시 50% 할인 및 추가 탄약 증정! 부대 만발 인증 시 [MOCK]",
-        "telno": "0507-1417-8138",
-        "distance": 0.807274867787601,
-        "onFire": true,
-        "isStar": false
-    }
-])
+  const [onFireMarkers, setOnFireMarkers] = useState<MarkerType[]>(onFireMarkersData)
+  const [hoveredIdx, setHoveredIdx] = useState(-1)
   
   const [tagToggleState, setTagToggleState] = useState(2)
   const [isTagsToggled, setIsTagsToggled] = useState<boolean[]>(Array.from({length: NUM_OF_TAGS}, () => true))
@@ -397,7 +410,7 @@ export default function Home() {
           
           <div className={`w-full h-full`}>
             <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} regionState={regionToggleState} searchText={searchText}
-                      level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!}
+                      level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}
                       setMarkers={setMarkers} isStarToggled={isStarToggled}/>
           </div>
           

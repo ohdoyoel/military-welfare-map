@@ -4,6 +4,8 @@ import { InfoWindow } from "../InfoWindow"
 import { tagOrderBgColor, tagOrderBgGradientColor, tagOrderTextColor } from "@/src/types/tagColor";
 import { tagIconForMarker, tagIconForOnFireMarker, tagToOrder } from "@/src/types/tagIconLabel";
 import { MarkerType } from "@/src/types/data";
+import { AdsWindow } from "../AdsWindow";
+import { onFireMarkersTitleToIdx } from "@/app/page";
 
 interface MarkerProps {
     idx: number
@@ -20,6 +22,8 @@ interface MarkerProps {
     setSelectedIdx: Dispatch<SetStateAction<number>>
     star: boolean
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
+    hoveredIdx: number
+    setHoveredIdx: Dispatch<SetStateAction<number>>
 }
 
 // let tagTextColors = `
@@ -59,7 +63,7 @@ interface MarkerProps {
 // bg-gradient-to-br from-purple-200 to-purple-500
 // `
 
-export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, selectedIdx, setSelectedIdx, star, setMarkers}: MarkerProps) => {
+export const Marker = ({idx, tag, position, address, title, description, telno, onFire, setPos, selectedIdx, setSelectedIdx, star, setMarkers, hoveredIdx, setHoveredIdx}: MarkerProps) => {
     const [isVisible, setIsVisible] = useState(idx == selectedIdx)
 
     const map = useMap()
@@ -82,14 +86,17 @@ export const Marker = ({idx, tag, position, address, title, description, telno, 
     // isStarred -> heart shape
     return (
         <CustomOverlayMap position={position} onCreate={removeZindexAndMargin} clickable={true}>
-            <button id={`tagmarker${idx}`} className={`grid place-content-center rounded-[3px] text-white opacity-80 z-20
+            <button id={`tagmarker${idx}`} className={`group grid place-content-center rounded-[3px] text-white opacity-80 z-20
                                                     ${!star && (onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' w-8 h-8': tagOrderBgColor[tagToOrder[tag]].normal + ' w-6 h-6')}
                                                     `}
                 onClick={() => {
                     map.panTo(new kakao.maps.LatLng(position.lat, position.lng))
                     setSelectedIdx(idx)
                     setIsVisible(!isVisible)
-                }}>
+                    onFire && isVisible && setHoveredIdx(onFireMarkersTitleToIdx[title])
+                }}
+                onMouseEnter={() => {onFire && !isVisible && hoveredIdx==-1 && setHoveredIdx(onFireMarkersTitleToIdx[title])}}
+                onMouseLeave={() => {onFire && !isVisible && setHoveredIdx(-1)}}>
                 {star && <div className={`relative ${onFire ? `h-[32px]` : `h-[24px]`}`}>
                     <p className={`${onFire ? tagOrderBgGradientColor[tagToOrder[tag]] + ' text-6xl -ml-3 -mt-2' : tagOrderBgColor[tagToOrder[tag]].normal + ' text-4xl -ml-1 -mt-1'} text-transparent bg-clip-text`}>❤</p>
                     {onFire ? <div className={`absolute top-1 right-1.5 w-full text-white`}>{tagIconForOnFireMarker[tag]}</div>
