@@ -114,6 +114,30 @@
         "link":"https://www.data.go.kr/data/15089146/fileData.do"
     },
     {
+        "title":"실시간 주소별 좌표정보 조회(검색API)",
+        "imgSrc":"/images/mis.svg",
+        "desc":"주소DB를 이용하여 실시간으로 주소의 X, Y좌표를 활용",
+        "link":"https://www.data.go.kr/data/15056663/openapi.do"
+    },
+    {
+        "title":"통합 가맹점기본정보",
+        "imgSrc":"/images/komsco.svg",
+        "desc":"지역사랑상품권 운영대행사들로부터 가맹점의 정보 제공",
+        "link":"https://www.data.go.kr/data/15056663/openapi.do"
+    },
+    {
+        "title":"열차 내 편의시설 정보",
+        "imgSrc":"/images/korail.svg",
+        "desc":"KTX 열차 내 편의시설 안내도",
+        "link":"https://www.data.go.kr/data/15125560/fileData.do"
+    },
+    {
+        "title":"SRT 승객이동유형",
+        "imgSrc":"/images/sr.svg",
+        "desc":"국민철도SR 승객이동유형 데이터로, '운행월별 정차역별 승하차인원' 항목 이용",
+        "link":"https://www.data.go.kr/data/15108353/openapi.do"
+    },
+    {
         "title":"경기도 고양시 덕양구 군장병우대업소",
         "imgSrc":"/images/goyang.svg",
         "desc":"군장병 우대업소 : 덕양구청 > 생활정보 > 사회·복지 > 군장병 우대업소",
