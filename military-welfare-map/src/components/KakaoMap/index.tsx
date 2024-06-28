@@ -395,6 +395,8 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
     const tooManyMarkers = useRef(false)
     const noMarkers = useRef(false)
 
+    const mapLoaded = useRef(false)
+
     // get current position and mark
 
     useEffect(() => {
@@ -431,8 +433,11 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
         // }, [curPos])
 
         useEffect(() => {
+          if (!mapLoaded.current) return;
           setIsResetMapBounds(true)
-          setTimeout(() => setIsResetMapBounds(false), 500)
+          setTimeout(() => {
+            setIsResetMapBounds(false)
+          }, 500)
         }, [searchText, isChatOpened, onFire, isRegionsToggled, isStarToggled])
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
@@ -499,6 +504,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={level}
+                onCreate={() => mapLoaded.current=true}
                 onClick={() => {setSelectedIdx(-1); setHoveredIdx(-1)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
