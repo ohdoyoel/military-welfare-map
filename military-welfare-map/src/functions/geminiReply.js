@@ -33,16 +33,15 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-export async function gptReply() {
-  const chatSession = model.startChat({
-    generationConfig,
- // safetySettings: Adjust safety settings
- // See https://ai.google.dev/gemini-api/docs/safety-settings
-    history: [
-    ],
-  });
+const chatSession = model.startChat({
+  generationConfig,
+// safetySettings: Adjust safety settings
+// See https://ai.google.dev/gemini-api/docs/safety-settings
+  history: [
+  ],
+});
 
-  const result = await chatSession.sendMessage('Write a vegetarian lasagna recipe for 4 people.');
-  console.log(result.response.text());
-  // console.log(apiKey)
+export async function gptReply(input) {
+  const result = await chatSession.sendMessage(input);
+  return result.response.text();
 }
