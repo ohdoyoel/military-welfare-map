@@ -360,6 +360,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             pushMessage('@loading', true)
             gptReply(messages[messages.length-1].message).then(res => {
                 messages.splice(messages.length-1, 0)
+                console.log(res)
                 beforePushBotMessage(res)
             })
         }
