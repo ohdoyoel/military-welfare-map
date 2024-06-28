@@ -31,7 +31,16 @@ export const ChatMessage = ({message, isBotSide, tag, setIsProfileOpened}: ChatM
                     <p className="text-base font-normal text-white self-end" suppressHydrationWarning>{nowTime()}</p>
                     <div className="flex flex-col gap-1 w-fit max-w-[335px]">
                         <div className={`flex flex-col py-1 px-2 bg-white ${isBotSide ? "rounded-r-lg rounded-bl-lg" : "rounded-l-lg rounded-br-lg"} shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] border-l-4 ${tag!=-1 && tagOrderBorderColor[tagToOrder[tag]].normal}`}>
-                            <ReactMarkdown className={`prose text-[16px]`} remarkPlugins={[remarkGfm]}
+                            {message == '@loading'
+                            ? <div className="loader w-full h-10 justify-center mr-8"> 
+                                <span className="dot shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]"/>
+                                <span className="dot shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]"/>
+                                <span className="dot shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]"/>
+                                <span className="dot shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]"/>
+                                <span className="dot shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]"/>
+                                <span className="dot shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]"/>
+                            </div> 
+                            : <ReactMarkdown className={`prose text-[16px]`} remarkPlugins={[remarkGfm]}
                             components={{
                                 a: ({ node, ...props }) => (
                                     <a {...props} target="_blank" className={`${tag!=-1 && tagOrderBgColor[tagToOrder[tag]].normal} mt-3 p-1 text-white no-underline inline-block`}/>
@@ -57,6 +66,7 @@ export const ChatMessage = ({message, isBotSide, tag, setIsProfileOpened}: ChatM
                             }}>
                                 {message}
                             </ReactMarkdown>
+                            }
                         </div>
                     </div>
                 </div>

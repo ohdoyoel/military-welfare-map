@@ -67,6 +67,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     const [isFriendsOpened, setIsFriendsOpened] = useState(false)
     const [isProfileOpened, setIsProfileOpened] = useState(false)
     const user = useRef(0)
+    const [isTyping, setIsTyping] = useState(false)
 
     const messageList = (messages: MessageProps[]) => {
         const result = []
@@ -192,7 +193,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     //          tag가 없으면 -> tag는 모두 true
     //          plc가 없으면 -> plc는 모두 true
     // else -> tag, plc는 이전 것을 따름
-    const beforePushBotMessage = (reply: string) => {
+    const beforePushBotMessageDeprecated = (reply: string) => {
         if (reply.includes('@hi')) {
             pushMessage(greeting[user.current], true)
             return
@@ -283,10 +284,84 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         }
     }
 
+    const beforePushBotMessage = (reply:string) => {
+        if (!reply.includes('@tag:') && !reply.includes('@plc:') && !reply.includes('@search:')) {
+            pushMessage(reply, true)
+            return
+        }
+
+        let tag:string[] = []
+        let plc:string[] = []
+        let searchText = ''
+
+        if (reply.includes('@tag:')) {
+            reply.split('@tag:').forEach((item, idx) => {
+                if (idx == 0) return
+                tag.push(item.trim().split(' ')[0])
+            })
+            let tagsToggled: boolean[] = (Array.from({length: 12}, () => false))
+            tag.forEach((t) => {
+                if (Number(t) == 12) {
+                    tagsToggled = (Array.from({length: 12}, () => true))
+                }
+                else tagsToggled[Number(t)] = true
+            })
+            setTagsToggled(tagsToggled)
+        }
+        if (reply.includes('@plc:')) {
+            reply.split('@plc:').forEach((item, idx) => {
+                if (idx == 0) return
+                plc.push(item.trim().split(' ')[0])
+            })
+            let plcsToggled: boolean[] = (Array.from({length: 16}, () => false))
+            plc.forEach((p) => {
+                if (Number(p) == 17) {
+                    plcsToggled = (Array.from({length: 16}, () => true))
+                    setDistance(30); setIsNear(false)
+                }
+                if (Number(p) == 16) {
+                    plcsToggled = (Array.from({length: 16}, () => true))
+                    setDistance(0.05); setIsNear(true)
+                }
+                else {
+                    setDistance(30)
+                    setIsNear(false)
+                    plcsToggled[Number(p)] = true
+                }
+            })
+            setRegionsToggled(plcsToggled)
+        }
+
+        if (reply.includes('@search:')) {
+            searchText = reply.split('@search:')[1].trim()
+            if (tag.length==0) {
+                setTagsToggled(Array.from({length: 12}, () => true))
+                tag = Array.from(Array(12).keys()).map((x) => x.toString())
+            }
+            if (plc.length==0) {
+                setRegionsToggled(Array.from({length: 16}, () => true))
+                plc = Array.from(Array(16).keys()).map((x) => x.toString())
+            }
+        }
+        setSearchText(searchText)
+
+        if (reply.includes('@rcmd')) {
+            replyRcmdProperlyTagAndPlcAndSearch(tag, plc, searchText)
+            return
+        } else {
+            replyProperlyTagAndPlcAndSearch(tag, plc, searchText)
+            return
+        }
+    }
+
     useEffect(() => {
         if (messages[messages.length-1].isBotSide == false) {
-            setTimeout(() => beforePushBotMessage(botReply(messages[messages.length-1].message)), 1000)
-            gptReply()
+            // setTimeout(() => beforePushBotMessageDeprecated(botReply(messages[messages.length-1].message)), 1000)
+            pushMessage('@loading', true)
+            gptReply(messages[messages.length-1].message).then(res => {
+                messages.splice(messages.length-1, 0)
+                beforePushBotMessage(res)
+            })
         }
         scrollDown()
     }, [messages])
