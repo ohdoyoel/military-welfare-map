@@ -399,7 +399,7 @@ export default function Home() {
           </div>
           
           <div className={`w-full h-full`}>
-            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} regionState={regionToggleState} searchText={searchText}
+            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} isRegionsToggled={isRegionsToggled} regionState={regionToggleState} searchText={searchText}
                       level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}
                       setMarkers={setMarkers} isStarToggled={isStarToggled}/>
           </div>

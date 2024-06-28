@@ -45,6 +45,7 @@ interface KakaoMapProps {
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
     isStarToggled: boolean
     isChatOpened: boolean
+    isRegionsToggled: boolean[]
     regionState: number
     searchText: string
     level: number
@@ -384,13 +385,13 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, hoveredIdx, setHoveredIdx, setMarkers, isStarToggled, isChatOpened, regionState, searchText, level, setLevel}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, hoveredIdx, setHoveredIdx, setMarkers, isStarToggled, isChatOpened, isRegionsToggled, regionState, searchText, level, setLevel}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
-
+    const [isResetMapBounds, setIsResetMapBounds] = useState(false)
     const tooManyMarkers = useRef(false)
     const noMarkers = useRef(false)
 
@@ -428,6 +429,11 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
         //         lng: curPos.center.lng
         //     })
         // }, [curPos])
+
+        useEffect(() => {
+          setIsResetMapBounds(true)
+          setTimeout(() => setIsResetMapBounds(false), 500)
+        }, [searchText, isChatOpened, onFire, isRegionsToggled, isStarToggled])
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
@@ -536,7 +542,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                {(searchText || isChatOpened || onFire || regionState == 1 || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
+                { isResetMapBounds && <ReSetttingMapBounds markers={markers}/>}
                 {onFire &&
                 <AlertOnFire>
                     <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>

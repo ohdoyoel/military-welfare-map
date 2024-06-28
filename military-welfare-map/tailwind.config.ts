@@ -16,16 +16,6 @@ const config: Config = {
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
         '17': 'repeat(17, minmax(0, 1fr))',
-      },
-      animation: {
-        typewriter: "typewriter 2s steps(11) forwards"
-      },
-      keyframes: {
-        typewriter: {
-          to: {
-            left: "100%"
-          }
-        }
       }
     }
   },
