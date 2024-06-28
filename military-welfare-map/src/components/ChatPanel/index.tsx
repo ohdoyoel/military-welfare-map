@@ -8,6 +8,7 @@ import { rcmdMsg, tagSearch } from "@/src/types/tagIconLabel"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Friends } from "../Friends"
 import { Profile } from "../Profile"
+import { gptReply } from "@/src/functions/geminiReply"
 
 interface ChatPanelProps {
     markers: MarkerType[]
@@ -285,6 +286,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     useEffect(() => {
         if (messages[messages.length-1].isBotSide == false) {
             setTimeout(() => beforePushBotMessage(botReply(messages[messages.length-1].message)), 1000)
+            gptReply()
         }
         scrollDown()
     }, [messages])
