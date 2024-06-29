@@ -184,6 +184,46 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             rcmdMarker.tag)
     }
 
+    const pushRcmd = (tagsToggled: boolean[], regionsToggled: boolean[], searchText:string, reply:string) => {
+        const filtered = markers.filter((marker) => {
+            return tagsToggled[marker.tag] && regionsToggled[marker.region]
+                && marker.distance! < distance && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase())
+        })
+
+        // if (filtered.length == 0) {
+        //     pushMessage(`추천드릴 장소가 없습니다! 검색 조건을 다시 설정해주십시오.`, true)
+        //     setIdx(-1)
+        //     return
+        // }
+
+        let rcmdMarkerIdx = -1
+
+        for (let i=0; i<onFireTitle.length; i++) {
+            let cand = filtered.findIndex((val) => val.title == onFireTitle[i])
+            if (cand != -1) {
+                rcmdMarkerIdx = cand
+                break
+            }
+        }
+
+        if (rcmdMarkerIdx == -1) {
+            rcmdMarkerIdx = Math.floor(Math.random() * (filtered.length-1))
+        }
+   
+        const rcmdMarker = filtered[rcmdMarkerIdx]
+        setSearchText(rcmdMarker.title)
+        setIdx(0)
+        pushRcmdMessage(
+            `${reply}
+            \n### ${rcmdMarker.title.trim()}
+            \n**${rcmdMarker.address.trim()}**
+            \n##### ${rcmdMarker.telno?.trim()}
+            \n${rcmdMarker.description && rcmdMarker.description.replaceAll('~', '&#126;').replace(/@img(.*)/gi, '')}   
+[길찾기↗](https://map.kakao.com/link/to/${rcmdMarker.title.replaceAll('(','_').replaceAll(')','_').replaceAll(' ','_')},${rcmdMarker.position.lat},${rcmdMarker.position.lng})`,
+            true,
+            rcmdMarker.tag)
+    }
+
     const replyProperlyTagAndPlcAndSearch = (tags: string[], plcs: string[], searchText:string) => {
         setIdx(-1)
         pushMessage(explain(tags, plcs, searchText, false), true)
@@ -290,68 +330,52 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             return
         }
 
-        let tag:string[] = []
-        let plc:string[] = []
+        let tagsToggled: boolean[] = (Array.from({length: 12}, () => false))
+        let plcsToggled: boolean[] = (Array.from({length: 16}, () => false))
         let searchText = ''
 
         if (reply.includes('@tag:')) {
-            reply.split('@tag:').forEach((item, idx) => {
-                if (idx == 0) return
-                tag.push(item.trim().split(' ')[0])
-            })
-            let tagsToggled: boolean[] = (Array.from({length: 12}, () => false))
-            tag.forEach((t) => {
-                if (Number(t) == 12) {
-                    tagsToggled = (Array.from({length: 12}, () => true))
-                }
-                else tagsToggled[Number(t)] = true
-            })
+            for (const match of reply.matchAll(/@tag:\d+/g)) {
+                const t = Number(match[0].match(/\d+/g)![0])
+                if (t == 12) tagsToggled = (Array.from({length: 12}, () => true))
+                tagsToggled[t] = true
+            }
             setTagsToggled(tagsToggled)
         }
         if (reply.includes('@plc:')) {
-            reply.split('@plc:').forEach((item, idx) => {
-                if (idx == 0) return
-                plc.push(item.trim().split(' ')[0])
-            })
-            let plcsToggled: boolean[] = (Array.from({length: 16}, () => false))
-            plc.forEach((p) => {
-                if (Number(p) == 17) {
+            for (const match of reply.matchAll(/@plc:\d+/g)) {
+                const p = Number(match[0].match(/\d+/g)![0])
+                if (p == 17) {
                     plcsToggled = (Array.from({length: 16}, () => true))
                     setDistance(30); setIsNear(false)
                 }
-                if (Number(p) == 16) {
+                else if (p == 16) {
                     plcsToggled = (Array.from({length: 16}, () => true))
                     setDistance(0.05); setIsNear(true)
                 }
                 else {
                     setDistance(30)
                     setIsNear(false)
-                    plcsToggled[Number(p)] = true
+                    plcsToggled[p] = true
                 }
-            })
+            }
             setRegionsToggled(plcsToggled)
         }
 
         if (reply.includes('@search:')) {
-            searchText = reply.split('@search:')[1].trim()
-            if (tag.length==0) {
-                setTagsToggled(Array.from({length: 12}, () => true))
-                tag = Array.from(Array(12).keys()).map((x) => x.toString())
-            }
-            if (plc.length==0) {
-                setRegionsToggled(Array.from({length: 16}, () => true))
-                plc = Array.from(Array(16).keys()).map((x) => x.toString())
-            }
+            searchText = reply.match(/@search:[^\n\r\s]+/g)![0].substring(8)
         }
         setSearchText(searchText)
 
         if (reply.includes('@rcmd')) {
-            replyRcmdProperlyTagAndPlcAndSearch(tag, plc, searchText)
+            pushRcmd(tagsToggled, regionsToggled, searchText, reply.match(/^[^@]*/g)![0])
             return
         } else {
-            replyProperlyTagAndPlcAndSearch(tag, plc, searchText)
+            setIdx(-1)
+            pushMessage(reply.match(/^[^@]*/g)![0], true)
             return
         }
+
     }
 
     useEffect(() => {
