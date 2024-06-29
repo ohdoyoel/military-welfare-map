@@ -9,7 +9,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Friends } from "../Friends"
 import { Profile } from "../Profile"
 import { gptReply } from "@/src/functions/geminiReply"
-import { stringifyError } from "next/dist/shared/lib/utils"
 
 interface ChatPanelProps {
     markers: MarkerType[]
@@ -68,7 +67,6 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     const [isFriendsOpened, setIsFriendsOpened] = useState(false)
     const [isProfileOpened, setIsProfileOpened] = useState(false)
     const user = useRef(0)
-    const [isTyping, setIsTyping] = useState(false)
 
     const messageList = (messages: MessageProps[]) => {
         const result = []
@@ -188,7 +186,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     const pushRcmd = (tagsToggled: boolean[], regionsToggled: boolean[], searchText:string, reply:string) => {
         const filtered = markers.filter((marker) => {
             return tagsToggled[marker.tag] && regionsToggled[marker.region]
-                && marker.distance! < distance && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description).toLowerCase(), searchText.toLowerCase())
+                && (isNear ? marker.distance! < 0.05 : true) && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description).toLowerCase(), searchText.toLowerCase())
         })
 
         if (filtered.length == 0) {
@@ -201,19 +199,21 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             return
         }
 
-        let rcmdMarkerIdx = -1
+        let rcmdMarkerIdx = Math.floor(Math.random() * (filtered.length-1))
 
-        for (let i=0; i<onFireTitle.length; i++) {
-            let cand = filtered.findIndex((val) => val.title == onFireTitle[i])
-            if (cand != -1) {
-                rcmdMarkerIdx = cand
-                break
-            }
-        }
+        // let rcmdMarkerIdx = -1
 
-        if (rcmdMarkerIdx == -1) {
-            rcmdMarkerIdx = Math.floor(Math.random() * (filtered.length-1))
-        }
+        // for (let i=0; i<onFireTitle.length; i++) {
+        //     let cand = filtered.findIndex((val) => val.title == onFireTitle[i])
+        //     if (cand != -1) {
+        //         rcmdMarkerIdx = cand
+        //         break
+        //     }
+        // }
+
+        // if (rcmdMarkerIdx == -1) {
+        //     rcmdMarkerIdx = Math.floor(Math.random() * (filtered.length-1))
+        // }
    
         const rcmdMarker = filtered[rcmdMarkerIdx]
         setSearchText(rcmdMarker.title)
@@ -335,36 +335,36 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             return
         }
 
-        let tagsToggled: boolean[] = (Array.from({length: 12}, () => false))
-        let plcsToggled: boolean[] = (Array.from({length: 16}, () => false))
+        let _tagsToggled: boolean[] = (Array.from({length: 12}, () => false))
+        let _plcsToggled: boolean[] = (Array.from({length: 16}, () => false))
         let searchText = ''
 
         if (reply.includes('@tag:')) {
             for (const match of reply.matchAll(/@tag:\d+/g)) {
                 const t = Number(match[0].match(/\d+/g)![0])
-                if (t == 12) tagsToggled = (Array.from({length: 12}, () => true))
-                tagsToggled[t] = true
+                if (t == 12) _tagsToggled = (Array.from({length: 12}, () => true))
+                _tagsToggled[t] = true
             }
-            setTagsToggled(tagsToggled)
+            setTagsToggled(_tagsToggled)
         }
         if (reply.includes('@plc:')) {
             for (const match of reply.matchAll(/@plc:\d+/g)) {
                 const p = Number(match[0].match(/\d+/g)![0])
                 if (p == 17) {
-                    plcsToggled = (Array.from({length: 16}, () => true))
+                    _plcsToggled = (Array.from({length: 16}, () => true))
                     setDistance(30); setIsNear(false)
                 }
                 else if (p == 16) {
-                    plcsToggled = (Array.from({length: 16}, () => true))
+                    _plcsToggled = (Array.from({length: 16}, () => true))
                     setDistance(0.05); setIsNear(true)
                 }
                 else {
                     setDistance(30)
                     setIsNear(false)
-                    plcsToggled[p] = true
+                    _plcsToggled[p] = true
                 }
             }
-            setRegionsToggled(plcsToggled)
+            setRegionsToggled(_plcsToggled)
         }
 
         if (reply.includes('@search:')) {
@@ -373,7 +373,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         setSearchText(searchText)
 
         if (reply.includes('@rcmd')) {
-            pushRcmd(tagsToggled, regionsToggled, searchText, reply.match(/^[^@]*/g)![0])
+            pushRcmd(_tagsToggled, _plcsToggled, searchText, reply.match(/^[^@]*/g)![0])
             return
         } else {
             setIdx(-1)
