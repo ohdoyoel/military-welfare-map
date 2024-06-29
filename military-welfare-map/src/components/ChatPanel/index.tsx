@@ -9,6 +9,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Friends } from "../Friends"
 import { Profile } from "../Profile"
 import { gptReply } from "@/src/functions/geminiReply"
+import { stringifyError } from "next/dist/shared/lib/utils"
 
 interface ChatPanelProps {
     markers: MarkerType[]
@@ -55,13 +56,13 @@ const onFireTitle = [
 export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regionsToggled, setRegionsToggled, setSearchText, distance, setDistance}: ChatPanelProps) => {
     const [messages, setMessages] = useState<MessageProps[]>([
         {
-            message: `안녕하십니까!
+            message: `안녕하십니까! 👋
 - 육군
 - 해군
 - 해병대
 - 공군
 - 민간인 (군 가족 및 지인)   
-\n중 어떤 집단에 속하여 계십니까?`, isBotSide: true, tag: -1}
+\n중 어떤 집단에 속하여 계십니까? 🤔`, isBotSide: true, tag: -1}
     ])
     const [isNear, setIsNear] = useState(false)
     const [isFriendsOpened, setIsFriendsOpened] = useState(false)
@@ -187,14 +188,18 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
     const pushRcmd = (tagsToggled: boolean[], regionsToggled: boolean[], searchText:string, reply:string) => {
         const filtered = markers.filter((marker) => {
             return tagsToggled[marker.tag] && regionsToggled[marker.region]
-                && marker.distance! < distance && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description + ' ' + tagSearch[marker.tag]).toLowerCase(), searchText.toLowerCase())
+                && marker.distance! < distance && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description).toLowerCase(), searchText.toLowerCase())
         })
 
-        // if (filtered.length == 0) {
-        //     pushMessage(`추천드릴 장소가 없습니다! 검색 조건을 다시 설정해주십시오.`, true)
-        //     setIdx(-1)
-        //     return
-        // }
+        if (filtered.length == 0) {
+            pushMessage(`음... 딱히 추천 드릴 만한 곳이 없네요. 😭
+
+다른 조건이나 지역, 태그로 찾아보시는 건 어떠세요? 🤔
+
+혹시 다른 도움이 필요하신가요? 😉`, true)
+            setIdx(-1)
+            return
+        }
 
         let rcmdMarkerIdx = -1
 
@@ -382,10 +387,15 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         if (messages[messages.length-1].isBotSide == false) {
             // setTimeout(() => beforePushBotMessageDeprecated(botReply(messages[messages.length-1].message)), 1000)
             pushMessage('@loading', true)
-            gptReply(messages[messages.length-1].message).then(res => {
+            gptReply(messages[messages.length-1].message)
+            .then(res => {
                 messages.splice(messages.length-1, 0)
                 console.log(res)
                 beforePushBotMessage(res)
+            }).catch(err => {
+                messages.splice(messages.length-1, 0)
+                console.log(String(err))
+                beforePushBotMessage('## 에러가 발생했습니다! \n대화를 재개하려면 새로고침 해주십시오.')
             })
         }
         scrollDown()
