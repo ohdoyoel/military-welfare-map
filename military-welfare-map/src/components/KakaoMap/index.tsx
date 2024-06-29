@@ -438,7 +438,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
           setTimeout(() => {
             setIsResetMapBounds(false)
           }, 500)
-        }, [searchText, isChatOpened, onFire, isRegionsToggled, isStarToggled])
+        }, [searchText, onFire, isRegionsToggled, isStarToggled])
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
