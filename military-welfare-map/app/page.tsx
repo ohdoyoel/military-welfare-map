@@ -211,7 +211,7 @@ export default function Home() {
         || (!onFireToggled && (isStarToggled && x.isStar))
         || (!onFireToggled && !isStarToggled
           && isTagsToggled[x.tag] && isRegionsToggled[x.region]
-          && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag]).toLowerCase(), searchText.toLowerCase())
+          && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description).toLowerCase(), searchText.toLowerCase())
           && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
