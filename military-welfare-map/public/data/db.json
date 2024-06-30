@@ -65144,7 +65144,7 @@
             "lng": 126.79080503506053
         },
         "region": 4,
-        "description": "광주송정역1층운영 @img(/images/ktx.jpg)",
+        "description": "광주송정역1층운영\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "062-940-7788"
     },
     {
@@ -65168,7 +65168,7 @@
             "lng": 128.181084377015
         },
         "region": 12,
-        "description": "김천구미역정문에서15m직진후역안내판에서우측15m지점 @img(/images/ktx.jpg)",
+        "description": "김천구미역정문에서15m직진후역안내판에서우측15m지점 \nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "054-440-8034"
     },
     {
@@ -65192,7 +65192,7 @@
             "lng": 127.43411216191
         },
         "region": 5,
-        "description": "대전역서광장방향대전역지구대(파출소)좌측 @img(/images/ktx.jpg)",
+        "description": "대전역서광장방향대전역지구대(파출소)좌측\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "042-550-4252"
     },
     {
@@ -65228,7 +65228,7 @@
             "lng": 128.628393775388
         },
         "region": 2,
-        "description": "동대구역4번출구우측2m지점 @img(/images/ktx.jpg)",
+        "description": "동대구역4번출구우측2m지점\nSRT 최근 월 승하차인원: 많음 @img(/images/ktx.jpg)",
         "telno": "053-750-4555"
     },
     {
@@ -65240,7 +65240,7 @@
             "lng": 128.57717877361824
         },
         "region": 13,
-        "description": "마산역1층우측10m지점 @img(/images/ktx.jpg)",
+        "description": "마산역1층우측10m지점\nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "055-549-1099"
     },
     {
@@ -65264,7 +65264,7 @@
             "lng": 126.386648357847
         },
         "region": 11,
-        "description": "목포역출구방향대로우측50m지점(LIG손해보험맞은편) @img(/images/ktx.jpg)",
+        "description": "목포역출구방향대로우측50m지점(LIG손해보험맞은편)\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "061-242-1992"
     },
     {
@@ -65288,7 +65288,7 @@
             "lng": 129.04141918283216
         },
         "region": 1,
-        "description": "부산역5번출구방향에서2m지점 @img(/images/ktx.jpg)",
+        "description": "부산역5번출구방향에서2m지점\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "051-730-4091"
     },
     {
@@ -65336,7 +65336,7 @@
             "lng": 127.104469788175
         },
         "region": 0,
-        "description": "수서역2번출구치안센터옆",
+        "description": "수서역2번출구치안센터옆\nSRT 최근 월 승하차인원: 많음",
         "telno": "02-445-2979"
     },
     {
@@ -65360,7 +65360,7 @@
             "lng": 129.1389994195668
         },
         "region": 12,
-        "description": "신경주역내1번출구우측으로10m지점 @img(/images/ktx.jpg)",
+        "description": "신경주역내1번출구우측으로10m지점\nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "054-290-2692"
     },
     {
@@ -65420,7 +65420,7 @@
             "lng": 127.32753205680102
         },
         "region": 8,
-        "description": "1번출구바로옆 @img(/images/ktx.jpg)",
+        "description": "1번출구바로옆\nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "043-231-7347"
     },
     {
@@ -65456,7 +65456,7 @@
             "lng": 129.138660047414
         },
         "region": 6,
-        "description": "울산역4번출구로부터50m지점 @img(/images/ktx.jpg)",
+        "description": "울산역4번출구로부터50m지점\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "052-254-3916"
     },
     {
@@ -65480,7 +65480,7 @@
             "lng": 126.94628827402263
         },
         "region": 10,
-        "description": "익산역임시역사정면에서좌측공사현장아래보도에서20m도보이동후우측50m지점 @img(/images/ktx.jpg)",
+        "description": "익산역임시역사정면에서좌측공사현장아래보도에서20m도보이동후우측50m지점\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "063-837-1873"
     },
     {
@@ -65504,7 +65504,7 @@
             "lng": 127.16180338402
         },
         "region": 10,
-        "description": "전주역출구우측10m지점(역공중화장실옆) @img(/images/ktx.jpg)",
+        "description": "전주역출구우측10m지점(역공중화장실옆)\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "063-249-7186"
     },
     {
@@ -65540,7 +65540,7 @@
             "lng": 128.11788467810103
         },
         "region": 13,
-        "description": "진주역입구로부터11시방향5m @img(/images/ktx.jpg)",
+        "description": "진주역입구로부터11시방향5m\nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "055-753-3175"
     },
     {
@@ -65564,7 +65564,7 @@
             "lng": 128.606553084154
         },
         "region": 13,
-        "description": "창원역1층 @img(/images/ktx.jpg)",
+        "description": "창원역1층\nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "055-250-4274"
     },
     {
@@ -65576,7 +65576,7 @@
             "lng": 128.70130739661
         },
         "region": 13,
-        "description": "창원중앙역내 @img(/images/ktx.jpg)",
+        "description": "창원중앙역내\nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "055-549-1097"
     },
     {
@@ -65588,7 +65588,7 @@
             "lng": 127.104380324936
         },
         "region": 9,
-        "description": "천안아산역2층훼미리마트맞은편 @img(/images/ktx.jpg)",
+        "description": "천안아산역2층훼미리마트맞은편\nSRT 최근 월 승하차인원: 보통 @img(/images/ktx.jpg)",
         "telno": "041-531-7213"
     },
     {
@@ -65648,7 +65648,7 @@
             "lng": 129.34192815800867
         },
         "region": 12,
-        "description": "포항역출구좌측10m지점 @img(/images/ktx.jpg)",
+        "description": "포항역출구좌측10m지점\nSRT 최근 월 승하차인원: 적음 @img(/images/ktx.jpg)",
         "telno": "054-299-2691"
     },
     {
