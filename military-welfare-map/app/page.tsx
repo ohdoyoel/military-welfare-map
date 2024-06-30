@@ -177,7 +177,7 @@ export default function Home() {
   const [level, setLevel] = useState(5);
   
   const [onFireToggled, setOnFireToggled] = useState(false)
-  const [isStarToggled, setIsStarToggled] = useState(false)
+  const [isStarToggled, setIsStarToggled] = useState(false)  
 
   useEffect(() => {
     validateDB(markers)
