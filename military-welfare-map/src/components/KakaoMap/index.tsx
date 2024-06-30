@@ -438,7 +438,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
           setTimeout(() => {
             setIsResetMapBounds(false)
           }, 500)
-        }, [searchText, onFire, isRegionsToggled, isStarToggled])
+        }, [searchText, onFire, isRegionsToggled])
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
@@ -548,7 +548,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                { isResetMapBounds && <ReSetttingMapBounds markers={markers}/>}
+                { (isResetMapBounds || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
                 {onFire &&
                 <AlertOnFire>
                     <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>
