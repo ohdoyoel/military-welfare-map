@@ -190,6 +190,7 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
             return tagsToggled[marker.tag] && regionsToggled[marker.region]
                 && (isNear ? marker.distance! < 0.05 : true) && isTrimedTextAllIncluded((marker.title + ' ' + marker.address + ' ' + marker.telno + ' ' + marker.description).toLowerCase(), searchText.toLowerCase())
         })
+        console.log(markers)
 
         if (filtered.length == 0) {
             pushMessage(`음... 딱히 추천 드릴 만한 곳이 없네요. 😭
@@ -372,6 +373,8 @@ export const ChatPanel = ({markers, setIdx, tagsToggled, setTagsToggled, regions
         setSearchText(searchText)
 
         if (reply.includes('@rcmd')) {
+            if (_tagsToggled.every((v) => v==false)) _tagsToggled = Array.from({length: 12}, () => true)
+            if (_plcsToggled.every((v) => v==false)) _plcsToggled = Array.from({length: 16}, () => true)
             pushRcmd(_tagsToggled, _plcsToggled, searchText, reply.match(/^[^@]*/g)![0])
             return
         } else {
