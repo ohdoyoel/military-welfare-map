@@ -177,7 +177,7 @@ export default function Home() {
   const [level, setLevel] = useState(5);
   
   const [onFireToggled, setOnFireToggled] = useState(false)
-  const [isStarToggled, setIsStarToggled] = useState(false)
+  const [isStarToggled, setIsStarToggled] = useState(false)  
 
   useEffect(() => {
     validateDB(markers)
@@ -211,7 +211,7 @@ export default function Home() {
         || (!onFireToggled && (isStarToggled && x.isStar))
         || (!onFireToggled && !isStarToggled
           && isTagsToggled[x.tag] && isRegionsToggled[x.region]
-          && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description + ' ' + tagSearch[x.tag]).toLowerCase(), searchText.toLowerCase())
+          && isTrimedTextAllIncluded((x.title + ' ' + x.address + ' ' + x.telno + ' ' + x.description).toLowerCase(), searchText.toLowerCase())
           && x.distance! < distanceRange)))
     })
     setFilteredMarkers(tempMarkers)
@@ -362,13 +362,14 @@ export default function Home() {
           </div>}
 
           {/* ChatPanel */}
-          <div className={`fixed right-0 ${isChatOpened ? `w-screen sm:w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
-            <ChatPanel markers={markers} setIdx={setSelectedIdx} tagsToggled={isTagsToggled} setTagsToggled={setIsTagsToggled} regionsToggled={isRegionsToggled} setRegionsToggled={setIsRegionsToggled} setSearchText={setSearchText} distance={distanceRange} setDistance={setDistanceRange}/>
+          <div className={`fixed right-0 ${isChatOpened && !onFireToggled ? `w-screen sm:w-[460px]` : `hidden`} h-full z-20 flex flex-col shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)]`} >
+            <ChatPanel markers={markers} setIdx={setSelectedIdx} tagsToggled={isTagsToggled} setTagsToggled={setIsTagsToggled} regionsToggled={isRegionsToggled} setRegionsToggled={setIsRegionsToggled}
+                      setSearchText={setSearchText} distance={distanceRange} setDistance={setDistanceRange} setOnFireToggled={setOnFireToggled} setIsStarToggled={setIsStarToggled}/>
             <AdsBar/>
           </div>
 
           {/* ChatPanel Open Btn */}
-          {(!onFireToggled && !isStarToggled) && <div className={`hidden sm:flex items-center`}>
+          {(!onFireToggled) && <div className={`hidden sm:flex items-center`}>
             <button className={`group w-9 sm:w-12 h-16 sm:h-20 bg-white shadow-[2px_2px_2px_0_rgba(0,0,0,0.3)] focus:outline-none
                               absolute z-10 ${isChatOpened ? `right-[460px] rounded-l-[3px]` : `right-0 rounded-l-[3px]`}`}
                     onClick={() => {setIsChatOpened(!isChatOpened)}}>
@@ -399,7 +400,7 @@ export default function Home() {
           </div>
           
           <div className={`w-full h-full`}>
-            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} regionState={regionToggleState} searchText={searchText}
+            <KakaoMap mapPos={mapPos} setMapPos={setMapPos} markers={filteredMarkers} curPos={curPos} setCurPos={setCurPos} isChatOpened={isChatOpened} isRegionsToggled={isRegionsToggled} regionState={regionToggleState} searchText={searchText}
                       level={level} setLevel={setLevel} selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} onFire={onFireToggled} onFireMarkers={onFireMarkers!} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}
                       setMarkers={setMarkers} isStarToggled={isStarToggled}/>
           </div>

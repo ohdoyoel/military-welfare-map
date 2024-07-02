@@ -45,6 +45,7 @@ interface KakaoMapProps {
     setMarkers: Dispatch<SetStateAction<MarkerType[]>>
     isStarToggled: boolean
     isChatOpened: boolean
+    isRegionsToggled: boolean[]
     regionState: number
     searchText: string
     level: number
@@ -384,15 +385,17 @@ const TooltipMarker = ({idx, tag, position, address, title, description, telno, 
     )
 }
 
-export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, hoveredIdx, setHoveredIdx, setMarkers, isStarToggled, isChatOpened, regionState, searchText, level, setLevel}: KakaoMapProps) => {
+export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSelectedIdx, selectedIdx, onFire, onFireMarkers, hoveredIdx, setHoveredIdx, setMarkers, isStarToggled, isChatOpened, isRegionsToggled, regionState, searchText, level, setLevel}: KakaoMapProps) => {
 
     // const [mapPos, setMapPos] = useState({lat: pos.lat, lng:pos.lng})
 
     const [mapNE, setMapNE] = useState({lat: 0, lng:0});
     const [mapSW, setMapSW] = useState({lat: 0, lng:0});
-
+    const [isResetMapBounds, setIsResetMapBounds] = useState(false)
     const tooManyMarkers = useRef(false)
     const noMarkers = useRef(false)
+
+    const mapLoaded = useRef(false)
 
     // get current position and mark
 
@@ -428,6 +431,14 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
         //         lng: curPos.center.lng
         //     })
         // }, [curPos])
+
+        useEffect(() => {
+          if (!mapLoaded.current) return;
+          setIsResetMapBounds(true)
+          setTimeout(() => {
+            setIsResetMapBounds(false)
+          }, 500)
+        }, [searchText, onFire, isRegionsToggled])
 
         const makeMapMarkers = (mks: MarkerType[], NE: {lat:number, lng:number}, SW: {lat:number, lng:number}) => {
             const result = []
@@ -493,6 +504,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     height: "100%",
                 }}
                 level={level}
+                onCreate={() => mapLoaded.current=true}
                 onClick={() => {setSelectedIdx(-1); setHoveredIdx(-1)}}
                 onDragEnd={setCenterAndBound}
                 onIdle={setCenterAndBound}
@@ -510,7 +522,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                 >
                 {!onFire && makeMapMarkers(markers, mapNE, mapSW)}
                 </MarkerClusterer>
-                {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && (level >= 8) && markers.map((marker, i) => 
+                {(onFire || isStarToggled || tooManyMarkers.current || (!tooManyMarkers.current && !noMarkers.current)) && (level > 8) && markers.map((marker, i) => 
                     marker.onFire && <TooltipMarker setSelectedIdx={setSelectedIdx} key={i} idx={i} tag={marker.tag} position={marker.position} onFire={marker.onFire!}
                     telno={marker.telno} description={marker.description} address={marker.address} title={marker.title} setPos={setMapPos} selectedIdx={selectedIdx} star={marker.isStar!} setMarkers={setMarkers} hoveredIdx={hoveredIdx} setHoveredIdx={setHoveredIdx}/>
                 )}
@@ -536,7 +548,7 @@ export const KakaoMap = ({mapPos, setMapPos, markers, curPos, setCurPos, setSele
                     }}
                 />}
                 <MapTypeControl position={"TOPRIGHT"}/>
-                {(searchText || isChatOpened || onFire || regionState == 1 || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
+                { (isResetMapBounds || isStarToggled) && <ReSetttingMapBounds markers={markers}/>}
                 {onFire &&
                 <AlertOnFire>
                     <p className='sm:text-lg text-base font-nsb'>💰 지피티 병장이 쏜다!</p>

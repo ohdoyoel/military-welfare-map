@@ -17,7 +17,7 @@ const config: Config = {
         '13': 'repeat(13, minmax(0, 1fr))',
         '17': 'repeat(17, minmax(0, 1fr))',
       }
-    },
+    }
   },
   plugins: [
     require('@tailwindcss/typography'),
