@@ -178,11 +178,15 @@ export default function Home() {
 
   useEffect(() => {
     validateDB(markers)
-    const d = localStorage.getItem('data')
-    if (d) {
-      setMarkers(JSON.parse(d))
-    } else {
-      setMarkers(data)
+    if (typeof window !== 'undefined') {
+      const d = localStorage.getItem('data')
+      console.log(d)
+      if (d) {
+        setMarkers(JSON.parse(d))
+        console.log('succsess!')
+      } else {
+        setMarkers(data)
+      }
     }
   }, [])
 
@@ -190,7 +194,6 @@ export default function Home() {
     if (markers.length > 0 && isLoading) {
       setIsLoading(false)
     }
-    console.log('markerchanged')
     localStorage.setItem('data', JSON.stringify(markers))
   }, [markers])
 
@@ -200,7 +203,7 @@ export default function Home() {
       tempMarkers.forEach((x) => {
         x.distance = (curPos.center.lat - x.position.lat) ** 2 + (curPos.center.lng - x.position.lng) ** 2
         x.onFire = x.description != undefined && x.description.includes('[MOCK]')
-        x.isStar = false
+        // x.isStar = false
       })
       tempMarkers.sort((a, b) => (!a.distance || !b.distance) ? 0 : a.distance - b.distance)
       setMarkers(tempMarkers)
