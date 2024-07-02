@@ -32,7 +32,6 @@ export const Profile = ({setIsProfileOpened}: ProfileProps) => {
                         <p className="text-2xl font-bold mb-1">상병 채수민</p>
                         <li className="text-lg ml-2">디자이너 ⋅ 기획가</li>
                         <li className="text-lg ml-2">공군 모 포대의 문서수발병</li>
-                        <li className="text-base ml-2">전역을 앞두고 귀찮은 일에 휘말렸다.</li>
                     </div>
                 </div>
 
@@ -44,7 +43,6 @@ export const Profile = ({setIsProfileOpened}: ProfileProps) => {
                         <p className="text-2xl font-bold mb-1">일병 오도열</p>
                         <li className="text-lg ml-2">개발자 ⋅ 리더</li>
                         <li className="text-lg ml-2">공군 모 포대의 무선통신병 및 으뜸병사</li>
-                        <li className="text-base ml-2">이 공모전에 출품하자고 채수민 상병을 졸랐다.</li>
                     </div>
                 </div>
             </div>
