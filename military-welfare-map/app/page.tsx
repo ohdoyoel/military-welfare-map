@@ -143,14 +143,11 @@ const onFireMarkersData = [
 ]
 
 export default function Home() {
-  // const dbFile = await fs.readFile('data/db.json', 'utf8');
-  // const dbData = JSON.parse(dbFile);
-
   const [isBarOpened, setIsBarOpened] = useState(false)
   const [isChatOpened, setIsChatOpened] = useState(false)
   
   const [isLoading, setIsLoading] = useState(true)
-  const [markers, setMarkers] = useState<MarkerType[]>(data)
+  const [markers, setMarkers] = useState<MarkerType[]>([])
   const [onFireMarkers, setOnFireMarkers] = useState<MarkerType[]>(onFireMarkersData)
   const [hoveredIdx, setHoveredIdx] = useState(-1)
   
@@ -181,12 +178,20 @@ export default function Home() {
 
   useEffect(() => {
     validateDB(markers)
+    const d = localStorage.getItem('data')
+    if (d) {
+      setMarkers(JSON.parse(d))
+    } else {
+      setMarkers(data)
+    }
   }, [])
 
   useEffect(() => {
     if (markers.length > 0 && isLoading) {
       setIsLoading(false)
     }
+    console.log('markerchanged')
+    localStorage.setItem('data', JSON.stringify(markers))
   }, [markers])
 
   useEffect(() => {
